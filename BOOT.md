@@ -8,7 +8,7 @@
 3. **Verify reality:** run `python _build/gates.py` (no --record). If anything FAILs that STATE claimed green, reality wins — your first task is reconciliation, on the tape.
 4. **Open your session:** append one line to `_build/TAPE.jsonl`:
    `{"ts": "<utc-iso>", "session": "S<n>", "type": "session_start", "goal": "<one sentence>"}`
-   Then read ONLY what your rung needs (SPEC section via its §-map; the organ's directory; never the whole repo). The harvest (`_local/harvest/`) is reference — cite as [H] with line refs; names never leave `_local/` (C1).
+   Then read ONLY what your rung needs — SPEC by section, never whole. **The §-map:** §1 checks-as-patches · §4 tape/data plane · §5 the Floor · §6 Clocks · §7 Crosswalk · §8 Ledger/CAPA · §9 gated tiers · §10 layers/kit · §11 privacy · §12 deciders · §13 build order · §15 open questions. Plus the organ's own directory. The harvest (`_local/harvest/`) is reference — cite as [H] with line refs; names never leave `_local/` (C1).
 5. **Work in bankable quanta** (D2): default = one catalog check fully encoded (`floor/checks/SV-xxx.check.yml` + `floor/fixtures/SV-xxx/pass*` + `fail*`), gate green after each. Decisions → tape `decision` events (what/why/revert). Uncertain-but-reversible → decide, log, tag. Uncertain-and-irreversible → `question`/`blocker` on tape, move to the next independent quantum.
 6. **Close on the tape** (D4): append `mount` events for what you built, your `session_end` with a **specific** `next` (executable by a stranger), then — **in this order** —
    `python _build/fold.py` (folds catch up with your appends) → `python _build/gates.py --record` (verdicts append + refold) → `git add -A && git commit`.

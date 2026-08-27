@@ -126,7 +126,7 @@ Standing nulls: the existing sampled human audit; a naive checklist cron. Standi
 
 | Rung | Deliverable | Executioner |
 |---|---|---|
-| 00 | This repo skeleton, spec, catalog, prereg stubs | R1-gate (catalog read-through) |
+| 00 | This repo skeleton, spec, catalog, prereg stubs | G-COLDSTART (fresh-agent audit orients from repo alone; the human R1-gate stays in §12) |
 | 01 | Tape + floor engine (check loader, hold/flag/alarm, fixtures runner) on synthetic data | F-FIXTURE |
 | 02 | Catalog v1 encoded (59 checks as `*.check.yml` + fixtures) | F-FIXTURE, per check |
 | 03 | Clocks engine (STN closure, anchor declarations) — port from REGISTRAR floor | fixture battery + anchor-defect plants |
