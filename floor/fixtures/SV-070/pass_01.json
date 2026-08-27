@@ -1,0 +1,6 @@
+{"expect": "PASS",
+ "note": "first primary offer on this organ - lawful",
+ "record": {"case_id": "AL-0771", "organ_id": "KI-L", "offer_ref": "OF-1001",
+            "active_primary_offers": {"KI-L": ["OF-1001"]}},
+ "history": [{"field": "active_primary_offers.KI-L", "value": "OF-1001",
+              "ts": "2026-08-27T14:02:00Z", "actor_role": "allocation_coordinator"}]}

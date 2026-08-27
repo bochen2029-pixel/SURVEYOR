@@ -125,12 +125,48 @@ def gate_catalog():
     return "PASS", f"{len(encoded)}/{len(ids)} encoded; {len(ids)-len(encoded)} honestly UNENCODED"
 
 
+def gate_fixture():
+    """Rung 01's executioner: the floor engine's full fixture battery + the ledger
+    selftest + the no-model scan. ImportError degrades to CANNOT-EVALUATE (the
+    estate's pattern), everything else is graded."""
+    try:
+        sys.path.insert(0, str(ROOT / "floor"))
+        import engine
+    except Exception as e:  # noqa: BLE001
+        return "CANNOT-EVALUATE", f"floor engine unavailable: {e}"
+    r = engine.run_battery()
+    try:
+        sys.path.insert(0, str(ROOT / "ledger"))
+        import tape as product_tape
+        ledger_fails = product_tape.selftest()
+    except Exception as e:  # noqa: BLE001
+        return "CANNOT-EVALUATE", f"ledger unavailable: {e}"
+    problems = list(r["broken"]) + r["no_model_violations"] + ledger_fails
+    if problems:
+        return "FAIL", "; ".join(problems[:4])
+    return "PASS", (f"{r['encoded']} check(s) fully encoded, {r['fixtures_run']} fixtures "
+                    f"green, ledger selftest green (append/verify/tamper/torn-tail), no-model clean")
+
+
+def gate_catalog_complete():
+    """Rung 02's executioner: PASS only when every catalog check is encoded."""
+    status, detail = gate_catalog()
+    if status != "PASS":
+        return status, detail
+    m = re.match(r"(\d+)/(\d+) encoded", detail)
+    if m and m.group(1) == m.group(2):
+        return "PASS", detail
+    return "CANNOT-EVALUATE", f"in progress - {detail}"
+
+
 def main():
     record = "--record" in sys.argv
     results = [
         ("G-FOLD",) + gate_fold(),
         ("G-PRIVACY",) + gate_privacy(),
         ("G-CATALOG",) + gate_catalog(),
+        ("F-FIXTURE",) + gate_fixture(),
+        ("G-CATALOG-COMPLETE",) + gate_catalog_complete(),
     ]
     width = max(len(r[0]) for r in results)
     fail = False

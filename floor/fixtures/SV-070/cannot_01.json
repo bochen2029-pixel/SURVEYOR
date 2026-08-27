@@ -1,0 +1,4 @@
+{"expect": "CANNOT-EVALUATE",
+ "note": "three-state honesty: the record lacks the offers field entirely - the check must say it cannot judge, never silently pass",
+ "record": {"case_id": "AL-0776", "organ_id": "KI-L"},
+ "history": []}

@@ -1,0 +1,15 @@
+# SV-070 - the flagship: a reportable violation with no system check today,
+# recovered by phone calls. Here: data with a citation, an expiry, and an undo.
+id: SV-070
+title: single-active-primary-offer guard
+family: reconciliation
+layer: L0
+authority: "OPTN allocation policy (crosswalk pin lands at rung 05)"
+trigger: on_write
+predicate: "count(active_primary_offers[organ_id]) <= 1"
+action: hold
+message: "A primary offer is already active on this organ (see {offer_ref})."
+evidence: [offer_ref]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-070/

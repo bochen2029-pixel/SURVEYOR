@@ -1,0 +1,6 @@
+{"expect": "HOLD",
+ "note": "cross-organ control: KI-L lawful with one, KI-R held with three",
+ "record": {"case_id": "AL-0775", "organ_id": "KI-R", "offer_ref": "OF-2003",
+            "active_primary_offers": {"KI-L": ["OF-1001"],
+                                      "KI-R": ["OF-2001", "OF-2002", "OF-2003"]}},
+ "history": []}

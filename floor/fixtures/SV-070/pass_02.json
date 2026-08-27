@@ -1,0 +1,5 @@
+{"expect": "PASS",
+ "note": "no active primaries on this organ at all",
+ "record": {"case_id": "AL-0772", "organ_id": "KI-L", "offer_ref": null,
+            "active_primary_offers": {"KI-L": []}},
+ "history": []}
