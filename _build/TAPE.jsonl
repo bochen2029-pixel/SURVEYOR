@@ -38,3 +38,11 @@
 {"ts": "2026-08-27T17:22:01+00:00", "session": "gates", "type": "verdict", "gate": "G-FOLD", "status": "PASS", "detail": "folds match tape"}
 {"ts": "2026-08-27T17:22:01+00:00", "session": "gates", "type": "verdict", "gate": "G-PRIVACY", "status": "PASS", "detail": "clean (5 warn-tier hits): LAWS.md:28 [iTransplant]; docs/ONE-PAGER_v0.1.md:32 [iTransplant]; docs/ONE-PAGER_v0.1.md:32 [Q-Pulse]; _build/BOARD.md:12 [iTransplant]"}
 {"ts": "2026-08-27T17:22:01+00:00", "session": "gates", "type": "verdict", "gate": "G-CATALOG", "status": "PASS", "detail": "0/59 encoded; 59 honestly UNENCODED"}
+{"ts": "2026-08-27T18:05:00+00:00", "session": "S0b", "type": "session_start", "goal": "Publish: LICENSE, public GitHub repo under operator instruction, push"}
+{"ts": "2026-08-27T18:05:30+00:00", "session": "S0b", "type": "mount", "path": "LICENSE", "desc": "MIT, (c) 2026 Bo Chen - was promised by README, now exists"}
+{"ts": "2026-08-27T18:06:00+00:00", "session": "S0b", "type": "decision", "what": "Repo goes public at REV 0 (spec + discipline, zero engine code) by operator instruction", "why": "Receipts-before-claims posture is the repo's own front matter; _local verified absent from history (law C3); G-PRIVACY green", "revert": "gh repo delete / make private (operator action)"}
+{"ts": "2026-08-27T18:06:30+00:00", "session": "S0b", "type": "signature", "by": "operator", "scope": "publish SURVEYOR public on GitHub, MIT, description in the product-page register"}
+{"ts": "2026-08-27T18:07:00+00:00", "session": "S0b", "type": "session_end", "next": "S1 = rung 01 as recorded at S0 close", "tokens_note": "publish session"}
+{"ts": "2026-08-27T17:24:43+00:00", "session": "gates", "type": "verdict", "gate": "G-FOLD", "status": "PASS", "detail": "folds match tape"}
+{"ts": "2026-08-27T17:24:43+00:00", "session": "gates", "type": "verdict", "gate": "G-PRIVACY", "status": "PASS", "detail": "clean (5 warn-tier hits): LAWS.md:28 [iTransplant]; docs/ONE-PAGER_v0.1.md:32 [iTransplant]; docs/ONE-PAGER_v0.1.md:32 [Q-Pulse]; _build/BOARD.md:12 [iTransplant]"}
+{"ts": "2026-08-27T17:24:43+00:00", "session": "gates", "type": "verdict", "gate": "G-CATALOG", "status": "PASS", "detail": "0/59 encoded; 59 honestly UNENCODED"}
