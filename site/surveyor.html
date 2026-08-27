@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SURVEYOR — Survey-ready every day · AORTA</title>
+    <meta name="description" content="SURVEYOR rebuilds quality into the record itself: every chart checked at entry instead of sampled at month-end, corrective actions that follow themselves up, a regulation-to-policy crosswalk that maintains itself, and a survey binder that is current every morning. Open source, MIT, runs in your building.">
+    <link rel="canonical" href="https://opnaorta.ai/surveyor">
+    <meta property="og:title" content="SURVEYOR — Survey-ready every day.">
+    <meta property="og:description" content="Quality was never a department — it was the record's missing property. Census instead of sample. Findings before the chart closes. CAPAs that verify themselves. The crosswalk that maintains itself.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://opnaorta.ai/surveyor">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="SURVEYOR — Survey-ready every day.">
+    <meta name="twitter:description" content="Quality, rebuilt into the record. Census not sample; findings at the keystroke; the survey binder current every morning.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✓</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* the surveyor's field book: ink on graph paper */
+            --paper: #faf9f4;
+            --paper-2: #f4f2ea;
+            --grid: rgba(14, 42, 71, 0.055);
+            --ink-950: #0b2239;
+            --ink-900: #0e2a47;
+            --ink-700: #1d446b;
+            --ink-500: #3d648c;
+            --ink-300: #8aa5bf;
+            --ink-150: #c9d6e2;
+            --ink-075: #e4ebf1;
+            --rule: #d8d4c6;
+            --stamp-green: #15733c;
+            --stamp-green-bg: #eaf5ee;
+            --flag-red: #b3261e;
+            --flag-red-bg: #fbeeed;
+            --hold-amber: #955104;
+            --hold-amber-bg: #fdf3e4;
+            --display: 'Fraunces', Georgia, serif;
+            --sans: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+            --mono: 'JetBrains Mono', 'Consolas', monospace;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        body {
+            font-family: var(--sans); font-weight: 400; line-height: 1.7; color: var(--ink-900);
+            background-color: var(--paper);
+            background-image:
+                linear-gradient(var(--grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+            background-size: 26px 26px;
+        }
+
+        /* ---- mockup ribbon ---- */
+        .mock-strip {
+            background: var(--ink-950); color: #cfdcea;
+            font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em;
+            text-align: center; padding: 0.45rem 1rem; text-transform: uppercase;
+        }
+        .mock-strip b { color: #ffd98a; font-weight: 700; }
+
+        /* ---- NAV (site chrome) ---- */
+        nav {
+            position: sticky; top: 0; z-index: 100; padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(250, 249, 244, 0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(14,42,71,0.08);
+        }
+        .nav-logo { font-family: var(--mono); font-weight: 500; font-size: 0.95rem; letter-spacing: 0.12em; color: var(--ink-950); text-decoration: none; }
+        .nav-links { display: flex; gap: 1.1rem; list-style: none; align-items: center; min-width: 0; }
+        .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--ink-700); text-decoration: none; letter-spacing: 0.03em; }
+        .nav-links a.pillbtn { color: #fff; padding: 0.34rem 0.72rem; border-radius: 6px; font-weight: 600; line-height: 1.15; display: inline-block; transition: transform 0.12s, filter 0.15s; }
+        .nav-links a.pillbtn:hover { transform: translateY(-1px); filter: brightness(1.15); }
+        a.nav-fusor { background: #6d28d9; }
+        a.nav-vigil { background: #166534; }
+        a.nav-rounds { background: #296DBF; }
+        a.nav-steward { background: #b91c1c; }
+        a.nav-inflight { background: #0F766E; }
+        a.nav-parallax { color: #e7e3ff; background: linear-gradient(100deg, #191039 0%, #3b2a7a 55%, #1c1450 100%); }
+        a.nav-surveyor {
+            background: var(--ink-900);
+            box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.28), inset 0 0 0 3px var(--ink-900);
+            outline: 1.5px solid var(--ink-900); outline-offset: 2px;
+        }
+        @media (max-width: 880px) { .nav-links li:not(.pill) { display: none; } }
+        @media (max-width: 560px) {
+            nav { padding: 0.7rem 0.9rem; }
+            .nav-links { gap: 0.4rem; overflow-x: auto; scrollbar-width: none; }
+            .nav-links::-webkit-scrollbar { display: none; }
+            .nav-links a.pillbtn { padding: 0.3rem 0.5rem; font-size: 0.72rem; }
+        }
+
+        /* ---- HERO ---- */
+        .hero { padding: 5.5rem 2rem 3.5rem; max-width: 980px; margin: 0 auto; }
+        .badge-row { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; }
+        .badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em;
+            padding: 0.38rem 0.9rem; border-radius: 2px; background: #fff;
+            border: 1px solid var(--ink-150); color: var(--ink-700);
+        }
+        .badge.green { color: var(--stamp-green); border-color: rgba(21,115,60,0.3); background: var(--stamp-green-bg); }
+        .badge.amber { color: var(--hold-amber); border-color: rgba(149,81,4,0.3); background: var(--hold-amber-bg); }
+        .kicker { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-500); margin-bottom: 1.1rem; }
+        .hero h1 {
+            font-family: var(--display); font-weight: 600;
+            font-size: clamp(2.6rem, 6vw, 4.4rem); line-height: 1.04; letter-spacing: -0.015em;
+            color: var(--ink-950); margin-bottom: 1.6rem;
+        }
+        .hero h1 .under { box-shadow: inset 0 -0.18em 0 rgba(21,115,60,0.25); }
+        .hero-sub { font-size: 1.22rem; font-weight: 300; line-height: 1.75; color: var(--ink-700); max-width: 740px; margin-bottom: 2.2rem; }
+        .hero-sub strong { font-weight: 600; color: var(--ink-950); }
+        .hero-cta { display: flex; gap: 0.9rem; flex-wrap: wrap; }
+        .cta {
+            display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+            font: 600 15px var(--sans); padding: 13px 22px; border-radius: 8px;
+            transition: transform 0.12s, filter 0.15s;
+        }
+        .cta:hover { transform: translateY(-1px); }
+        .cta.primary { background: var(--ink-900); color: #fff; box-shadow: 0 2px 12px rgba(14,42,71,0.25); }
+        .cta.primary:hover { filter: brightness(1.2); }
+        .cta.ghost { background: #fff; color: var(--ink-900); border: 1.5px solid var(--ink-150); }
+        .cta.ghost:hover { border-color: var(--ink-500); }
+
+        /* ---- INVERSION TILES ---- */
+        .inversions { max-width: 980px; margin: 0 auto; padding: 0 2rem 4rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.1rem; }
+        .inv {
+            background: #fff; border: 1px solid var(--ink-150); border-radius: 3px;
+            padding: 1.5rem 1.6rem; position: relative; box-shadow: 0 1px 3px rgba(14,42,71,0.06);
+        }
+        .inv .from { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--ink-300); text-transform: uppercase; text-decoration: line-through; }
+        .inv .to { font-family: var(--display); font-weight: 600; font-size: 1.7rem; color: var(--ink-950); line-height: 1.15; margin: 0.35rem 0 0.5rem; }
+        .inv p { font-size: 0.88rem; color: var(--ink-500); line-height: 1.6; }
+
+        /* ---- SECTIONS ---- */
+        section { padding: 4.5rem 2rem; max-width: 980px; margin: 0 auto; }
+        .slabel { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-500); margin-bottom: 1.3rem; }
+        section h2 { font-family: var(--display); font-weight: 600; font-size: clamp(1.9rem, 3.6vw, 2.6rem); line-height: 1.15; color: var(--ink-950); margin-bottom: 1.4rem; letter-spacing: -0.01em; }
+        section > p { font-size: 1.06rem; color: var(--ink-700); max-width: 700px; }
+        section > p + p { margin-top: 1rem; }
+        section p strong { color: var(--ink-950); font-weight: 600; }
+        .rule { max-width: 980px; margin: 0 auto; padding: 0 2rem; }
+        .rule hr { border: none; height: 1px; background: var(--rule); }
+
+        /* ---- STAMPS ---- */
+        .stamp {
+            display: inline-block; font-family: var(--mono); font-weight: 700;
+            font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+            padding: 0.22rem 0.55rem; border-radius: 2px; border: 1.5px solid currentColor;
+            transform: rotate(-1.6deg);
+        }
+        .stamp.pass { color: var(--stamp-green); background: var(--stamp-green-bg); }
+        .stamp.held { color: var(--hold-amber); background: var(--hold-amber-bg); }
+        .stamp.red { color: var(--flag-red); background: var(--flag-red-bg); }
+        .stamp.ink { color: var(--ink-700); background: var(--ink-075); }
+
+        /* ---- THE MORNING BOARD (product mock) ---- */
+        .board-wrap { max-width: 1080px; margin: 0 auto; padding: 0 2rem 1rem; }
+        .board {
+            background: #fff; border: 1px solid var(--ink-150); border-radius: 10px;
+            box-shadow: 0 18px 50px rgba(11,34,57,0.13), 0 2px 8px rgba(11,34,57,0.06);
+            overflow: hidden;
+        }
+        .board-chrome {
+            display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+            background: var(--ink-950); color: #d9e4ee; padding: 0.75rem 1.2rem;
+            font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.05em;
+        }
+        .board-chrome .dots { display: flex; gap: 5px; }
+        .board-chrome .dots i { width: 9px; height: 9px; border-radius: 50%; background: #3d648c; display: block; }
+        .board-chrome .title { font-weight: 700; letter-spacing: 0.12em; }
+        .board-chrome .spacer { flex: 1; }
+        .chip { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; padding: 0.2rem 0.55rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.35); }
+        .chip.live { color: #8fe3ae; border-color: rgba(143,227,174,0.5); }
+        .board-note {
+            background: #fff8e8; color: #7a5a12; border-bottom: 1px solid #eadfbe;
+            font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.08em; padding: 0.4rem 1.2rem; text-transform: uppercase;
+        }
+        .board-grid { display: grid; grid-template-columns: 1.35fr 1fr 1fr; gap: 1px; background: var(--ink-075); }
+        @media (max-width: 900px) { .board-grid { grid-template-columns: 1fr; } }
+        .panel { background: #fff; padding: 1.15rem 1.25rem; }
+        .panel.wide { grid-column: 1 / -1; }
+        .panel h4 {
+            font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--ink-500); margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.6rem;
+        }
+        .bignum { font-family: var(--mono); font-weight: 700; font-size: 2rem; color: var(--ink-950); line-height: 1; }
+        .bignum small { font-size: 0.85rem; color: var(--ink-300); font-weight: 500; }
+        .census-row { display: flex; gap: 1.6rem; align-items: flex-end; margin-bottom: 0.9rem; flex-wrap: wrap; }
+        .census-row .sub { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-500); letter-spacing: 0.04em; }
+        .item { display: grid; grid-template-columns: auto 1fr auto; gap: 0.7rem; align-items: baseline; padding: 0.5rem 0; border-top: 1px dashed var(--ink-150); font-size: 0.85rem; color: var(--ink-700); }
+        .item:first-of-type { border-top: 1px solid var(--ink-150); }
+        .item .id { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-300); }
+        .item b { color: var(--ink-950); font-weight: 600; }
+        .clock { display: grid; grid-template-columns: 1fr auto; gap: 0.6rem; align-items: baseline; padding: 0.45rem 0; border-top: 1px dashed var(--ink-150); font-size: 0.83rem; color: var(--ink-700); }
+        .clock:first-of-type { border-top: none; }
+        .clock .t { font-family: var(--mono); font-size: 0.78rem; font-weight: 700; color: var(--ink-950); }
+        .clock .t.warn { color: var(--hold-amber); }
+        .bar { height: 6px; background: var(--ink-075); border-radius: 4px; overflow: hidden; margin-top: 4px; }
+        .bar i { display: block; height: 100%; background: var(--stamp-green); }
+        .bar i.warn { background: var(--hold-amber); }
+        .fold-line { display: flex; justify-content: space-between; gap: 0.8rem; padding: 0.45rem 0; border-top: 1px dashed var(--ink-150); font-size: 0.84rem; color: var(--ink-700); align-items: center; }
+        .fold-line:first-of-type { border-top: none; }
+        .board-foot {
+            display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+            padding: 0.8rem 1.25rem; background: var(--paper-2); border-top: 1px solid var(--ink-075);
+            font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.06em; color: var(--ink-500);
+        }
+        .board-cap { text-align: center; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--ink-500); padding: 1rem 2rem 0; text-transform: uppercase; }
+
+        /* ---- FIVE PIECES ---- */
+        .pieces { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; margin-top: 2.6rem; }
+        .piece { background: #fff; border: 1px solid var(--ink-150); border-radius: 3px; padding: 1.6rem 1.6rem 1.4rem; box-shadow: 0 1px 3px rgba(14,42,71,0.05); }
+        .piece .n { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.16em; color: var(--ink-300); text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; }
+        .piece h3 { font-family: var(--display); font-weight: 600; font-size: 1.35rem; color: var(--ink-950); margin-bottom: 0.55rem; }
+        .piece p { font-size: 0.9rem; color: var(--ink-700); line-height: 1.65; }
+        .piece p + p { margin-top: 0.6rem; }
+
+        /* ---- CROSSWALK SPLIT ---- */
+        .split { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; margin-top: 2.4rem; align-items: stretch; }
+        @media (max-width: 760px) { .split { grid-template-columns: 1fr; } .split .line { display: none; } }
+        .half { background: #fff; border: 1px solid var(--ink-150); border-radius: 3px; padding: 1.6rem; }
+        .half h4 { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 0.8rem; }
+        .half.pub h4 { color: var(--ink-500); }
+        .half.priv h4 { color: var(--stamp-green); }
+        .half p { font-size: 0.9rem; color: var(--ink-700); line-height: 1.65; }
+        .split .line {
+            width: 70px; display: flex; align-items: center; justify-content: center;
+            font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--flag-red);
+            writing-mode: vertical-rl; text-orientation: mixed; text-transform: uppercase;
+            border-left: 2px dashed rgba(179,38,30,0.5); border-right: 2px dashed rgba(179,38,30,0.5); margin: 0 0.8rem;
+        }
+
+        /* ---- FENCES ---- */
+        .fences { background: var(--ink-950); border-radius: 4px; padding: 2.2rem 2.4rem; margin-top: 2.4rem; color: var(--ink-150); position: relative; }
+        .fences::before { content: ''; position: absolute; left: 2.4rem; top: 0; width: 44px; height: 3px; background: var(--stamp-green); }
+        .fences h3 { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: #9fd9b4; margin-bottom: 1.1rem; }
+        .fences ul { list-style: none; }
+        .fences li { padding: 0.55rem 0 0.55rem 1.6rem; position: relative; font-size: 0.93rem; line-height: 1.7; border-top: 1px solid rgba(138,165,191,0.18); color: #b9c9d8; }
+        .fences li:first-child { border-top: none; }
+        .fences li::before { content: '⊘'; position: absolute; left: 0; color: #e08a84; }
+        .fences li strong { color: #eef3f8; font-weight: 500; }
+        .fences .law { margin-top: 1.2rem; font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.08em; color: #9fd9b4; }
+
+        /* ---- AUDIENCE ---- */
+        .aud { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; margin-top: 2.4rem; }
+        .aud .card { background: #fff; border: 1px solid var(--ink-150); border-left: 4px solid var(--ink-900); border-radius: 3px; padding: 1.4rem 1.5rem; }
+        .aud h3 { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-500); margin-bottom: 0.5rem; }
+        .aud p { font-size: 0.9rem; color: var(--ink-700); line-height: 1.65; }
+
+        /* ---- BUILD LADDER ---- */
+        .ladder { margin-top: 2.4rem; border: 1px solid var(--ink-150); border-radius: 3px; overflow: hidden; background: #fff; }
+        .rung { display: grid; grid-template-columns: 200px 1fr auto; gap: 1.2rem; align-items: center; padding: 0.95rem 1.3rem; border-top: 1px solid var(--ink-075); font-size: 0.88rem; color: var(--ink-700); }
+        .rung:first-child { border-top: none; }
+        .rung .r { font-family: var(--mono); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.05em; color: var(--ink-950); }
+        @media (max-width: 680px) { .rung { grid-template-columns: 1fr; gap: 0.35rem; } }
+
+        /* ---- FOOTER ---- */
+        footer { padding: 3.5rem 2rem 3rem; max-width: 980px; margin: 0 auto; }
+        .foot-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--rule); }
+        .foot-brand { font-family: var(--mono); font-weight: 500; font-size: 0.85rem; letter-spacing: 0.12em; color: var(--ink-950); margin-bottom: 0.4rem; }
+        .foot-tag { font-size: 0.85rem; color: var(--ink-500); }
+        .foot-links { display: flex; gap: 1.8rem; }
+        .foot-links a { font-size: 0.85rem; color: var(--ink-500); text-decoration: none; }
+        .foot-links a:hover { color: var(--ink-950); }
+        .foot-substrate { padding-top: 1.4rem; font-size: 0.85rem; color: var(--ink-500); max-width: 760px; line-height: 1.7; }
+        .foot-substrate a { color: var(--ink-700); text-decoration: none; border-bottom: 1px solid var(--ink-150); }
+        .foot-bottom { padding-top: 1.4rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.05em; color: var(--ink-300); }
+
+        @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+        .hero > *, .inversions > * { animation: rise 0.7s ease both; }
+        .hero > *:nth-child(2) { animation-delay: 0.05s; } .hero > *:nth-child(3) { animation-delay: 0.1s; }
+        .hero > *:nth-child(4) { animation-delay: 0.15s; } .hero > *:nth-child(5) { animation-delay: 0.2s; }
+        .inversions > *:nth-child(2) { animation-delay: 0.1s; } .inversions > *:nth-child(3) { animation-delay: 0.2s; }
+        @media (prefers-reduced-motion: reduce) { .hero > *, .inversions > * { animation: none; } }
+    </style>
+</head>
+<body>
+
+    <div class="mock-strip"><b>DESIGN MOCKUP · REV 0</b> — this page reads as it will the day the receipts exist. Every number shown is an illustrative target, not a measurement. Funerals print here too.</div>
+
+    <nav>
+        <a href="/" class="nav-logo">AORTA</a>
+        <ul class="nav-links">
+            <li><a href="/#framework">Framework</a></li>
+            <li class="pill"><a href="https://fusor1.com/" class="pillbtn nav-fusor">FUSOR-1</a></li>
+            <li class="pill"><a href="/vigil" class="pillbtn nav-vigil">VIGIL</a></li>
+            <li class="pill"><a href="/rounds" class="pillbtn nav-rounds">ROUNDS</a></li>
+            <li class="pill"><a href="/steward" class="pillbtn nav-steward">STEWARD</a></li>
+            <li class="pill"><a href="/in-flight" class="pillbtn nav-inflight">IN-FLIGHT</a></li>
+            <li class="pill"><a href="/parallax" class="pillbtn nav-parallax">PARALLAX</a></li>
+            <li class="pill"><a href="/surveyor" class="pillbtn nav-surveyor" aria-current="page">SURVEYOR</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="badge-row">
+            <span class="badge green">OPEN SOURCE · MIT · NO LICENSE SERVER</span>
+            <span class="badge">RUNS IN YOUR BUILDING · ZERO EGRESS</span>
+            <span class="badge amber">REV 0 · PRE-BUILD · RECEIPTS BEFORE CLAIMS</span>
+        </div>
+        <div class="kicker">SURVEYOR · Quality, rebuilt into the record</div>
+        <h1>Survey-ready<br><span class="under">every day.</span></h1>
+        <p class="hero-sub">
+            Your quality program audits a <strong>sample</strong> of charts, <strong>weeks</strong> after the cases
+            they describe, and gets survey-ready as an <strong>event</strong>. SURVEYOR rebuilds all three into the
+            record itself: every chart checked at the keystroke, corrective actions that follow themselves up,
+            a regulation-to-policy crosswalk that maintains itself, and a survey binder that is current every
+            morning. Your quality team stops re-performing arithmetic — and gets its judgment back.
+        </p>
+        <div class="hero-cta">
+            <a class="cta primary" href="#board">See the Morning Board ↓</a>
+            <a class="cta ghost" href="#pieces">How it works</a>
+            <a class="cta ghost" href="#honesty">The receipts promise</a>
+        </div>
+    </header>
+
+    <div class="inversions">
+        <div class="inv">
+            <span class="from">Sample</span>
+            <div class="to">Census.</div>
+            <p>Chart review today covers what human attention can reach. The floor checks <b>100% of records at entry</b> — the audit becomes a property of the chart, not a department's afternoon.</p>
+        </div>
+        <div class="inv">
+            <span class="from">Weeks later</span>
+            <div class="to">At the keystroke.</div>
+            <p>A chart missing its second signature, its subtype, or its attached consent recording doesn't become a finding next month. <b>It doesn't close.</b> The finding arrives while the case can still be fixed.</p>
+        </div>
+        <div class="inv">
+            <span class="from">The event</span>
+            <div class="to">A standing property.</div>
+            <p>The line-of-sight report, the committee packet, and the survey binder are generated from the same tamper-evident record — <b>current every morning, every claim linked to its evidence.</b></p>
+        </div>
+    </div>
+
+    <div class="rule"><hr></div>
+
+    <!-- THE MORNING BOARD -->
+    <section id="board" style="max-width:1080px">
+        <div class="slabel">The end product — what your Tuesday looks like</div>
+        <h2>The Morning Board.</h2>
+        <p style="margin-bottom:2rem">
+            One screen, first coffee. Everything below is computed from the record itself and every line
+            links to its evidence. Nothing here was compiled by a person the night before.
+        </p>
+        <div class="board">
+            <div class="board-chrome">
+                <span class="dots"><i></i><i></i><i></i></span>
+                <span class="title">SURVEYOR · MORNING BOARD</span>
+                <span>Tue · 06:45</span>
+                <span class="spacer"></span>
+                <span class="chip">YOUR OPO</span>
+                <span class="chip live">STATE: LIVE</span>
+                <span class="chip">SURVEY BINDER: CURRENT</span>
+            </div>
+            <div class="board-note">Illustrative data — REV 0 mockup. The shipped board shows your record, your denominators, your receipts.</div>
+            <div class="board-grid">
+                <div class="panel">
+                    <h4>The Floor — last 24h <span class="stamp pass">census</span></h4>
+                    <div class="census-row">
+                        <div><div class="bignum">147</div><div class="sub">records checked at entry</div></div>
+                        <div><div class="bignum" style="color:var(--stamp-green)">144</div><div class="sub">clean on first pass</div></div>
+                        <div><div class="bignum" style="color:var(--hold-amber)">3</div><div class="sub">held at entry — fixed before close</div></div>
+                    </div>
+                    <div class="item"><span class="id">TR-4118</span><span><b>ABO subtype missing</b> on type-A donor — chart held at serology page, resolved in 4 min</span><span class="stamp held">held→fixed</span></div>
+                    <div class="item"><span class="id">TR-4121</span><span><b>Second ORC signature absent</b> on HLA verification — held, countersigned</span><span class="stamp held">held→fixed</span></div>
+                    <div class="item"><span class="id">OR-2093</span><span><b>Inspection timestamp precedes donor prep</b> — sequence flag, corrected with case note</span><span class="stamp held">held→fixed</span></div>
+                    <div class="item"><span class="id">AL-0774</span><span><b>Primary-offer guard:</b> second primary blocked while PR-0771 active — no duplicate offer possible</span><span class="stamp pass">prevented</span></div>
+                </div>
+                <div class="panel">
+                    <h4>Clocks — the SLA lattice</h4>
+                    <div class="clock"><span>PDTR notification (case 4102)<div class="bar"><i style="width:38%"></i></div></span><span class="t">14h 22m left</span></div>
+                    <div class="clock"><span>Reactive serology → county (4118)<div class="bar"><i class="warn" style="width:81%"></i></div></span><span class="t warn">4h 36m left</span></div>
+                    <div class="clock"><span>Donor feedback ×3 — anchored to recovery time<div class="bar"><i style="width:22%"></i></div></span><span class="t">3.9 days</span></div>
+                    <div class="clock"><span>DDR (Sept batch) — internal 30-day buffer<div class="bar"><i style="width:12%"></i></div></span><span class="t">26 days</span></div>
+                    <div class="clock"><span>Onsite response, active referral<div class="bar"><i style="width:44%"></i></div></span><span class="t">0:49 of 1:30</span></div>
+                </div>
+                <div class="panel">
+                    <h4>Crosswalk — regulation ↔ your policy</h4>
+                    <div class="item"><span class="id">OPTN</span><span><b>Policy notice, eff. Nov 1</b> — 3 site documents affected · draft diffs ready for quality review</span><span class="stamp ink">3 diffs</span></div>
+                    <div class="item"><span class="id">AATB</span><span><b>New edition</b> — audit window in 47 days · 12 clauses changed · 2 touch your SOPs</span><span class="stamp ink">tracked</span></div>
+                    <div class="item"><span class="id">CMS</span><span>No changes affecting mapped policies this week — <b>checked daily, cited to source</b></span><span class="stamp pass">current</span></div>
+                    <div class="item"><span class="id">CITE</span><span>Every crosswalk claim byte-matches a pinned public source — <b>a quote that doesn't match doesn't exist</b></span><span class="stamp pass">pinned</span></div>
+                </div>
+                <div class="panel wide">
+                    <h4>Corrective actions — effectiveness, measured &nbsp;·&nbsp; variance intake &nbsp;·&nbsp; the ledger</h4>
+                    <div class="fold-line"><span><b>CAPA-031</b> (labeling variance class) — 90-day effectiveness check ran overnight: class rate <b>↓ 64%</b> since mount, sustained · expectation met</span><span class="stamp pass">sustained</span></div>
+                    <div class="fold-line"><span><b>CAPA-027</b> (handoff omissions) — trend flat at horizon · <b>expectation NOT met</b> — auto-returned to committee with the data attached</span><span class="stamp red">re-opened</span></div>
+                    <div class="fold-line"><span><b>Variance V-2210</b> — triage suggests <b>process, not person</b> (training current, pattern spans 3 coordinators, 2 shifts) · investigation packet drafted</span><span class="stamp ink">drafted</span></div>
+                    <div class="fold-line"><span><b>Line-of-sight report · committee packet · survey binder</b> — generated from the tape, every claim linked to evidence, hash-chained</span><span class="stamp pass">current</span></div>
+                </div>
+            </div>
+            <div class="board-foot">
+                <span>EVERY LINE LINKS TO ITS EVIDENCE · EVERY SILENCE IS ON THE RECORD</span>
+                <span>LOCAL MODEL · ZERO EGRESS · APPEND-ONLY, HASH-CHAINED</span>
+            </div>
+        </div>
+        <div class="board-cap">The quality department's morning, before SURVEYOR: assembling this by hand, from last month's sample.</div>
+    </section>
+
+    <div class="rule"><hr></div>
+
+    <!-- FIVE PIECES -->
+    <section id="pieces">
+        <div class="slabel">How it works — five pieces, one record</div>
+        <h2>Quality is a property of the record,<br>not a department.</h2>
+        <p>
+            Every check your auditors perform by hand today is either <strong>mechanical</strong> — and belongs
+            in the record, at entry, on every chart — or it is <strong>judgment</strong>, and belongs to your
+            people, with better instruments. SURVEYOR draws exactly that line.
+        </p>
+        <div class="pieces">
+            <div class="piece">
+                <div class="n"><span>01 · THE FLOOR</span><span class="stamp pass">deterministic</span></div>
+                <h3>Every check, every chart, at entry.</h3>
+                <p>The audit checklist your team runs at week three — cross-document identity matching, two-person verification, branching completeness, revision control, timestamp sequencing — compiled into gates that run on <strong>100% of records as they're written.</strong> A chart that fails doesn't close; a hazard that can be blocked can't occur (one organ, one primary offer — enforced by the system, not by a phone call).</p>
+                <p>No AI in this layer at all. It must pass its full battery with every learned component switched off.</p>
+            </div>
+            <div class="piece">
+                <div class="n"><span>02 · THE CROSSWALK</span><span class="stamp ink">day one</span></div>
+                <h3>The regulation-to-policy map that maintains itself.</h3>
+                <p>Every quality team has tried to keep a crosswalk between the regulations and their own policies. Every one has abandoned it — one agency overhaul and you start over. SURVEYOR maintains it as a standing computation: public regulations read daily, <strong>every claim byte-matched to a pinned source</strong>, edition changes surfaced with lead time and the affected SOPs named, draft diffs ready for your review — never auto-applied.</p>
+            </div>
+            <div class="piece">
+                <div class="n"><span>03 · THE CLOCKS</span><span class="stamp pass">exact</span></div>
+                <h3>The SLA lattice, computed — with the right anchors.</h3>
+                <p>The 24-hour transmission report, the 72-hour draw windows, the refrigeration clocks, the 5-business-day feedback measured from the <strong>correct</strong> anchor field, the 30/60-day submissions. Deadline arithmetic is exact, run continuously, and alarmed before the breach — not discovered in the audit after it.</p>
+            </div>
+            <div class="piece">
+                <div class="n"><span>04 · THE LEDGER</span><span class="stamp pass">tamper-evident</span></div>
+                <h3>CAPAs that follow themselves up.</h3>
+                <p>Every corrective action carries an owner, a falsifiable expectation, a check-by date, and an expiry. "Sustained corrective action" stops being a phrase in the plan and becomes a measurement that runs at the horizon — met, or auto-returned to committee <strong>with the data attached.</strong> The committee packet and the survey binder are generated from the same record, every claim linked to its evidence.</p>
+            </div>
+            <div class="piece">
+                <div class="n"><span>05 · THE WATCH</span><span class="stamp held">gated · opt-in</span></div>
+                <h3>Quality in the present tense.</h3>
+                <p>A standing watcher on the case stream that surfaces the drift <em>while it's happening</em> — the closing window, the contradiction between pages, the silence where a lab should be — at a livable rate, with every decision <em>not</em> to speak on the record too. Ships off by default; turns on by your hand; every ambitious surface degrades to a useful ordinary one.</p>
+            </div>
+            <div class="piece">
+                <div class="n"><span>&nbsp;</span><span class="stamp ink">inheritance</span></div>
+                <h3>It starts knowing your history.</h3>
+                <p>Before day one, SURVEYOR reads your past — closed charts, findings logs, policies, committee minutes — into the same evidence-linked record. Your first morning it can answer "when did we last see this variance class?" <strong>with citations.</strong> The site starts with a memory, not a blank.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="rule"><hr></div>
+
+    <!-- CROSSWALK SPLIT -->
+    <section>
+        <div class="slabel">Why your privacy officer says yes</div>
+        <h2>Two models. Two data classes. One clean line.</h2>
+        <p>
+            The architecture is the compliance posture. Nothing about your donors, your staff, or your cases
+            ever crosses the line — and the line is structural, not a policy promise.
+        </p>
+        <div class="split">
+            <div class="half pub">
+                <h4>Public side — frontier AI</h4>
+                <p>Reads only <strong>public material</strong>: OPTN policies, CMS rules, FDA and AATB standards, and the open-source SURVEYOR seed. Maintains the crosswalk. No PHI, no case data, <strong>no BAA required</strong> — because nothing protected ever reaches it.</p>
+            </div>
+            <div class="line">PHI never crosses</div>
+            <div class="half priv">
+                <h4>Private side — your hardware</h4>
+                <p>A local model on <strong>one workstation-class machine in your building</strong> reads your records, your SOPs, your tapes. Zero egress; air-gapped supported. Your data never leaves; the intelligence is swappable; the record is yours — exportable in full, no license server, no vendor in the loop.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="rule"><hr></div>
+
+    <!-- FENCES -->
+    <section>
+        <div class="slabel">The fence — Just Culture, by architecture</div>
+        <h2>It reads records. It never grades people.</h2>
+        <p>
+            Your quality program already professes Just Culture: variance is attributed to system and process,
+            not the person. SURVEYOR is the version of your record that can keep that promise — because the
+            fence is built into what the software <em>is</em>, not written in a memo about how to use it.
+        </p>
+        <div class="fences">
+            <h3>Never — by construction, not by policy</h3>
+            <ul>
+                <li><strong>Never grades, ranks, or scores a person.</strong> Variance triage separates system-pattern from individual-pattern mechanically — and its output is an investigation aid for your people, not a verdict about anyone.</li>
+                <li><strong>Never pings a coordinator.</strong> Findings land on the case, not on a person's phone. A check that punishes charting suppresses charting — so no check ever does.</li>
+                <li><strong>Never files a report or contacts a regulator.</strong> Surfacing is internal. Reporting decisions are made by humans, under your escalation policy, every time.</li>
+                <li><strong>Never writes the quality record.</strong> Findings and variances enter under a human name. The system holds charts open; only people close them.</li>
+                <li><strong>Never auto-applies a change.</strong> Every policy diff, every CAPA, every configuration change mounts only under a signature — and every one carries an inverse, so a wrong fix unwinds instead of scarring.</li>
+                <li><strong>Never sends your data anywhere.</strong> And never holds you hostage: MIT license, open formats, full export, fork it if we disappear.</li>
+            </ul>
+            <div class="law">NO MACHINE PATH FROM A RECORD TO A VERDICT ABOUT A PERSON — THE GAP IS THE LAW.</div>
+        </div>
+    </section>
+
+    <div class="rule"><hr></div>
+
+    <!-- AUDIENCE -->
+    <section>
+        <div class="slabel">What changes, for whom</div>
+        <h2>The judgment stays. The re-typing goes.</h2>
+        <div class="aud">
+            <div class="card">
+                <h3>For the Quality Director</h3>
+                <p>Your team stops re-performing arithmetic on a sample and starts adjudicating on the census. Chart review becomes exception review. The crosswalk you gave up maintaining, maintained. Your line-of-sight report writes itself — from evidence, not from memory.</p>
+            </div>
+            <div class="card">
+                <h3>For the CEO &amp; the Board</h3>
+                <p>Census assurance instead of sampled assurance. Metrics with honest denominators. CAPA effectiveness as a measurement, not an assertion. Survey-readiness as a standing property of the organization — and a quality cost curve that finally bends without cutting the judgment that matters.</p>
+            </div>
+            <div class="card">
+                <h3>For the Coordinator</h3>
+                <p>The record catches it before the chart closes — not in a finding three weeks later. The feedback lands on the case, never on you. And the Just Culture your organization already promises is finally enforced by the architecture instead of by memo.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="rule"><hr></div>
+
+    <!-- HONESTY / BUILD LADDER -->
+    <section id="honesty">
+        <div class="slabel">The receipts promise — how this gets built, in the open</div>
+        <h2>No claim ships without the test that could kill it.</h2>
+        <p>
+            SURVEYOR is built in public, backwards from this page. The decisive test is pre-registered:
+            implement the floor, run it against <strong>historical closed charts</strong>, and score it against
+            the quality team's own findings log — how much of what your auditors found does it reproduce at
+            entry-time, what did the census catch that the sample missed, and what does an audit-hour per case
+            become. <strong>Whatever the numbers say, they publish here</strong> — including the funeral, if
+            that's what prints. And one result would not be a failure: if the deterministic floor alone captures
+            most of what retrospective review finds, that <em>is</em> the product.
+        </p>
+        <div class="ladder">
+            <div class="rung"><span class="r">01 · FLOOR CATALOG</span><span>~40 deterministic checks + the full SLA lattice, harvested from a working quality program's own audit walkthrough</span><span class="stamp pass">receipted</span></div>
+            <div class="rung"><span class="r">02 · F-RETRO</span><span>The retro-audit race: floor vs. the quality team's historical findings — recall, precision, census surplus, hours per case</span><span class="stamp held">work order</span></div>
+            <div class="rung"><span class="r">03 · CROSSWALK</span><span>One real edition change, diffed against site policies, graded against the quality staff's own manual reading</span><span class="stamp held">pre-registered</span></div>
+            <div class="rung"><span class="r">04 · LEDGER + CAPA</span><span>Expectation-graded corrective actions; committee packet and survey binder as generated, evidence-linked documents</span><span class="stamp ink">spec</span></div>
+            <div class="rung"><span class="r">05 · THE WATCH</span><span>The present-tense tier — ships off by default, behind its own published tests, and must beat the floor or it doesn't ship</span><span class="stamp ink">gated</span></div>
+        </div>
+        <p style="margin-top:1.6rem; font-size:0.9rem; color:var(--ink-500);">
+            Claim grammar, binding on every number this page will ever carry: <b>measured</b> (dated receipt) ·
+            <b>harvested</b> (line-referenced source) · <b>derived</b> (chain shown) · <b>spec</b> (designed, unbuilt) ·
+            <b>bet</b> (kill condition named). A number without its grain, denominator, and source is not a number.
+        </p>
+    </section>
+
+    <div class="rule"><hr></div>
+
+    <footer>
+        <div class="foot-top">
+            <div>
+                <div class="foot-brand">SURVEYOR · AORTA</div>
+                <div class="foot-tag">Survey-ready every day. The books close continuously; the record is the proof.</div>
+            </div>
+            <div class="foot-links">
+                <a href="/">AORTA</a>
+                <a href="/edr">REGISTRAR</a>
+                <a href="/parallax">PARALLAX</a>
+                <a href="https://github.com/bochen2029-pixel" target="_blank" rel="noopener">GitHub</a>
+            </div>
+        </div>
+        <p class="foot-substrate">
+            Under the hood, last and least: SURVEYOR runs on the same open substrate as the rest of this site —
+            <a href="/edr">REGISTRAR</a>'s record and gate battery, <a href="https://fusor1.com/">FUSOR</a>'s
+            resident loop, SCRIPTORIUM's inheritance intake, CORTEX's cited memory — all MIT. The fact that it
+            uses AI is almost beside the point. The point is that your quality program deserves a record that
+            checks itself.
+        </p>
+        <div class="foot-bottom">
+            <span>MIT LICENSE · NO PRICING PAGE · NO CONTACT FORM · NO ASK</span>
+            <span>REV 0 · DESIGN MOCKUP · WHERE THIS PAGE AND A RECEIPT DISAGREE, THE RECEIPT WINS</span>
+        </div>
+    </footer>
+
+</body>
+</html>

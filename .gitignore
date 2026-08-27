@@ -1,0 +1,9 @@
+# Site-specific material — NEVER ships. The only place names/roles from any real
+# organization may live. If this repo goes public, _local/ stays behind.
+_local/
+
+# Local scratch
+*.tmp
+*.bak
+__pycache__/
+.DS_Store
