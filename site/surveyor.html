@@ -257,6 +257,65 @@
         .rung .r { font-family: var(--mono); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.05em; color: var(--ink-950); }
         @media (max-width: 680px) { .rung { grid-template-columns: 1fr; gap: 0.35rem; } }
 
+        /* ---- SUBNAV (section jump bar) ---- */
+        .subnav { position: sticky; top: 53px; z-index: 90; display: flex; gap: 1.4rem; flex-wrap: wrap;
+            padding: 0.5rem 2rem; background: rgba(250,249,244,0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--ink-075); font-family: var(--mono); font-size: 0.68rem;
+            letter-spacing: 0.12em; text-transform: uppercase; }
+        .subnav a { color: var(--ink-500); text-decoration: none; }
+        .subnav a:hover { color: var(--ink-950); }
+        @media (max-width: 560px) { .subnav { top: 44px; gap: 0.9rem; padding: 0.45rem 0.9rem; overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; } .subnav::-webkit-scrollbar { display: none; } }
+
+        /* ---- DWG-003 (the drawing) ---- */
+        .dwg { background: #fff; border: 1.5px solid var(--ink-900); border-radius: 2px; padding: 1.4rem 1.6rem 1.2rem; margin-top: 2.4rem; box-shadow: 0 2px 10px rgba(11,34,57,0.07); }
+        .dwg-head { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: flex-start; margin-bottom: 1.4rem; }
+        .dwg-legend { display: flex; flex-direction: column; gap: 0.35rem; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--ink-500); }
+        .dwg-legend i { display: inline-block; width: 22px; height: 11px; margin-right: 0.5rem; vertical-align: -1px; }
+        .lg-ship { border: 1.5px solid var(--ink-900); background: #fff; }
+        .lg-site { border: 1.5px dashed var(--ink-500); background: #fff; }
+        .lg-off  { border: 1.5px dashed var(--ink-300); background: var(--paper-2); }
+        .dwg-block { border-collapse: collapse; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--ink-700); }
+        .dwg-block td { border: 1px solid var(--ink-150); padding: 0.3rem 0.7rem; }
+        .dwg-cols { display: grid; grid-template-columns: 1fr 56px 1.6fr; gap: 0; }
+        .dwg-col { display: flex; flex-direction: column; }
+        .dwg-side-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-300); margin-bottom: 0.6rem; }
+        .db { border: 1.5px solid var(--ink-900); background: #fff; border-radius: 2px; padding: 0.65rem 0.85rem; }
+        .db .t { font-family: var(--mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; color: var(--ink-950); }
+        .db .s { font-size: 0.76rem; color: var(--ink-500); line-height: 1.5; margin-top: 0.15rem; }
+        .db.site { border-style: dashed; border-color: var(--ink-500); }
+        .db.off { border-style: dashed; border-color: var(--ink-300); background: var(--paper-2); }
+        .db.ext { border-color: var(--ink-150); background: var(--paper-2); }
+        .dwg-arrow { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.06em; color: var(--ink-500); padding: 0.35rem 0 0.35rem 0.9rem; border-left: 1.5px solid var(--ink-300); margin-left: 1.1rem; }
+        .dwg-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+        .phi-div { display: flex; align-items: stretch; justify-content: center; }
+        .phi-div span { writing-mode: vertical-rl; text-orientation: mixed; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em; color: var(--flag-red); border-left: 2px dashed rgba(179,38,30,0.55); border-right: 2px dashed rgba(179,38,30,0.55); padding: 0 0.5rem; margin: 0 auto; display: flex; align-items: center; }
+        .dwg-seam { margin-top: 1.2rem; padding-top: 0.7rem; border-top: 2px dashed var(--stamp-green); font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.12em; color: var(--stamp-green); text-align: center; }
+        .dwg-law { margin-top: 0.5rem; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; color: var(--ink-950); text-align: center; font-weight: 700; }
+        @media (max-width: 860px) {
+            .dwg-cols { grid-template-columns: 1fr; }
+            .phi-div { padding: 0.6rem 0; }
+            .phi-div span { writing-mode: horizontal-tb; border: none; border-top: 2px dashed rgba(179,38,30,0.55); border-bottom: 2px dashed rgba(179,38,30,0.55); padding: 0.3rem 0; width: 100%; text-align: center; justify-content: center; }
+            .dwg-row { grid-template-columns: 1fr; }
+        }
+
+        /* ---- UNDER THE HOOD ---- */
+        .hood-h { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-500); margin: 2.6rem 0 0.9rem; }
+        .chip { display: inline-block; font-family: var(--mono); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.08em; border: 1px solid var(--ink-300); border-radius: 2px; padding: 0.06rem 0.32rem; color: var(--ink-500); vertical-align: 0.15em; margin-left: 0.35rem; }
+        .eq { font-family: Georgia, 'Times New Roman', serif; font-size: 1.25rem; color: var(--ink-950); text-align: center; padding: 1.1rem 1rem; background: #fff; border: 1px solid var(--ink-150); border-radius: 2px; margin: 0.6rem 0 0.9rem; overflow-x: auto; }
+        .nobuy { border-left: 3px solid var(--hold-amber); background: var(--hold-amber-bg); padding: 1.1rem 1.4rem; margin: 2.2rem 0 0; border-radius: 2px; max-width: 780px; }
+        .nobuy h4 { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.16em; color: var(--hold-amber); margin-bottom: 0.5rem; }
+        .nobuy p { font-size: 0.92rem; color: #6b4a10; line-height: 1.7; max-width: none; }
+        .code-plate { background: var(--ink-950); border-radius: 6px; padding: 1.1rem 1.3rem; overflow-x: auto; margin: 0.6rem 0 0.5rem; }
+        .code-plate pre { font-family: var(--mono); font-size: 0.78rem; line-height: 1.75; color: #d9e4ee; margin: 0; }
+        .code-plate .c { color: #7d94ab; }
+        .code-plate .k { color: #ffd98a; }
+        .code-plate .g { color: #8fe3ae; }
+        .cap { font-size: 0.88rem; color: var(--ink-500); max-width: 740px; line-height: 1.65; }
+
+        /* ---- TAPE STATUS STRIP ---- */
+        .tape-strip { margin-top: 1.6rem; background: var(--paper-2); border: 1px solid var(--ink-150); border-radius: 2px; padding: 0.7rem 1.1rem; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.05em; color: var(--ink-700); line-height: 1.8; }
+        .tape-strip a { color: var(--ink-900); }
+
         /* ---- FOOTER ---- */
         footer { padding: 3.5rem 2rem 3rem; max-width: 980px; margin: 0 auto; }
         .foot-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--rule); }
@@ -294,6 +353,16 @@
             <li class="pill"><a href="/surveyor" class="pillbtn nav-surveyor" aria-current="page">SURVEYOR</a></li>
         </ul>
     </nav>
+
+    <div class="subnav">
+        <a href="#board">The Board</a>
+        <a href="#pieces">How it works</a>
+        <a href="#schematic">Schematic</a>
+        <a href="#hood">Under the hood</a>
+        <a href="#fence">The fence</a>
+        <a href="#who">For whom</a>
+        <a href="#honesty">Receipts</a>
+    </div>
 
     <header class="hero">
         <div class="badge-row">
@@ -448,31 +517,67 @@
 
     <div class="rule"><hr></div>
 
-    <!-- CROSSWALK SPLIT -->
-    <section>
-        <div class="slabel">Why your privacy officer says yes</div>
-        <h2>Two models. Two data classes. One clean line.</h2>
+    <!-- THE SCHEMATIC — DWG-003 -->
+    <section id="schematic" style="max-width:1080px">
+        <div class="slabel">The drawing <span class="tag">[SPEC]</span></div>
+        <h2>DWG-003 — the whole system, on one sheet.</h2>
         <p>
-            The architecture is the compliance posture. Nothing about your donors, your staff, or your cases
-            ever crosses the line — and the line is structural, not a policy promise.
+            Read it like a site plan. Everything <strong>solid</strong> ships in the repo, byte-identical, for
+            every OPO. Everything <strong>dashed</strong> is authored in your building, by your people, under
+            signature. And the red line is the compliance posture drawn as geography: the frontier model lives
+            on the public side and <strong>PHI never crosses</strong> — no BAA, because nothing protected ever
+            reaches it. Your records meet only the local model, on your hardware, zero egress, air-gap supported.
+            The record stays yours: exportable in full, no license server, no vendor in the loop.
         </p>
-        <div class="split">
-            <div class="half pub">
-                <h4>Public side — frontier AI</h4>
-                <p>Reads only <strong>public material</strong>: OPTN policies, CMS rules, FDA and AATB standards, and the open-source SURVEYOR seed. Maintains the crosswalk. No PHI, no case data, <strong>no BAA required</strong> — because nothing protected ever reaches it.</p>
+        <div class="dwg">
+            <div class="dwg-head">
+                <div class="dwg-legend">
+                    <span><i class="lg lg-ship"></i>SHIPS IN THE REPO · BYTE-IDENTICAL</span>
+                    <span><i class="lg lg-site"></i>AUTHORED ON SITE · BY YOU</span>
+                    <span><i class="lg lg-off"></i>OFF BY DEFAULT · OPERATOR-ONLY SWITCH</span>
+                </div>
+                <table class="dwg-block">
+                    <tr><td>SURVEYOR · DWG-003 · REV 0</td></tr>
+                    <tr><td>QUALITY, REBUILT INTO THE RECORD</td></tr>
+                    <tr><td>SCALE: NONE · MIT · ZERO EGRESS</td></tr>
+                    <tr><td>SCHEMATIC — NOT THE CODE</td></tr>
+                </table>
             </div>
-            <div class="line">PHI never crosses</div>
-            <div class="half priv">
-                <h4>Private side — your hardware</h4>
-                <p>A local model on <strong>one workstation-class machine in your building</strong> reads your records, your SOPs, your tapes. Zero egress; air-gapped supported. Your data never leaves; the intelligence is swappable; the record is yours — exportable in full, no license server, no vendor in the loop.</p>
+            <div class="dwg-cols">
+                <div class="dwg-col">
+                    <div class="dwg-side-label">Public side — frontier AI · no PHI · no BAA</div>
+                    <div class="db ext"><span class="t">PUBLIC REGULATIONS</span><div class="s">OPTN · CMS · FDA · AATB — editions, verbatim</div></div>
+                    <div class="dwg-arrow">frontier reads · every quote byte-pinned (sha256)</div>
+                    <div class="db"><span class="t">THE CROSSWALK</span><div class="s">regulation ↔ your policy, maintained as a computation · edition changes surfaced with lead time</div></div>
+                    <div class="dwg-arrow">draft diffs — never auto-applied</div>
+                    <div class="db site"><span class="t">REVIEW QUEUE</span><div class="s">your quality team accepts, edits, or rejects — graded, not reviewed-for-you</div></div>
+                </div>
+                <div class="phi-div"><span>PHI NEVER CROSSES</span></div>
+                <div class="dwg-col">
+                    <div class="dwg-side-label">Your building — local model · zero egress · air-gap OK</div>
+                    <div class="db site"><span class="t">YOUR RECORD SYSTEM</span><div class="s">read beside, never through — adapters are read-only, worst-case CSV</div></div>
+                    <div class="dwg-arrow">records, as they are written</div>
+                    <div class="dwg-row">
+                        <div class="db"><span class="t">THE FLOOR</span><div class="s">59 checks at entry · hold / flag / alarm · deterministic, model-free</div></div>
+                        <div class="db"><span class="t">THE CLOCKS</span><div class="s">the SLA lattice · (min,+) closure · alarmed before breach, with the why</div></div>
+                    </div>
+                    <div class="dwg-arrow">every verdict, every hold, every silence</div>
+                    <div class="db"><span class="t">THE TAPE</span><div class="s">append-only · hash-chained · local · exportable in full</div></div>
+                    <div class="dwg-arrow">deterministic folds</div>
+                    <div class="db"><span class="t">THE FOLDS</span><div class="s">line-of-sight report · committee packet · survey binder — current every morning, every claim linked to evidence</div></div>
+                    <div class="dwg-arrow" style="border-left-style:dashed">optional tier — earns its place or stays off</div>
+                    <div class="db off"><span class="t">THE WATCH</span><div class="s">present-tense case watching · state: off | shadow | live · must beat the floor or it doesn't ship</div></div>
+                </div>
             </div>
+            <div class="dwg-seam">FINDINGS ENTER UNDER A HUMAN NAME — A SIGNATURE IS THE ONLY WAY ACROSS</div>
+            <div class="dwg-law">NO MACHINE PATH FROM A RECORD TO A VERDICT ABOUT A PERSON — THE GAP IS THE LAW</div>
         </div>
     </section>
 
     <div class="rule"><hr></div>
 
     <!-- FENCES -->
-    <section>
+    <section id="fence">
         <div class="slabel">The fence — Just Culture, by architecture</div>
         <h2>It reads records. It never grades people.</h2>
         <p>
@@ -497,7 +602,7 @@
     <div class="rule"><hr></div>
 
     <!-- AUDIENCE -->
-    <section>
+    <section id="who">
         <div class="slabel">What changes, for whom</div>
         <h2>The judgment stays. The re-typing goes.</h2>
         <div class="aud">
@@ -514,6 +619,99 @@
                 <p>The record catches it before the chart closes — not in a finding three weeks later. The feedback lands on the case, never on you. And the Just Culture your organization already promises is finally enforced by the architecture instead of by memo.</p>
             </div>
         </div>
+    </section>
+
+    <div class="rule"><hr></div>
+
+    <!-- UNDER THE HOOD -->
+    <section id="hood" style="max-width:1080px">
+        <div class="slabel">Under the hood — for whoever your IT director sends</div>
+        <h2>One theorem, one model, three artifacts.</h2>
+        <p>
+            The substrate is mentioned last on this page, on purpose — but when it is mentioned, it is shown
+            properly. What follows is the actual mathematics and the actual shape of the code, short enough to
+            read whole, honest about what it does and does not prove.
+        </p>
+
+        <div class="hood-h">The algebra — inherited, not re-proven <span class="chip">D</span></div>
+        <div class="eq">(<i>p₁</i>, <i>p₁⁻</i>) · (<i>p₂</i>, <i>p₂⁻</i>) &nbsp;=&nbsp; (<i>p₁</i> ∘ <i>p₂</i> , <i>p₂⁻</i> ∘ <i>p₁⁻</i>)</div>
+        <p class="cap">
+            A check is a patch row in the same algebra <a href="/edr" style="color:var(--ink-900)">REGISTRAR</a>
+            proves on its own page: every row carries its inverse, and composition <em>twists</em> — inverses
+            accumulate in reverse. Two things fall out for free. Fifty-nine checks mounted in any order land in
+            the same fit (confluence, derived rather than borrowed). And retiring a check must unwind in reverse
+            dependency order — <strong>the algebra forces it; no implementation gets a vote.</strong> A wrong
+            check is reversible, not scar tissue.
+        </p>
+
+        <div class="hood-h">One exposure model, labelled as a model <span class="chip">D</span></div>
+        <div class="eq"><i>T</i><sub>exposure</sub> ∝ <i>L</i> / <i>s</i> &nbsp;&nbsp;(sampled, lagged audit)&nbsp;&nbsp;&nbsp;→&nbsp;&nbsp;&nbsp;<i>T</i><sub>exposure</sub> → 0 &nbsp;&nbsp;(checked at entry)</div>
+        <p class="cap">
+            where <i>s</i> is the audited sample fraction and <i>L</i> the audit lag. It is a model, not a
+            measurement, and it carries no number. The claim is not that the machine is smarter than your
+            auditors. It is that <strong><i>s</i> ≈ 0.05–0.10 and <i>L</i> ≈ 2–4 weeks today, while the record
+            is always there.</strong> The census inversion is that denominator.
+        </p>
+
+        <div class="nobuy">
+            <h4>WHAT MATHEMATICS DOES NOT BUY</h4>
+            <p>
+                The theorem is true of the algebra unconditionally. Whether the floor catches what your auditors
+                catch is F-RETRO's question — recall, precision, the census surplus, hours per case — and not a
+                corollary. <b>A proof about the design is not a receipt about the build.</b> Nothing on this page
+                is exempt from the pre-registration.
+            </p>
+        </div>
+
+        <div class="hood-h">A check, as it actually ships</div>
+        <div class="code-plate"><pre><span class="c"># floor/checks/SV-070.check.yml — the flagship</span>
+id: SV-070
+title: single-active-primary-offer guard
+layer: L0                    <span class="c"># mandated — citation pinned via the crosswalk</span>
+authority: "OPTN allocation policy (pin: sha256 …)"
+trigger: on_write
+predicate: "count(active_primary_offers[organ_id]) &lt;= 1"
+action: hold                 <span class="c"># the record holds; nobody's phone rings</span>
+message: "A primary offer is already active on this organ (see {offer_ref})."
+evidence: [offer_ref]        <span class="c"># every result links what it saw</span>
+expires: P2Y                 <span class="c"># every check re-earns its place</span>
+inverse: retire              <span class="c"># unmount is total — a wrong check unwinds</span>
+tests: fixtures/SV-070/      <span class="c"># ships with passing AND failing fixtures</span></pre></div>
+        <p class="cap">
+            One organ, one primary offer — today a professional norm, recovered by phone calls when it slips.
+            Here: thirteen lines of data with a citation, an expiry, and an undo. A quality director can read
+            this. That is the point. <strong>This is what "a check is a patch" means.</strong>
+        </p>
+
+        <div class="hood-h">A clock, declared — then every deadline checked at once</div>
+        <div class="code-plate"><pre><span class="c"># clocks/lattice.py — the 24-hour rule, as code, with its citation attached</span>
+stn.<span class="k">at_most</span>(<span class="g">"county_report"</span>, <span class="g">"reactive_serology"</span>, minutes=<span class="k">24*60</span>, cite=<span class="g">"pinned"</span>)
+stn.<span class="k">at_most</span>(<span class="g">"chart_to_processor"</span>, <span class="g">"recovery_end"</span>, minutes=<span class="k">30*24*60</span>)
+stn.<span class="k">window</span>(<span class="g">"recovery_start"</span>, opens=<span class="g">"death+0"</span>, closes=<span class="g">"death+24h | +15h by cooling"</span>)
+
+<span class="c"># floor/closure.py — every deadline in the lattice, simultaneously</span>
+<span class="k">for</span> k <span class="k">in</span> range(n):                     <span class="c"># Floyd–Warshall in the (min,+) semiring</span>
+    D = minimum(D, D[:,k,None] + D[None,k,:])   <span class="c"># ⊕ = min, ⊗ = +</span>
+<span class="k">if</span> any(D[i][i] &lt; 0 <span class="k">for</span> i <span class="k">in</span> range(n)):  <span class="c"># a negative cycle:</span>
+    <span class="k">return</span> INFEASIBLE                    <span class="c"># this plan cannot be met — with the</span>
+<span class="k">return</span> earliest, latest                  <span class="c"># chain of rules that caused it</span></pre></div>
+        <p class="cap">
+            Deadline arithmetic as a temporal network: the earliest and latest legal time for every obligation,
+            alarmed before breach — and when a plan is impossible, the answer is not a red icon but the
+            <strong>chain of rules that made it impossible</strong>. Every clock declares its anchor field with
+            a citation, because an SLA computed from the wrong anchor is a defect that looks like compliance.
+        </p>
+
+        <div class="hood-h">One line of the tape</div>
+        <div class="code-plate"><pre>{<span class="g">"i"</span>: 4118, <span class="g">"kind"</span>: <span class="g">"verdict"</span>, <span class="g">"ts"</span>: <span class="g">"2026-…"</span>,
+ <span class="g">"body"</span>: {<span class="g">"gate"</span>: <span class="g">"SV-070"</span>, <span class="g">"status"</span>: <span class="g">"HELD"</span>, <span class="g">"case"</span>: <span class="g">"TR-4118"</span>, <span class="g">"evidence"</span>: [<span class="g">"offer_ref"</span>]},
+ <span class="g">"h"</span>: <span class="g">"9f3ac2…"</span>}   <span class="c">← h = blake2b( prev_h ‖ canonical(record) )</span></pre></div>
+        <p class="cap">
+            Append-only, hash-chained, local, yours. Every verdict, every hold, every silence, in order, forever.
+            The line-of-sight report, the committee packet, and the survey binder are <strong>computations over
+            this</strong> — which is why they are current every morning, and why every claim in them can point at
+            its evidence.
+        </p>
     </section>
 
     <div class="rule"><hr></div>
@@ -537,6 +735,11 @@
             <div class="rung"><span class="r">03 · CROSSWALK</span><span>One real edition change, diffed against site policies, graded against the quality staff's own manual reading</span><span class="stamp held">pre-registered</span></div>
             <div class="rung"><span class="r">04 · LEDGER + CAPA</span><span>Expectation-graded corrective actions; committee packet and survey binder as generated, evidence-linked documents</span><span class="stamp ink">spec</span></div>
             <div class="rung"><span class="r">05 · THE WATCH</span><span>The present-tense tier — ships off by default, behind its own published tests, and must beat the floor or it doesn't ship</span><span class="stamp ink">gated</span></div>
+        </div>
+        <div class="tape-strip">
+            LIVE FROM THE BUILD TAPE · 2026-08-27 — gates 4/4 PASS (G-FOLD · G-PRIVACY · G-CATALOG · G-COLDSTART)
+            · checks 0/59 encoded, honestly · rung 00 GREEN (fresh-agent cold-start audit) · tape 3e9f4fee ·
+            <a href="https://github.com/bochen2029-pixel/SURVEYOR" target="_blank" rel="noopener">github.com/bochen2029-pixel/SURVEYOR</a>
         </div>
         <p style="margin-top:1.6rem; font-size:0.9rem; color:var(--ink-500);">
             Claim grammar, binding on every number this page will ever carry: <b>measured</b> (dated receipt) ·
