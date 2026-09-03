@@ -1,0 +1,3 @@
+{"expect": "ALARM", "note": "December referral: due January 31, and it is February 2 with nothing submitted (the year boundary)",
+ "record": {"case_id": "RF-2026-1143", "referral": {"received_ts": "2025-12-30T04:00:00Z"}, "dnr": {}, "as_of": "2026-02-02T09:00:00Z"},
+ "history": []}

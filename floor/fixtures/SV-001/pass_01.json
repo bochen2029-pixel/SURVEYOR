@@ -1,0 +1,8 @@
+{"expect": "PASS",
+ "note": "all four documents carry the same name and DOB",
+ "record": {"case_id": "TD-2026-0882",
+            "chart": {"donor_name": "SYNTH-NAME-0882", "donor_dob": "1961-04-12"},
+            "authorization": {"donor_name": "SYNTH-NAME-0882", "donor_dob": "1961-04-12"},
+            "dre": {"donor_name": "SYNTH-NAME-0882", "donor_dob": "1961-04-12"},
+            "document_of_gift": {"donor_name": "SYNTH-NAME-0882", "donor_dob": "1961-04-12"}},
+ "history": []}

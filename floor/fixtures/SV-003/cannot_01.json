@@ -1,0 +1,4 @@
+{"expect": "CANNOT-EVALUATE",
+ "note": "the paperwork has no band number recorded - nothing to match against",
+ "record": {"case_id": "TD-2026-0892", "donor_band": {"number": "DB-448130"}, "recovery_paperwork": {"page_count": 6}},
+ "history": []}

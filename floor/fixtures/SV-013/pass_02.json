@@ -1,0 +1,5 @@
+{"expect": "PASS",
+ "note": "a post-completion edit with its case note linked",
+ "record": {"case_id": "OD-2026-0451",
+            "edit": {"class": "post_completion", "field": "medications.list", "ts": "2026-08-26T16:40:00Z", "case_note_ref": "NOTE-5120"}},
+ "history": []}

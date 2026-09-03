@@ -1,0 +1,3 @@
+{"expect": "CANNOT-EVALUATE", "note": "feedback form not yet submitted - the DDR clock has not started",
+ "record": {"case_id": "OD-2026-0534", "feedback": {}, "ddr": {}, "as_of": "2026-08-01T13:00:00Z"},
+ "history": []}

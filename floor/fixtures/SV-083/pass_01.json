@@ -1,0 +1,3 @@
+{"expect": "PASS", "note": "a high-priority risk with owner and review date",
+ "record": {"risk_register": {"id": "RR-2026", "owner_required_at_priority": 12}, "risk": {"id": "RSK-041", "priority": 16, "owner_role": "director_of_operations", "review_ts": "2026-11-01T00:00:00Z"}},
+ "history": []}

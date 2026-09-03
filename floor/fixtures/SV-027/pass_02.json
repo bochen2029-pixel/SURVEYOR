@@ -1,0 +1,3 @@
+{"expect": "PASS", "note": "forty minutes after prep, no incision yet - inside the window",
+ "record": {"case_id": "TD-2026-0951", "or_timeline": {"prep_complete_ts": "2026-08-18T01:00:00Z"}, "as_of": "2026-08-18T01:40:00Z"},
+ "history": []}

@@ -1,0 +1,16 @@
+# SV-013 - a late or second signature, or an edit after completion, carries its
+# explanation as a linked case note. Harvested [H]: the audit asks "why is this
+# signature dated after the chart closed?" - the answer belongs in the record.
+id: SV-013
+title: late/second signature or post-completion edit requires a linked explanatory case note
+family: signatures
+layer: L1
+authority: "Quality-science invariant: documentation of after-the-fact changes (site audit checklist [H]); CMS 42 CFR 486 Subpart G recordkeeping context - pin at rung 05"
+trigger: on_write
+predicate: "edit.class != 'routine' implies exists(edit.case_note_ref)"
+action: hold
+message: "A {edit.class} edit on {edit.field} needs a linked case note explaining it."
+evidence: [edit.class, edit.field, edit.case_note_ref]
+expires: P1Y
+inverse: retire
+tests: fixtures/SV-013/

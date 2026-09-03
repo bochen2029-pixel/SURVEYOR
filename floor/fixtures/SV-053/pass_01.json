@@ -1,0 +1,4 @@
+{"expect": "PASS", "note": "three items, three sequence numbers, no pairs",
+ "record": {"case_id": "TD-2026-1030",
+            "recovery": {"items": [{"seq": 1, "tissue": "femur_left"}, {"seq": 2, "tissue": "femur_right"}, {"seq": 3, "tissue": "skin_back"}], "paired_sequence_numbers": []}},
+ "history": []}

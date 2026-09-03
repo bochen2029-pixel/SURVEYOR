@@ -1,5 +1,5 @@
 # THE FLOOR CATALOG — v0.1
-**Status: RECEIPTED `[H]`, UNENCODED.** Every check below was harvested from a working OPO quality program's own audit walkthrough (local corpus, line-referenced in `_local/harvest/`, which never ships). Layer tags are provisional until a second site's practice is compared: **L0** = mandated (citation pinned via crosswalk) · **L1** = quality-science invariant · **L2** = site-variant (the reference program's own rule; each site signs its own). Trigger: `W` on-write · `C` on-close-attempt · `K` continuous clock. Action: `hold` blocks close · `flag` annotates · `alarm` pre-breach.
+**Status: RECEIPTED `[H]` · ENCODED** (every check below has a `floor/checks/SV-xxx.check.yml` and pass/fail/cannot fixtures; the live count is the machine's, in `_build/BOARD.md` G-CATALOG; the record vocabulary the checks read is folded in `floor/FIELDS.md`). Every check below was harvested from a working OPO quality program's own audit walkthrough (local corpus, line-referenced in `_local/harvest/`, which never ships). Layer tags are provisional until a second site's practice is compared: **L0** = mandated (citation pinned via crosswalk) · **L1** = quality-science invariant · **L2** = site-variant (the reference program's own rule; each site signs its own). Trigger: `W` on-write · `C` on-close-attempt · `K` continuous clock. Action: `hold` blocks close · `flag` annotates · `alarm` pre-breach.
 **The R1-gate for this file: a quality director reads it cold and recognizes their own audit checklist.** Encoding order: **SV-070 first** (the flagship — a reportable violation with no system check today), **then catalog order from SV-001.** Every check ships with passing AND failing fixtures before it counts as done.
 
 ## A · Identity & cross-document
@@ -76,4 +76,4 @@
 - **SV-085** `L1·C·flag` Reports mixing metric variants (e.g., "organ donor" vs "CMS organ donor") without naming the denominator are flagged.
 
 ---
-*59 checks (count enforced by `_build/gates.py` G-CATALOG — the first number in this repo a machine corrected). Deterministic, every one currently performed by a person, weeks later, on a sample. SV-070 encodes first; catalog order after. A check without fixtures is a sentence, not a check.*
+*59 checks (count enforced by `_build/gates.py` G-CATALOG — the first number in this repo a machine corrected). Deterministic, every one currently performed by a person, weeks later, on a sample. Encoded SV-070 first, then catalog order (S1 + S2 on the tape). A check without fixtures is a sentence, not a check.*

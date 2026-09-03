@@ -1,0 +1,3 @@
+{"expect": "CANNOT-EVALUATE", "note": "blood type not yet resulted",
+ "record": {"case_id": "OD-2026-0574", "abo": {"draw_ts": "2026-08-18T05:00:00Z"}},
+ "history": []}

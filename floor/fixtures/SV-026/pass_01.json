@@ -1,0 +1,8 @@
+{"expect": "PASS", "note": "one unit inside the 48h window used, one outside it left out; the 30-minute crystalloid used, the 3-hour one left out; totals match",
+ "record": {"case_id": "OD-2026-0510",
+            "hemodilution": {"sample_draw_ts": "2026-08-17T10:00:00Z",
+                             "logged": {"blood_products": [{"ref": "BP-1", "ts": "2026-08-16T04:00:00Z", "volume_ml": 300}, {"ref": "BP-2", "ts": "2026-08-14T22:00:00Z", "volume_ml": 300}],
+                                        "crystalloids": [{"ref": "CR-1", "ts": "2026-08-17T09:30:00Z", "volume_ml": 1000}, {"ref": "CR-2", "ts": "2026-08-17T07:00:00Z", "volume_ml": 500}]},
+                             "calc": {"blood_products": [{"ref": "BP-1", "ts": "2026-08-16T04:00:00Z", "volume_ml": 300}], "blood_product_refs": ["BP-1"], "blood_products_ml": 300,
+                                      "crystalloids": [{"ref": "CR-1", "ts": "2026-08-17T09:30:00Z", "volume_ml": 1000}], "crystalloid_refs": ["CR-1"], "crystalloids_ml": 1000}}},
+ "history": []}

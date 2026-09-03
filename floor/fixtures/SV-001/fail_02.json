@@ -1,0 +1,8 @@
+{"expect": "HOLD",
+ "note": "name differs on the document of gift (a different spelling is a different string)",
+ "record": {"case_id": "TD-2026-0884",
+            "chart": {"donor_name": "SYNTH-NAME-0884", "donor_dob": "1970-11-30"},
+            "authorization": {"donor_name": "SYNTH-NAME-0884", "donor_dob": "1970-11-30"},
+            "dre": {"donor_name": "SYNTH-NAME-0884", "donor_dob": "1970-11-30"},
+            "document_of_gift": {"donor_name": "SYNTH-NAME-0884-B", "donor_dob": "1970-11-30"}},
+ "history": []}

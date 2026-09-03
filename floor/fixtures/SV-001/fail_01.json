@@ -1,0 +1,8 @@
+{"expect": "HOLD",
+ "note": "the classic finding: DOB transposed on the DRE (04-21 for 04-12)",
+ "record": {"case_id": "TD-2026-0883",
+            "chart": {"donor_name": "SYNTH-NAME-0883", "donor_dob": "1961-04-12"},
+            "authorization": {"donor_name": "SYNTH-NAME-0883", "donor_dob": "1961-04-12"},
+            "dre": {"donor_name": "SYNTH-NAME-0883", "donor_dob": "1961-04-21"},
+            "document_of_gift": {"donor_name": "SYNTH-NAME-0883", "donor_dob": "1961-04-12"}},
+ "history": [{"field": "dre.donor_dob", "value": "1961-04-21", "ts": "2026-08-14T15:02:00Z", "actor_role": "tissue_recovery_coordinator"}]}

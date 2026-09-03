@@ -1,0 +1,3 @@
+{"expect": "PASS", "note": "type O - no subtype applies",
+ "record": {"case_id": "OD-2026-0571", "abo": {"type": "O", "draw_ts": "2026-08-18T05:00:00Z"}},
+ "history": []}

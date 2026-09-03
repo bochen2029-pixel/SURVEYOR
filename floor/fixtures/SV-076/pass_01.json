@@ -1,0 +1,5 @@
+{"expect": "PASS", "note": "primary-list offers first; the bypassed center offered only after exhaustion",
+ "record": {"case_id": "OD-2026-0650",
+            "allocation": {"offers": [{"offer_ref": "OF-4001", "center_id": "TXC-03", "center_bypassed": "no", "primary_list_exhausted_at_send": "no"},
+                                      {"offer_ref": "OF-4002", "center_id": "TXC-19", "center_bypassed": "yes", "primary_list_exhausted_at_send": "yes"}]}},
+ "history": []}

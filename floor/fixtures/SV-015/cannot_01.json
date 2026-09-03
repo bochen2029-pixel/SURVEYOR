@@ -1,0 +1,5 @@
+{"expect": "CANNOT-EVALUATE",
+ "note": "witness affiliation not captured on the authorization",
+ "record": {"case_id": "OD-2026-0473",
+            "authorization": {"method": "in_person", "witness_role": "bedside_nurse"}},
+ "history": []}

@@ -1,0 +1,3 @@
+{"expect": "ALARM", "note": "a forty-five-minute gap between offers with no exception",
+ "record": {"case_id": "OD-2026-0543", "allocation": {"offers": [{"offer_ref": "OF-3031", "sent_ts": "2026-08-19T10:00:00Z"}, {"offer_ref": "OF-3032", "sent_ts": "2026-08-19T10:45:00Z"}], "latest_offer_ts": "2026-08-19T10:45:00Z", "closed_ts": "2026-08-19T11:00:00Z"}, "as_of": "2026-08-20T00:00:00Z"},
+ "history": []}

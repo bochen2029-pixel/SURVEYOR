@@ -1,0 +1,5 @@
+{"expect": "HOLD",
+ "note": "witnessed by the recovering organization's own coordinator",
+ "record": {"case_id": "OD-2026-0471",
+            "authorization": {"method": "in_person", "witness_affiliation": "recovering_organization", "witness_role": "family_services_coordinator"}},
+ "history": []}

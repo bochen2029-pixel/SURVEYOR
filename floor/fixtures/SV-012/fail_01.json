@@ -1,0 +1,6 @@
+{"expect": "HOLD",
+ "note": "brain-dead donor recovered without an anesthesiologist on the roster",
+ "record": {"case_id": "OD-2026-0442", "donor_type": "brain_dead",
+            "or_roster": {"roles": ["circulator", "recovery_surgeon", "coordinator"],
+                          "recovering_physicians": ["STF-301"], "physician_signatures": ["STF-301"]}},
+ "history": []}

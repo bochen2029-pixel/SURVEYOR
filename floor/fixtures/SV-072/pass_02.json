@@ -1,0 +1,3 @@
+{"expect": "PASS", "note": "in-person authorization - no recording required",
+ "record": {"case_id": "OD-2026-0611", "authorization": {"method": "in_person"}},
+ "history": []}

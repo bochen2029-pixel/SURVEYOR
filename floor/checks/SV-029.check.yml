@@ -1,0 +1,18 @@
+# SV-029 - a serology sample reused from the organ case may serve the tissue case
+# only if it was drawn within 7 days of tissue recovery (either side); otherwise a
+# redraw is required. With no recovery yet, an aging sample alarms before it lapses.
+id: SV-029
+title: reused serology sample only within 7 days of tissue recovery, else redraw required
+family: clocks
+layer: L0
+authority: "FDA 21 CFR 1271.80(b) (donor specimen collected within 7 days before or after recovery) + site reuse SOP [H] - pin at rung 05"
+trigger: continuous
+anchor: serology.draw_ts
+anchor_why: "sample validity runs from the draw, not from the result date and not from the organ case's recovery; the tissue recovery must fall within 7 days of the draw"
+predicate: "serology.source == 'reused_from_organ_case' implies (within(serology.draw_ts, recovery.start_ts, 7d) and (not exists(recovery.start_ts) or minutes_between(recovery.start_ts, serology.draw_ts) <= 7d))"
+action: alarm
+message: "Serology drawn {serology.draw_ts} is being reused outside the 7-day window around tissue recovery ({recovery.start_ts}); redraw required."
+evidence: [serology.source, serology.draw_ts, recovery.start_ts]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-029/

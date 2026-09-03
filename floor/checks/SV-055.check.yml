@@ -1,0 +1,15 @@
+# SV-055 - the pre-recovery inspection happened before donor prep began - strictly,
+# to the minute; a same-minute pair is a documentation defect, not a coincidence.
+id: SV-055
+title: inspection timestamp ordering - pre-inspection precedes donor prep
+family: sequence
+layer: L1
+authority: "Quality-science invariant: procedural sequence integrity (AATB recovery standards context); site SOP [H] - pin at rung 05"
+trigger: on_write
+predicate: "minutes_between(inspection.pre_inspection_ts, prep.start_ts) > 0"
+action: hold
+message: "Pre-inspection ({inspection.pre_inspection_ts}) does not precede donor prep ({prep.start_ts})."
+evidence: [inspection.pre_inspection_ts, prep.start_ts]
+expires: P1Y
+inverse: retire
+tests: fixtures/SV-055/

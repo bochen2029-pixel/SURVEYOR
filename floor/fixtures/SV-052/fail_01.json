@@ -1,0 +1,5 @@
+{"expect": "HOLD", "note": "a paraphrase - bone for research is not the controlled term",
+ "record": {"case_id": "TD-2026-1021",
+            "authorization": {"categories": ["bone for research", "Skin for transplant"]},
+            "controlled_vocabulary": {"authorized_categories": ["Musculoskeletal tissue for transplant", "Musculoskeletal tissue for research", "Skin for transplant"]}},
+ "history": []}

@@ -1,0 +1,3 @@
+{"expect": "CANNOT-EVALUATE", "note": "authorization method not recorded",
+ "record": {"case_id": "OD-2026-0613", "authorization": {"recording_ref": "REC-2026-08-18-0412"}},
+ "history": []}

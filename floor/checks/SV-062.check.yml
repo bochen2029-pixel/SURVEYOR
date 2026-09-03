@@ -1,0 +1,19 @@
+# SV-062 - a design law about checks themselves (LAWS.md B5): the channel a check
+# uses to verify a change may never be the field being changed. The harvested
+# anti-pattern, abstracted [H]: a bank that confirms a phone-number change by
+# texting the phone number under correction - the deadlock nobody can unlock.
+# Runs on_mount over a description of a CHECK, not over a chart: the record here
+# is the check being mounted. Fixtures are the law's own pass and fail.
+id: SV-062
+title: no check's verification channel may be the field under correction (design law)
+family: sequence
+layer: L1
+authority: "LAWS.md B5 - design law, harvested anti-pattern abstracted [H]"
+trigger: on_mount
+predicate: "not contains(check.verification_fields, check.corrects_field)"
+action: hold
+message: "Check {check.id} verifies a change to {check.corrects_field} through that same field - it cannot mount."
+evidence: [check.id, check.corrects_field, check.verification_fields]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-062/

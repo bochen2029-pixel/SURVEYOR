@@ -1,0 +1,5 @@
+{"expect": "CANNOT-EVALUATE",
+ "note": "donor type not recorded - the role requirement cannot be selected",
+ "record": {"case_id": "OD-2026-0444",
+            "or_roster": {"roles": ["circulator", "recovery_surgeon"], "recovering_physicians": ["STF-301"], "physician_signatures": ["STF-301"]}},
+ "history": []}

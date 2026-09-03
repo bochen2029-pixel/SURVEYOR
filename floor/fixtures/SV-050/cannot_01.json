@@ -1,0 +1,4 @@
+{"expect": "CANNOT-EVALUATE", "note": "a parent question with no answer recorded - the branch cannot be judged",
+ "record": {"case_id": "TD-2026-1002",
+            "dre": {"branches": [{"parent_id": "Q12", "children": [{"id": "Q12a", "answer": ""}]}]}},
+ "history": []}

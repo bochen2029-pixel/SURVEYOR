@@ -1,0 +1,5 @@
+{"expect": "ALARM",
+ "note": "ANCHOR PLANT: the annual clock runs from the last PRESENTATION to the board, not from the plan's last revision. Presented Aug 2025, plan revised Jan 2026, nothing since, now Sep 2026: 13 months (ALARM); from the revision it is 7.5 months and a false PASS.",
+ "anchor_plant": {"wrong_anchor": "qapi.plan_revised_ts", "verdict_if_wrong": "PASS"},
+ "record": {"qapi": {"plan_revision": "2026-A", "plan_revised_ts": "2026-01-15T00:00:00Z", "last_board_presentation_ts": "2025-08-01T00:00:00Z"}, "as_of": "2026-09-01T00:00:00Z"},
+ "history": []}

@@ -1,0 +1,20 @@
+# SV-026 - the hemodilution calculation used exactly the transfusions in its lookback
+# windows: blood products in the 48 hours before the sample draw, crystalloids in the
+# hour before, nothing outside, nothing omitted, totals summed from the log.
+# Encoded on_write/hold rather than the family's K/alarm: the windows are graded the
+# moment the calculation is entered (S2 tape decision lists this deviation).
+id: SV-026
+title: hemodilution lookback windows (blood products 48h, crystalloids 1h) computed from logged volumes and timestamps
+family: clocks
+layer: L0
+authority: "OPTN Policy 2.5 Hemodilution Assessment (complete history of blood products and IV fluids; hemodilution calculation) + FDA 21 CFR 1271.80(d)(2) plasma dilution context; site windows [H] - pin at rung 05"
+trigger: on_write
+anchor: hemodilution.sample_draw_ts
+anchor_why: "lookback windows count backward from the screening sample draw - not from admission and not from the result"
+predicate: "every(hemodilution.calc.blood_products, minutes_between(ts, hemodilution.sample_draw_ts) >= 0 and minutes_between(ts, hemodilution.sample_draw_ts) <= 48h) and every(hemodilution.logged.blood_products, minutes_between(ts, hemodilution.sample_draw_ts) < 0 or minutes_between(ts, hemodilution.sample_draw_ts) > 48h or contains(hemodilution.calc.blood_product_refs, ref)) and sum(hemodilution.calc.blood_products, volume_ml) == hemodilution.calc.blood_products_ml and every(hemodilution.calc.crystalloids, minutes_between(ts, hemodilution.sample_draw_ts) >= 0 and minutes_between(ts, hemodilution.sample_draw_ts) <= 1h) and every(hemodilution.logged.crystalloids, minutes_between(ts, hemodilution.sample_draw_ts) < 0 or minutes_between(ts, hemodilution.sample_draw_ts) > 1h or contains(hemodilution.calc.crystalloid_refs, ref)) and sum(hemodilution.calc.crystalloids, volume_ml) == hemodilution.calc.crystalloids_ml"
+action: hold
+message: "Hemodilution calculation inputs disagree with the transfusion log for the draw at {hemodilution.sample_draw_ts}."
+evidence: [hemodilution.sample_draw_ts, hemodilution.logged.blood_products, hemodilution.logged.crystalloids, hemodilution.calc.blood_product_refs, hemodilution.calc.crystalloid_refs, hemodilution.calc.blood_products_ml, hemodilution.calc.crystalloids_ml]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-026/

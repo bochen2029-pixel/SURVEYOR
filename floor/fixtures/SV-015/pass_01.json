@@ -1,0 +1,5 @@
+{"expect": "PASS",
+ "note": "witnessed by a hospital bedside nurse",
+ "record": {"case_id": "OD-2026-0470",
+            "authorization": {"method": "in_person", "witness_affiliation": "hospital_care_team", "witness_role": "bedside_nurse"}},
+ "history": []}

@@ -1,0 +1,17 @@
+# SV-023 - a reactive serology reaches county epidemiology within 24 hours.
+# Mandated by state communicable-disease reporting (L0); the fax is the site's channel [H].
+id: SV-023
+title: reactive serology reported to county epidemiology within 24h
+family: clocks
+layer: L0
+authority: "State communicable-disease reporting rules (county health department notification) + site SOP [H] - pin at rung 05"
+trigger: continuous
+anchor: serology.reactive_result_ts
+anchor_why: "the reporting clock starts at the reactive result, not at confirmatory testing and not at case close"
+predicate: "within(serology.reactive_result_ts, county_epidemiology.notified_ts, 24h)"
+action: alarm
+message: "Reactive serology resulted {serology.reactive_result_ts} has not been reported to county epidemiology within 24 hours."
+evidence: [serology.reactive_result_ts, serology.reactive_marker, county_epidemiology.notified_ts]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-023/

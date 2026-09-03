@@ -1,0 +1,3 @@
+{"expect": "PASS", "note": "both screening centers appear on the run",
+ "record": {"case_id": "OD-2026-0630", "perfusion_screening": {"centers": ["TXC-07", "TXC-12"]}, "match_run": {"id": "MR-88120", "centers": ["TXC-03", "TXC-07", "TXC-12", "TXC-19"]}},
+ "history": []}

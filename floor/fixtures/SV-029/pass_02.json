@@ -1,0 +1,3 @@
+{"expect": "PASS", "note": "a fresh draw for the tissue case - the reuse rule does not apply",
+ "record": {"case_id": "TD-2026-0971", "serology": {"source": "tissue_case_draw", "draw_ts": "2026-08-13T10:00:00Z"}, "recovery": {"start_ts": "2026-08-13T09:00:00Z"}, "as_of": "2026-08-20T00:00:00Z"},
+ "history": []}

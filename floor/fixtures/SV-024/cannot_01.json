@@ -1,0 +1,3 @@
+{"expect": "CANNOT-EVALUATE", "note": "collection time missing from the test entry",
+ "record": {"case_id": "OD-2026-0495", "recovery": {"organs": ["kidney_left"], "cross_clamp_ts": "2026-08-15T06:00:00Z"}, "covid": {"result": "negative"}, "as_of": "2026-08-20T00:00:00Z"},
+ "history": []}

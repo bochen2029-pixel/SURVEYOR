@@ -1,0 +1,5 @@
+{"expect": "PASS", "note": "two corrections, both lawful",
+ "record": {"case_id": "TD-2026-1010",
+            "corrections": [{"field": "vitals.temp", "method": "single_line_through", "initialed_by": "STF-014", "dated": "2026-08-18"},
+                            {"field": "recovery.start_ts", "method": "single_line_through", "initialed_by": "STF-052", "dated": "2026-08-18"}]},
+ "history": []}

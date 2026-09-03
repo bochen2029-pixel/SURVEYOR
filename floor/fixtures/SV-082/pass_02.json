@@ -1,0 +1,4 @@
+{"expect": "PASS", "note": "horizon reached, expectation unmet, returned to committee with the data - the lawful failure path",
+ "record": {"capa": {"id": "CAPA-2026-015", "status": "returned_to_committee", "expectation": {"metric": "late_feedback_forms_per_100_cases", "target": 2, "horizon_ts": "2026-08-01T00:00:00Z"},
+                     "effectiveness": {"result": "unmet", "observed": 5, "data_ref": "FOLD-2026-07-LOS"}}, "as_of": "2026-08-14T00:00:00Z"},
+ "history": []}

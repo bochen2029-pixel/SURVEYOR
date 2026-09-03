@@ -1,0 +1,16 @@
+# SV-074 - every center on the perfusion-screening list appears in the match run,
+# or the omission is flagged. Site rule [H] (L2): a screening partner left off a
+# run is an offer never made.
+id: SV-074
+title: centers on the perfusion-screening list present in the match run, or flagged
+family: reconciliation
+layer: L2
+authority: "Site allocation practice: perfusion-screening partner list vs match run [H] (site-variant)"
+trigger: on_write
+predicate: "subset(perfusion_screening.centers, match_run.centers)"
+action: flag
+message: "A perfusion-screening center is missing from match run {match_run.id}."
+evidence: [perfusion_screening.centers, match_run.id, match_run.centers]
+expires: P1Y
+inverse: retire
+tests: fixtures/SV-074/

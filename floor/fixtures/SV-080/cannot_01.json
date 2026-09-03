@@ -1,0 +1,4 @@
+{"expect": "CANNOT-EVALUATE", "note": "culture results not yet reported - contamination unknown",
+ "record": {"case_id": "TD-2026-1093",
+            "release": {"required_documents": [{"name": "dre", "status": "complete"}]}},
+ "history": []}

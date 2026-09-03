@@ -1,0 +1,5 @@
+{"expect": "HOLD",
+ "note": "a second signature whose note reference is blank",
+ "record": {"case_id": "OD-2026-0453",
+            "edit": {"class": "second_signature", "field": "hla_abo.coordinator_signatures", "ts": "2026-08-27T09:15:00Z", "case_note_ref": ""}},
+ "history": []}

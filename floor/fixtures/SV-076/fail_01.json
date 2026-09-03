@@ -1,0 +1,4 @@
+{"expect": "FLAG", "note": "a bypassed center offered while the primary list still had candidates",
+ "record": {"case_id": "OD-2026-0651",
+            "allocation": {"offers": [{"offer_ref": "OF-4011", "center_id": "TXC-19", "center_bypassed": "yes", "primary_list_exhausted_at_send": "no"}]}},
+ "history": []}

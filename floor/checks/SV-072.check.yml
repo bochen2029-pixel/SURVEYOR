@@ -1,0 +1,14 @@
+# SV-072 - a phone authorization is not complete until the recording is attached.
+id: SV-072
+title: phone authorization requires the attached voice recording before completion
+family: reconciliation
+layer: L0
+authority: "State Revised Uniform Anatomical Gift Act (recorded telephonic authorization) + site recorded-line SOP [H] - pin at rung 05"
+trigger: on_close_attempt
+predicate: "authorization.method != 'phone' or exists(authorization.recording_ref)"
+action: hold
+message: "Phone authorization cannot complete without its voice recording attached."
+evidence: [authorization.method, authorization.recording_ref]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-072/

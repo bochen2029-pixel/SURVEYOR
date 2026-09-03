@@ -1,0 +1,5 @@
+{"expect": "HOLD",
+ "note": "a late signature with no explanation on the record",
+ "record": {"case_id": "OD-2026-0452",
+            "edit": {"class": "late_signature", "field": "consent.signature_2", "ts": "2026-08-27T09:15:00Z"}},
+ "history": []}

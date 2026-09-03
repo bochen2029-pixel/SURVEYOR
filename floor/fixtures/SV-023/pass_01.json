@@ -1,0 +1,3 @@
+{"expect": "PASS", "note": "reported within the day",
+ "record": {"case_id": "TD-2026-0940", "serology": {"reactive_result_ts": "2026-08-12T11:00:00Z", "reactive_marker": "HBcAb"}, "county_epidemiology": {"notified_ts": "2026-08-12T16:30:00Z", "channel": "fax"}, "as_of": "2026-08-20T00:00:00Z"},
+ "history": []}

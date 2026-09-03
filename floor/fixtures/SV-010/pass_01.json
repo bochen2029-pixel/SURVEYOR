@@ -1,0 +1,5 @@
+{"expect": "PASS",
+ "note": "two different coordinators and the lab have signed",
+ "record": {"case_id": "OD-2026-0430",
+            "hla_abo": {"coordinator_signatures": ["STF-014", "STF-031"], "lab_signature": "STF-207", "status": "complete"}},
+ "history": []}

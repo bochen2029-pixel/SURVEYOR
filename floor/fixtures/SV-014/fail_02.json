@@ -1,0 +1,5 @@
+{"expect": "FLAG",
+ "note": "an edit with no timestamp at all",
+ "record": {"case_id": "OD-2026-0462",
+            "edits": [{"field": "medications.list", "editor_id": "STF-014", "session_actor_id": "STF-014", "ts": ""}]},
+ "history": []}

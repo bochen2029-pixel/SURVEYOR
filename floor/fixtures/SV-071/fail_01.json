@@ -1,0 +1,4 @@
+{"expect": "HOLD", "note": "the witness affiliation was left blank",
+ "record": {"case_id": "OD-2026-0601",
+            "authorization": {"required_fields": [{"name": "authorizing_party_relationship", "value": "spouse"}, {"name": "method", "value": "in_person"}, {"name": "witness_affiliation", "value": ""}, {"name": "signed_ts", "value": "2026-08-18T07:40:00Z"}]}},
+ "history": []}

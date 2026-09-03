@@ -1,0 +1,3 @@
+{"expect": "ALARM", "note": "day 45: inside the OPTN 60, past the site's 30 - the buffer is the alarm, the message names the hard deadline",
+ "record": {"case_id": "OD-2026-0532", "feedback": {"submitted_ts": "2026-07-01T12:00:00Z"}, "ddr": {"submitted_ts": "2026-08-15T12:00:00Z"}, "as_of": "2026-09-01T00:00:00Z"},
+ "history": []}

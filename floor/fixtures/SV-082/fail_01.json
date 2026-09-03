@@ -1,0 +1,3 @@
+{"expect": "ALARM", "note": "two weeks past the horizon and no effectiveness result exists",
+ "record": {"capa": {"id": "CAPA-2026-017", "status": "open", "expectation": {"metric": "late_feedback_forms_per_100_cases", "target": 2, "horizon_ts": "2026-08-01T00:00:00Z"}}, "as_of": "2026-08-14T00:00:00Z"},
+ "history": []}

@@ -1,0 +1,3 @@
+{"expect": "PASS", "note": "no signoff yet - nothing to backdate past",
+ "record": {"case_id": "OD-2026-0552", "entry": {"field": "vitals.hr", "documented_ts": "2026-08-18T09:00:00Z", "entered_ts": "2026-08-18T13:10:00Z"}, "signoff": {}},
+ "history": []}

@@ -9,11 +9,16 @@ Usage:
   python _build/gates.py --record   # also append verdict events to the tape,
                                     # then regenerate the folds
 
-Gates (v0):
-  G-FOLD     folds on disk match a fresh deterministic render of the tape
-  G-PRIVACY  no denylisted term (from _local/denylist.txt) outside _local/
-  G-CATALOG  every SV- check is either honestly UNENCODED or fully encoded
-             (check.yml + at least one pass* and one fail* fixture)
+Gates:
+  G-FOLD              folds on disk match a fresh deterministic render of the tape
+  G-PRIVACY           no denylisted term (from _local/denylist.txt) outside _local/
+  G-CATALOG           every SV- check is either honestly UNENCODED or fully encoded
+                      (check.yml + at least one pass* and one fail* fixture)
+  F-FIXTURE           rung 01's executioner: the floor engine's DSL selftest + full
+                      fixture battery + ledger selftest + no-model scan
+  G-CATALOG-COMPLETE  rung 02's executioner: PASS only when every catalog check is encoded
+  G-FIELDS            floor/FIELDS.md (the record vocabulary) matches a fresh fold of
+                      the fixtures (law A1 applied to the vocabulary; added S2)
 Stdlib only.
 """
 import json
@@ -31,6 +36,7 @@ DENYLIST = ROOT / "_local" / "denylist.txt"
 CATALOG = ROOT / "floor" / "CATALOG.md"
 CHECKS_DIR = ROOT / "floor" / "checks"
 FIXTURES_DIR = ROOT / "floor" / "fixtures"
+FIELDS_MD = ROOT / "floor" / "FIELDS.md"
 
 SKIP_DIRS = {"_local", ".git", "__pycache__", "node_modules", ".chunks"}
 TEXT_SUFFIXES = {".md", ".py", ".yml", ".yaml", ".html", ".json", ".txt", ".js", ".css", ".csv"}
@@ -125,15 +131,22 @@ def gate_catalog():
     return "PASS", f"{len(encoded)}/{len(ids)} encoded; {len(ids)-len(encoded)} honestly UNENCODED"
 
 
+def _engine():
+    sys.path.insert(0, str(ROOT / "floor"))
+    import engine  # noqa: WPS433
+    return engine
+
+
 def gate_fixture():
-    """Rung 01's executioner: the floor engine's full fixture battery + the ledger
-    selftest + the no-model scan. ImportError degrades to CANNOT-EVALUATE (the
-    estate's pattern), everything else is graded."""
+    """Rung 01's executioner: the DSL selftest (known-good and known-bad predicates),
+    the floor engine's full fixture battery, the ledger selftest, and the no-model
+    scan. ImportError degrades to CANNOT-EVALUATE (the estate's pattern), everything
+    else is graded."""
     try:
-        sys.path.insert(0, str(ROOT / "floor"))
-        import engine
+        engine = _engine()
     except Exception as e:  # noqa: BLE001
         return "CANNOT-EVALUATE", f"floor engine unavailable: {e}"
+    dsl_fails = engine.selftest() if hasattr(engine, "selftest") else []
     r = engine.run_battery()
     try:
         sys.path.insert(0, str(ROOT / "ledger"))
@@ -141,11 +154,14 @@ def gate_fixture():
         ledger_fails = product_tape.selftest()
     except Exception as e:  # noqa: BLE001
         return "CANNOT-EVALUATE", f"ledger unavailable: {e}"
-    problems = list(r["broken"]) + r["no_model_violations"] + ledger_fails
+    problems = ([f"DSL selftest: {f}" for f in dsl_fails] + list(r["broken"])
+                + r["no_model_violations"] + ledger_fails)
     if problems:
         return "FAIL", "; ".join(problems[:4])
+    hatches = r.get("hatches", [])
     return "PASS", (f"{r['encoded']} check(s) fully encoded, {r['fixtures_run']} fixtures "
-                    f"green, ledger selftest green (append/verify/tamper/torn-tail), no-model clean")
+                    f"green, DSL selftest green, {len(hatches)} impl hatch(es), ledger selftest "
+                    f"green (append/verify/tamper/torn-tail), no-model clean")
 
 
 def gate_catalog_complete():
@@ -159,6 +175,24 @@ def gate_catalog_complete():
     return "CANNOT-EVALUATE", f"in progress - {detail}"
 
 
+def gate_fields():
+    """floor/FIELDS.md is a fold over the fixtures (law A1): regenerate and compare."""
+    try:
+        engine = _engine()
+    except Exception as e:  # noqa: BLE001
+        return "CANNOT-EVALUATE", f"floor engine unavailable: {e}"
+    if not hasattr(engine, "fields_markdown"):
+        return "CANNOT-EVALUATE", "engine has no fields fold"
+    want = engine.fields_markdown()
+    if not FIELDS_MD.exists():
+        return "FAIL", "floor/FIELDS.md missing - run: python floor/engine.py --fields --write"
+    have = FIELDS_MD.read_text(encoding="utf-8")
+    if want == have:
+        m = re.search(r"leaf paths: (\d+)", want)
+        return "PASS", f"FIELDS.md matches the fixtures ({m.group(1) if m else '?'} leaf paths)"
+    return "FAIL", "floor/FIELDS.md stale or hand-edited - run: python floor/engine.py --fields --write"
+
+
 def main():
     record = "--record" in sys.argv
     results = [
@@ -167,6 +201,7 @@ def main():
         ("G-CATALOG",) + gate_catalog(),
         ("F-FIXTURE",) + gate_fixture(),
         ("G-CATALOG-COMPLETE",) + gate_catalog_complete(),
+        ("G-FIELDS",) + gate_fields(),
     ]
     width = max(len(r[0]) for r in results)
     fail = False

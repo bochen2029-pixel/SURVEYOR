@@ -1,0 +1,4 @@
+{"expect": "CANNOT-EVALUATE", "note": "no competency record for this person in this role - the check cannot say it was current, and says so",
+ "record": {"case_id": "TD-2026-0992", "action": {"kind": "tissue_recovery", "role": "tissue_recovery_technician", "performed_by": "STF-140", "ts": "2026-08-18T03:00:00Z"},
+            "competencies": {"STF-052": {"tissue_recovery_technician": {"expires_ts": "2027-01-31T00:00:00Z"}}}},
+ "history": []}

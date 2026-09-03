@@ -1,0 +1,4 @@
+{"expect": "FLAG", "note": "white-out on a paper form",
+ "record": {"case_id": "TD-2026-1011",
+            "corrections": [{"field": "vitals.temp", "method": "white_out", "initialed_by": "STF-014", "dated": "2026-08-18"}]},
+ "history": []}

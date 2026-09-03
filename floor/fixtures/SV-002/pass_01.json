@@ -1,0 +1,7 @@
+{"expect": "PASS",
+ "note": "report and entry agree on donor, DOB, and draw time",
+ "record": {"case_id": "OD-2026-0417",
+            "chart": {"donor_id": "DN-2026-0417", "donor_dob": "1968-09-09"},
+            "serology_report": {"donor_id": "DN-2026-0417", "donor_dob": "1968-09-09", "draw_ts": "2026-08-20T08:40:00Z", "lab_ref": "LAB-77120"},
+            "serology_entry": {"draw_ts": "2026-08-20T08:40:00Z", "result_ref": "LAB-77120"}},
+ "history": []}

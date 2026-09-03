@@ -1,0 +1,4 @@
+{"expect": "HOLD", "note": "a stale local copy: REV-04 filled while REV-05 had been in force for a month",
+ "record": {"case_id": "TD-2026-0981", "form": {"document_id": "FRM-DRE-02", "revision_used": "REV-04", "used_ts": "2026-08-18T14:00:00Z"},
+            "document_control": {"current_revision_at_use": {"FRM-DRE-02": "REV-05", "FRM-AUTH-01": "REV-11"}}},
+ "history": []}

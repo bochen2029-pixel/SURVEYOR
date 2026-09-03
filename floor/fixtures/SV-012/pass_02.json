@@ -1,0 +1,6 @@
+{"expect": "PASS",
+ "note": "DCD donor: circulator present; no anesthesiologist required",
+ "record": {"case_id": "OD-2026-0441", "donor_type": "dcd",
+            "or_roster": {"roles": ["circulator", "recovery_surgeon", "coordinator"],
+                          "recovering_physicians": ["STF-301"], "physician_signatures": ["STF-301"]}},
+ "history": []}

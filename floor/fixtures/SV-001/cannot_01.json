@@ -1,0 +1,7 @@
+{"expect": "CANNOT-EVALUATE",
+ "note": "the document of gift is not in the record yet - identity cannot be judged, and the check says so instead of passing",
+ "record": {"case_id": "TD-2026-0885",
+            "chart": {"donor_name": "SYNTH-NAME-0885", "donor_dob": "1955-02-03"},
+            "authorization": {"donor_name": "SYNTH-NAME-0885", "donor_dob": "1955-02-03"},
+            "dre": {"donor_name": "SYNTH-NAME-0885", "donor_dob": "1955-02-03"}},
+ "history": []}

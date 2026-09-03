@@ -1,0 +1,5 @@
+{"expect": "PASS",
+ "note": "ANCHOR PLANT: OPTN anchors the DDR to the feedback form's submission (Table 18-1), not to organ recovery. Recovery Jul 1, feedback Jul 8, DDR Aug 5: 28 days from feedback (PASS), 35 from recovery (a false ALARM on the site buffer).",
+ "anchor_plant": {"wrong_anchor": "recovery.organ_recovery_ts", "verdict_if_wrong": "ALARM"},
+ "record": {"case_id": "OD-2026-0535", "recovery": {"organ_recovery_ts": "2026-07-01T10:00:00Z"}, "feedback": {"submitted_ts": "2026-07-08T12:00:00Z"}, "ddr": {"submitted_ts": "2026-08-05T12:00:00Z"}, "as_of": "2026-09-01T00:00:00Z"},
+ "history": []}

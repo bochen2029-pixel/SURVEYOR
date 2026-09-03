@@ -1,0 +1,4 @@
+{"expect": "CANNOT-EVALUATE", "note": "the form is not in the controlled register at all - there is no revision to compare against, which is its own finding for the document-control organ",
+ "record": {"case_id": "TD-2026-0982", "form": {"document_id": "FRM-LOCAL-99", "revision_used": "REV-01", "used_ts": "2026-08-18T14:00:00Z"},
+            "document_control": {"current_revision_at_use": {"FRM-DRE-02": "REV-05"}}},
+ "history": []}

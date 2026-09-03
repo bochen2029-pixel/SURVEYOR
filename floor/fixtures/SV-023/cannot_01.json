@@ -1,0 +1,3 @@
+{"expect": "CANNOT-EVALUATE", "note": "no reactive result time on the record",
+ "record": {"case_id": "TD-2026-0943", "serology": {"reactive_marker": "HCV Ab"}, "county_epidemiology": {"notified_ts": "2026-08-14T09:00:00Z"}, "as_of": "2026-08-20T00:00:00Z"},
+ "history": []}

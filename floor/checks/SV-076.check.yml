@@ -1,0 +1,15 @@
+# SV-076 - a bypassed center gets no offer until the primary list is exhausted.
+# Site rule [H] (L2).
+id: SV-076
+title: bypassed centers suppressed until the primary list is exhausted
+family: reconciliation
+layer: L2
+authority: "Site allocation practice: bypass suppression [H] (site-variant; OPTN Policy 5 offer requirements context)"
+trigger: on_write
+predicate: "every(allocation.offers, center_bypassed != 'yes' or primary_list_exhausted_at_send == 'yes')"
+action: flag
+message: "An offer went to a bypassed center before the primary list was exhausted."
+evidence: [allocation.offers]
+expires: P1Y
+inverse: retire
+tests: fixtures/SV-076/

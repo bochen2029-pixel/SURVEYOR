@@ -1,0 +1,18 @@
+# SV-082 - at its horizon a CAPA is graded: met, or unmet and returned to committee
+# with the data attached. Before the horizon there is nothing to grade. Encoded as
+# a continuous alarm; rung 06 wires the automatic return (the catalog's K/auto).
+id: SV-082
+title: CAPA effectiveness check runs at horizon; unmet returns to committee with data attached
+family: release
+layer: L1
+authority: "Quality-science invariant: effectiveness verification (SPEC section 8 PDSA lifecycle; CMS 42 CFR 486.348 QAPI improvement tracking context) - pin at rung 05"
+trigger: continuous
+anchor: capa.expectation.horizon_ts
+anchor_why: "the horizon the CAPA itself declared when it was mounted - not the committee meeting date and not the close date someone would prefer"
+predicate: "minutes_between(capa.expectation.horizon_ts, as_of) < 0 or (exists(capa.effectiveness.result) and (capa.effectiveness.result == 'met' or (capa.status == 'returned_to_committee' and exists(capa.effectiveness.data_ref))))"
+action: alarm
+message: "CAPA {capa.id} passed its horizon ({capa.expectation.horizon_ts}) without a graded effectiveness result, or is unmet without return to committee with data."
+evidence: [capa.id, capa.expectation.horizon_ts, capa.effectiveness, capa.status]
+expires: P1Y
+inverse: retire
+tests: fixtures/SV-082/

@@ -1,0 +1,18 @@
+# SV-056 - an entry made after a signoff may not claim a time before it. Two clocks
+# on every entry: when it was ENTERED (the system's clock) and what it DOCUMENTS
+# (the time it asserts). Backdating is the second running behind the first, across
+# a signoff. A late entry that documents a time after the signoff is lawful here
+# (SV-013 asks for its note).
+id: SV-056
+title: no backdating past a signoff (audit-trail sequence legality)
+family: sequence
+layer: L1
+authority: "Quality-science invariant: audit-trail sequence legality (site audit checklist [H]); FDA 21 CFR 1271.270 and CMS 42 CFR 486 Subpart G records context - pin at rung 05"
+trigger: on_write
+predicate: "not exists(signoff.ts) or minutes_between(signoff.ts, entry.entered_ts) <= 0 or minutes_between(signoff.ts, entry.documented_ts) >= 0"
+action: hold
+message: "Entry on {entry.field} was made at {entry.entered_ts}, after the signoff at {signoff.ts}, but documents {entry.documented_ts} - before it."
+evidence: [entry.field, entry.entered_ts, entry.documented_ts, signoff.ts]
+expires: P1Y
+inverse: retire
+tests: fixtures/SV-056/

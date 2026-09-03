@@ -1,0 +1,3 @@
+{"expect": "CANNOT-EVALUATE", "note": "prep completion time not recorded",
+ "record": {"case_id": "TD-2026-0954", "or_timeline": {"incision_ts": "2026-08-18T02:30:00Z"}, "as_of": "2026-08-20T00:00:00Z"},
+ "history": []}

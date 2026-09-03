@@ -1,0 +1,16 @@
+# SV-083 - a risk-register entry at or above the priority threshold carries an
+# owner and a review date. Harvested [H] from the organization's own risk
+# methodology (a register of over a hundred risks per cycle).
+id: SV-083
+title: risk-register entries at or above the priority threshold carry owner and review date
+family: release
+layer: L1
+authority: "Quality-science invariant: risk-register governance (site risk methodology [H]); CMS 42 CFR 486.348 QAPI context - pin at rung 05"
+trigger: on_write
+predicate: "risk.priority < risk_register.owner_required_at_priority or (exists(risk.owner_role) and exists(risk.review_ts))"
+action: hold
+message: "Risk {risk.id} at priority {risk.priority} needs an owner and a review date."
+evidence: [risk.id, risk.priority, risk.owner_role, risk.review_ts, risk_register.owner_required_at_priority]
+expires: P1Y
+inverse: retire
+tests: fixtures/SV-083/

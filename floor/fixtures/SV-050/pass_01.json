@@ -1,0 +1,5 @@
+{"expect": "PASS", "note": "a yes-branch fully answered; a no-branch whose children are lawfully blank",
+ "record": {"case_id": "TD-2026-1000",
+            "dre": {"branches": [{"parent_id": "Q12", "parent_answer": "yes", "children": [{"id": "Q12a", "answer": "2024-11"}, {"id": "Q12b", "answer": "outpatient"}]},
+                                 {"parent_id": "Q14", "parent_answer": "no", "children": [{"id": "Q14a", "answer": ""}]}]}},
+ "history": []}

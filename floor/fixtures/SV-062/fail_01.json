@@ -1,0 +1,3 @@
+{"expect": "HOLD", "note": "the deadlock: confirm the new phone number by texting the phone number",
+ "record": {"check": {"id": "SITE-CONTACT-02", "corrects_field": "contact.phone", "verification_fields": ["contact.phone"]}},
+ "history": []}

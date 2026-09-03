@@ -1,0 +1,19 @@
+# SV-032 - the Death Notification Registration (DNR) is due by the end of the month
+# following the referral month. OPTN's letter is 30 days after the end of the month
+# in which the death was reported to the OPO; the site's month-end rule sits within
+# two days of it (stricter in 31-day months) and is what the site audits to [H].
+id: SV-032
+title: DNR due month-end following the referral month
+family: clocks
+layer: L0
+authority: "OPTN Policy 18 Table 18-1: Death Notification Registration due 30 days after the end of the month in which a donor hospital reports a death to the OPO; site month-end rule [H] - pin at rung 05"
+trigger: continuous
+anchor: referral.received_ts
+anchor_why: "the month in which the hospital reported the death to the OPO - the referral, not the recovery and not case close"
+predicate: "by(month_end_following(referral.received_ts), dnr.submitted_ts)"
+action: alarm
+message: "DNR for the referral received {referral.received_ts} not submitted by the end of the following month."
+evidence: [referral.received_ts, dnr.submitted_ts]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-032/

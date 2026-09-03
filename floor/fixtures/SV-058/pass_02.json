@@ -1,0 +1,3 @@
+{"expect": "PASS", "note": "six-month-old donor, both interviews on record",
+ "record": {"case_id": "TD-2026-1061", "donor": {"age_months": 6}, "dre": {"subjects": ["donor", "birth_mother"]}},
+ "history": []}

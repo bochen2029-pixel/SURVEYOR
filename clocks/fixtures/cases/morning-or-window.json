@@ -1,0 +1,73 @@
+{
+  "id": "morning-or-window",
+  "synthetic": true,
+  "note": "SYNTHETIC. No real donor data. The case that motivates the closure: every field is green, no timer has expired, and the morning OR window is already gone. The serology deadline nobody wrote down was 22:15 the previous evening.",
+
+  "reference": "midnight of the day the OR window opens; all times are whole minutes from that point",
+  "now": 1420,
+  "watch": ["serology_drawn", "serology_resulted", "match_run", "primary_acceptance", "or_scheduled", "incision", "cross_clamp"],
+  "explain": ["serology_drawn"],
+
+  "constraints": [
+    {
+      "kind": "window",
+      "event": "cross_clamp",
+      "opens": 360,
+      "closes": 600,
+      "label": "donor-hospital OR availability (06:00-10:00)",
+      "layer": "L2",
+      "$comment": "recovery.or_availability — frequently the binding constraint on the whole case, and almost never written down"
+    },
+    {
+      "kind": "at_least",
+      "later": "cross_clamp",
+      "earlier": "incision",
+      "minutes": 45,
+      "label": "incision to cross-clamp",
+      "layer": "L1"
+    },
+    {
+      "kind": "at_least",
+      "later": "incision",
+      "earlier": "or_scheduled",
+      "minutes": 120,
+      "label": "recovery-team mobilisation",
+      "layer": "L3",
+      "$comment": "recovery.team_mobilisation"
+    },
+    {
+      "kind": "at_least",
+      "later": "or_scheduled",
+      "earlier": "primary_acceptance",
+      "minutes": 0,
+      "label": "acceptance precedes scheduling",
+      "layer": "L2"
+    },
+    {
+      "kind": "at_least",
+      "later": "primary_acceptance",
+      "earlier": "match_run",
+      "minutes": 180,
+      "label": "offer window budgeted at 3h",
+      "layer": "L2",
+      "$comment": "allocation.offer_window_practice. Budgeted as a required lead time: a latest-safe-start computation must assume the worst case, or it is not a guarantee."
+    },
+    {
+      "kind": "at_least",
+      "later": "match_run",
+      "earlier": "serology_resulted",
+      "minutes": 0,
+      "label": "serology results precede the match run",
+      "layer": "L0"
+    },
+    {
+      "kind": "at_least",
+      "later": "serology_resulted",
+      "earlier": "serology_drawn",
+      "minutes": 360,
+      "label": "reference-lab turnaround",
+      "layer": "L3",
+      "$comment": "evaluation.reference_lab"
+    }
+  ]
+}

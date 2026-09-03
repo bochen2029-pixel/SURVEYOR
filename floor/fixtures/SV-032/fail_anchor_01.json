@@ -1,0 +1,5 @@
+{"expect": "ALARM",
+ "note": "ANCHOR PLANT: the DNR month is the REFERRAL month, not the recovery month. Referral March 31 22:00, recovery April 1, DNR May 15: due April 30 (ALARM); anchored to recovery it would be due May 31 and a false PASS.",
+ "anchor_plant": {"wrong_anchor": "recovery.end_ts", "verdict_if_wrong": "PASS"},
+ "record": {"case_id": "RF-2026-1145", "referral": {"received_ts": "2026-03-31T22:00:00Z"}, "recovery": {"end_ts": "2026-04-01T06:00:00Z"}, "dnr": {"submitted_ts": "2026-05-15T09:00:00Z"}, "as_of": "2026-06-01T00:00:00Z"},
+ "history": []}

@@ -1,0 +1,3 @@
+{"expect": "PASS", "note": "bone and skin authorized; bone recovered",
+ "record": {"case_id": "TD-2026-1040", "authorization": {"tissues_authorized": ["bone", "skin", "tendon"]}, "recovery": {"tissues_recovered": ["bone", "tendon"]}},
+ "history": []}

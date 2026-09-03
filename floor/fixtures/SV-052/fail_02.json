@@ -1,0 +1,5 @@
+{"expect": "HOLD", "note": "an abbreviation",
+ "record": {"case_id": "TD-2026-1022",
+            "authorization": {"categories": ["MSK for transplant"]},
+            "controlled_vocabulary": {"authorized_categories": ["Musculoskeletal tissue for transplant", "Skin for transplant"]}},
+ "history": []}

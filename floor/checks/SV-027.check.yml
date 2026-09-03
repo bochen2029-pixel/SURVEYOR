@@ -1,0 +1,18 @@
+# SV-027 - incision follows skin prep within 1h15m, or the prep is repeated. Encoded
+# as a running clock (family default) so the alarm lands while a re-prep is still
+# possible; the catalog's "cross-contamination flag" is the message, not the action.
+id: SV-027
+title: prep-to-incision interval at most 1h15m (cross-contamination)
+family: clocks
+layer: L1
+authority: "Quality-science invariant: surgical prep currency (AATB aseptic recovery standards context; site rule 1h15m [H]) - pin at rung 05"
+trigger: continuous
+anchor: or_timeline.prep_complete_ts
+anchor_why: "prep currency runs from completion of skin prep, not from arrival in the OR and not from draping"
+predicate: "within(or_timeline.prep_complete_ts, or_timeline.incision_ts, 75m)"
+action: alarm
+message: "Incision has not followed skin prep ({or_timeline.prep_complete_ts}) within 1h15m - cross-contamination risk; re-prep required."
+evidence: [or_timeline.prep_complete_ts, or_timeline.incision_ts]
+expires: P1Y
+inverse: retire
+tests: fixtures/SV-027/

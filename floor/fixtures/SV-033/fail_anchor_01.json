@@ -1,0 +1,5 @@
+{"expect": "ALARM",
+ "note": "ANCHOR PLANT: the response clock starts when the referral is RECEIVED, not when a coordinator is dispatched. Received 02:00, dispatched 02:40, onsite 03:50: 110 minutes from receipt (ALARM), 70 from dispatch (a false PASS).",
+ "anchor_plant": {"wrong_anchor": "referral.dispatched_ts", "verdict_if_wrong": "PASS"},
+ "record": {"case_id": "RF-2026-1155", "referral": {"received_ts": "2026-08-19T02:00:00Z", "dispatched_ts": "2026-08-19T02:40:00Z"}, "onsite": {"arrived_ts": "2026-08-19T03:50:00Z"}, "as_of": "2026-08-20T00:00:00Z"},
+ "history": []}

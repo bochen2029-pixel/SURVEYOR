@@ -1,0 +1,19 @@
+# SV-030 - the donor feedback form is due 5 business days from ORGAN-RECOVERY TIME,
+# not from cross-clamp. Law B1's example: the reference site once computed this
+# clock from the wrong anchor and produced due dates that looked like compliance
+# [H]. The anchor declaration IS the check; pass_02 is the anchor-defect plant.
+id: SV-030
+title: donor feedback due 5 business days from organ-recovery time (not cross-clamp)
+family: clocks
+layer: L0
+authority: "OPTN Policy 18 Table 18-1: Donor Organ Disposition (Feedback) due 5 business days after the procurement date (host OPO) - pin at rung 05; site anchor field [H]"
+trigger: continuous
+anchor: recovery.organ_recovery_ts
+anchor_why: "organ-recovery time, NOT cross-clamp: a clock anchored to the clamp computes a different due date whenever the two fall on different business days - the site's historical error mode [H]"
+predicate: "within(recovery.organ_recovery_ts, feedback.submitted_ts, 5bd)"
+action: alarm
+message: "Donor feedback not submitted within 5 business days of organ recovery ({recovery.organ_recovery_ts})."
+evidence: [recovery.organ_recovery_ts, recovery.cross_clamp_ts, feedback.submitted_ts]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-030/

@@ -1,0 +1,6 @@
+{"expect": "CANNOT-EVALUATE",
+ "note": "the narrative has no structured sites - the semantic remainder belongs to the watch tier, and the floor says it cannot judge",
+ "record": {"case_id": "TD-2026-0903",
+            "body_diagram": {"sites": ["R-knee-scar"]},
+            "narrative": {"text_ref": "NOTE-4413"}},
+ "history": []}

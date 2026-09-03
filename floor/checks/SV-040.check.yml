@@ -1,0 +1,16 @@
+# SV-040 - the form being filled is the controlled revision in force at the time of
+# use. Harvested [H]: stale local copies of forms are the document-control finding
+# the audit reads by revision number, page by page.
+id: SV-040
+title: form revision in use equals the current controlled revision at time of use
+family: revision
+layer: L1
+authority: "Quality-science invariant: document control (AATB standards on records and document control; CMS 42 CFR 486.348 QAPI documentation context); site document-control-class system rule [H] - pin at rung 05"
+trigger: on_write
+predicate: "form.revision_used == document_control.current_revision_at_use[form.document_id]"
+action: hold
+message: "Form {form.document_id} was completed on revision {form.revision_used}; the controlled revision in force was different."
+evidence: [form.document_id, form.revision_used, form.used_ts, document_control.current_revision_at_use]
+expires: P1Y
+inverse: retire
+tests: fixtures/SV-040/

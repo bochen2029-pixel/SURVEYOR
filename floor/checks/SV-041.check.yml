@@ -1,0 +1,16 @@
+# SV-041 - a quality document becomes effective only once every required approval
+# is recorded; until then it stays a draft. Harvested [H]: the document-control
+# review queue is where approvals get skipped when a policy is needed in a hurry.
+id: SV-041
+title: quality documents held in draft until required approvals are recorded
+family: revision
+layer: L1
+authority: "Quality-science invariant: controlled-document approval (AATB standards on document control; CMS 42 CFR 486.348 QAPI context); site document-control SOP [H] - pin at rung 05"
+trigger: on_write
+predicate: "document.status == 'effective' implies subset(document.required_approval_roles, document.approved_roles)"
+action: hold
+message: "Document {document.id} cannot become effective: required approvals {document.required_approval_roles}, recorded {document.approved_roles}."
+evidence: [document.id, document.status, document.required_approval_roles, document.approved_roles]
+expires: P1Y
+inverse: retire
+tests: fixtures/SV-041/

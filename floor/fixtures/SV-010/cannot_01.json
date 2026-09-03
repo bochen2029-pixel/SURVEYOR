@@ -1,0 +1,4 @@
+{"expect": "CANNOT-EVALUATE",
+ "note": "no HLA/ABO page on the record yet",
+ "record": {"case_id": "OD-2026-0433", "chart": {"donor_id": "DN-2026-0433"}},
+ "history": []}

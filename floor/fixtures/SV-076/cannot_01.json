@@ -1,0 +1,4 @@
+{"expect": "CANNOT-EVALUATE", "note": "an offer whose bypass status is unknown",
+ "record": {"case_id": "OD-2026-0652",
+            "allocation": {"offers": [{"offer_ref": "OF-4021", "center_id": "TXC-19", "primary_list_exhausted_at_send": "no"}]}},
+ "history": []}

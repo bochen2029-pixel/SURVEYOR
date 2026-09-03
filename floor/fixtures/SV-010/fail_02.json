@@ -1,0 +1,5 @@
+{"expect": "HOLD",
+ "note": "the lab signature line is blank",
+ "record": {"case_id": "OD-2026-0432",
+            "hla_abo": {"coordinator_signatures": ["STF-014", "STF-031"], "lab_signature": "", "status": "complete"}},
+ "history": []}

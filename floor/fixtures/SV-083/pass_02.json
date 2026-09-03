@@ -1,0 +1,3 @@
+{"expect": "PASS", "note": "a low-priority risk below the threshold - no owner required",
+ "record": {"risk_register": {"id": "RR-2026", "owner_required_at_priority": 12}, "risk": {"id": "RSK-042", "priority": 6}},
+ "history": []}

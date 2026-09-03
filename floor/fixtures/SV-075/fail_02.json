@@ -1,0 +1,4 @@
+{"expect": "HOLD", "note": "a disqualifying decline whose center is still active on the list",
+ "record": {"case_id": "OD-2026-0642",
+            "allocation": {"declines": [{"center_id": "TXC-12", "reason_code": "DR-921", "classification": "disqualifying", "list_status": "active"}]}},
+ "history": []}

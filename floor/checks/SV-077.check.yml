@@ -1,0 +1,15 @@
+# SV-077 - each organ's disposition code reads the same on the organ-data page and
+# the donor-summary page; the summary feeds the registry.
+id: SV-077
+title: organ disposition code matches across the organ-data page and the donor-summary page
+family: reconciliation
+layer: L0
+authority: "OPTN Policy 18 data submission (donor organ disposition reporting) - pin at rung 05; site audit checklist [H]"
+trigger: on_close_attempt
+predicate: "every(organs, organ_page_disposition == summary_page_disposition)"
+action: hold
+message: "An organ's disposition code differs between the organ-data page and the donor-summary page."
+evidence: [organs]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-077/

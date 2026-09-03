@@ -1,0 +1,3 @@
+{"expect": "CANNOT-EVALUATE", "note": "a contract with no notice deadline captured - the register cannot be judged until it is",
+ "record": {"register_id": "CONTRACTS-2026", "contracts": [{"id": "CT-14", "notice_deadline_ts": "2027-03-01T00:00:00Z"}, {"id": "CT-51", "vendor_class": "records-system"}], "as_of": "2026-08-14T00:00:00Z"},
+ "history": []}

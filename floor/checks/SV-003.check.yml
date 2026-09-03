@@ -1,0 +1,14 @@
+# SV-003 - the donor band on the body is the donor on the paperwork.
+id: SV-003
+title: donor-band number matches recovery paperwork
+family: identity
+layer: L1
+authority: "Quality-science invariant: physical identifier to paperwork match (site audit checklist [H]); AATB standards on donor identification - pin at rung 05"
+trigger: on_close_attempt
+predicate: "donor_band.number == recovery_paperwork.donor_band_number"
+action: hold
+message: "Donor band {donor_band.number} does not match the band number on the recovery paperwork ({recovery_paperwork.donor_band_number})."
+evidence: [donor_band.number, recovery_paperwork.donor_band_number]
+expires: P1Y
+inverse: retire
+tests: fixtures/SV-003/

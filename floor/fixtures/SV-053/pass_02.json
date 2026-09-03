@@ -1,0 +1,4 @@
+{"expect": "PASS", "note": "tibia and fibula share sequence 4 as a declared pair",
+ "record": {"case_id": "TD-2026-1031",
+            "recovery": {"items": [{"seq": 1, "tissue": "femur_left"}, {"seq": 4, "tissue": "tibia_left"}, {"seq": 4, "tissue": "fibula_left"}], "paired_sequence_numbers": [4]}},
+ "history": []}

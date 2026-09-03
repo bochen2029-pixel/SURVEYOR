@@ -1,0 +1,6 @@
+{"expect": "PASS",
+ "note": "same sites, different order",
+ "record": {"case_id": "TD-2026-0900",
+            "body_diagram": {"sites": ["L-forearm-abrasion", "R-knee-scar", "chest-incision"]},
+            "narrative": {"sites": ["chest-incision", "L-forearm-abrasion", "R-knee-scar"], "text_ref": "NOTE-4410"}},
+ "history": []}

@@ -1,0 +1,5 @@
+{"expect": "PASS", "note": "every category is the controlled term, verbatim",
+ "record": {"case_id": "TD-2026-1020",
+            "authorization": {"categories": ["Musculoskeletal tissue for transplant", "Skin for transplant"]},
+            "controlled_vocabulary": {"authorized_categories": ["Musculoskeletal tissue for transplant", "Musculoskeletal tissue for research", "Skin for transplant", "Cardiovascular tissue for transplant"]}},
+ "history": []}

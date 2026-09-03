@@ -1,0 +1,16 @@
+# SV-073 - the research specimens on the research tab are the research specimens on
+# the post-OR donor summary - two roles, one list. Harvested [H]: the cross-role
+# reconciliation the audit does by hand.
+id: SV-073
+title: cross-role specimen reconciliation - research-tab entries match the post-OR donor summary
+family: reconciliation
+layer: L1
+authority: "Quality-science invariant: cross-role reconciliation (site audit checklist [H]) - L1"
+trigger: on_close_attempt
+predicate: "same_set(research_tab.specimens, or_summary.research_specimens)"
+action: flag
+message: "Research specimens differ between the research tab ({research_tab.specimens}) and the post-OR summary ({or_summary.research_specimens})."
+evidence: [research_tab.specimens, or_summary.research_specimens]
+expires: P1Y
+inverse: retire
+tests: fixtures/SV-073/

@@ -1,0 +1,5 @@
+{"expect": "HOLD", "note": "complete except that nobody owns it",
+ "record": {"capa": {"id": "CAPA-2026-016", "variance_class": "process", "owner_role": "",
+                     "expectation": {"metric": "offer_cadence_breaches_per_month", "baseline": 4, "target": 0, "horizon_ts": "2026-12-31T00:00:00Z"},
+                     "expires": "2027-12-31", "inverse": "retire"}},
+ "history": []}

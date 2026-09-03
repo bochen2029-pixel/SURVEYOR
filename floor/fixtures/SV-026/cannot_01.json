@@ -1,0 +1,6 @@
+{"expect": "CANNOT-EVALUATE", "note": "no sample draw time - the windows have no anchor",
+ "record": {"case_id": "OD-2026-0514",
+            "hemodilution": {"logged": {"blood_products": [{"ref": "BP-1", "ts": "2026-08-16T04:00:00Z", "volume_ml": 300}], "crystalloids": []},
+                             "calc": {"blood_products": [{"ref": "BP-1", "ts": "2026-08-16T04:00:00Z", "volume_ml": 300}], "blood_product_refs": ["BP-1"], "blood_products_ml": 300,
+                                      "crystalloids": [], "crystalloid_refs": [], "crystalloids_ml": 0}}},
+ "history": []}

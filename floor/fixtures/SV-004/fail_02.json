@@ -1,0 +1,5 @@
+{"expect": "HOLD",
+ "note": "the bedside nurse never confirmed - two of three sources",
+ "record": {"case_id": "TD-2026-0897",
+            "donor_verification": {"identifiers": ["name", "dob", "mrn"], "sources": ["hospital_wristband", "donor_band"], "verified_ts": "2026-08-22T03:15:00Z"}},
+ "history": []}

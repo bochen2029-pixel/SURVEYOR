@@ -1,0 +1,5 @@
+{"expect": "PASS",
+ "note": "ANCHOR PLANT: the audit clock runs from recovery END, not from referral. Referral Aug 1, recovery ended Aug 3, audit started Aug 9: 5.8 days from recovery end (PASS), 8.4 days from referral (a false ALARM).",
+ "anchor_plant": {"wrong_anchor": "referral.received_ts", "verdict_if_wrong": "ALARM"},
+ "record": {"case_id": "TD-2026-0925", "referral": {"received_ts": "2026-08-01T00:00:00Z"}, "recovery": {"end_ts": "2026-08-03T14:00:00Z"}, "audit": {"started_ts": "2026-08-09T09:00:00Z"}, "as_of": "2026-08-20T00:00:00Z"},
+ "history": []}

@@ -1,0 +1,20 @@
+# SV-031 - the Deceased Donor Registration (DDR): OPTN gives 60 days after the donor
+# organ disposition (feedback) form is submitted; the site holds itself to 30 from
+# the same anchor. An L2 tightening riding an L0 clock: one check, two bounds.
+# A site that anchors its buffer elsewhere signs its own variant.
+id: SV-031
+title: DDR due 60 days (OPTN) / 30 days (site buffer) after the feedback form is submitted
+family: clocks
+layer: L0/L2
+authority: "OPTN Policy 18 Table 18-1: Deceased Donor Registration due 60 days after the donor organ disposition (feedback) form is submitted and disposition is reported for all organs; site 30-day buffer [H] - pin at rung 05"
+trigger: continuous
+anchor: feedback.submitted_ts
+anchor_why: "OPTN anchors the DDR to submission of the feedback form (Table 18-1) - not to recovery and not to cross-clamp; the site buffer rides the same anchor"
+bound_l0: 60d
+predicate: "within(feedback.submitted_ts, ddr.submitted_ts, 30d)"
+action: alarm
+message: "DDR not submitted within the site's 30-day buffer after feedback submission ({feedback.submitted_ts}); the OPTN deadline is 60 days."
+evidence: [feedback.submitted_ts, ddr.submitted_ts]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-031/

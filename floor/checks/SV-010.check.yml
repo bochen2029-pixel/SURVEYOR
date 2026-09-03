@@ -1,0 +1,16 @@
+# SV-010 - the HLA/ABO pages carry two DISTINCT coordinator signatures and the lab's.
+# Harvested [H]: two-person verification on blood type is the first-corroborator law
+# already in OPTN policy; the site adds a second coordinator and the lab signature.
+id: SV-010
+title: two distinct coordinator signatures plus lab signature before HLA/ABO pages complete
+family: signatures
+layer: L0
+authority: "OPTN Policy 2.6 Deceased Donor Blood Type Determination and Reporting (verification by a different qualified professional) + site rule of two coordinator signatures and a lab signature [H] - pin at rung 05"
+trigger: on_close_attempt
+predicate: "distinct(hla_abo.coordinator_signatures) >= 2 and exists(hla_abo.lab_signature)"
+action: hold
+message: "HLA/ABO pages cannot complete: coordinator signatures {hla_abo.coordinator_signatures}, lab signature {hla_abo.lab_signature}."
+evidence: [hla_abo.coordinator_signatures, hla_abo.lab_signature]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-010/

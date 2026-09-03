@@ -1,0 +1,16 @@
+# SV-075 - decline reasons are structured codes, each pre-classified disqualifying
+# or not, and a disqualifying decline gates the center's list status automatically.
+# Site rule [H] (L2).
+id: SV-075
+title: decline reasons structured and pre-classified disqualifying/non-disqualifying, auto-gating list status
+family: reconciliation
+layer: L2
+authority: "Site allocation practice: structured decline codes and list gating [H] (site-variant)"
+trigger: on_write
+predicate: "every(allocation.declines, exists(reason_code) and (classification == 'disqualifying' or classification == 'non_disqualifying') and (classification != 'disqualifying' or list_status == 'removed'))"
+action: hold
+message: "A decline is unstructured, unclassified, or disqualifying without removing the center from the list."
+evidence: [allocation.declines]
+expires: P1Y
+inverse: retire
+tests: fixtures/SV-075/

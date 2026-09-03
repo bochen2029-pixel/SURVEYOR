@@ -1,0 +1,4 @@
+{"expect": "PASS", "note": "two processors, both received all three results",
+ "record": {"shared_case": {"id": "TD-2026-1080", "results": ["SER-1", "CUL-2", "HLA-3"],
+                            "processors": [{"processor_id": "PRC-A", "results_received": ["SER-1", "CUL-2", "HLA-3"]}, {"processor_id": "PRC-B", "results_received": ["HLA-3", "SER-1", "CUL-2"]}]}},
+ "history": []}

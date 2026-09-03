@@ -1,0 +1,6 @@
+{"expect": "HOLD",
+ "note": "a verifier who is not on this case's team worksheet",
+ "record": {"case_id": "TD-2026-0912",
+            "donor_verification": {"verified_by": ["STF-014", "STF-121"], "verified_ts": "2026-08-23T02:10:00Z"},
+            "team_worksheet": {"roster": ["STF-014", "STF-052", "STF-088"]}},
+ "history": []}

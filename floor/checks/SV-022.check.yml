@@ -1,0 +1,17 @@
+# SV-022 - a potential disease transmission is reported within 24 hours of the OPO
+# learning of it. Mandated (L0).
+id: SV-022
+title: potential disease-transmission notification within 24h of receipt
+family: clocks
+layer: L0
+authority: "OPTN Policy 15.4 Host OPO Requirements for Reporting Post-Procurement Test Results and Discovery of Potential Transmission of Disease or Malignancy (24 hours) - pin at rung 05"
+trigger: continuous
+anchor: disease_transmission.info_received_ts
+anchor_why: "the OPTN clock starts when the host OPO receives the result or discovers the concern - not when it is confirmed, and not when the case closed"
+predicate: "within(disease_transmission.info_received_ts, disease_transmission.notified_ts, 24h)"
+action: alarm
+message: "Potential disease-transmission information received {disease_transmission.info_received_ts} has not been reported within 24 hours."
+evidence: [disease_transmission.info_received_ts, disease_transmission.notified_ts, disease_transmission.notified_to]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-022/

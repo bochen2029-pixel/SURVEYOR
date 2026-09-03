@@ -1,0 +1,17 @@
+# SV-084 - the QAPI plan is presented to the governing board at least annually.
+# A slow clock: anchored to the previous presentation.
+id: SV-084
+title: QAPI plan annual governing-board presentation clock
+family: release
+layer: L0
+authority: "CMS 42 CFR 486.348 (QAPI program; governing body oversight) and 486.324 (administration and governing body) - pin at rung 05"
+trigger: continuous
+anchor: qapi.last_board_presentation_ts
+anchor_why: "the previous presentation to the governing board, not the plan's revision date and not the fiscal year"
+predicate: "within(qapi.last_board_presentation_ts, qapi.next_board_presentation_ts, 365d)"
+action: alarm
+message: "The QAPI plan has not been presented to the governing board within a year of the last presentation ({qapi.last_board_presentation_ts})."
+evidence: [qapi.last_board_presentation_ts, qapi.next_board_presentation_ts]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-084/

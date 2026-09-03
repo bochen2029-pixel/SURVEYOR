@@ -1,0 +1,5 @@
+{"expect": "ALARM",
+ "note": "ANCHOR PLANT: the OPTN clock starts at RECEIPT of the information, not at confirmation. Received 08:00, confirmed 20:00, reported 14:00 next day: 30h from receipt (ALARM), 18h from confirmation (a false PASS).",
+ "anchor_plant": {"wrong_anchor": "disease_transmission.confirmed_ts", "verdict_if_wrong": "PASS"},
+ "record": {"case_id": "OD-2026-0485", "disease_transmission": {"info_received_ts": "2026-08-10T08:00:00Z", "confirmed_ts": "2026-08-10T20:00:00Z", "notified_ts": "2026-08-11T14:00:00Z", "notified_to": ["optn_patient_safety"]}, "as_of": "2026-08-20T00:00:00Z"},
+ "history": []}

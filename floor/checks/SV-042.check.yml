@@ -1,0 +1,19 @@
+# SV-042 - the audited-to-the-new-edition trap: a regulator's next edition takes
+# effect inside the audit window while the site's policies still cite the old one.
+# For every standard with a pending edition: adopted, or more than the lead time
+# away. Lead time 90 days is site-variant.
+id: SV-042
+title: regulator edition-change monitor - effective date vs audit window, with lead time
+family: revision
+layer: L1
+authority: "Quality-science invariant: regulatory-change readiness (the harvested AATB edition-transition case [H]); site lead time - pin at rung 05"
+trigger: continuous
+anchor: standards.next_edition_effective_ts
+anchor_why: "the regulator's EFFECTIVE date, not its publication date - the survey applies the edition in force on the day of the survey, whatever the policies cite"
+predicate: "every(standards, not exists(next_edition) or adopted_edition == next_edition or minutes_between(as_of, next_edition_effective_ts) > 90d)"
+action: alarm
+message: "A standard's next edition takes effect within 90 days and the site's policies have not adopted it."
+evidence: [standards]
+expires: P1Y
+inverse: retire
+tests: fixtures/SV-042/

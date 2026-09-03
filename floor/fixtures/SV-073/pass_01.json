@@ -1,0 +1,3 @@
+{"expect": "PASS", "note": "the same three specimens on both pages",
+ "record": {"case_id": "OD-2026-0620", "research_tab": {"specimens": ["SPL-01", "LN-02", "SPL-03"]}, "or_summary": {"research_specimens": ["SPL-03", "SPL-01", "LN-02"]}},
+ "history": []}

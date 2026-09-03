@@ -1,0 +1,18 @@
+# SV-020 - the chart audit starts within a week of recovery. Site rule [H] (L2):
+# the department's own SLA on itself. A clock check: alarms before breach once the
+# clocks engine (rung 03) adds lead; here the floor grades the bound.
+id: SV-020
+title: chart audit begins within 7 days post-recovery
+family: clocks
+layer: L2
+authority: "Site quality SOP: audit start SLA [H] (site-variant; each site signs its own)"
+trigger: continuous
+anchor: recovery.end_ts
+anchor_why: "post-recovery means the end of the recovery procedure, not referral and not case close; the audit clock starts when there is a chart to audit"
+predicate: "within(recovery.end_ts, audit.started_ts, 7d)"
+action: alarm
+message: "Chart audit has not started within 7 days of recovery end ({recovery.end_ts})."
+evidence: [recovery.end_ts, audit.started_ts]
+expires: P1Y
+inverse: retire
+tests: fixtures/SV-020/

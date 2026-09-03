@@ -1,0 +1,16 @@
+# SV-050 - branching logic on the risk-assessment interview is complete: wherever a
+# parent question was answered yes, every required child question has an answer.
+# Harvested [H]: the audit walks the DRE branch by branch.
+id: SV-050
+title: DRE branching completeness - parent answered yes implies required children non-blank
+family: sequence
+layer: L0
+authority: "FDA 21 CFR 1271.75 donor screening (risk-assessment interview) + AATB DRAI requirements; OPTN Policy 2.4 deceased donor medical and behavioral history - pin at rung 05"
+trigger: on_close_attempt
+predicate: "every(dre.branches, parent_answer == 'yes' implies every(children, exists(answer)))"
+action: hold
+message: "A DRE parent question answered yes has an unanswered required child question."
+evidence: [dre.branches]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-050/

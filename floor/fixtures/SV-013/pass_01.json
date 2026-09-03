@@ -1,0 +1,5 @@
+{"expect": "PASS",
+ "note": "a routine edit needs no note",
+ "record": {"case_id": "OD-2026-0450",
+            "edit": {"class": "routine", "field": "vitals.hr", "ts": "2026-08-24T10:02:00Z"}},
+ "history": []}

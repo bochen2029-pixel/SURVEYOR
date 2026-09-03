@@ -1,0 +1,16 @@
+# SV-015 - the authorization witness belongs to the hospital care team, never to the
+# recovering organization. Harvested [H]: a recovering-organization witness is the
+# conflict-of-interest finding the survey looks for first.
+id: SV-015
+title: authorization witness is hospital care-team, never recovering-organization staff
+family: signatures
+layer: L0
+authority: "State Revised Uniform Anatomical Gift Act witnessing provisions + site authorization SOP [H]; CMS 42 CFR 486.344 context - pin at rung 05"
+trigger: on_close_attempt
+predicate: "authorization.witness_affiliation == 'hospital_care_team'"
+action: hold
+message: "Authorization witness affiliation is {authorization.witness_affiliation}; it must be hospital care-team."
+evidence: [authorization.witness_affiliation, authorization.witness_role]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-015/

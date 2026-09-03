@@ -1,0 +1,3 @@
+{"expect": "CANNOT-EVALUATE", "note": "a pending edition with no effective date captured",
+ "record": {"register_id": "STANDARDS-2026", "standards": [{"id": "STD-A", "adopted_edition": "ed-15", "next_edition": "ed-16"}], "as_of": "2026-08-14T00:00:00Z"},
+ "history": []}

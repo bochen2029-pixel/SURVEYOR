@@ -1,0 +1,14 @@
+# SV-059 - blood type A or AB carries a subtype, or a reason code for why not.
+id: SV-059
+title: ABO type A or AB implies subtype present or a reason code
+family: sequence
+layer: L0
+authority: "OPTN Policy 2.6 Deceased Donor Blood Type Determination and Reporting, Table 2-1 subtyping requirements - pin at rung 05"
+trigger: on_write
+predicate: "(abo.type == 'A' or abo.type == 'AB') implies (exists(abo.subtype) or exists(abo.subtype_reason_code))"
+action: hold
+message: "Blood type {abo.type} recorded without a subtype or a reason code."
+evidence: [abo.type, abo.subtype, abo.subtype_reason_code]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-059/

@@ -1,0 +1,5 @@
+{"expect": "CANNOT-EVALUATE",
+ "note": "the system exported no session actor - attribution cannot be verified, and the check says so",
+ "record": {"case_id": "OD-2026-0463",
+            "edits": [{"field": "vitals.hr", "editor_id": "STF-014", "ts": "2026-08-24T10:02:00Z"}]},
+ "history": []}

@@ -1,0 +1,5 @@
+{"expect": "HOLD",
+ "note": "witnessed by a family member - not a care-team witness either",
+ "record": {"case_id": "OD-2026-0472",
+            "authorization": {"method": "in_person", "witness_affiliation": "family", "witness_role": "next_of_kin_relative"}},
+ "history": []}

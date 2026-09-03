@@ -1,0 +1,6 @@
+{"expect": "PASS",
+ "note": "brain-dead donor: anesthesiologist on the roster, both recovering physicians signed",
+ "record": {"case_id": "OD-2026-0440", "donor_type": "brain_dead",
+            "or_roster": {"roles": ["anesthesiologist", "circulator", "recovery_surgeon", "recovery_surgeon", "coordinator"],
+                          "recovering_physicians": ["STF-301", "STF-318"], "physician_signatures": ["STF-301", "STF-318"]}},
+ "history": []}

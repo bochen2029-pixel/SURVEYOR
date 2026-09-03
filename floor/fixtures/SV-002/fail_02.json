@@ -1,0 +1,7 @@
+{"expect": "HOLD",
+ "note": "the report belongs to another donor (ID mismatch) - the eligibility-relevant failure",
+ "record": {"case_id": "OD-2026-0419",
+            "chart": {"donor_id": "DN-2026-0419", "donor_dob": "1974-01-15"},
+            "serology_report": {"donor_id": "DN-2026-0391", "donor_dob": "1974-01-15", "draw_ts": "2026-08-21T06:10:00Z", "lab_ref": "LAB-77140"},
+            "serology_entry": {"draw_ts": "2026-08-21T06:10:00Z", "result_ref": "LAB-77140"}},
+ "history": []}

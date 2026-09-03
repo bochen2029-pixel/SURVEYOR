@@ -1,0 +1,4 @@
+{"expect": "HOLD", "note": "parent yes, one child left blank",
+ "record": {"case_id": "TD-2026-1001",
+            "dre": {"branches": [{"parent_id": "Q12", "parent_answer": "yes", "children": [{"id": "Q12a", "answer": "2024-11"}, {"id": "Q12b", "answer": ""}]}]}},
+ "history": []}

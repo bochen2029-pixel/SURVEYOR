@@ -1,0 +1,18 @@
+# SV-035 - every contract or license with a notice deadline inside the next 120
+# days carries a logged decision. Generalized from a harvested near-miss [H]:
+# the clock runs to the NOTICE deadline, not to the contract end date.
+id: SV-035
+title: contract/license notice-deadline lookahead of at least 120 days
+family: clocks
+layer: L2
+authority: "Site contract-management practice, generalized from a harvested near-miss [H] (site-variant)"
+trigger: continuous
+anchor: contracts.notice_deadline_ts
+anchor_why: "the last day to give notice, not the contract's end date - a renewal that auto-triggers at the notice deadline is the trap this generalizes"
+predicate: "every(contracts, minutes_between(as_of, notice_deadline_ts) > 120d or exists(decision_ref))"
+action: alarm
+message: "A contract or license reaches its notice deadline within 120 days with no decision logged."
+evidence: [contracts]
+expires: P1Y
+inverse: retire
+tests: fixtures/SV-035/

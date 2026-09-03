@@ -1,0 +1,3 @@
+{"expect": "HOLD", "note": "exactly at the threshold, no review date",
+ "record": {"risk_register": {"id": "RR-2026", "owner_required_at_priority": 12}, "risk": {"id": "RSK-043", "priority": 12, "owner_role": "quality_manager", "review_ts": ""}},
+ "history": []}

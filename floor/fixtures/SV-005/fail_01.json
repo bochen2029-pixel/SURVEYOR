@@ -1,0 +1,6 @@
+{"expect": "FLAG",
+ "note": "the diagram marks a site the narrative never mentions",
+ "record": {"case_id": "TD-2026-0901",
+            "body_diagram": {"sites": ["L-forearm-abrasion", "R-knee-scar", "L-antecubital-puncture"]},
+            "narrative": {"sites": ["L-forearm-abrasion", "R-knee-scar"], "text_ref": "NOTE-4411"}},
+ "history": []}

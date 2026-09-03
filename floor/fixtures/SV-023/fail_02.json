@@ -1,0 +1,3 @@
+{"expect": "ALARM", "note": "never reported; the window closed yesterday",
+ "record": {"case_id": "TD-2026-0942", "serology": {"reactive_result_ts": "2026-08-12T11:00:00Z", "reactive_marker": "HCV Ab"}, "county_epidemiology": {}, "as_of": "2026-08-14T09:00:00Z"},
+ "history": []}

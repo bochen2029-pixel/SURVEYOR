@@ -1,0 +1,5 @@
+{"expect": "HOLD", "note": "the liver reads transplanted on the organ page and not-transplanted on the summary",
+ "record": {"case_id": "OD-2026-0661",
+            "organs": [{"organ_id": "KI-L", "organ_page_disposition": "transplanted", "summary_page_disposition": "transplanted"},
+                       {"organ_id": "LI", "organ_page_disposition": "transplanted", "summary_page_disposition": "recovered_not_transplanted"}]},
+ "history": []}

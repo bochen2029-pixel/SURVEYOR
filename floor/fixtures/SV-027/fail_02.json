@@ -1,0 +1,3 @@
+{"expect": "ALARM", "note": "eighty minutes after prep and no incision - the moment to re-prep",
+ "record": {"case_id": "TD-2026-0953", "or_timeline": {"prep_complete_ts": "2026-08-18T01:00:00Z"}, "as_of": "2026-08-18T02:20:00Z"},
+ "history": []}

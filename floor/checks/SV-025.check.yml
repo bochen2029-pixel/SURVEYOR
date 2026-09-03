@@ -1,0 +1,17 @@
+# SV-025 - a liver offer starts on an INR no older than 12 hours. With allocation
+# not yet started, an aging INR alarms before it can no longer support an offer.
+id: SV-025
+title: PT/INR collected within 12h before liver allocation start
+family: clocks
+layer: L0
+authority: "OPTN Policy 2.11 Required Deceased Donor Information (liver: INR or PT within 12 hours of the offer) - pin at rung 05"
+trigger: continuous
+anchor: labs.inr.collected_ts
+anchor_why: "lab age is measured from collection, not from the result time; allocation start must fall inside the 12h window the draw opens"
+predicate: "contains(allocation.organs, 'liver') implies (within(labs.inr.collected_ts, allocation.start_ts, 12h) and (not exists(allocation.start_ts) or minutes_between(labs.inr.collected_ts, allocation.start_ts) >= 0))"
+action: alarm
+message: "Liver allocation started {allocation.start_ts} without an INR collected in the prior 12 hours (last draw {labs.inr.collected_ts})."
+evidence: [allocation.organs, allocation.start_ts, labs.inr.collected_ts, labs.inr.value]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-025/

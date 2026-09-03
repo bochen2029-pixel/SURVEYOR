@@ -1,0 +1,6 @@
+{"expect": "FLAG",
+ "note": "the narrative describes a site absent from the diagram",
+ "record": {"case_id": "TD-2026-0902",
+            "body_diagram": {"sites": ["R-knee-scar"]},
+            "narrative": {"sites": ["R-knee-scar", "back-tattoo"], "text_ref": "NOTE-4412"}},
+ "history": []}

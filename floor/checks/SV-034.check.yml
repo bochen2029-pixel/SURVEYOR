@@ -1,0 +1,18 @@
+# SV-034 - offers keep pace: no more than 30 minutes between consecutive offers, and
+# no more than 30 minutes from the latest offer to either the next one or the close
+# of allocation - unless an unstable-donor exception is logged. Site rule [H] (L2).
+id: SV-034
+title: offer cadence at most 30 minutes between offers, or a logged unstable-donor exception
+family: clocks
+layer: L2
+authority: "Site allocation policy: offer cadence and the unstable-donor exception [H] (site-variant)"
+trigger: continuous
+anchor: allocation.latest_offer_ts
+anchor_why: "cadence runs from the most recent offer sent; a logged unstable-donor exception suspends it for the case"
+predicate: "exists(allocation.unstable_donor_exception_ref) or (every_pair(allocation.offers, minutes_between(prev.sent_ts, next.sent_ts) <= 30m) and within(allocation.latest_offer_ts, allocation.closed_ts, 30m))"
+action: alarm
+message: "More than 30 minutes since the last offer ({allocation.latest_offer_ts}) with no new offer, no close, and no unstable-donor exception logged."
+evidence: [allocation.offers, allocation.latest_offer_ts, allocation.closed_ts, allocation.unstable_donor_exception_ref]
+expires: P1Y
+inverse: retire
+tests: fixtures/SV-034/

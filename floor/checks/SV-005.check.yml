@@ -1,0 +1,16 @@
+# SV-005 - the body diagram and the narrative describe the same body.
+# Deterministic subset only: structured site codes must agree both ways. Whether
+# the free-text narrative MEANS what the diagram shows is the watch tier's question.
+id: SV-005
+title: body-diagram annotations consistent with narrative notes (deterministic subset)
+family: identity
+layer: L1
+authority: "Quality-science invariant: physical-assessment cross-check (site audit checklist [H]); FDA 21 CFR 1271.75 physical assessment context - pin at rung 05"
+trigger: on_close_attempt
+predicate: "same_set(body_diagram.sites, narrative.sites)"
+action: flag
+message: "Body-diagram sites {body_diagram.sites} and narrative sites {narrative.sites} disagree."
+evidence: [body_diagram.sites, narrative.sites]
+expires: P1Y
+inverse: retire
+tests: fixtures/SV-005/

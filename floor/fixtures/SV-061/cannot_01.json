@@ -1,0 +1,3 @@
+{"expect": "CANNOT-EVALUATE", "note": "a finding with no classification field at all",
+ "record": {"case_id": "TD-2026-1073", "physical_assessment": {"injection_sites": [{"site": "L-antecubital"}]}},
+ "history": []}

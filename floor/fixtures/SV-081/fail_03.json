@@ -1,0 +1,3 @@
+{"expect": "HOLD", "note": "a CAPA stub with nothing beyond its id - the emptiest possible incomplete row; exists() reads absence as absence, so this holds rather than abstains",
+ "record": {"capa": {"id": "CAPA-2026-017"}},
+ "history": []}

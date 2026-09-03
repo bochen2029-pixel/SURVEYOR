@@ -1,0 +1,26 @@
+{
+  "id": "infeasible-transport",
+  "synthetic": true,
+  "note": "SYNTHETIC. A case that cannot be met, where no single constraint is unreasonable. Cross-clamp is pinned, the accepting centre's OR opens at a fixed hour, and the transport leg plus the receiving centre's own preparation do not fit inside the organ's ischemia budget. The closure detects a negative cycle; a flat timer list detects nothing, because no timer has expired.",
+
+  "reference": "midnight of the recovery day",
+  "watch": ["cross_clamp", "organ_out", "arrival", "implant"],
+
+  "constraints": [
+    { "kind": "at", "event": "cross_clamp", "minutes": 480, "label": "cross-clamp occurred 08:00", "layer": "L4" },
+
+    { "kind": "at_least", "later": "organ_out", "earlier": "cross_clamp", "minutes": 60,
+      "label": "recovery to packaged", "layer": "L1" },
+
+    { "kind": "at_least", "later": "arrival", "earlier": "organ_out", "minutes": 300,
+      "label": "transport, door to door", "layer": "L3" },
+
+    { "kind": "at_least", "later": "implant", "earlier": "arrival", "minutes": 150,
+      "label": "accepting-centre preparation to incision", "layer": "L3" },
+
+    { "kind": "at_most", "later": "implant", "earlier": "cross_clamp", "minutes": 480,
+      "label": "cold ischemia budget for this organ",
+      "layer": "L1",
+      "$comment": "Illustrative only. Organ-specific ischemia tolerances are clinical figures that must be cited to published literature before any validator enforces one — see PROVENANCE.md and core/lifecycle/lifecycle.yml t_cold_ischemia, which is deliberately TODO-VERIFY." }
+  ]
+}

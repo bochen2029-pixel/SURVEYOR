@@ -1,0 +1,6 @@
+{"expect": "PASS", "note": "two variants of the donor count, each with its denominator named",
+ "record": {"report": {"id": "RPT-2026-08-LOS",
+                       "metric_families": [{"family": "organ_donors", "metrics": [{"variant": "organ_donor", "value": 41, "denominator": "donors from whom at least one organ was recovered"},
+                                                                                  {"variant": "cms_organ_donor", "value": 38, "denominator": "CMS-defined organ donors (external death-record denominator, imported)"}]},
+                                           {"family": "tissue_donors", "metrics": [{"variant": "tissue_donor", "value": 70}]}]}},
+ "history": []}

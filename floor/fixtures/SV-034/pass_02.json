@@ -1,0 +1,3 @@
+{"expect": "PASS", "note": "a fifty-minute gap, but the donor became unstable and the exception is logged",
+ "record": {"case_id": "OD-2026-0541", "allocation": {"offers": [{"offer_ref": "OF-3011", "sent_ts": "2026-08-19T10:00:00Z"}, {"offer_ref": "OF-3012", "sent_ts": "2026-08-19T10:50:00Z"}], "latest_offer_ts": "2026-08-19T10:50:00Z", "unstable_donor_exception_ref": "NOTE-6120"}, "as_of": "2026-08-19T11:40:00Z"},
+ "history": []}

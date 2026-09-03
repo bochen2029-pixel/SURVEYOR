@@ -1,0 +1,3 @@
+{"expect": "ALARM", "note": "the near-miss shape: the deadline already passed last week and the decision field is still blank",
+ "record": {"register_id": "CONTRACTS-2026", "contracts": [{"id": "CT-40", "notice_deadline_ts": "2026-08-07T00:00:00Z", "decision_ref": ""}], "as_of": "2026-08-14T00:00:00Z"},
+ "history": []}

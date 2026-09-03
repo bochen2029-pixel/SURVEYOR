@@ -1,0 +1,4 @@
+{"expect": "HOLD", "note": "a free-text decline with no reason code",
+ "record": {"case_id": "OD-2026-0641",
+            "allocation": {"declines": [{"center_id": "TXC-07", "reason_code": "", "classification": "non_disqualifying", "list_status": "active", "free_text": "surgeon unavailable"}]}},
+ "history": []}

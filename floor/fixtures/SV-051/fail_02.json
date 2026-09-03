@@ -1,0 +1,4 @@
+{"expect": "FLAG", "note": "a proper line-through, initialed, never dated",
+ "record": {"case_id": "TD-2026-1012",
+            "corrections": [{"field": "vitals.temp", "method": "single_line_through", "initialed_by": "STF-014", "dated": ""}]},
+ "history": []}

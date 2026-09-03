@@ -1,0 +1,19 @@
+# SV-024 - the SARS-CoV-2 specimen is fresh at cross-clamp (collected within the 72
+# hours before it), and every lung donor has a lower respiratory specimen. The
+# validity window runs from COLLECTION: with no clamp yet, an aging sample alarms
+# before it goes stale.
+id: SV-024
+title: SARS-CoV-2 test collected within 72h before cross-clamp; lower respiratory specimen for every lung donor
+family: clocks
+layer: L0
+authority: "OPTN Policy 2.9 Required Deceased Donor Infectious Disease Testing (lower respiratory SARS-CoV-2 NAT for lung donors) + site 72-hour currency rule [H] - pin at rung 05"
+trigger: continuous
+anchor: covid.collected_ts
+anchor_why: "specimen currency is measured from collection, not from the result; cross-clamp must fall inside the 72h window that collection opens"
+predicate: "within(covid.collected_ts, recovery.cross_clamp_ts, 72h) and (not exists(recovery.cross_clamp_ts) or minutes_between(covid.collected_ts, recovery.cross_clamp_ts) >= 0) and (contains(recovery.organs, 'lung') implies exists(covid.lower_respiratory_specimen_ref))"
+action: alarm
+message: "SARS-CoV-2 specimen collected {covid.collected_ts} is outside the 72h window for cross-clamp, or a lung donor lacks a lower respiratory specimen."
+evidence: [covid.collected_ts, covid.lower_respiratory_specimen_ref, recovery.cross_clamp_ts, recovery.organs]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-024/

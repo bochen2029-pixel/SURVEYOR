@@ -1,0 +1,4 @@
+{"expect": "PASS",
+ "note": "band and paperwork agree",
+ "record": {"case_id": "TD-2026-0890", "donor_band": {"number": "DB-448120"}, "recovery_paperwork": {"donor_band_number": "DB-448120"}},
+ "history": []}

@@ -1,0 +1,3 @@
+{"expect": "ALARM", "note": "audit started on day 9",
+ "record": {"case_id": "TD-2026-0922", "recovery": {"end_ts": "2026-08-01T14:00:00Z"}, "audit": {"started_ts": "2026-08-10T09:00:00Z"}, "as_of": "2026-08-20T00:00:00Z"},
+ "history": []}

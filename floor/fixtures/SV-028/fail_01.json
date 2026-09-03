@@ -1,0 +1,4 @@
+{"expect": "ALARM", "note": "cooled promptly, but recovery began at 26h - past the 24h window",
+ "record": {"case_id": "TD-2026-0962", "death": {"pronounced_ts": "2026-08-01T00:00:00Z"}, "cooling": {"initial_ts": "2026-08-01T04:00:00Z"}, "recovery": {"start_ts": "2026-08-02T02:00:00Z"},
+            "refrigeration": {"out_intervals": [{"out_ts": "2026-08-01T00:00:00Z", "in_ts": "2026-08-01T04:00:00Z"}, {"out_ts": "2026-08-02T01:00:00Z", "in_ts": "2026-08-02T02:00:00Z"}]}, "as_of": "2026-08-20T00:00:00Z"},
+ "history": []}

@@ -1,0 +1,16 @@
+# SV-011 - donor-ID verification names two different people, and both are on the
+# team worksheet for this case. Harvested [H]: the audit reads the initials against
+# the roster by hand.
+id: SV-011
+title: donor-ID verification carries two distinct staff, both on the team-worksheet roster
+family: signatures
+layer: L0
+authority: "Two-person donor identification (OPTN Policy 2; AATB standards) + site team-worksheet rule [H] - pin at rung 05"
+trigger: on_close_attempt
+predicate: "distinct(donor_verification.verified_by) >= 2 and subset(donor_verification.verified_by, team_worksheet.roster)"
+action: hold
+message: "Donor-ID verification by {donor_verification.verified_by} does not show two distinct rostered staff (roster {team_worksheet.roster})."
+evidence: [donor_verification.verified_by, team_worksheet.roster]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-011/

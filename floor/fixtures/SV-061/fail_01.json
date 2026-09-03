@@ -1,0 +1,3 @@
+{"expect": "HOLD", "note": "a finding tagged unknown - not a lawful classification",
+ "record": {"case_id": "TD-2026-1072", "physical_assessment": {"injection_sites": [{"site": "L-antecubital", "classification": "unknown"}]}},
+ "history": []}

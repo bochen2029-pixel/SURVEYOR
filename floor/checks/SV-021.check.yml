@@ -1,0 +1,17 @@
+# SV-021 - the chart reaches the processor in time: 30 days, or 10 for fresh /
+# osteochondral tissue (site target 5). Site rule [H] (L2).
+id: SV-021
+title: chart to processor within 30 days (10 days for fresh/osteochondral tissue)
+family: clocks
+layer: L2
+authority: "Site quality SOP: chart-to-processor SLA; processor contract terms for fresh tissue [H] (site-variant)"
+trigger: continuous
+anchor: recovery.end_ts
+anchor_why: "the processor's window runs from the end of recovery; fresh tissue has a shorter shelf life so its chart must travel faster"
+predicate: "(tissue.category == 'fresh' implies within(recovery.end_ts, chart.sent_to_processor_ts, 10d)) and (tissue.category != 'fresh' implies within(recovery.end_ts, chart.sent_to_processor_ts, 30d))"
+action: alarm
+message: "Chart for {tissue.category} tissue not sent to the processor within its window (recovery ended {recovery.end_ts})."
+evidence: [tissue.category, recovery.end_ts, chart.sent_to_processor_ts]
+expires: P1Y
+inverse: retire
+tests: fixtures/SV-021/

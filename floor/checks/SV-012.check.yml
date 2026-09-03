@@ -1,0 +1,16 @@
+# SV-012 - the OR roster fits the donor type, and every recovering physician signed.
+# Harvested [H]: anesthesiologist present for a brain-dead donor; circulator for DCD;
+# the roster is read against the signature page by hand today.
+id: SV-012
+title: OR roster role requirements by donor type; every recovering physician signs
+family: signatures
+layer: L0
+authority: "OPTN Policy 2.14 Organ Procurement and 2.15 DCD protocol requirements + site OR roster rule [H] - pin at rung 05"
+trigger: on_close_attempt
+predicate: "(donor_type == 'brain_dead' implies contains(or_roster.roles, 'anesthesiologist')) and (donor_type == 'dcd' implies contains(or_roster.roles, 'circulator')) and subset(or_roster.recovering_physicians, or_roster.physician_signatures)"
+action: hold
+message: "OR roster for a {donor_type} donor is incomplete (roles {or_roster.roles}) or a recovering physician has not signed."
+evidence: [donor_type, or_roster.roles, or_roster.recovering_physicians, or_roster.physician_signatures]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-012/

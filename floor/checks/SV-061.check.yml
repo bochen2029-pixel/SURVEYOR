@@ -1,0 +1,15 @@
+# SV-061 - every injection-site finding is classified medical or non-medical; the
+# non-medical ones are eligibility-relevant risk factors.
+id: SV-061
+title: injection-site findings tagged medical vs non-medical (eligibility-relevant)
+family: sequence
+layer: L0
+authority: "FDA 21 CFR 1271.75 and 1271.80 physical assessment (evidence of non-medical percutaneous drug use as a risk factor) + AATB standards - pin at rung 05"
+trigger: on_write
+predicate: "every(physical_assessment.injection_sites, classification == 'medical' or classification == 'non_medical')"
+action: hold
+message: "An injection-site finding is not classified as medical or non-medical."
+evidence: [physical_assessment.injection_sites]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-061/

@@ -1,0 +1,3 @@
+{"expect": "ALARM", "note": "thirteen months and no presentation",
+ "record": {"qapi": {"plan_revision": "2026-A", "last_board_presentation_ts": "2025-08-01T00:00:00Z"}, "as_of": "2026-09-01T00:00:00Z"},
+ "history": []}

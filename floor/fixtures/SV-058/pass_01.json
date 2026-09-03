@@ -1,0 +1,3 @@
+{"expect": "PASS", "note": "adult donor, one DRE",
+ "record": {"case_id": "TD-2026-1060", "donor": {"age_months": 612}, "dre": {"subjects": ["donor"]}},
+ "history": []}

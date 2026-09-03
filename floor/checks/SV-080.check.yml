@@ -1,0 +1,15 @@
+# SV-080 - the tissue release gate: no contamination and every screening and
+# recovery document complete before the release record closes.
+id: SV-080
+title: tissue release gate - contamination 0% and screening/recovery documentation complete
+family: release
+layer: L0
+authority: "FDA 21 CFR 1271.50 and 1271.265 (donor eligibility determination and release criteria) + AATB release standards; site release SOP [H] - pin at rung 05"
+trigger: on_close_attempt
+predicate: "release.contamination_pct == 0 and every(release.required_documents, status == 'complete')"
+action: hold
+message: "Release record cannot close: contamination {release.contamination_pct}% or incomplete documentation."
+evidence: [release.contamination_pct, release.required_documents]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-080/

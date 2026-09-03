@@ -1,0 +1,3 @@
+{"expect": "FLAG", "note": "a specimen on the research tab that the OR summary never recorded",
+ "record": {"case_id": "OD-2026-0621", "research_tab": {"specimens": ["SPL-01", "LN-02", "SPL-03"]}, "or_summary": {"research_specimens": ["SPL-01", "LN-02"]}},
+ "history": []}

@@ -1,0 +1,17 @@
+# SV-001 - identity agrees across the four documents that name the donor.
+# Harvested [H]: the chart audit's first page-by-page check. A DOB transposed on
+# one document is the classic finding - found weeks later, on a sample. Here it
+# holds the chart at close-attempt, at census.
+id: SV-001
+title: name and DOB agree across authorization, DRE, record, and document of gift
+family: identity
+layer: L1
+authority: "Quality-science invariant: cross-document identity agreement (site audit checklist [H]); no single regulatory clause - L1"
+trigger: on_close_attempt
+predicate: "authorization.donor_name == chart.donor_name and authorization.donor_dob == chart.donor_dob and dre.donor_name == chart.donor_name and dre.donor_dob == chart.donor_dob and document_of_gift.donor_name == chart.donor_name and document_of_gift.donor_dob == chart.donor_dob"
+action: hold
+message: "Donor name/DOB disagree between documents; the chart carries {chart.donor_name} / {chart.donor_dob}."
+evidence: [chart.donor_name, chart.donor_dob, authorization.donor_dob, dre.donor_dob, document_of_gift.donor_dob]
+expires: P1Y
+inverse: retire
+tests: fixtures/SV-001/

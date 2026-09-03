@@ -1,0 +1,15 @@
+# SV-052 - authorized categories are recorded in the controlled vocabulary, exactly:
+# no paraphrase, no abbreviation. The authorization says what it says.
+id: SV-052
+title: controlled-vocabulary exact match on authorized categories (no paraphrase, no abbreviation)
+family: sequence
+layer: L0
+authority: "State Revised Uniform Anatomical Gift Act (scope of the gift as authorized) + site authorization SOP: verbatim categories [H] - pin at rung 05"
+trigger: on_write
+predicate: "subset(authorization.categories, controlled_vocabulary.authorized_categories)"
+action: hold
+message: "Authorized categories {authorization.categories} include a term outside the controlled vocabulary."
+evidence: [authorization.categories, controlled_vocabulary.authorized_categories]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-052/

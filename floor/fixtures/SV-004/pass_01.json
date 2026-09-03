@@ -1,0 +1,5 @@
+{"expect": "PASS",
+ "note": "two identifiers confirmed against all three sources",
+ "record": {"case_id": "TD-2026-0895",
+            "donor_verification": {"identifiers": ["name", "dob"], "sources": ["bedside_nurse", "hospital_wristband", "donor_band"], "verified_ts": "2026-08-22T03:15:00Z"}},
+ "history": []}

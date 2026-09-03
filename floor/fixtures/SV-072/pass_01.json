@@ -1,0 +1,3 @@
+{"expect": "PASS", "note": "phone authorization with the recording attached",
+ "record": {"case_id": "OD-2026-0610", "authorization": {"method": "phone", "recording_ref": "REC-2026-08-18-0412"}},
+ "history": []}

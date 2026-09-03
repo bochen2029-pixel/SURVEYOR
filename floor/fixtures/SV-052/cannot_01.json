@@ -1,0 +1,4 @@
+{"expect": "CANNOT-EVALUATE", "note": "the controlled vocabulary is not loaded on this record - nothing to match against",
+ "record": {"case_id": "TD-2026-1023",
+            "authorization": {"categories": ["Skin for transplant"]}},
+ "history": []}

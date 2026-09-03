@@ -1,0 +1,16 @@
+# SV-043 - the person performing an action held a current competency for that role
+# at the moment they acted. Mandated (L0); today it is read from the training
+# system against the chart by hand, weeks later.
+id: SV-043
+title: training/competency current for the role performing the action, at action time
+family: revision
+layer: L0
+authority: "CMS 42 CFR 486.326 (OPO human resources - qualified, trained personnel) + FDA 21 CFR 1271.170 (personnel) + AATB personnel standards - pin at rung 05"
+trigger: on_write
+predicate: "minutes_between(action.ts, competencies[action.performed_by][action.role].expires_ts) >= 0"
+action: hold
+message: "{action.performed_by} performed {action.role} work at {action.ts} without a current competency for that role."
+evidence: [action.performed_by, action.role, action.ts, competencies]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-043/

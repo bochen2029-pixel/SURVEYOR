@@ -1,0 +1,4 @@
+{"expect": "CANNOT-EVALUATE", "note": "a correction known only from a scanned image - method not structured, so the floor hands it to the assist tier",
+ "record": {"case_id": "TD-2026-1013",
+            "corrections": [{"field": "vitals.temp", "image_ref": "SCAN-2210", "initialed_by": "STF-014", "dated": "2026-08-18"}]},
+ "history": []}

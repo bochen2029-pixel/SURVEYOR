@@ -1,0 +1,3 @@
+{"expect": "CANNOT-EVALUATE", "note": "a check that declares no verification fields - the law cannot be applied until it does",
+ "record": {"check": {"id": "SITE-CONTACT-03", "corrects_field": "contact.phone"}},
+ "history": []}

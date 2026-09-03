@@ -1,0 +1,17 @@
+# SV-033 - onsite within 1.5 hours of the referral. CMS ties timely response to the
+# conditions for coverage; the site tightened its own SLA from 2h to 1.5h [H].
+id: SV-033
+title: onsite response within 1.5h of referral
+family: clocks
+layer: L0
+authority: "CMS 42 CFR 486.344 (evaluation and management of potential donors - timely onsite response) + site SLA 1.5h, tightened from 2h [H] - pin at rung 05"
+trigger: continuous
+anchor: referral.received_ts
+anchor_why: "the clock starts when the referral call is received, not when the coordinator is dispatched and not when the hospital asks for someone onsite"
+predicate: "within(referral.received_ts, onsite.arrived_ts, 90m)"
+action: alarm
+message: "No onsite arrival within 1.5 hours of the referral received {referral.received_ts}."
+evidence: [referral.received_ts, onsite.arrived_ts]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-033/

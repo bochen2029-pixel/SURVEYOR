@@ -1,0 +1,4 @@
+{"expect": "CANNOT-EVALUATE", "note": "an item with no sequence number at all",
+ "record": {"case_id": "TD-2026-1033",
+            "recovery": {"items": [{"seq": 1, "tissue": "femur_left"}, {"tissue": "femur_right"}], "paired_sequence_numbers": []}},
+ "history": []}

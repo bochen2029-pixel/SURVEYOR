@@ -1,0 +1,6 @@
+{"expect": "PASS",
+ "note": "two distinct verifiers, both rostered",
+ "record": {"case_id": "TD-2026-0910",
+            "donor_verification": {"verified_by": ["STF-014", "STF-052"], "verified_ts": "2026-08-23T02:10:00Z"},
+            "team_worksheet": {"roster": ["STF-014", "STF-052", "STF-088"]}},
+ "history": []}

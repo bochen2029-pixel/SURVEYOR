@@ -1,0 +1,16 @@
+# SV-004 - two-identifier verification, from three sources, is on the record.
+# Harvested [H]: bedside nurse + hospital wristband + donor band, at least two
+# identifiers (name, DOB, MRN...). Mandated: right donor, every time.
+id: SV-004
+title: two-identifier donor verification present (bedside nurse, hospital wristband, donor band)
+family: identity
+layer: L0
+authority: "Donor identification requirements (OPTN Policy 2 deceased donor procurement; AATB standards; hospital two-identifier practice) - pin at rung 05"
+trigger: on_close_attempt
+predicate: "count(donor_verification.identifiers) >= 2 and contains(donor_verification.sources, 'bedside_nurse') and contains(donor_verification.sources, 'hospital_wristband') and contains(donor_verification.sources, 'donor_band')"
+action: hold
+message: "Donor verification is incomplete: identifiers {donor_verification.identifiers}, sources {donor_verification.sources}."
+evidence: [donor_verification.identifiers, donor_verification.sources, donor_verification.verified_ts]
+expires: P2Y
+inverse: retire
+tests: fixtures/SV-004/

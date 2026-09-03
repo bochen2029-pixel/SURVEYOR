@@ -1,0 +1,3 @@
+{"expect": "HOLD", "note": "phone authorization, recording never attached",
+ "record": {"case_id": "OD-2026-0612", "authorization": {"method": "phone", "recording_ref": ""}},
+ "history": []}

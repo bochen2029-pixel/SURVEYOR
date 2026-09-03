@@ -1,0 +1,3 @@
+{"expect": "PASS", "note": "two findings, both classified",
+ "record": {"case_id": "TD-2026-1070", "physical_assessment": {"injection_sites": [{"site": "L-antecubital", "classification": "medical"}, {"site": "R-forearm", "classification": "non_medical"}]}},
+ "history": []}

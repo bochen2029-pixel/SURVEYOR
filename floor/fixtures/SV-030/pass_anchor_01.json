@@ -1,0 +1,5 @@
+{"expect": "PASS",
+ "note": "ANCHOR PLANT (law B1, the harvested error): clamp Thursday 23:50, organ recovered Friday 00:10, feedback the following Friday 10:00. Five business days from organ recovery = PASS; the same feedback counted from cross-clamp is six business days and a false ALARM. The gate re-runs this fixture on the wrong anchor and requires the flip.",
+ "anchor_plant": {"wrong_anchor": "recovery.cross_clamp_ts", "verdict_if_wrong": "ALARM"},
+ "record": {"case_id": "OD-2026-0525", "recovery": {"cross_clamp_ts": "2026-08-06T23:50:00Z", "organ_recovery_ts": "2026-08-07T00:10:00Z"}, "feedback": {"submitted_ts": "2026-08-14T10:00:00Z"}, "as_of": "2026-08-20T00:00:00Z"},
+ "history": []}
