@@ -2,11 +2,13 @@
 # recovered by phone calls. Here: data with a citation, an expiry, and an undo.
 # Scope: on_write, the organ being written (organ_id); a continuous sibling that
 # quantifies over every organ on the case is on the tape as a question (S2b).
+# Authority found at S7 after two sessions searched for the phrase 'primary offer',
+# which does not occur. The rule is there under other words - see the mappings.
 id: SV-070
 title: single-active-primary-offer guard
 family: reconciliation
 layer: L0
-authority: "NOT PINNED. The rung-05 crosswalk searched the pinned OPTN Policies (edition effective 2025-08-01) for primary offer, duplicate, one candidate at a time, simultaneous, provisional - no clause codifies the single-active-primary guard. See crosswalk/mappings/MAP-SV-070-silent-primary-offer.map.yml. The rule may live in OPTN Bylaws or the allocation system operational rules (neither in this corpus), or it may be professional practice only [H]. L0 is PROVISIONAL until an R1 reviewer names the document."
+authority: "OPTN Policy 5.4.B (offers proceed in the order PTRs appear on the match run), 5.4.D (an additional offer is a BACKUP offer, a named category), and 5.6.D (the policy term is 'a primary potential transplant recipient', singular per organ). PINNED: MAP-SV-070-optn-5.4.B, MAP-SV-070-optn-5.4.D, MAP-SV-070-optn-5.6.D. The guard itself is nowhere stated in so many words (MAP-SV-070-silent-explicit-guard, six phrases searched mechanically) - it is the operational consequence of those three, which is exactly why the harvested violation was recovered by phone rather than blocked at entry [H]. L0 no longer provisional."
 trigger: on_write
 predicate: "count(active_primary_offers[organ_id]) <= 1"
 action: hold

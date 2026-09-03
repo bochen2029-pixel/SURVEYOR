@@ -1,0 +1,13 @@
+# THE FLAGSHIP'S AUTHORITY, FOUND AT S7. Two sessions declared this check unpinnable on a
+# search for the phrase "primary offer", which does not occur. The rule is there under
+# other words: offers proceed in MATCH-RUN ORDER. Two simultaneously active primaries on
+# one organ is not a sequence, so the check enforces the order this clause requires.
+id: MAP-SV-070-optn-5.4.B
+check: SV-070
+source: optn-policies
+locator: "OPTN Policy 5.4.B: Order of Allocation, step 3"
+type: constrains
+quote: "OPOs must first offer organs to potential transplant recipients (PTRs) in the order that the PTRs appear on a match run."
+establishes: "Allocation is an ORDERED sequence down the match run, not a broadcast. A second active primary offer on the same organ is two candidates being treated as next at once, which the ordering forbids. `constrains` rather than `implements`: the policy states the order, the check enforces its operational consequence."
+expires: P1Y
+inverse: retire

@@ -203,6 +203,11 @@
         .bar i.warn { background: var(--hold-amber); }
         .fold-line { display: flex; justify-content: space-between; gap: 0.8rem; padding: 0.45rem 0; border-top: 1px dashed var(--ink-150); font-size: 0.84rem; color: var(--ink-700); align-items: center; }
         .fold-line:first-of-type { border-top: none; }
+        .ev {
+            font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.02em; color: var(--ink-300);
+            display: block; margin-top: 3px; overflow-wrap: anywhere; line-height: 1.5;
+        }
+        .census-row .sub .ev { display: inline-block; margin-top: 2px; }
         .board-foot {
             display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
             padding: 0.8rem 1.25rem; background: var(--paper-2); border-top: 1px solid var(--ink-075);
@@ -418,49 +423,60 @@
             <div class="board-chrome">
                 <span class="dots"><i></i><i></i><i></i></span>
                 <span class="title">SURVEYOR · MORNING BOARD</span>
-                <span>Tue · 06:45</span>
+                <span>tape 8d1ee1f6d026ba72</span>
                 <span class="spacer"></span>
                 <span class="chip">YOUR OPO</span>
                 <span class="chip live">STATE: LIVE</span>
                 <span class="chip">SURVEY BINDER: CURRENT</span>
             </div>
-            <div class="board-note">Illustrative data — REV 0 mockup. The shipped board shows your record, your denominators, your receipts.</div>
+            <!-- BOARD:GENERATED begin - rendered by ledger/board.py; do not hand-edit -->
+            <div class="board-note">GENERATED FROM THE TAPE · SYNTHETIC TAPE - real reads of a generated record; F-RETRO has not run · tape 8d1ee1f6d026ba72 · 2026-01-01 to 2027-01-01 · 0 line(s) refused for lacking evidence</div>
             <div class="board-grid">
                 <div class="panel">
-                    <h4>The Floor — last 24h <span class="stamp pass">census</span></h4>
+                    <h4>The Floor — census, at entry</h4>
                     <div class="census-row">
-                        <div><div class="bignum">147</div><div class="sub">records checked at entry</div></div>
-                        <div><div class="bignum" style="color:var(--stamp-green)">144</div><div class="sub">clean on first pass</div></div>
-                        <div><div class="bignum" style="color:var(--hold-amber)">3</div><div class="sub">held at entry — fixed before close</div></div>
+                        <div><div class="bignum">138</div><div class="sub">records checked at entry<br>distinct cases with at least one check evaluated<br><span class="ev">tape #1, #10, #100 +8729 more</span></div></div>
+                        <div><div class="bignum" style="color:var(--stamp-green)">104</div><div class="sub">clean on first pass<br>no hold raised, of 138 cases<br><span class="ev">tape #1, #10, #100 +6723 more</span></div></div>
+                        <div><div class="bignum" style="color:var(--hold-amber)">35</div><div class="sub">held at entry<br>12 released before close-attempt, 11 became findings<br><span class="ev">tape #1064, #1601, #2253 +32 more</span></div></div>
                     </div>
-                    <div class="item"><span class="id">TR-4118</span><span><b>ABO subtype missing</b> on type-A donor — chart held at serology page, resolved in 4 min</span><span class="stamp held">held→fixed</span></div>
-                    <div class="item"><span class="id">TR-4121</span><span><b>Second ORC signature absent</b> on HLA verification — held, countersigned</span><span class="stamp held">held→fixed</span></div>
-                    <div class="item"><span class="id">OR-2093</span><span><b>Inspection timestamp precedes donor prep</b> — sequence flag, corrected with case note</span><span class="stamp held">held→fixed</span></div>
-                    <div class="item"><span class="id">AL-0774</span><span><b>Primary-offer guard:</b> second primary blocked while PR-0771 active — no duplicate offer possible</span><span class="stamp pass">prevented</span></div>
+                    <div class="item"><span class="id">OD-2026-0067</span><span>SV-011 — Donor-ID verification by 2 item(s) does not show two distinct rostered staff (roster 4 item(s)). <span class="ev">tape #886</span></span><span class="stamp red">open</span></div>
+                    <div class="item"><span class="id">OD-2026-0071</span><span>SV-015 — Authorization witness affiliation is recovering_organization; it must be hospital care-team. <span class="ev">tape #1064</span></span><span class="stamp held">held→fixed</span></div>
+                    <div class="item"><span class="id">OD-2026-0094</span><span>SV-055 — Pre-inspection (2026-01-19T22:48:00Z) does not precede donor prep (2026-01-19T22:21:00Z). <span class="ev">tape #1601</span></span><span class="stamp red">open</span></div>
+                    <div class="item"><span class="id">OD-2026-0102</span><span>SV-015 — Authorization witness affiliation is (blank); it must be hospital care-team. <span class="ev">tape #2253</span></span><span class="stamp red">open</span></div>
                 </div>
                 <div class="panel">
                     <h4>Clocks — the SLA lattice</h4>
-                    <div class="clock"><span>PDTR notification (case 4102)<div class="bar"><i style="width:38%"></i></div></span><span class="t">14h 22m left</span></div>
-                    <div class="clock"><span>Reactive serology → county (4118)<div class="bar"><i class="warn" style="width:81%"></i></div></span><span class="t warn">4h 36m left</span></div>
-                    <div class="clock"><span>Donor feedback ×3 — anchored to recovery time<div class="bar"><i style="width:22%"></i></div></span><span class="t">3.9 days</span></div>
-                    <div class="clock"><span>DDR (Sept batch) — internal 30-day buffer<div class="bar"><i style="width:12%"></i></div></span><span class="t">26 days</span></div>
-                    <div class="clock"><span>Onsite response, active referral<div class="bar"><i style="width:44%"></i></div></span><span class="t">0:49 of 1:30</span></div>
+                    <div class="census-row">
+                        <div><div class="bignum">2,664</div><div class="sub">clock evaluations<br>18 continuous checks, each anchored to a declared field<br><span class="ev">tape #1, #10, #1005 +2661 more</span></div></div>
+                        <div><div class="bignum" style="color:var(--flag-red)">10</div><div class="sub">alarms raised<br>fired before the deadline passed, not after<br><span class="ev">tape #4036, #4402, #4570 +7 more</span></div></div>
+                    </div>
+                    <div class="clock"><span><b>SV-020</b> — anchored to recovery.end_ts · OD-2026-0072 <span class="ev">tape #4815</span><div class="bar"><i class="warn" style="width:4%"></i></div></span><span class="t warn">1 of 148</span></div>
+                    <div class="clock"><span><b>SV-022</b> — anchored to disease_transmission.info_received_ts · OD-2026-0074 <span class="ev">tape #4570</span><div class="bar"><i class="warn" style="width:4%"></i></div></span><span class="t warn">1 of 148</span></div>
+                    <div class="clock"><span><b>SV-023</b> — anchored to serology.reactive_result_ts · OD-2026-0075 <span class="ev">tape #4402</span><div class="bar"><i class="warn" style="width:4%"></i></div></span><span class="t warn">1 of 148</span></div>
+                    <div class="clock"><span><b>SV-024</b> — anchored to covid.collected_ts · OD-2026-0076 <span class="ev">tape #6002</span><div class="bar"><i class="warn" style="width:4%"></i></div></span><span class="t warn">1 of 148</span></div>
                 </div>
                 <div class="panel">
                     <h4>Crosswalk — regulation ↔ your policy</h4>
-                    <div class="item"><span class="id">OPTN</span><span><b>Policy notice, eff. Nov 1</b> — 3 site documents affected · draft diffs ready for quality review</span><span class="stamp ink">3 diffs</span></div>
-                    <div class="item"><span class="id">AATB</span><span><b>New edition</b> — audit window in 47 days · 12 clauses changed · 2 touch your SOPs</span><span class="stamp ink">tracked</span></div>
-                    <div class="item"><span class="id">CMS</span><span>No changes affecting mapped policies this week — <b>checked daily, cited to source</b></span><span class="stamp pass">current</span></div>
-                    <div class="item"><span class="id">CITE</span><span>Every crosswalk claim byte-matches a pinned public source — <b>a quote that doesn't match doesn't exist</b></span><span class="stamp pass">pinned</span></div>
+                    <div class="census-row">
+                        <div><div class="bignum" style="color:var(--stamp-green)">41</div><div class="sub">citations byte-matched to a pinned source<br>across 5 sources; a quote that does not match does not exist<br><span class="ev">pin MAP-SV-002-fda-1271.55, MAP-SV-003-fda-1271.55 +39 more</span></div></div>
+                        <div><div class="bignum">5</div><div class="sub">searched and found absent<br>every search term run by the tool, not asserted by a person<br><span class="ev">pin MAP-SV-020-silent-audit-start, MAP-SV-034-silent-offer-cadence +3 more</span></div></div>
+                        <div><div class="bignum" style="color:var(--stamp-green)">39</div><div class="sub">checks under a pinned authority<br>the rest print &#x27;not pinned&#x27; in the binder, never a paraphrase<br><span class="ev">pin MAP-SV-002-fda-1271.55, MAP-SV-003-fda-1271.55 +44 more</span></div></div>
+                    </div>
+                    <div class="fold-line"><span><b>optn-policies</b> — citations, byte-matched against this source&#x27;s sha256 <span class="ev">pin MAP-SV-010-optn-2.6.C, MAP-SV-011-optn-2.6.C +15 more</span></span><span class="stamp ink">17</span></div>
+                    <div class="fold-line"><span><b>ecfr-21-1271</b> — citations, byte-matched against this source&#x27;s sha256 <span class="ev">pin MAP-SV-002-fda-1271.55, MAP-SV-003-fda-1271.55 +10 more</span></span><span class="stamp ink">12</span></div>
+                    <div class="fold-line"><span><b>ecfr-42-486-subpartG</b> — citations, byte-matched against this source&#x27;s sha256 <span class="ev">pin MAP-SV-033-cfr-486.322, MAP-SV-043-cfr-486.326 +5 more</span></span><span class="stamp ink">7</span></div>
+                    <div class="fold-line"><span><b>tx-hs-692A</b> — citations, byte-matched against this source&#x27;s sha256 <span class="ev">pin MAP-SV-012-tx-692A.014, MAP-SV-015-tx-692A.005 +1 more</span></span><span class="stamp ink">3</span></div>
+                    <div class="fold-line"><span><b>fda-hctp-eligibility</b> — citations, byte-matched against this source&#x27;s sha256 <span class="ev">pin MAP-SV-058-guidance-18-months, MAP-SV-061-guidance-injected-drugs</span></span><span class="stamp ink">2</span></div>
                 </div>
                 <div class="panel wide">
-                    <h4>Corrective actions — effectiveness, measured &nbsp;·&nbsp; variance intake &nbsp;·&nbsp; the ledger</h4>
-                    <div class="fold-line"><span><b>CAPA-031</b> (labeling variance class) — 90-day effectiveness check ran overnight: class rate <b>↓ 64%</b> since mount, sustained · expectation met</span><span class="stamp pass">sustained</span></div>
-                    <div class="fold-line"><span><b>CAPA-027</b> (handoff omissions) — trend flat at horizon · <b>expectation NOT met</b> — auto-returned to committee with the data attached</span><span class="stamp red">re-opened</span></div>
-                    <div class="fold-line"><span><b>Variance V-2210</b> — triage suggests <b>process, not person</b> (training current, pattern spans 3 coordinators, 2 shifts) · investigation packet drafted</span><span class="stamp ink">drafted</span></div>
-                    <div class="fold-line"><span><b>Line-of-sight report · committee packet · survey binder</b> — generated from the tape, every claim linked to evidence, hash-chained</span><span class="stamp pass">current</span></div>
+                    <h4>Corrective actions · variance intake · the ledger</h4>
+                    <div class="fold-line"><span><b>CAPA-2026-021</b> — holds_per_100_cases_family_signatures: observed 7 against target 9 (lower-is-better) — expectation met <span class="ev">tape #1303, #1304, #3790</span></span><span class="stamp pass">sustained</span></div>
+                    <div class="fold-line"><span><b>CAPA-2026-022</b> — alarms_per_100_cases_family_clocks: observed 11 against target 4 (lower-is-better) — expectation NOT met, auto-returned to committee with the data attached <span class="ev">tape #1302, #1305, #3909</span></span><span class="stamp red">re-opened</span></div>
+                    <div class="fold-line"><span><b>Line-of-sight · committee packet · survey binder</b> — generated from this tape, every claim linked to evidence, chain-verified <span class="ev">tape #1, #2, #3 +3 more</span></span><span class="stamp pass">current</span></div>
+                    <div class="fold-line"><span><b>Variance VAR-0002</b> — triage: coverage covered-but-mounted-after, novelty first-in-record, distortion spread — investigation packet drafted for a human; there is no axis for who was involved <span class="ev">tape #1603</span></span><span class="stamp ink">drafted</span></div>
                 </div>
             </div>
+            <!-- BOARD:GENERATED end -->
             <div class="board-foot">
                 <span>EVERY LINE LINKS TO ITS EVIDENCE · EVERY SILENCE IS ON THE RECORD</span>
                 <span>LOCAL MODEL · ZERO EGRESS · APPEND-ONLY, HASH-CHAINED</span>
@@ -737,8 +753,8 @@ stn.<span class="k">window</span>(<span class="g">"recovery_start"</span>, opens
             <div class="rung"><span class="r">05 · THE WATCH</span><span>The present-tense tier — ships off by default, behind its own published tests, and must beat the floor or it doesn't ship</span><span class="stamp ink">gated</span></div>
         </div>
         <div class="tape-strip">
-            LIVE FROM THE BUILD TAPE · 2026-09-03 — gates PASS (G-FOLD · G-PRIVACY · G-CATALOG · G-COLDSTART · F-FIXTURE · G-CATALOG-COMPLETE · G-FIELDS · G-ANCHOR-PLANTS · F-FIXTURE-WORLD · G-CROSSWALK-PINS · G-FOLD-DETERMINISM)
-            · checks 59/59 encoded — 283 fixtures green, DSL v1 selftest green · rungs 00-03 + 06 GREEN · F-FIXTURE: 295/295 plants caught, 0 false holds in 8,967 clean pairs · crosswalk: 37 citations byte-matched · folds: 3 documents byte-identical on re-render · tape 364681c9 ·
+            LIVE FROM THE BUILD TAPE · 2026-09-03 — gates PASS (G-FOLD · G-PRIVACY · G-CATALOG · G-COLDSTART · F-FIXTURE · G-CATALOG-COMPLETE · G-FIELDS · G-ANCHOR-PLANTS · F-FIXTURE-WORLD · G-CROSSWALK-PINS · G-FOLD-DETERMINISM · G-EVIDENCE-LINKS)
+            · checks 59/59 encoded — 283 fixtures green, DSL v1 selftest green · rungs 00-03 + 06 + 07 GREEN · F-FIXTURE: 295/295 plants caught, 0 false holds in 8,967 clean pairs · crosswalk: 46 citations byte-matched, 39/59 checks pinned · the board above is generated from the tape · tape a5f26272 ·
             <a href="https://github.com/bochen2029-pixel/SURVEYOR" target="_blank" rel="noopener">github.com/bochen2029-pixel/SURVEYOR</a>
         </div>
         <p style="margin-top:1.6rem; font-size:0.9rem; color:var(--ink-500);">
@@ -760,7 +776,7 @@ stn.<span class="k">window</span>(<span class="g">"recovery_start"</span>, opens
                 <a href="/">AORTA</a>
                 <a href="/edr">REGISTRAR</a>
                 <a href="/parallax">PARALLAX</a>
-                <a href="https://github.com/bochen2029-pixel" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://github.com/bochen2029-pixel/SURVEYOR" target="_blank" rel="noopener">GitHub &mdash; the repo</a>
             </div>
         </div>
         <p class="foot-substrate">

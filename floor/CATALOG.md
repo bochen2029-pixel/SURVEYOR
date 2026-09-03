@@ -57,7 +57,7 @@
 - **SV-062** `L1·design-law` No check's verification channel may be the field under correction.
 
 ## F · Reconciliation & allocation
-- **SV-070** `L0·W·hold` **Single-active-primary-offer guard** — a second primary on an organ with an active primary cannot be recorded. *(The flagship: a reportable violation with no system check today, recovered by phone `[H]`. **The rung-05 crosswalk could not pin it:** the phrase does not occur in the pinned OPTN Policies, which is itself the finding - the norm the harvest described as culture-enforced is, in the policy text, exactly that.)*
+- **SV-070** `L0·W·hold` **Single-active-primary-offer guard** — a second primary on an organ with an active primary cannot be recorded. *(The flagship: a reportable violation with no system check today, recovered by phone `[H]`. **Pinned at S7 to OPTN 5.4.B, 5.4.D and 5.6.D** - offers proceed in match-run order, an additional offer is a *backup* offer, and the policy term is *a primary potential transplant recipient*, singular. The guard itself is stated nowhere: it is the operational consequence of those three, which is why the harvested violation was recovered by phone rather than blocked at entry.)*
 - **SV-071** `L0·C·hold` Authorization record field-complete before allocation starts.
 - **SV-072** `L0·C·hold` Phone authorization requires the attached voice recording before completion.
 - **SV-073** `L1·C·flag` Cross-role specimen reconciliation: research-tab entries ↔ post-OR donor summary.

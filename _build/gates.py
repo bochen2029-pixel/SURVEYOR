@@ -33,6 +33,9 @@ Gates:
                       a tape whose simultaneous events are reordered renders the SAME bytes,
                       every table data row carries an evidence handle, and the CAPA/variance
                       engines pass their own battery
+  G-EVIDENCE-LINKS    rung 07's executioner: the Morning Board renders from the tape, a line
+                      with no evidence CANNOT be built, refusals are counted on the page, and
+                      the board published on site/surveyor.html is the one this tape produces
 Stdlib only.
 """
 import json
@@ -348,6 +351,52 @@ def gate_fold_determinism():
                     f"pinned authority in the binder; {summary}")
 
 
+SITE_PAGE = ROOT / "site" / "surveyor.html"
+BOARD_BEGIN = "<!-- BOARD:GENERATED begin"
+
+
+def gate_evidence_links():
+    """Rung 07's executioner: every line on the Morning Board links to its evidence, or the
+    line does not render. Three things: the renderer's own battery (which proves a line
+    CANNOT be built without evidence, rather than merely that none lacks it); that the
+    published page actually contains a generated board; and that every row of that
+    published board carries the evidence element. The last one matters because the page is
+    what a surveyor reads - a green renderer and a stale page would still be a false page."""
+    try:
+        sys.path.insert(0, str(ROOT / "ledger"))
+        import board
+        import make_tape
+    except Exception as e:  # noqa: BLE001
+        return "CANNOT-EVALUATE", f"board unavailable: {e}"
+    events = make_tape.build(seed=20260903, cases=25)
+    problems = [f"board: {x}" for x in board.selftest(events)]
+    if not SITE_PAGE.exists():
+        problems.append("site/surveyor.html missing")
+    else:
+        page = SITE_PAGE.read_text(encoding="utf-8")
+        if BOARD_BEGIN not in page:
+            problems.append("the published page carries no generated board - it is still the mockup")
+        else:
+            frag = page.split(BOARD_BEGIN, 1)[1].split("BOARD:GENERATED end", 1)[0]
+            rows = [r for r in frag.splitlines()
+                    if any(c in r for c in ('class="item"', 'class="sub"',
+                                            'class="clock"', 'class="fold-line"'))]
+            uncited = [r for r in rows if 'class="ev"' not in r]
+            if not rows:
+                problems.append("the generated board on the page has no rows")
+            if uncited:
+                problems.append(f"{len(uncited)} published board row(s) carry no evidence element")
+            if "board-note" not in frag or "refused" not in frag:
+                problems.append("the published board does not state its provenance and refusal count")
+    if problems:
+        return "FAIL", "; ".join(problems[:3])
+    lines, dropped = board.build(events, "2026-01-01T00:00:00Z", "2027-01-01T00:00:00Z")
+    cited = sum(len(l.evidence) for l in lines)
+    return "PASS", (f"{len(lines)} board lines, every one citing its evidence ({cited:,} handles), "
+                    f"{len(dropped)} refused for lacking it; the published page carries the "
+                    f"generated board and its provenance")
+
+
 def main():
     record = "--record" in sys.argv
     results = [
@@ -361,6 +410,7 @@ def main():
         ("F-FIXTURE-WORLD",) + gate_fixture_world(),
         ("G-CROSSWALK-PINS",) + gate_crosswalk_pins(),
         ("G-FOLD-DETERMINISM",) + gate_fold_determinism(),
+        ("G-EVIDENCE-LINKS",) + gate_evidence_links(),
     ]
     width = max(len(r[0]) for r in results)
     fail = False

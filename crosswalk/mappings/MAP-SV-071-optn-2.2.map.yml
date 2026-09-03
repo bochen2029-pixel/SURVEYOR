@@ -1,0 +1,9 @@
+id: MAP-SV-071-optn-2.2
+check: SV-071
+source: optn-policies
+locator: "OPTN Policy 2.2: OPO Responsibilities, item 2"
+type: implements
+quote: "The host OPO is responsible for all of the following: 1. Identifying potential deceased donors. 2. Providing evidence of authorization for donation."
+establishes: "Authorization is not merely obtained, it is EVIDENCED - the OPO must be able to produce it. SV-071 grades the mechanical form: every field the site's authorization template declares required must carry a value before the record can close for allocation."
+expires: P1Y
+inverse: retire

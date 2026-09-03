@@ -1,0 +1,11 @@
+# The clock SV-022 grades, in the policy's own words, with the anchor spelled out:
+# AFTER RECEIPT - not after confirmation, which is what the check's anchor plant proves.
+id: MAP-SV-022-optn-15.4.A
+check: SV-022
+source: optn-policies
+locator: "OPTN Policy 15.4.A: Host OPO Requirements for Reporting Post-Procurement Donor Results"
+type: implements
+quote: "The host OPO must report all positive test results and other relevant information received post- procurement for each donor to all the receiving transplant programs' Patient Safety Contacts through the OPTN Donor Data and Matching System as soon as possible but no later than 24 hours after receipt."
+establishes: "Twenty-four hours, anchored to RECEIPT. SV-022's anchor_why says the clock starts when the OPO receives the result rather than when it is confirmed, and its anchor plant fails on the confirmation timestamp - this clause is why."
+expires: P1Y
+inverse: retire

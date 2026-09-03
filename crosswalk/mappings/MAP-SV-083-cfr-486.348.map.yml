@@ -1,0 +1,9 @@
+id: MAP-SV-083-cfr-486.348
+check: SV-083
+source: ecfr-42-486-subpartG
+locator: "42 CFR 486.348(c)(1)"
+type: constrains
+quote: "An OPO must establish written policies to address, at a minimum, the process for identification, reporting, analysis, and prevention of adverse events that occur during the organ donation process."
+establishes: "Identification, reporting, ANALYSIS and PREVENTION - a register that records a risk without an owner and a review date has done the first two and abandoned the last two. SV-083's priority threshold is the site's own number, read from the register rather than hardcoded, which is why the check is L1 and the threshold is not."
+expires: P1Y
+inverse: retire

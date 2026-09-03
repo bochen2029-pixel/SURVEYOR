@@ -1,0 +1,15 @@
+# What remains true after S7: the policy nowhere states the GUARD in so many words. It
+# establishes the order (5.4.B), the backup category (5.4.D) and the singular primary
+# recipient (5.6.D), and leaves "do not record a second active primary" as the operational
+# consequence a record system must enforce - which is precisely why the harvest found the
+# violation recovered by phone rather than blocked at entry [H].
+id: MAP-SV-070-silent-explicit-guard
+check: SV-070
+source: optn-policies
+locator: "OPTN Policies (whole document, edition effective 2025-08-01)"
+type: silent
+quote: ""
+searched: "second primary offer | duplicate primary | more than one primary | two primary offers | active primary offer | only one primary"
+establishes: "No clause states the guard explicitly. The check is the operational enforcement of 5.4.B, 5.4.D and 5.6.D taken together, and its L0 tag now rests on those three rather than on a promise."
+expires: P1Y
+inverse: retire

@@ -1,0 +1,9 @@
+id: MAP-SV-082-cfr-486.348
+check: SV-082
+source: ecfr-42-486-subpartG
+locator: "42 CFR 486.348(d)(1)"
+type: implements
+quote: "An OPO must include a process to review its performance on the outcome measure requirements at § 486.318. The process must be a continuous activity to improve performance."
+establishes: "CONTINUOUS, not annual and not on request. SV-082 is that continuity made mechanical: at the horizon the CAPA declared for itself, the effectiveness check runs, and a horizon that passes with nothing graded is the alarm. A CAPA nobody graded is how 'sustained' becomes a word rather than a measurement."
+expires: P1Y
+inverse: retire

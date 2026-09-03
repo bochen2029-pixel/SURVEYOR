@@ -1,0 +1,11 @@
+# The word the department itself used [H] - 'sustained corrective action' - turns out to
+# be the regulation's word too, in the same sentence that requires the tracking.
+id: MAP-SV-081-cfr-486.348
+check: SV-081
+source: ecfr-42-486-subpartG
+locator: "42 CFR 486.348(a)"
+type: implements
+quote: "The OPO must take actions that result in performance improvements and track performance to ensure that improvements are sustained."
+establishes: "An action that cannot be tracked cannot be shown to have sustained anything. SV-081 refuses a CAPA row without a metric, a baseline, a target and a horizon, because those four are what make 'track performance' possible at all - and the row also carries an inverse, because a patch that cannot be unwound is not a patch."
+expires: P1Y
+inverse: retire

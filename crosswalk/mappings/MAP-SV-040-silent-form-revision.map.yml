@@ -1,0 +1,14 @@
+# An honest non-mapping. 486.330 requires an electronic information management system,
+# which is about holding the information, not about controlling the revision of the forms
+# that capture it. Mapping SV-040 to it would make the survey binder look authoritative
+# where it is not, and a weak citation is worse than an honest blank.
+id: MAP-SV-040-silent-form-revision
+check: SV-040
+source: ecfr-42-486-subpartG
+locator: "42 CFR 486 Subpart G (whole)"
+type: silent
+quote: ""
+searched: "controlled document | document control | current revision | revision in use | superseded form | version control"
+establishes: "No clause governs form revision control. SV-040 is a quality-science invariant (L1) implemented against the site's document-control system; the mandated hook is 486.330's information management system, which is a different requirement and is deliberately not cited here."
+expires: P6M
+inverse: retire

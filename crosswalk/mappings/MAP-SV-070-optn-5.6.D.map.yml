@@ -1,0 +1,9 @@
+id: MAP-SV-070-optn-5.6.D
+check: SV-070
+source: optn-policies
+locator: "OPTN Policy 5.6.D: Effect of Acceptance"
+type: implements
+quote: "If an organ has been accepted by a transplant program for a primary potential transplant recipient, the organ is not required to be offered according to Policy 5.10"
+establishes: "PRIMARY is a policy term after all - 'a primary potential transplant recipient', singular, per organ. The earlier searches looked for 'primary offer' and missed it. The check's vocabulary is the policy's vocabulary."
+expires: P1Y
+inverse: retire

@@ -28,6 +28,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -40,6 +41,27 @@ import generate  # noqa: E402
 from lifecycle import grade, ts as parse_ts  # noqa: E402
 
 HOLD_ACTIONS = {"HOLD", "ALARM"}
+
+_PLACEHOLDER = re.compile(r"\{([A-Za-z_][\w.\[\]]*)\}")
+
+
+def resolve_message(msg: str, rec: dict) -> str:
+    """A check's message names its evidence fields in braces. Resolve them against the
+    record so the tape carries what a person would read, not a template - an unresolved
+    {or_timeline.prep_complete_ts} on a morning board is a defect the reader has to
+    decode, and the evidence path stays in the check where it belongs."""
+    def sub(m):
+        cur = rec
+        for part in m.group(1).split("."):
+            if not isinstance(cur, dict) or part not in cur:
+                return "(not recorded)"
+            cur = cur[part]
+        if isinstance(cur, (list, dict)):
+            return f"{len(cur)} item(s)"
+        return "(blank)" if cur in (None, "") else str(cur)
+    return _PLACEHOLDER.sub(sub, msg)
+
+
 
 
 def _ts(dt: datetime) -> str:
@@ -65,13 +87,14 @@ def build(seed: int = 20260903, cases: int = 60) -> list[dict]:
             verdict = engine.evaluate(chk, rec)
             ev = {"case": case, "check": cid, "verdict": verdict,
                   "layer": chk.get("layer"), "family": chk.get("family"),
-                  "trigger": chk.get("trigger"),
+                  "trigger": chk.get("trigger"), "anchor": chk.get("anchor"),
                   "evidence_fields": list(chk.get("evidence") or []),
                   "source_system": "adapter-synthetic"}
             add("check_result", at, ev)
             if verdict in HOLD_ACTIONS:
                 add("hold", at, {"case": case, "check": cid, "verdict": verdict,
-                                 "reason": chk.get("message"), "source_system": "adapter-synthetic",
+                                 "reason": resolve_message(str(chk.get("message", "")), rec),
+                                 "source_system": "adapter-synthetic",
                                  # law B3: a hold attaches to the CASE. There is no field here
                                  # for a person, and no notify-person primitive to put one in.
                                  "attached_to": "case"})

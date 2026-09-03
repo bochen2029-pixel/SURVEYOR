@@ -1,0 +1,9 @@
+id: MAP-SV-070-optn-5.4.D
+check: SV-070
+source: optn-policies
+locator: "OPTN Policy 5.4.D: Backup Organ Offers"
+type: constrains
+quote: "OPOs may make backup offers for all organs. Transplant programs must treat backup offers the same as actual organ offers and must respond within one hour of receiving the required deceased donor information for an organ."
+establishes: "The policy provides a NAMED CATEGORY for the additional offer, and it is 'backup', not a second primary. An OPO that wants two centers holding an offer has a lawful way to do it; recording both as primary is not that way. This is what makes the check's rule enforceable rather than merely conventional."
+expires: P1Y
+inverse: retire
