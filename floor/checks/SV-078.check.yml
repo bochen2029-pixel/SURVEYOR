@@ -4,7 +4,7 @@ id: SV-078
 title: cross-processor result redistribution complete on shared cases
 family: reconciliation
 layer: L1
-authority: "Quality-science invariant: result distribution completeness (AATB standards on communication of results context); site practice [H] - pin at rung 05"
+authority: "Quality-science invariant: result distribution completeness (AATB standards on communication of results context); site practice [H] - AUTHORITY OUTSIDE THE PINNED CORPUS (AATB and FDA guidance are licensed or non-codified; see crosswalk/pins.py --coverage). Not a promise of a future pin"
 trigger: on_close_attempt
 predicate: "count(shared_case.processors) >= 2 and every(shared_case.processors, subset(shared_case.results, results_received))"
 action: hold

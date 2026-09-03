@@ -159,7 +159,9 @@ def write_chain(events: list[dict], data_root: Path) -> str:
     import tape as product_tape
     t = product_tape.Tape.open(data_root)
     try:
-        t.append_many([(e["kind"], e["body"]) for e in events])
+        # pass each event's OWN timestamp: replaying the same events must reproduce the
+        # same chain, or the head is a clock reading rather than an identity
+        t.append_many([(e["kind"], e["body"], e.get("ts")) for e in events])
     finally:
         t.close()
     rep = product_tape.verify_tape(data_root)

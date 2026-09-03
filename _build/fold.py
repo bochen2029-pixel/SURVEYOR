@@ -22,7 +22,7 @@ BOARD = ROOT / "_build" / "BOARD.md"
 RUNGS = [
     ("00", "Repo skeleton, spec, catalog, prereg, build discipline", "G-COLDSTART"),
     ("01", "Tape + floor engine + fixtures runner",                  "F-FIXTURE"),
-    ("02", "Catalog encoded (~45 checks, pass+fail fixtures each)",  "G-CATALOG-COMPLETE"),
+    ("02", "Catalog encoded (59 checks, pass+fail fixtures each)",   "G-CATALOG-COMPLETE"),
     ("03", "Clocks engine (STN port, anchor declarations)",          "G-ANCHOR-PLANTS"),
     ("04", "F-RETRO on historical charts (on site, local)",          "F-RETRO"),
     ("05", "Crosswalk MVP (pinning, mappings, one edition diff)",    "F-CROSSWALK"),
@@ -158,5 +158,30 @@ def write_folds():
     print(f"folded: {STATE.name}, {BOARD.name} (tape {tape_sha()})")
 
 
+def open_sessions(events=None):
+    """Sessions with a session_start and no session_end, read FROM THE TAPE.
+
+    BOOT step 2 used to detect a second writer by reading STATE.md - but STATE only learns
+    about a session when that session folds, and a session that is still working has by
+    construction not folded. The S10 cold-start audit hit this live: STATE said `open: 0`
+    while a fresh fold of the same tape said `open: 1`, and the auditor walked into a
+    repository another agent was writing. The lock must be read from the tape."""
+    events = read_tape() if events is None else events
+    ended = {e.get("session") for e in events if e.get("type") == "session_end"}
+    return [e for e in events if e.get("type") == "session_start"
+            and e.get("session") not in ended]
+
+
 if __name__ == "__main__":
+    if "--check-open" in sys.argv:
+        opens = open_sessions()
+        if not opens:
+            print("no open session on the tape - safe to start")
+            sys.exit(0)
+        for o in opens:
+            print(f"OPEN SESSION {o.get('session')} since {o.get('ts')}\n  goal: {o.get('goal','?')}")
+        print("\nSTOP (law D8, single writer). Read that session's tape events and either\n"
+              "reconcile - close it honestly with what the tape shows actually happened -\n"
+              "or hand back to it. Do not write first.")
+        sys.exit(3)
     write_folds()

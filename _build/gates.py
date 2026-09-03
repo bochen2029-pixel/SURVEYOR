@@ -41,9 +41,13 @@ Gates:
   G-FOREIGN-HARNESS   rung 09's executioner: the completion kit holds - conformance/run.py is
                       green, every refused draft is refused for the reason it declares, every
                       site-variant check has an elicit question, and the boot contract exists
+  G-WITNESS           law D11's executioner, and the fence around the fences: every gate is run
+                      against a KNOWN-BAD copy of this repository and must refuse to pass it.
+                      A gate that cannot be made to fail is not guarding what it claims to.
 Stdlib only.
 """
 import json
+import os
 import re
 import sys
 from datetime import datetime, timezone
@@ -61,7 +65,16 @@ FIXTURES_DIR = ROOT / "floor" / "fixtures"
 FIELDS_MD = ROOT / "floor" / "FIELDS.md"
 
 SKIP_DIRS = {"_local", ".git", "__pycache__", "node_modules", ".chunks"}
-TEXT_SUFFIXES = {".md", ".py", ".yml", ".yaml", ".html", ".json", ".txt", ".js", ".css", ".csv"}
+# The catalog's size is a pinned constant, not whatever the catalog currently says.
+# Before this, deleting a row from CATALOG.md and its check.yml reported '58/58 encoded
+# - PASS'. The tape called this 'the machine-enforced 59'; it was not machine-enforced.
+# Changing it requires a tape `decision`, exactly as WORLD_SEED does.
+CATALOG_COUNT = 59
+# .jsonl was missing until the S10 audit: the append-only TAPE, the file every session
+# writes goals, decisions and questions into in free prose, was invisible to the one
+# hard-fail privacy gate. C1 is a hard law and its enforcer skipped the primary target.
+TEXT_SUFFIXES = {".md", ".py", ".yml", ".yaml", ".html", ".json", ".jsonl", ".txt",
+                 ".js", ".css", ".csv", ".xml", ".log", ".ini", ".cfg", ".toml"}
 
 
 def gate_fold():
@@ -95,7 +108,10 @@ def term_regex(term):
 
 def gate_privacy():
     if not DENYLIST.exists():
-        return "CANNOT-EVALUATE", "no _local/denylist.txt - privacy gate fails closed"
+        return "CANNOT-EVALUATE", ("no _local/denylist.txt - privacy gate fails closed. "
+                                   "Copy denylist.example.txt to _local/denylist.txt and add "
+                                   "the names your programme touches; the gate can only refuse "
+                                   "what it has been told")
     hard, warn = load_denylist()
     hard_rx = [(t, term_regex(t)) for t in hard]
     warn_rx = [(t, term_regex(t)) for t in warn]
@@ -150,6 +166,9 @@ def gate_catalog():
     if broken:
         return "FAIL", (f"{len(broken)} check(s) without pass+fail fixtures "
                         f"(a check without fixtures is a sentence): {', '.join(broken[:8])}")
+    if len(ids) != CATALOG_COUNT:
+        return "FAIL", (f"the catalog carries {len(ids)} checks, the pinned count is "
+                        f"{CATALOG_COUNT} - a catalog that can shrink silently has no denominator")
     return "PASS", f"{len(encoded)}/{len(ids)} encoded; {len(ids)-len(encoded)} honestly UNENCODED"
 
 
@@ -247,6 +266,12 @@ def gate_anchor_plants():
 # The pinned run: the numbers that publish. Changing these changes the receipt, so a
 # change needs a tape decision saying why (the seed is arbitrary; the sizes are not).
 WORLD_SEED, WORLD_CASES, WORLD_PLANTS = 20260903, 200, 5
+# The chain head the ledger must produce when the S10-era synthetic events are replayed
+# through it. Pinned, not printed: a head that is merely displayed proves nothing, and
+# before the S10 audit it was a different value on every run. A change here needs a tape
+# `decision` saying which events changed and why.
+LEDGER_HEAD_SEED, LEDGER_HEAD_CASES = 20260903, 25
+LEDGER_EXPECTED_HEAD = "e24c470d474a63c81cc918cfe3053016"   # filled by tools/pin_ledger_head.py; empty = not yet pinned
 
 
 def gate_fixture_world():
@@ -265,6 +290,21 @@ def gate_fixture_world():
         return "FAIL", f"generator defect (instrument, not floor): {e}"
     if res["kill"]:
         return "FAIL", "; ".join(res["kill"])
+    # RESULTS.md is the receipt this project cites; until the S10 audit nothing guarded it,
+    # so the numbers a foreign harness is told to rely on could be hand-edited freely.
+    rp = ROOT / "experiments" / "f-fixture" / "RESULTS.md"
+    if not rp.exists():
+        return "FAIL", "experiments/f-fixture/RESULTS.md missing - the receipt this project cites"
+    txt = rp.read_text(encoding="utf-8")
+    for needle, what in ((res["catalog_hash"], "catalog hash"),
+                         (f"| plants | {res['plants']} ", "plant count"),
+                         (f"| missed | {len(res['missed'])} ", "missed count"),
+                         (f"| clean pairs | {res['clean_pairs']} ", "clean-pair count")):
+        if needle not in txt:
+            return "FAIL", (f"RESULTS.md's {what} does not match this run ({needle!r} absent) - "
+                            f"regenerate: python experiments/f-fixture/run.py --sweep --write-results")
+    if "## The sweep" not in txt:
+        return "FAIL", "RESULTS.md carries no sweep - the multi-seed claim has no receipt"
     return "PASS", (f"{res['caught']}/{res['plants']} plants caught, 0 missed, "
                     f"{len(res['false_holds'])} false holds in {res['clean_pairs']} clean pairs "
                     f"({res['false_hold_rate']:.2%}), {len(res['collateral'])} collateral, "
@@ -347,6 +387,13 @@ def gate_fold_determinism():
         else:
             if not summary.startswith("tape OK"):
                 problems.append(f"product tape: {summary}")
+            head = summary.rsplit("head ", 1)[-1].strip() if "head " in summary else ""
+            if LEDGER_EXPECTED_HEAD and head != LEDGER_EXPECTED_HEAD:
+                problems.append(f"ledger chain head {head[:16]} != pinned "
+                                f"{LEDGER_EXPECTED_HEAD[:16]} - the same events no longer "
+                                f"produce the same chain")
+            elif not LEDGER_EXPECTED_HEAD:
+                problems.append("ledger chain head is not pinned - run tools/pin_ledger_head.py")
     if problems:
         return "FAIL", "; ".join(problems[:3])
     auth = folds.load_authorities()
@@ -393,6 +440,24 @@ def gate_evidence_links():
                 problems.append(f"{len(uncited)} published board row(s) carry no evidence element")
             if "board-note" not in frag or "refused" not in frag:
                 problems.append("the published board does not state its provenance and refusal count")
+            # AND THE CONTENT, not only the shape. Until the S10 audit this gate checked
+            # markers and evidence elements and never that the board on the page was the one
+            # this tape produces - so it could not have caught the staleness S8 recorded
+            # fixing, where the live file sat a week behind claiming 0/59 encoded.
+            try:
+                import importlib.util
+                spec = importlib.util.spec_from_file_location(
+                    "surveyor_publish", ROOT / "tools" / "publish_board.py")
+                pub = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(pub)
+                fragment, _, _, tape = pub.render()
+                if pub.published(page).strip() != pub.block(fragment).strip():
+                    problems.append("the published board is NOT the board this tape renders - "
+                                    "run: python tools/publish_board.py")
+                if f"tape {tape}" not in page:
+                    problems.append(f"the page's chrome does not carry this tape's id ({tape})")
+            except Exception as e:  # noqa: BLE001
+                problems.append(f"could not re-render the board to compare: {type(e).__name__}: {e}")
     if problems:
         return "FAIL", "; ".join(problems[:3])
     # the local app: the citation is a LINK, so the link must go somewhere
@@ -459,30 +524,104 @@ def gate_foreign_harness():
                     f"AGENTS.md + elicit/method.md + adapters/CONTRACT.md present; adapters empty by design")
 
 
+# name -> the callable, so one gate can be run alone. G-WITNESS needs this: it perturbs a
+# throwaway copy of the repository and asks ONE gate whether it noticed, and running the
+# whole battery per perturbation would make the meta-gate too slow to keep.
+GATES = {
+    "G-FOLD": lambda: gate_fold(),
+    "G-PRIVACY": lambda: gate_privacy(),
+    "G-CATALOG": lambda: gate_catalog(),
+    "F-FIXTURE": lambda: gate_fixture(),
+    "G-CATALOG-COMPLETE": lambda: gate_catalog_complete(),
+    "G-FIELDS": lambda: gate_fields(),
+    "G-ANCHOR-PLANTS": lambda: gate_anchor_plants(),
+    "F-FIXTURE-WORLD": lambda: gate_fixture_world(),
+    "G-CROSSWALK-PINS": lambda: gate_crosswalk_pins(),
+    "G-FOLD-DETERMINISM": lambda: gate_fold_determinism(),
+    "G-EVIDENCE-LINKS": lambda: gate_evidence_links(),
+    "G-FOREIGN-HARNESS": lambda: gate_foreign_harness(),
+    "G-WITNESS": lambda: gate_witness(),
+}
+
+
+def gate_witness():
+    """Law D11's executioner. For each gate, a named minimal perturbation of the thing it
+    guards, applied to a throwaway copy of the repository; the gate must not report PASS.
+    Details in _build/witness.py, including what it deliberately cannot witness.
+
+    This is a full member of the battery rather than an opt-in flag, on purpose: the whole
+    weakness D11 names is that a fence nobody exercises is indistinguishable from a fence
+    that was quietly removed, and a meta-gate that only runs when asked has the same defect
+    it was built to fix. It costs about half a minute."""
+    if os.environ.get("SURVEYOR_WITNESS_CHILD"):
+        return "CANNOT-EVALUATE", "nested witness run - the child battery does not re-witness"
+    try:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import witness as W
+    except Exception as e:  # noqa: BLE001
+        return "CANNOT-EVALUATE", f"witness unavailable: {e}"
+    try:
+        # First prove the meta-gate itself works: a copy whose G-CATALOG is rewritten to
+        # always return PASS must be reported UNPROVEN. Without this, "the witness would
+        # catch a weakened gate" is an assumption in the one file whose subject is not
+        # making assumptions. The regress stops here, at one level, and is carried the rest
+        # of the way by git history and the operator's review of any diff to this file.
+        self_fails = W.selftest() if hasattr(W, "selftest") else ["witness has no selftest"]
+        res = W.witness()
+    except Exception as e:  # noqa: BLE001
+        return "CANNOT-EVALUATE", f"witness could not run: {type(e).__name__}: {e}"
+    if self_fails:
+        return "FAIL", "the witness itself is broken: " + "; ".join(self_fails[:2])
+    proven, unproven = W.summary(res)
+    if unproven:
+        first = unproven[0]
+        return "FAIL", (f"{len(unproven)} gate(s) passed a broken repository and are therefore not "
+                        f"guarding what they claim: {', '.join(unproven)} - e.g. {first} said "
+                        f"{res[first]['verdict']} when we {res[first]['damage'][:60]}")
+    return "PASS", (f"{len(proven)}/{len(res)} gates refused a known-bad copy of this repository; "
+                    f"the witness itself proven against a gate neutered to always pass; "
+                    f"{len(W.UNWITNESSABLE)} named as unwitnessable by machine and not skipped")
+
+
 def main():
     record = "--record" in sys.argv
-    results = [
-        ("G-FOLD",) + gate_fold(),
-        ("G-PRIVACY",) + gate_privacy(),
-        ("G-CATALOG",) + gate_catalog(),
-        ("F-FIXTURE",) + gate_fixture(),
-        ("G-CATALOG-COMPLETE",) + gate_catalog_complete(),
-        ("G-FIELDS",) + gate_fields(),
-        ("G-ANCHOR-PLANTS",) + gate_anchor_plants(),
-        ("F-FIXTURE-WORLD",) + gate_fixture_world(),
-        ("G-CROSSWALK-PINS",) + gate_crosswalk_pins(),
-        ("G-FOLD-DETERMINISM",) + gate_fold_determinism(),
-        ("G-EVIDENCE-LINKS",) + gate_evidence_links(),
-        ("G-FOREIGN-HARNESS",) + gate_foreign_harness(),
-    ]
+    only = sys.argv[sys.argv.index("--only") + 1] if "--only" in sys.argv else None
+    if only:
+        if only not in GATES:
+            print(f"unknown gate {only!r}; known: {', '.join(sorted(GATES))}")
+            sys.exit(2)
+        names = [only]
+    else:
+        names = list(GATES)
+    results = [(n,) + GATES[n]() for n in names]
     width = max(len(r[0]) for r in results)
+    # THE EXIT POLICY. Anything that is not PASS fails the build, CANNOT-EVALUATE included.
+    #
+    # Until the S10 cold-start audit this read `if status == "FAIL"`, with privacy as the
+    # lone exception - and the auditor showed what that bought: every gate reaches its organ
+    # through `try: import ... except: return CANNOT-EVALUATE`, so DELETING AN ORGAN turned
+    # its gate silent and the battery still exited 0. Ten of thirteen gates could be
+    # neutralised by breaking an import. Law A4 says a gate that cannot judge must say so;
+    # the implementation said so and then shipped it as success.
+    #
+    # A gate that cannot judge has not blessed anything, so it must not be able to bless a
+    # build. --allow-cannot-evaluate GATE re-admits one named gate, loudly, for the case a
+    # human has actually looked at (a clone with no corpus, say).
+    allowed = {a for i, a in enumerate(sys.argv)
+               if i and sys.argv[i - 1] == "--allow-cannot-evaluate"}
     fail = False
     for name, status, detail in results:
         print(f"{name:<{width}}  {status:<16}  {detail}")
-        if status == "FAIL":
-            fail = True
-        if status == "CANNOT-EVALUATE" and name == "G-PRIVACY":
-            fail = True  # privacy fails closed
+        if status == "PASS":
+            continue
+        if status == "CANNOT-EVALUATE" and name in allowed:
+            print(f"{'':<{width}}  (cannot-evaluate allowed for {name} by explicit flag)")
+            continue
+        fail = True
+    if record and only:
+        print("refusing to --record a single gate: a partial battery on the tape would read "
+              "as the whole battery. Run the full set to record.")
+        sys.exit(2)
     if record:
         ts = datetime.now(timezone.utc).isoformat(timespec="seconds")
         with TAPE.open("a", encoding="utf-8", newline="\n") as f:

@@ -206,15 +206,24 @@ class Tape:
     def append(self, kind: str, body: dict[str, Any]) -> dict[str, Any]:
         return self.append_many([(kind, body)])[0]
 
-    def append_many(self, items: list[tuple[str, dict[str, Any]]]) -> list[dict[str, Any]]:
+    def append_many(self, items) -> list[dict[str, Any]]:
+        """items are (kind, body) or (kind, body, ts).
+
+        An explicit ts exists because the chain hash covers the record, so stamping
+        `now()` made the head differ on every run over identical events - and the S10
+        cold-start audit found the build publishing that head as a tamper-evidence
+        receipt. A receipt that changes when nothing changed identifies nothing. Replaying
+        events that already carry their own times must reproduce the chain exactly."""
         if not items:
             return []
         recs: list[dict[str, Any]] = []
         blob = bytearray()
         prev = self.head
         i = self.count
-        ts = datetime.now(UTC).isoformat(timespec="milliseconds")
-        for kind, body in items:
+        now = datetime.now(UTC).isoformat(timespec="milliseconds")
+        for item in items:
+            kind, body = item[0], item[1]
+            ts = item[2] if len(item) > 2 and item[2] else now
             if kind not in KINDS:
                 raise TapeError(f"unknown record kind {kind!r}")
             core = {"i": i, "kind": kind, "ts": ts, "body": body}

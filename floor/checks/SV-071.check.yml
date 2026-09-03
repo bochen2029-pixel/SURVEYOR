@@ -6,7 +6,7 @@ id: SV-071
 title: authorization record field-complete before allocation starts
 family: reconciliation
 layer: L0
-authority: "State Revised Uniform Anatomical Gift Act documentation + OPTN Policy 2.2 OPO responsibilities (authorization before allocation); site SOP [H] - pin at rung 05"
+authority: "State Revised Uniform Anatomical Gift Act documentation + OPTN Policy 2.2 OPO responsibilities (authorization before allocation); site SOP [H] - AUTHORITY OUTSIDE THE PINNED CORPUS (AATB and FDA guidance are licensed or non-codified; see crosswalk/pins.py --coverage). Not a promise of a future pin"
 trigger: on_close_attempt
 predicate: "count(authorization.required_fields) > 0 and every(authorization.required_fields, exists(authorization[value]))"
 action: hold

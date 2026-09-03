@@ -5,7 +5,7 @@ id: SV-040
 title: form revision in use equals the current controlled revision at time of use
 family: revision
 layer: L1
-authority: "Quality-science invariant: document control (AATB standards on records and document control; CMS 42 CFR 486.348 QAPI documentation context); site document-control-class system rule [H] - pin at rung 05"
+authority: "Quality-science invariant: document control (AATB standards on records and document control; CMS 42 CFR 486.348 QAPI documentation context); site document-control-class system rule [H] - AUTHORITY OUTSIDE THE PINNED CORPUS (AATB and FDA guidance are licensed or non-codified; see crosswalk/pins.py --coverage). Not a promise of a future pin"
 trigger: on_write
 predicate: "form.revision_used == document_control.current_revision_at_use[form.document_id]"
 action: hold

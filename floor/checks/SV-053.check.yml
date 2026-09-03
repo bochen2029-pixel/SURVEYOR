@@ -5,7 +5,7 @@ id: SV-053
 title: no duplicate recovery sequence numbers (paired tibia/fibula exception)
 family: sequence
 layer: L1
-authority: "Quality-science invariant: unique specimen identification (AATB standards on labeling and identification); site tib/fib pairing rule [H] - pin at rung 05"
+authority: "Quality-science invariant: unique specimen identification (AATB standards on labeling and identification); site tib/fib pairing rule [H] - AUTHORITY OUTSIDE THE PINNED CORPUS (AATB and FDA guidance are licensed or non-codified; see crosswalk/pins.py --coverage). Not a promise of a future pin"
 trigger: on_write
 predicate: "every(recovery.items, occurrences(recovery.items, seq, seq) == 1 or (contains(recovery.paired_sequence_numbers, seq) and occurrences(recovery.items, seq, seq) == 2))"
 action: hold

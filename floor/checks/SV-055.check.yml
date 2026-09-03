@@ -4,7 +4,7 @@ id: SV-055
 title: inspection timestamp ordering - pre-inspection precedes donor prep
 family: sequence
 layer: L1
-authority: "Quality-science invariant: procedural sequence integrity (AATB recovery standards context); site SOP [H] - pin at rung 05"
+authority: "Quality-science invariant: procedural sequence integrity (AATB recovery standards context); site SOP [H] - AUTHORITY OUTSIDE THE PINNED CORPUS (AATB and FDA guidance are licensed or non-codified; see crosswalk/pins.py --coverage). Not a promise of a future pin"
 trigger: on_write
 predicate: "minutes_between(inspection.pre_inspection_ts, prep.start_ts) > 0"
 action: hold

@@ -103,7 +103,25 @@ def grade(seed: int, n_cases: int, k_plants: int) -> dict:
     return res
 
 
-def render(res: dict) -> str:
+SWEEP_SEEDS = (20260903, 7, 991, 4242, 13, 20261231, 555, 88)
+
+
+def sweep(seeds=SWEEP_SEEDS, cases: int = 120, plants: int = 3) -> list[dict]:
+    """The same battery over several worlds. A single seed establishes that the floor
+    caught THAT world's plants; the robustness claim needs more than one, and the S10
+    cold-start audit found that claim attached to a single-seed result in the file
+    addressed to foreign harnesses. Now it is computed and printed."""
+    out = []
+    for s in seeds:
+        r = grade(s, cases, plants)
+        out.append({"seed": s, "plants": r["plants"], "caught": r["caught"],
+                    "missed": len(r["missed"]), "abstained": len(r["abstained"]),
+                    "clean_pairs": r["clean_pairs"], "false_holds": len(r["false_holds"]),
+                    "rate": r["false_hold_rate"], "kill": r["kill"]})
+    return out
+
+
+def render(res: dict, sweep_rows: list[dict] | None = None) -> str:
     pred_hash = hashlib.sha256(PREDICTIONS_MD.read_bytes().replace(b"\r\n", b"\n")).hexdigest()[:16] if PREDICTIONS_MD.exists() else "absent"
     L = ["# F-FIXTURE arm A - RESULTS (generated fold; regenerate with run.py --write-results)",
          f"seed {res['seed']} | cases {res['n_cases']} | plants per check {res['k_plants']} | catalog {res['catalog_hash']} | predictions {pred_hash} | {res['seconds']} s",
@@ -144,6 +162,25 @@ def render(res: dict) -> str:
         pairs = Counter((c["plant"], c["check"]) for c in res["collateral"])
         L += ["", "## Collateral firings (plant check -> other check), distinct pairs", "| plant | other check | count |", "|---|---|---|"]
         L += [f"| {p} | {o} | {n} |" for (p, o), n in sorted(pairs.items())]
+    if sweep_rows:
+        tot_p = sum(r["plants"] for r in sweep_rows)
+        tot_c = sum(r["caught"] for r in sweep_rows)
+        tot_m = sum(r["missed"] for r in sweep_rows)
+        tot_cp = sum(r["clean_pairs"] for r in sweep_rows)
+        tot_fh = sum(r["false_holds"] for r in sweep_rows)
+        L += ["", "## The sweep - the same battery over several worlds", "",
+              "*One seed establishes that the floor caught THAT world's plants. The robustness "
+              "claim needs more than one, so it is computed here rather than remembered.*", "",
+              "| seed | plants | caught | missed | clean pairs | false holds | rate | verdict |",
+              "|---|---|---|---|---|---|---|---|"]
+        for r in sweep_rows:
+            L.append(f"| {r['seed']} | {r['plants']} | {r['caught']} | {r['missed']} | "
+                     f"{r['clean_pairs']:,} | {r['false_holds']} | {r['rate']:.2%} | "
+                     f"{'KILLED: ' + '; '.join(r['kill']) if r['kill'] else 'alive'} |")
+        L.append(f"| **{len(sweep_rows)} seeds** | **{tot_p}** | **{tot_c}** | **{tot_m}** | "
+                 f"**{tot_cp:,}** | **{tot_fh}** | **{tot_fh / tot_cp if tot_cp else 0:.2%}** | "
+                 f"**{'KILLED' if tot_m or tot_fh / max(tot_cp,1) > 0.01 else 'alive'}** |")
+        L.append("")
     L += ["", "## Checks that never evaluate on a clean record (registers or event-conditional)",
           ", ".join(cid for cid in sorted(res["cannot_by_check"]) if res["evaluable_by_check"][cid] == 0) or "none", ""]
     return "\n".join(L) + "\n"
@@ -156,9 +193,11 @@ def main() -> int:
     ap.add_argument("--plants", type=int, default=5)
     ap.add_argument("--out", default=None, help="directory for corpus.jsonl (large; gitignored)")
     ap.add_argument("--write-results", action="store_true")
+    ap.add_argument("--sweep", action="store_true", help="also run the battery over several seeds")
     a = ap.parse_args()
     res = grade(a.seed, a.cases, a.plants)
-    md = render(res)
+    rows = sweep() if a.sweep else None
+    md = render(res, rows)
     print(md)
     if a.write_results:
         RESULTS_MD.write_text(md, encoding="utf-8", newline="\n")

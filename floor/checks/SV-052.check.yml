@@ -4,7 +4,7 @@ id: SV-052
 title: controlled-vocabulary exact match on authorized categories (no paraphrase, no abbreviation)
 family: sequence
 layer: L0
-authority: "State Revised Uniform Anatomical Gift Act (scope of the gift as authorized) + site authorization SOP: verbatim categories [H] - pin at rung 05"
+authority: "State Revised Uniform Anatomical Gift Act (scope of the gift as authorized) + site authorization SOP: verbatim categories [H] - AUTHORITY OUTSIDE THE PINNED CORPUS (AATB and FDA guidance are licensed or non-codified; see crosswalk/pins.py --coverage). Not a promise of a future pin"
 trigger: on_write
 predicate: "subset(authorization.categories, controlled_vocabulary.authorized_categories)"
 action: hold

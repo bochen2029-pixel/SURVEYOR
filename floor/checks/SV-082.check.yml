@@ -5,7 +5,7 @@ id: SV-082
 title: CAPA effectiveness check runs at horizon; unmet returns to committee with data attached
 family: release
 layer: L1
-authority: "Quality-science invariant: effectiveness verification (SPEC section 8 PDSA lifecycle; CMS 42 CFR 486.348 QAPI improvement tracking context) - pin at rung 05"
+authority: "Quality-science invariant: effectiveness verification (SPEC section 8 PDSA lifecycle; CMS 42 CFR 486.348 QAPI improvement tracking context) - AUTHORITY OUTSIDE THE PINNED CORPUS (AATB and FDA guidance are licensed or non-codified; see crosswalk/pins.py --coverage). Not a promise of a future pin"
 trigger: continuous
 anchor: capa.expectation.horizon_ts
 anchor_why: "the horizon the CAPA itself declared when it was mounted - not the committee meeting date and not the close date someone would prefer"

@@ -5,7 +5,7 @@ id: SV-057
 title: flow-sheet continuity - segment start equals prior end plus one minute; every vital non-blank including explicit zero
 family: sequence
 layer: L1
-authority: "Quality-science invariant: continuous donor-management documentation (site audit checklist [H]); OPTN Policy 2.13 deceased donor management context - pin at rung 05"
+authority: "Quality-science invariant: continuous donor-management documentation (site audit checklist [H]); OPTN Policy 2.13 deceased donor management context - AUTHORITY OUTSIDE THE PINNED CORPUS (AATB and FDA guidance are licensed or non-codified; see crosswalk/pins.py --coverage). Not a promise of a future pin"
 trigger: on_close_attempt
 predicate: "every_pair(flow_sheet.segments, minutes_between(prev.end_ts, next.start_ts) == 1) and every(flow_sheet.segments, count(vitals) >= flow_sheet.vitals_per_segment and every(vitals, exists(value)))"
 action: hold

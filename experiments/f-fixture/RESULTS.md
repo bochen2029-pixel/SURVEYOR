@@ -1,5 +1,5 @@
 # F-FIXTURE arm A - RESULTS (generated fold; regenerate with run.py --write-results)
-seed 20260903 | cases 200 | plants per check 5 | catalog 0f148b0c37ca7ebb | predictions bd867f554bb3330b | 1.15 s
+seed 20260903 | cases 200 | plants per check 5 | catalog 24ffe1087e04b010 | predictions bd867f554bb3330b | 0.94 s
 
 ## Verdict
 **ALIVE:** no planted defect passed; false-hold rate within the 1% kill line.
@@ -106,6 +106,23 @@ seed 20260903 | cases 200 | plants per check 5 | catalog 0f148b0c37ca7ebb | pred
 | plant | other check | count |
 |---|---|---|
 | SV-071 | SV-015 | 5 |
+
+## The sweep - the same battery over several worlds
+
+*One seed establishes that the floor caught THAT world's plants. The robustness claim needs more than one, so it is computed here rather than remembered.*
+
+| seed | plants | caught | missed | clean pairs | false holds | rate | verdict |
+|---|---|---|---|---|---|---|---|
+| 20260903 | 177 | 177 | 0 | 5,493 | 0 | 0.00% | alive |
+| 7 | 177 | 177 | 0 | 5,484 | 0 | 0.00% | alive |
+| 991 | 177 | 177 | 0 | 5,484 | 0 | 0.00% | alive |
+| 4242 | 177 | 177 | 0 | 5,485 | 0 | 0.00% | alive |
+| 13 | 177 | 177 | 0 | 5,492 | 0 | 0.00% | alive |
+| 20261231 | 177 | 177 | 0 | 5,490 | 0 | 0.00% | alive |
+| 555 | 177 | 177 | 0 | 5,486 | 0 | 0.00% | alive |
+| 88 | 177 | 177 | 0 | 5,492 | 0 | 0.00% | alive |
+| **8 seeds** | **1416** | **1416** | **0** | **43,906** | **0** | **0.00%** | **alive** |
+
 
 ## Checks that never evaluate on a clean record (registers or event-conditional)
 none

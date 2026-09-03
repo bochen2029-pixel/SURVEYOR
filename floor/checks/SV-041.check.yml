@@ -5,7 +5,7 @@ id: SV-041
 title: quality documents held in draft until required approvals are recorded
 family: revision
 layer: L1
-authority: "Quality-science invariant: controlled-document approval (AATB standards on document control; CMS 42 CFR 486.348 QAPI context); site document-control SOP [H] - pin at rung 05"
+authority: "Quality-science invariant: controlled-document approval (AATB standards on document control; CMS 42 CFR 486.348 QAPI context); site document-control SOP [H] - AUTHORITY OUTSIDE THE PINNED CORPUS (AATB and FDA guidance are licensed or non-codified; see crosswalk/pins.py --coverage). Not a promise of a future pin"
 trigger: on_write
 predicate: "document.status == 'effective' implies subset(document.required_approval_roles, document.approved_roles)"
 action: hold

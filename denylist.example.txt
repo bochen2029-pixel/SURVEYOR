@@ -1,0 +1,20 @@
+# denylist.example.txt - COPY THIS TO _local/denylist.txt BEFORE RUNNING THE GATES.
+#
+# G-PRIVACY reads _local/denylist.txt and FAILS CLOSED without it, so a fresh clone cannot
+# pass the battery until this file exists. That is deliberate: a privacy gate that passed
+# when it had nothing to check would be worse than no gate. It is also why this example
+# ships - the S10 cold-start audit found a stranger could not run the repository and
+# nothing told them why.
+#
+# One term per line. '!' prefix = warn-only (surfaced for review, does not fail the build).
+# ALL-CAPS terms match case-sensitively at word boundaries; everything else case-insensitively.
+# The real file lives in _local/, which is gitignored and never ships (law C1).
+#
+# HARD (the build fails): every person's name your programme touches, and the programme's
+# own identity. Add a name the moment you encounter one - the gate is a regex over an
+# enumerated list, not semantic detection, and it can only refuse what it has been told.
+Example Person
+Example Transplant Alliance
+# WARN (allowed with care, e.g. genericised as "-class"; surfaced each session for review):
+!VendorProductName
+!AnotherVendor

@@ -4,7 +4,7 @@ id: SV-023
 title: reactive serology reported to county epidemiology within 24h
 family: clocks
 layer: L0/L2
-authority: "State communicable-disease reporting rules (county health department notification; the window varies by state and organism - L2 rides the L0 duty) + site SOP [H] - pin at rung 05"
+authority: "State communicable-disease reporting rules (county health department notification; the window varies by state and organism - L2 rides the L0 duty) + site SOP [H] - AUTHORITY OUTSIDE THE PINNED CORPUS (AATB and FDA guidance are licensed or non-codified; see crosswalk/pins.py --coverage). Not a promise of a future pin"
 trigger: continuous
 anchor: serology.reactive_result_ts
 anchor_why: "the reporting clock starts at the reactive result, not at confirmatory testing and not at case close"

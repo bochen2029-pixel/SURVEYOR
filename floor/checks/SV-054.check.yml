@@ -3,7 +3,7 @@ id: SV-054
 title: recovered tissue is a subset of authorized tissue
 family: sequence
 layer: L0
-authority: "State Revised Uniform Anatomical Gift Act (scope of the gift) + FDA 21 CFR 1271 donor consent documentation context; site SOP [H] - pin at rung 05"
+authority: "State Revised Uniform Anatomical Gift Act (scope of the gift) + FDA 21 CFR 1271 donor consent documentation context; site SOP [H] - AUTHORITY OUTSIDE THE PINNED CORPUS (AATB and FDA guidance are licensed or non-codified; see crosswalk/pins.py --coverage). Not a promise of a future pin"
 trigger: on_close_attempt
 predicate: "subset(recovery.tissues_recovered, authorization.tissues_authorized)"
 action: hold

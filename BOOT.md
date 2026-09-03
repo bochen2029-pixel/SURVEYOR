@@ -4,7 +4,7 @@
 ## The seven steps
 
 1. **Read [`LAWS.md`](LAWS.md)** — all of it (one screen per law). These are binding. If you are about to violate one, stop and file a `question` on the tape instead.
-2. **Read the folds:** [`_build/STATE.md`](_build/STATE.md) (next action, rung ladder, open items) and [`_build/BOARD.md`](_build/BOARD.md). If STATE shows an **open session** that isn't yours: STOP — single-writer law (D8). Reconcile: read that session's tape events, close it honestly (`session_end` with what the tape shows actually happened), then proceed.
+2. **Check for another writer, FROM THE TAPE:** `python _build/fold.py --check-open`. If it reports an open session that isn't yours: **STOP** — single-writer law (D8). Reconcile: read that session's tape events, close it honestly (`session_end` with what the tape shows actually happened), or hand back. **Do not read this from STATE.md** — STATE only learns of a session when that session folds, and a session still working has by construction not folded. An S10 cold-start audit walked into a live repository doing exactly that: STATE said `open: 0` while the tape said one. Then read the folds — [`_build/STATE.md`](_build/STATE.md) (next action, rung ladder, open items) and [`_build/BOARD.md`](_build/BOARD.md).
 3. **Verify reality:** run `python _build/gates.py` (no --record). If anything FAILs that STATE claimed green, reality wins — your first task is reconciliation, on the tape.
 4. **Open your session:** append one line to `_build/TAPE.jsonl`:
    `{"ts": "<utc-iso>", "session": "S<n>", "type": "session_start", "goal": "<one sentence>"}`

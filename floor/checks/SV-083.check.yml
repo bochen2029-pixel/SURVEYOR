@@ -5,7 +5,7 @@ id: SV-083
 title: risk-register entries at or above the priority threshold carry owner and review date
 family: release
 layer: L1
-authority: "Quality-science invariant: risk-register governance (site risk methodology [H]); CMS 42 CFR 486.348 QAPI context - pin at rung 05"
+authority: "Quality-science invariant: risk-register governance (site risk methodology [H]); CMS 42 CFR 486.348 QAPI context - AUTHORITY OUTSIDE THE PINNED CORPUS (AATB and FDA guidance are licensed or non-codified; see crosswalk/pins.py --coverage). Not a promise of a future pin"
 trigger: on_write
 predicate: "risk.priority < risk_register.owner_required_at_priority or (exists(risk.owner_role) and exists(risk.review_ts))"
 action: hold

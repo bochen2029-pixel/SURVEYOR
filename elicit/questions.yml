@@ -157,3 +157,12 @@ sources: "your release SOP | the processor's release specification | past releas
 impact: "The last gate before tissue leaves. Everything upstream is preparation for this."
 trap: "A flat 'contamination = 0%' is rarely how release actually works: recovery-site cultures are often positive and resolved by validated processing. If your real rule is 'positive culture routes to a documented disposition', encode THAT - a bar nobody can meet gets waived, and a waived gate is worse than an honest one."
 mandated_floor: "FDA 21 CFR 1271.50 and 1271.265 require a documented determination against pre-established release criteria. The criteria themselves are yours."
+
+check: SV-028
+tier: 1
+variation: the refrigeration clocks - recovery-start window and the cumulative out-of-refrigeration cap
+ask: "After asystole, how long may pass before tissue recovery starts - and does that window change depending on how quickly the body was cooled? Separately: what is the maximum CUMULATIVE time the body may spend out of refrigeration, counting every interval?"
+sources: "your tissue recovery SOP | the AATB standard your programme is accredited against, if you hold a licence for it | the refrigeration in/out logs from past cases, which are the only place the cumulative figure can be checked"
+impact: "Gates whether tissue may be recovered at all. It is also the check most likely to be quoted at a tissue-bank inspection, and the one whose anchor is easiest to get wrong."
+trap: "TWO traps. First the anchor: every clock here runs from ASYSTOLE, and for a brain-dead donor that is cross-clamp, not the declaration of death, which can be a day earlier - anchoring to the declaration fabricates breaches on every brain-dead organ-and-tissue donor. Second the cap: cumulative means EVERY interval summed, including the stretch between asystole and first cooling, which is the one people forget because nothing was refrigerated yet."
+mandated_floor: "None that this corpus can pin. AATB Standards for Tissue Banking is a licensed voluntary accreditation standard - not federal rule, not OPTN policy, not state statute - so this check is tagged L1/L2 rather than L0, and a site holding an AATB licence can pin it privately in its own corpus root."

@@ -4,7 +4,7 @@ id: SV-022
 title: potential disease-transmission notification within 24h of receipt
 family: clocks
 layer: L0
-authority: "OPTN Policy 15.4 Host OPO Requirements for Reporting Post-Procurement Test Results and Discovery of Potential Transmission of Disease or Malignancy (24 hours) - pin at rung 05"
+authority: "OPTN Policy 15.4 Host OPO Requirements for Reporting Post-Procurement Test Results and Discovery of Potential Transmission of Disease or Malignancy (24 hours) - AUTHORITY OUTSIDE THE PINNED CORPUS (AATB and FDA guidance are licensed or non-codified; see crosswalk/pins.py --coverage). Not a promise of a future pin"
 trigger: continuous
 anchor: disease_transmission.info_received_ts
 anchor_why: "the OPTN clock starts when the host OPO receives the result or discovers the concern - not when it is confirmed, and not when the case closed"

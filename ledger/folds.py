@@ -289,6 +289,13 @@ def survey_binder(events: list[dict], start: str, end: str,
                 auth = "SEARCHED, NOT FOUND: " + "; ".join(sorted(str(m["locator"]) for m in silent))
             elif silent:
                 auth += " (+ a searched-and-silent finding on file)"
+            # A passage can be REAL AND SUPERSEDED. The pin store warns; before the S10 audit
+            # the binder swallowed the warning and a surveyor would have been handed a
+            # citation to a repealed regime with no caveat.
+            warned = [m for m in maps if m.get("_status") == "CHECK-CURRENCY"]
+            if warned:
+                auth += (" &mdash; **CURRENCY WARNING: verbatim, but the surrounding text "
+                         "carries sunset language; confirm it is still in force**")
         else:
             auth = "not pinned"
         L.append(f"| {cid} | {b0.get('layer', '?')} | {auth} | {len(rs)} | {passed} | {acted} | "
@@ -385,14 +392,25 @@ def selftest(events: list[dict] | None = None) -> list[str]:
 
 
 def load_authorities() -> dict[str, list[dict]]:
-    """The crosswalk's verified mappings, by check. Absent crosswalk -> empty, and the
-    binder then says 'not pinned' for every row rather than inventing an authority."""
+    """The crosswalk's VERIFIED mappings, by check.
+
+    Until the S10 cold-start audit this was a plain YAML read: it never byte-matched and
+    never touched the corpus, so the survey binder printed "SV-085 runs under 42 CFR
+    486.318(a)" whether or not the quote still matched - and on a fresh clone with no
+    corpus at all. Law B6 was enforced in `pins.py --check` and abandoned at the exact
+    point a citation reaches a regulator. Now every mapping is verified here, an
+    unverified one is dropped so the binder prints "not pinned", and a currency warning
+    travels with the mapping so the page can carry it."""
     try:
         sys.path.insert(0, str(ROOT / "crosswalk"))
         import pins
+        sources = pins.load_sources()
         out: dict[str, list[dict]] = defaultdict(list)
         for m in pins.load_mappings():
-            out[str(m.get("check"))].append(m)
+            status, detail = pins.verify(m, sources)
+            if status not in (pins.OK, pins.WARN):
+                continue                      # not verified -> it does not reach the binder
+            out[str(m.get("check"))].append({**m, "_status": status, "_detail": detail})
         return dict(out)
     except Exception:  # noqa: BLE001
         return {}

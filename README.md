@@ -5,6 +5,8 @@
 
 Every OPO staffs a quality department that audits a **sample** of charts, **weeks** after the cases, and becomes survey-ready as an **event**. SURVEYOR moves the deterministic half of that work into the record itself — **census, at the keystroke, as a standing property** — keeps the regulation↔policy crosswalk maintained as a computation, makes corrective actions grade their own effectiveness, and reserves human judgment for the part that is judgment.
 
+**To run it yourself:** `cp denylist.example.txt _local/denylist.txt` (the privacy gate fails closed without it) and `python tools/fetch_corpus.py --fetch` (the pinned regulatory sources are not redistributed from here; the registry in `crosswalk/sources.yml` carries every url and sha256 needed to rebuild them). Then `python _build/gates.py`. Without those two steps a fresh clone cannot pass the battery, and until the S10 cold-start audit nothing said so.
+
 | Read | What it is |
 |---|---|
 | [`SPEC.md`](SPEC.md) | The spec: five organs, checks-as-patches, layers, gates, deciders, build order |

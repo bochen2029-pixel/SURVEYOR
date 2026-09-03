@@ -10,8 +10,8 @@
 id: SV-028
 title: refrigeration clocks - 24h/15h recovery-start rule by initial-cooling timing; cumulative out-of-refrigeration at most 15h
 family: clocks
-layer: L0
-authority: "AATB Standards for Tissue Banking - time limits for recovery relative to asystole and refrigeration (section pinned at rung 05); site SOP [H]"
+layer: L1/L2
+authority: "AATB Standards for Tissue Banking - time limits for recovery relative to asystole and refrigeration. NOT PINNABLE: AATB is a licensed voluntary accreditation standard, not in this corpus and not redistributable; a site holding a licence can pin it privately (the corpus loader takes several roots). Retagged L1/L2 at S10 after a cold-start audit pointed out that L0 means federal rule, OPTN policy or state statute, and a surveyor asking which federal rule requires 15 hours would get no answer. The 24h/15h intervals are the site SOP [H]."
 trigger: continuous
 anchor: death.asystole_ts
 anchor_why: "every refrigeration clock anchors to ASYSTOLE - the moment circulation stops. For a DCD or tissue-only donor that is the pronouncement of death; for a brain-dead donor it is cross-clamp, a day or more AFTER death was declared. Anchoring to the declaration would fabricate breaches on every brain-dead organ-and-tissue donor (found by the S3 generator while modelling the timeline)"

@@ -8,7 +8,7 @@ id: SV-081
 title: CAPA row completeness - owner, falsifiable expectation, horizon, expiry, inverse
 family: release
 layer: L1
-authority: "Quality-science invariant: corrective action as a testable expectation (SPEC section 8; the department's own sustained-corrective-action language [H]); CMS 42 CFR 486.348 QAPI context - pin at rung 05"
+authority: "Quality-science invariant: corrective action as a testable expectation (SPEC section 8; the department's own sustained-corrective-action language [H]); CMS 42 CFR 486.348 QAPI context - AUTHORITY OUTSIDE THE PINNED CORPUS (AATB and FDA guidance are licensed or non-codified; see crosswalk/pins.py --coverage). Not a promise of a future pin"
 trigger: on_write
 predicate: "capa.id != '' and exists(capa.owner_role) and exists(capa.expectation.metric) and exists(capa.expectation.baseline) and exists(capa.expectation.target) and exists(capa.expectation.horizon_ts) and exists(capa.expires) and exists(capa.inverse)"
 action: hold
