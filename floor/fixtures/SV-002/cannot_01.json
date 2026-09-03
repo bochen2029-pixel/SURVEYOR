@@ -1,5 +1,5 @@
 {"expect": "CANNOT-EVALUATE",
- "note": "no serology entry exists yet to compare the report against",
+ "note": "no serology draw is recorded on the chart yet to compare the report against",
  "record": {"case_id": "OD-2026-0420",
             "chart": {"donor_id": "DN-2026-0420", "donor_dob": "1974-01-15"},
             "serology_report": {"donor_id": "DN-2026-0420", "donor_dob": "1974-01-15", "draw_ts": "2026-08-21T06:10:00Z", "lab_ref": "LAB-77141"}},

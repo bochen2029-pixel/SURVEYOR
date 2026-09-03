@@ -1,4 +1,4 @@
 {"expect": "HOLD", "note": "clean, but the physical assessment is still pending",
  "record": {"case_id": "TD-2026-1092",
-            "release": {"contamination_pct": 0, "required_documents": [{"name": "dre", "status": "complete"}, {"name": "physical_assessment", "status": "pending"}]}},
+            "release": {"contamination_pct": 0, "required_document_count": 2, "required_documents": [{"name": "dre", "status": "complete"}, {"name": "physical_assessment", "status": "pending"}]}},
  "history": []}

@@ -4,7 +4,7 @@
 id: SV-027
 title: prep-to-incision interval at most 1h15m (cross-contamination)
 family: clocks
-layer: L1
+layer: L1/L2
 authority: "Quality-science invariant: surgical prep currency (AATB aseptic recovery standards context; site rule 1h15m [H]) - pin at rung 05"
 trigger: continuous
 anchor: or_timeline.prep_complete_ts

@@ -1,5 +1,5 @@
 # THE FLOOR CATALOG — v0.1
-**Status: RECEIPTED `[H]` · ENCODED** (every check below has a `floor/checks/SV-xxx.check.yml` and pass/fail/cannot fixtures; the live count is the machine's, in `_build/BOARD.md` G-CATALOG; the record vocabulary the checks read is folded in `floor/FIELDS.md`). Every check below was harvested from a working OPO quality program's own audit walkthrough (local corpus, line-referenced in `_local/harvest/`, which never ships). Layer tags are provisional until a second site's practice is compared: **L0** = mandated (citation pinned via crosswalk) · **L1** = quality-science invariant · **L2** = site-variant (the reference program's own rule; each site signs its own). Trigger: `W` on-write · `C` on-close-attempt · `K` continuous clock. Action: `hold` blocks close · `flag` annotates · `alarm` pre-breach.
+**Status: RECEIPTED `[H]` · ENCODED** (every check below has a `floor/checks/SV-xxx.check.yml` and pass/fail/cannot fixtures; the live count is the machine's, in `_build/BOARD.md` G-CATALOG; the record vocabulary the checks read is folded in `floor/FIELDS.md`). Every check below was harvested from a working OPO quality program's own audit walkthrough (local corpus, line-referenced in `_local/harvest/`, which never ships). Layer tags are provisional until a second site's practice is compared: **L0** = mandated (citation pinned via crosswalk) · **L1** = quality-science invariant · **L2** = site-variant (the reference program's own rule; each site signs its own) · **L0/L2** = a site number riding a mandated duty · **L1/L2** = an invariant whose number is the site's. Trigger: `W` on-write · `C` on-close-attempt · `K` continuous clock. Action: `hold` blocks close · `flag` annotates · `alarm` pre-breach.
 **The R1-gate for this file: a quality director reads it cold and recognizes their own audit checklist.** Encoding order: **SV-070 first** (the flagship — a reportable violation with no system check today), **then catalog order from SV-001.** Every check ships with passing AND failing fixtures before it counts as done.
 
 ## A · Identity & cross-document
@@ -12,7 +12,7 @@
 ## B · Signatures, roster & attribution
 - **SV-010** `L0·C·hold` ≥2 coordinator signatures + lab signature before HLA/ABO pages complete.
 - **SV-011** `L0·C·hold` Donor-ID verification carries two distinct staff, both on the team-worksheet roster.
-- **SV-012** `L0·C·hold` OR roster role requirements by donor type (anesthesiologist for brain-dead; circulator for DCD); every recovering physician signs.
+- **SV-012** `L0·C·hold` OR roster role requirements by donor type (anesthesiologist for brain-dead; circulator for DCD); every recovering physician signs; the clinician who declared death is not on the recovery team.
 - **SV-013** `L1·W·hold` Any late/second signature or post-completion edit requires a linked explanatory case note.
 - **SV-014** `L1·system` True editor + timestamp recorded on every edit (attribution never freezes to the original author).
 - **SV-015** `L0·C·hold` Authorization witness is hospital care-team, never recovering-organization staff.
@@ -21,24 +21,24 @@
 - **SV-020** `L2` Chart audit begins ≤7 days post-recovery.
 - **SV-021** `L2` Chart to processor ≤30 days (5–10 for fresh/OC).
 - **SV-022** `L0` Potential disease-transmission notification ≤24h from receipt.
-- **SV-023** `L0` Reactive serology to county epidemiology ≤24h.
-- **SV-024** `L0` COVID test within 72h of cross-clamp (all donors); BAL for every lung donor.
+- **SV-023** `L0/L2` Reactive serology to county epidemiology ≤24h (window varies by state and organism).
+- **SV-024** `L0/L2` SARS-CoV-2 specimen present and collected within 72h before cross-clamp (all donors); lower respiratory specimen for every lung donor.
 - **SV-025** `L0` PT/INR within 12h of allocation start (liver).
-- **SV-026** `L0` Hemodilution lookback windows: blood products 48h, crystalloids 1h; auto-computed from logged volumes/timestamps.
-- **SV-027** `L1` Prep-to-incision interval ≤1h15m (cross-contamination flag).
+- **SV-026** `L0·W·hold` Hemodilution lookback windows: blood products 48h, crystalloids 1h; computed from logged volumes/timestamps, nothing omitted, nothing invented.
+- **SV-027** `L1/L2` Prep-to-incision interval ≤1h15m (cross-contamination).
 - **SV-028** `L0` Refrigeration clocks: recovery-start 24h/15h rule by initial-cooling timing; cumulative out-of-refrigeration ≤15h, auto-summed from in/out events.
 - **SV-029** `L0` TFO serology reuse only within 7 days, else redraw required.
 - **SV-030** `L0` Donor feedback due 5 business days **anchored to organ-recovery time, not cross-clamp** (anchor-declaration is the check).
 - **SV-031** `L0/L2` DDR due 60 days (OPTN) / 30 days (site buffer — L2 tightening of an L0 clock).
-- **SV-032** `L0` DNR due month-end following referral month.
-- **SV-033** `L0` Onsite response ≤1.5h of referral (CMS-linked; site-tightened from 2h).
+- **SV-032** `L0` DNR due 30 days after the end of the referral month (OPTN letter; the site's month-end paraphrase is a day looser in 31-day months).
+- **SV-033** `L0/L2` Onsite response ≤1.5h of referral (CMS duty; the 1.5h is the site's, tightened from 2h).
 - **SV-034** `L2` Offer cadence ≤30 min between offers, or a logged unstable-donor exception.
 - **SV-035** `L2` Contract/license notice-deadline lookahead ≥120 days (generalized from a harvested near-miss).
 
 ## D · Revision & document control
 - **SV-040** `L1·W·hold` Form revision in use equals current controlled revision at time of use (stale local copies blocked).
 - **SV-041** `L1·W·hold` Quality documents held in draft until required approvals recorded.
-- **SV-042** `L1·K·alarm` Regulator edition-change monitor: effective date vs audit window, with lead time (the audited-to-the-new-edition trap).
+- **SV-042** `L1/L2·K·alarm` Regulator edition-change monitor: effective date vs audit window, with lead time (the audited-to-the-new-edition trap).
 - **SV-043** `L0·W·hold` Training/competency current for the role performing the action, at action time.
 
 ## E · Sequence, logic & vocabulary
@@ -50,9 +50,9 @@
 - **SV-055** `L1·W·hold` Inspection timestamp ordering: pre-inspection precedes donor prep.
 - **SV-056** `L1·W·hold` No backdating past a signoff (audit-trail sequence legality).
 - **SV-057** `L1·C·hold` Flow-sheet continuity: segment start = prior end + 1 min; every vital field non-blank including explicit zero.
-- **SV-058** `L0·C·hold` Donor ≤18 months ⇒ two DREs (donor + birth mother).
+- **SV-058** `L0·C·hold` Donor ≤18 months, or breastfed within 12 months ⇒ two DREs (donor + birth mother).
 - **SV-059** `L0·W·hold` ABO type A/AB ⇒ subtype present or reason code.
-- **SV-060** `L1·W·flag` ABO and serology draws must not share a timestamp (independence of draws).
+- **SV-060** `L0·W·hold` The two ABO determinations are drawn on separate occasions with different collection times (OPTN 2.6.A; harvested as ABO-vs-serology, retargeted on the tape).
 - **SV-061** `L0·W·hold` Injection-site findings tagged medical vs non-medical (eligibility-relevant).
 - **SV-062** `L1·design-law` No check's verification channel may be the field under correction.
 
@@ -68,7 +68,7 @@
 - **SV-078** `L1·C·hold` Cross-processor result redistribution complete on shared cases (every processor on the case received every result).
 
 ## G · Release, CAPA & reporting hygiene
-- **SV-080** `L0·C·hold` Tissue release gate: contamination = 0% and screening/recovery documentation complete before release record closes.
+- **SV-080** `L0/L2·C·hold` Tissue release gate: contamination = 0% and screening/recovery documentation complete before release record closes.
 - **SV-081** `L1·W·hold` CAPA row completeness: owner, falsifiable expectation, horizon, expiry, inverse.
 - **SV-082** `L1·K·auto` CAPA effectiveness check runs at horizon; unmet ⇒ auto-return to committee with data attached.
 - **SV-083** `L1·W·hold` Risk-register entries at/above priority threshold carry owner + review date.

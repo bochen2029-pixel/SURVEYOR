@@ -1,4 +1,4 @@
-{"expect": "PASS", "note": "competency current at the time of the action",
+{"expect": "PASS", "note": "competency granted before the action and not yet expired",
  "record": {"case_id": "TD-2026-0990", "action": {"kind": "tissue_recovery", "role": "tissue_recovery_technician", "performed_by": "STF-052", "ts": "2026-08-18T03:00:00Z"},
-            "competencies": {"STF-052": {"tissue_recovery_technician": {"expires_ts": "2027-01-31T00:00:00Z"}, "driver": {"expires_ts": "2026-12-31T00:00:00Z"}}}},
+            "competencies": {"STF-052": {"tissue_recovery_technician": {"granted_ts": "2026-01-31T00:00:00Z", "expires_ts": "2027-01-31T00:00:00Z"}, "driver": {"granted_ts": "2025-12-31T00:00:00Z", "expires_ts": "2026-12-31T00:00:00Z"}}}},
  "history": []}

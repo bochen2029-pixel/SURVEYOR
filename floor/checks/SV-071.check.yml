@@ -1,5 +1,6 @@
 # SV-071 - the authorization record is complete before allocation begins: every
-# required field carries a value. Harvested [H]: the new record system gates this
+# required field (named in the site's required-field list) carries a value on the
+# authorization itself - one home per fact. Harvested [H]: the new record system gates this
 # at entry; the floor makes the gate portable.
 id: SV-071
 title: authorization record field-complete before allocation starts
@@ -7,10 +8,10 @@ family: reconciliation
 layer: L0
 authority: "State Revised Uniform Anatomical Gift Act documentation + OPTN Policy 2.2 OPO responsibilities (authorization before allocation); site SOP [H] - pin at rung 05"
 trigger: on_close_attempt
-predicate: "every(authorization.required_fields, exists(value))"
+predicate: "count(authorization.required_fields) > 0 and every(authorization.required_fields, exists(authorization[value]))"
 action: hold
 message: "Authorization cannot close for allocation: a required field is blank."
-evidence: [authorization.required_fields]
+evidence: [authorization.required_fields, authorization]
 expires: P2Y
 inverse: retire
 tests: fixtures/SV-071/

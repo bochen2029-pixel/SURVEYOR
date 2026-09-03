@@ -7,7 +7,7 @@ family: sequence
 layer: L1
 authority: "Quality-science invariant: continuous donor-management documentation (site audit checklist [H]); OPTN Policy 2.13 deceased donor management context - pin at rung 05"
 trigger: on_close_attempt
-predicate: "every_pair(flow_sheet.segments, minutes_between(prev.end_ts, next.start_ts) == 1) and every(flow_sheet.segments, every(vitals, exists(value)))"
+predicate: "every_pair(flow_sheet.segments, minutes_between(prev.end_ts, next.start_ts) == 1) and every(flow_sheet.segments, count(vitals) >= flow_sheet.vitals_per_segment and every(vitals, exists(value)))"
 action: hold
 message: "Flow sheet has a gap or overlap between segments, or a blank vital."
 evidence: [flow_sheet.segments]

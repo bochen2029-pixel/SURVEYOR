@@ -1,16 +1,20 @@
-# SV-012 - the OR roster fits the donor type, and every recovering physician signed.
-# Harvested [H]: anesthesiologist present for a brain-dead donor; circulator for DCD;
-# the roster is read against the signature page by hand today.
+# SV-012 - the OR roster fits the donor type, every recovering physician signed, and
+# the clinician who declared death is not on the recovery team. Harvested [H]:
+# anesthesiologist present for a brain-dead donor; circulator for DCD; the roster is
+# read against the signature page by hand today. The conflict-of-interest rule is
+# OPTN Policy 2.14.A and the state anatomical gift act, for every deceased donor.
+# (The reviewer's argument that a circulator belongs on every case, not only DCD, is
+# on the tape as a question for the quality director; encoded as harvested.)
 id: SV-012
-title: OR roster role requirements by donor type; every recovering physician signs
+title: OR roster role requirements by donor type; every recovering physician signs; the clinician who declared death is not on the recovery team
 family: signatures
 layer: L0
-authority: "OPTN Policy 2.14 Organ Procurement and 2.15 DCD protocol requirements + site OR roster rule [H] - pin at rung 05"
+authority: "OPTN Policy 2.14.A Conflicts of Interest (recovery not performed by the team member who declared death) + 2.15 DCD requirements + state Revised Uniform Anatomical Gift Act (the physician determining death may not participate in removal); site OR roster rule [H] - pin at rung 05"
 trigger: on_close_attempt
-predicate: "(donor_type == 'brain_dead' implies contains(or_roster.roles, 'anesthesiologist')) and (donor_type == 'dcd' implies contains(or_roster.roles, 'circulator')) and subset(or_roster.recovering_physicians, or_roster.physician_signatures)"
+predicate: "(donor_type == 'brain_dead' implies contains(or_roster.roles, 'anesthesiologist')) and (donor_type == 'dcd' implies contains(or_roster.roles, 'circulator')) and not contains(or_roster.recovering_physicians, declaration.pronouncing_clinician) and subset(or_roster.recovering_physicians, or_roster.physician_signatures)"
 action: hold
-message: "OR roster for a {donor_type} donor is incomplete (roles {or_roster.roles}) or a recovering physician has not signed."
-evidence: [donor_type, or_roster.roles, or_roster.recovering_physicians, or_roster.physician_signatures]
+message: "OR roster for a {donor_type} donor is incomplete (roles {or_roster.roles}), a recovering physician has not signed, or the clinician who declared death ({declaration.pronouncing_clinician}) is on the recovery team."
+evidence: [donor_type, or_roster.roles, or_roster.recovering_physicians, or_roster.physician_signatures, declaration.pronouncing_clinician]
 expires: P2Y
 inverse: retire
 tests: fixtures/SV-012/

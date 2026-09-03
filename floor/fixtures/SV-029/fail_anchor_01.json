@@ -1,0 +1,5 @@
+{"expect": "ALARM",
+ "note": "ANCHOR PLANT: sample validity runs from the DRAW, not from the result date. Drawn Aug 4, resulted Aug 8, tissue recovered Aug 13: 9.1 days from the draw (ALARM), 5.1 from the result (a false PASS).",
+ "anchor_plant": {"wrong_anchor": "serology.resulted_ts", "verdict_if_wrong": "PASS"},
+ "record": {"case_id": "TD-2026-0975", "serology": {"source": "reused_from_organ_case", "draw_ts": "2026-08-04T06:00:00Z", "resulted_ts": "2026-08-08T06:00:00Z"}, "recovery": {"start_ts": "2026-08-13T09:00:00Z"}, "as_of": "2026-08-20T00:00:00Z"},
+ "history": []}

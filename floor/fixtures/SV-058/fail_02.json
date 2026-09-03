@@ -1,0 +1,3 @@
+{"expect": "HOLD", "note": "a three-year-old breastfed eight months ago: past 18 months, but the breastfeeding limb still requires the birth mother",
+ "record": {"case_id": "TD-2026-1064", "donor": {"age_months": 36, "breastfed_within_12_months": "yes"}, "dre": {"subjects": ["donor"]}},
+ "history": []}

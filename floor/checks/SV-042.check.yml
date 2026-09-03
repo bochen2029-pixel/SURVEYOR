@@ -5,7 +5,7 @@
 id: SV-042
 title: regulator edition-change monitor - effective date vs audit window, with lead time
 family: revision
-layer: L1
+layer: L1/L2
 authority: "Quality-science invariant: regulatory-change readiness (the harvested AATB edition-transition case [H]); site lead time - pin at rung 05"
 trigger: continuous
 anchor: standards.next_edition_effective_ts

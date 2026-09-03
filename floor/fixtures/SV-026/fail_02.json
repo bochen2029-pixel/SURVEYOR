@@ -1,7 +1,7 @@
 {"expect": "HOLD", "note": "a crystalloid given 90 minutes before the draw was counted - outside the one-hour window",
  "record": {"case_id": "OD-2026-0512",
             "hemodilution": {"sample_draw_ts": "2026-08-17T10:00:00Z",
-                             "logged": {"blood_products": [], "crystalloids": [{"ref": "CR-9", "ts": "2026-08-17T08:30:00Z", "volume_ml": 500}]},
+                             "logged": {"blood_products": [], "blood_product_refs": [], "crystalloids": [{"ref": "CR-9", "ts": "2026-08-17T08:30:00Z", "volume_ml": 500}], "crystalloid_refs": ["CR-9"]},
                              "calc": {"blood_products": [], "blood_product_refs": [], "blood_products_ml": 0,
                                       "crystalloids": [{"ref": "CR-9", "ts": "2026-08-17T08:30:00Z", "volume_ml": 500}], "crystalloid_refs": ["CR-9"], "crystalloids_ml": 500}}},
  "history": []}

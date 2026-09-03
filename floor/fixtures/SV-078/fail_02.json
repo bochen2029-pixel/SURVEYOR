@@ -1,0 +1,3 @@
+{"expect": "HOLD", "note": "a case marked shared that lists one processor - the distribution list itself is incomplete",
+ "record": {"shared_case": {"id": "TD-2026-1083", "results": ["SER-1"], "processors": [{"processor_id": "PRC-A", "results_received": ["SER-1"]}]}},
+ "history": []}

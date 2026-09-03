@@ -1,13 +1,13 @@
 # SV-053 - recovery sequence numbers are unique, except that a tibia/fibula pair
-# lawfully shares one. Counted, not listed: the number of duplicate sequence
-# numbers must equal the number of declared pairs.
+# lawfully shares one. Per item: its sequence number occurs once, or it is a
+# declared pair number carried by exactly two items.
 id: SV-053
 title: no duplicate recovery sequence numbers (paired tibia/fibula exception)
 family: sequence
 layer: L1
 authority: "Quality-science invariant: unique specimen identification (AATB standards on labeling and identification); site tib/fib pairing rule [H] - pin at rung 05"
 trigger: on_write
-predicate: "count(recovery.items) - distinct(recovery.items, seq) == count(recovery.paired_sequence_numbers)"
+predicate: "every(recovery.items, occurrences(recovery.items, seq, seq) == 1 or (contains(recovery.paired_sequence_numbers, seq) and occurrences(recovery.items, seq, seq) == 2))"
 action: hold
 message: "Recovery sequence numbers repeat beyond the declared tibia/fibula pairs ({recovery.paired_sequence_numbers})."
 evidence: [recovery.items, recovery.paired_sequence_numbers]

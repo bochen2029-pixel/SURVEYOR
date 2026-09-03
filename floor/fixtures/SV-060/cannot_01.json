@@ -1,3 +1,3 @@
-{"expect": "CANNOT-EVALUATE", "note": "serology draw not yet recorded",
- "record": {"case_id": "OD-2026-0582", "abo": {"draw_ts": "2026-08-18T05:00:00Z"}, "serology": {}},
+{"expect": "CANNOT-EVALUATE", "note": "the second determination is not drawn yet",
+ "record": {"case_id": "OD-2026-0582", "abo": {"determination_1": {"draw_ts": "2026-08-18T05:00:00Z", "result": "A"}}},
  "history": []}

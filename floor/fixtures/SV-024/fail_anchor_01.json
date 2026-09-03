@@ -1,5 +1,5 @@
 {"expect": "ALARM",
  "note": "ANCHOR PLANT: specimen currency runs from COLLECTION, not from the result. Collected Aug 11 22:00, resulted Aug 12 20:00, clamp Aug 15 06:00: 80h from collection (ALARM), 58h from result (a false PASS).",
  "anchor_plant": {"wrong_anchor": "covid.resulted_ts", "verdict_if_wrong": "PASS"},
- "record": {"case_id": "OD-2026-0496", "recovery": {"organs": ["kidney_left"], "cross_clamp_ts": "2026-08-15T06:00:00Z"}, "covid": {"collected_ts": "2026-08-11T22:00:00Z", "resulted_ts": "2026-08-12T20:00:00Z", "result": "negative"}, "as_of": "2026-08-20T00:00:00Z"},
+ "record": {"case_id": "OD-2026-0496", "recovery": {"organs": ["KI-L"], "cross_clamp_ts": "2026-08-15T06:00:00Z"}, "covid": {"collected_ts": "2026-08-11T22:00:00Z", "resulted_ts": "2026-08-12T20:00:00Z", "result": "negative"}, "as_of": "2026-08-20T00:00:00Z"},
  "history": []}

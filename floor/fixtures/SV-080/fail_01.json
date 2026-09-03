@@ -1,4 +1,4 @@
 {"expect": "HOLD", "note": "a positive culture on one graft - contamination above zero",
  "record": {"case_id": "TD-2026-1091",
-            "release": {"contamination_pct": 4, "required_documents": [{"name": "dre", "status": "complete"}, {"name": "serology_panel", "status": "complete"}]}},
+            "release": {"contamination_pct": 4, "required_document_count": 2, "required_documents": [{"name": "dre", "status": "complete"}, {"name": "serology_panel", "status": "complete"}]}},
  "history": []}

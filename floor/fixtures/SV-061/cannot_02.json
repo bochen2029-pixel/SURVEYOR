@@ -1,0 +1,3 @@
+{"expect": "CANNOT-EVALUATE", "note": "an empty list and no statement either way about whether sites were assessed",
+ "record": {"case_id": "TD-2026-1075", "physical_assessment": {"injection_sites": []}},
+ "history": []}

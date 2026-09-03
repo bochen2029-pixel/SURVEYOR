@@ -1,19 +1,20 @@
-# SV-024 - the SARS-CoV-2 specimen is fresh at cross-clamp (collected within the 72
-# hours before it), and every lung donor has a lower respiratory specimen. The
+# SV-024 - every donor has a SARS-CoV-2 specimen by cross-clamp, collected within the
+# 72 hours before it, and every lung donor has a lower respiratory specimen. The
 # validity window runs from COLLECTION: with no clamp yet, an aging sample alarms
-# before it goes stale.
+# before it goes stale; at clamp, a missing specimen is a breach, not an unknown.
+# Organ codes are the controlled list (KI-L, KI-R, LU-L, LU-R, LI, HR, PA, IN).
 id: SV-024
-title: SARS-CoV-2 test collected within 72h before cross-clamp; lower respiratory specimen for every lung donor
+title: SARS-CoV-2 specimen present and collected within 72h before cross-clamp; lower respiratory specimen for every lung donor
 family: clocks
-layer: L0
-authority: "OPTN Policy 2.9 Required Deceased Donor Infectious Disease Testing (lower respiratory SARS-CoV-2 NAT for lung donors) + site 72-hour currency rule [H] - pin at rung 05"
+layer: L0/L2
+authority: "OPTN Policy 2.9 Required Deceased Donor Infectious Disease Testing (lower respiratory SARS-CoV-2 NAT for lung donors) - the mandated core; the 72-hour currency window is the site's rule [H] - pin at rung 05"
 trigger: continuous
 anchor: covid.collected_ts
 anchor_why: "specimen currency is measured from collection, not from the result; cross-clamp must fall inside the 72h window that collection opens"
-predicate: "within(covid.collected_ts, recovery.cross_clamp_ts, 72h) and (not exists(recovery.cross_clamp_ts) or minutes_between(covid.collected_ts, recovery.cross_clamp_ts) >= 0) and (contains(recovery.organs, 'lung') implies exists(covid.lower_respiratory_specimen_ref))"
+predicate: "(exists(recovery.cross_clamp_ts) implies exists(covid.result)) and (exists(covid.result) implies (within(covid.collected_ts, recovery.cross_clamp_ts, 72h) and (not exists(recovery.cross_clamp_ts) or minutes_between(covid.collected_ts, recovery.cross_clamp_ts) >= 0))) and ((contains(recovery.organs, 'LU-L') or contains(recovery.organs, 'LU-R')) implies exists(covid.lower_respiratory_specimen_ref))"
 action: alarm
-message: "SARS-CoV-2 specimen collected {covid.collected_ts} is outside the 72h window for cross-clamp, or a lung donor lacks a lower respiratory specimen."
-evidence: [covid.collected_ts, covid.lower_respiratory_specimen_ref, recovery.cross_clamp_ts, recovery.organs]
+message: "SARS-CoV-2 testing is missing or stale for cross-clamp (collected {covid.collected_ts}), or a lung donor lacks a lower respiratory specimen."
+evidence: [covid.collected_ts, covid.result, covid.lower_respiratory_specimen_ref, recovery.cross_clamp_ts, recovery.organs]
 expires: P2Y
 inverse: retire
 tests: fixtures/SV-024/

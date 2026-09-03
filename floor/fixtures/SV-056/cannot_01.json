@@ -1,3 +1,3 @@
 {"expect": "CANNOT-EVALUATE", "note": "the system did not export when the entry was made - sequence legality cannot be judged",
- "record": {"case_id": "OD-2026-0554", "entry": {"field": "vitals.hr", "documented_ts": "2026-08-18T09:00:00Z"}, "signoff": {"ts": "2026-08-18T12:00:00Z", "by": "STF-014"}},
+ "record": {"case_id": "OD-2026-0554", "entry": {"field": "vitals.hr", "documented_ts": "2026-08-18T09:00:00Z"}, "signoff": {"ts": "2026-08-18T12:00:00Z", "signed_by": "STF-014"}},
  "history": []}

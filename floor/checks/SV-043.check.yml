@@ -7,7 +7,7 @@ family: revision
 layer: L0
 authority: "CMS 42 CFR 486.326 (OPO human resources - qualified, trained personnel) + FDA 21 CFR 1271.170 (personnel) + AATB personnel standards - pin at rung 05"
 trigger: on_write
-predicate: "minutes_between(action.ts, competencies[action.performed_by][action.role].expires_ts) >= 0"
+predicate: "minutes_between(competencies[action.performed_by][action.role].granted_ts, action.ts) >= 0 and minutes_between(action.ts, competencies[action.performed_by][action.role].expires_ts) >= 0"
 action: hold
 message: "{action.performed_by} performed {action.role} work at {action.ts} without a current competency for that role."
 evidence: [action.performed_by, action.role, action.ts, competencies]

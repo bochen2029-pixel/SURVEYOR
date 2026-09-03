@@ -1,4 +1,4 @@
 {"expect": "CANNOT-EVALUATE", "note": "a metric with no variant label - the report cannot be judged for mixing",
- "record": {"report": {"id": "RPT-2026-08-X",
-                       "metric_families": [{"family": "organ_donors", "metrics": [{"value": 41}, {"variant": "cms_organ_donor", "value": 38}]}]}},
+ "record": {"report": {"id": "RPT-2026-08-A",
+                       "metrics": [{"family": "organ_donors", "value": 41, "section": 1}, {"family": "organ_donors", "variant": "cms_organ_donor", "value": 38, "section": 1}]}},
  "history": []}

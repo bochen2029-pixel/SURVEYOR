@@ -1,0 +1,5 @@
+{"expect": "ALARM",
+ "note": "ANCHOR PLANT: the processor window runs from recovery END, not from case close. Recovery ended Jul 1, case closed Jul 20, chart sent Aug 5: 35 days from recovery end (ALARM), 16 days from close (a false PASS).",
+ "anchor_plant": {"wrong_anchor": "case.closed_ts", "verdict_if_wrong": "PASS"},
+ "record": {"case_id": "TD-2026-0936", "tissue": {"category": "standard"}, "recovery": {"end_ts": "2026-07-01T10:00:00Z"}, "case": {"closed_ts": "2026-07-20T10:00:00Z"}, "chart": {"sent_to_processor_ts": "2026-08-05T10:00:00Z"}, "as_of": "2026-08-20T00:00:00Z"},
+ "history": []}

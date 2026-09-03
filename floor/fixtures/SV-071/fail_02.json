@@ -1,0 +1,4 @@
+{"expect": "HOLD", "note": "an empty required-field list - the site template was never loaded, so completeness cannot be claimed",
+ "record": {"case_id": "OD-2026-0603",
+            "authorization": {"required_fields": [], "method": "in_person"}},
+ "history": []}

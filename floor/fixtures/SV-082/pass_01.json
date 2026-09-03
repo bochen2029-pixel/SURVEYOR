@@ -1,4 +1,4 @@
 {"expect": "PASS", "note": "horizon reached, expectation met, graded",
  "record": {"capa": {"id": "CAPA-2026-014", "status": "sustained", "expectation": {"metric": "late_feedback_forms_per_100_cases", "target": 2, "horizon_ts": "2026-08-01T00:00:00Z"},
-                     "effectiveness": {"result": "met", "observed": 1, "data_ref": "FOLD-2026-07-LOS"}}, "as_of": "2026-08-14T00:00:00Z"},
+                     "effectiveness": {"result": "met", "observed": 1, "data_ref": "FOLD-2026-07-LINE-OF-SIGHT"}}, "as_of": "2026-08-14T00:00:00Z"},
  "history": []}

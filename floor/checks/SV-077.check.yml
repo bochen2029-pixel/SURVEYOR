@@ -6,7 +6,7 @@ family: reconciliation
 layer: L0
 authority: "OPTN Policy 18 data submission (donor organ disposition reporting) - pin at rung 05; site audit checklist [H]"
 trigger: on_close_attempt
-predicate: "every(organs, organ_page_disposition == summary_page_disposition)"
+predicate: "count(organs) > 0 and every(organs, organ_page_disposition == summary_page_disposition)"
 action: hold
 message: "An organ's disposition code differs between the organ-data page and the donor-summary page."
 evidence: [organs]

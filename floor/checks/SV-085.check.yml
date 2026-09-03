@@ -1,5 +1,7 @@
 # SV-085 - a report that mixes variants of a metric (organ donor vs CMS organ donor)
-# names the denominator on each, or it is flagged. Law A6 applied to the site's own
+# names the denominator on each, or it is flagged - wherever in the report the
+# variants appear (one flat metric list; a family with more than one variant is
+# one whose family count exceeds its variant count). Law A6 applied to the site's own
 # reporting: a number without its denominator is not a number.
 id: SV-085
 title: reports mixing metric variants without naming the denominator are flagged
@@ -7,10 +9,10 @@ family: release
 layer: L1
 authority: "Quality-science invariant: denominator discipline (LAWS.md A6; OPTN/SRTR metric definitions context) - pin at rung 05"
 trigger: on_close_attempt
-predicate: "every(report.metric_families, distinct(metrics, variant) <= 1 or every(metrics, exists(denominator)))"
+predicate: "every(report.metrics, exists(denominator) or occurrences(report.metrics, family, family) == occurrences(report.metrics, variant, variant))"
 action: flag
 message: "Report {report.id} mixes variants of a metric without naming each denominator."
-evidence: [report.id, report.metric_families]
+evidence: [report.id, report.metrics]
 expires: P1Y
 inverse: retire
 tests: fixtures/SV-085/

@@ -6,7 +6,7 @@ family: reconciliation
 layer: L1
 authority: "Quality-science invariant: result distribution completeness (AATB standards on communication of results context); site practice [H] - pin at rung 05"
 trigger: on_close_attempt
-predicate: "every(shared_case.processors, subset(shared_case.results, results_received))"
+predicate: "count(shared_case.processors) >= 2 and every(shared_case.processors, subset(shared_case.results, results_received))"
 action: hold
 message: "A processor on shared case {shared_case.id} has not received every result."
 evidence: [shared_case.id, shared_case.results, shared_case.processors]

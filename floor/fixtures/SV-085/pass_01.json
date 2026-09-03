@@ -1,6 +1,6 @@
-{"expect": "PASS", "note": "two variants of the donor count, each with its denominator named",
- "record": {"report": {"id": "RPT-2026-08-LOS",
-                       "metric_families": [{"family": "organ_donors", "metrics": [{"variant": "organ_donor", "value": 41, "denominator": "donors from whom at least one organ was recovered"},
-                                                                                  {"variant": "cms_organ_donor", "value": 38, "denominator": "CMS-defined organ donors (external death-record denominator, imported)"}]},
-                                           {"family": "tissue_donors", "metrics": [{"variant": "tissue_donor", "value": 70}]}]}},
+{"expect": "PASS", "note": "two variants of the donor count, each with its denominator named; a single-variant family needs none",
+ "record": {"report": {"id": "RPT-2026-08-LINE-OF-SIGHT",
+                       "metrics": [{"family": "organ_donors", "variant": "organ_donor", "value": 41, "denominator": "donors from whom at least one organ was recovered", "section": 2},
+                                   {"family": "organ_donors", "variant": "cms_organ_donor", "value": 38, "denominator": "CMS-defined organ donors (external death-record denominator, imported)", "section": 2},
+                                   {"family": "tissue_donors", "variant": "tissue_donor", "value": 70, "section": 3}]}},
  "history": []}

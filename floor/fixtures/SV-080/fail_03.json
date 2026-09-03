@@ -1,0 +1,4 @@
+{"expect": "HOLD", "note": "clean, and no documents on file at all - an empty list is not a complete set",
+ "record": {"case_id": "TD-2026-1094",
+            "release": {"contamination_pct": 0, "required_document_count": 4, "required_documents": []}},
+ "history": []}

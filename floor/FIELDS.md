@@ -2,12 +2,16 @@
 Regenerate: `python floor/engine.py --fields --write` (gates.py G-FIELDS enforces).
 Folded from the fixtures, so it is exact for what the checks have been proven against and silent about anything else. Types are observed, not declared: ts = ISO-8601 timestamp, blank = null or empty string.
 
-checks: 59 | fixtures: 256 | leaf paths: 285
+checks: 59 | fixtures: 281 | leaf paths: 306
 
 ## abo
 | path | observed types | carried by fixtures of |
 |---|---|---|
-| `abo.draw_ts` | ts | SV-059, SV-060 |
+| `abo.determination_1.draw_ts` | ts | SV-060 |
+| `abo.determination_1.result` | str | SV-060 |
+| `abo.determination_2.draw_ts` | ts | SV-060 |
+| `abo.determination_2.result` | str | SV-060 |
+| `abo.draw_ts` | ts | SV-059 |
 | `abo.subtype` | blank, str | SV-059 |
 | `abo.subtype_reason_code` | str | SV-059 |
 | `abo.type` | str | SV-059 |
@@ -63,18 +67,21 @@ checks: 59 | fixtures: 256 | leaf paths: 285
 ## authorization
 | path | observed types | carried by fixtures of |
 |---|---|---|
+| `authorization.authorizing_party_relationship` | str | SV-071 |
 | `authorization.categories` | list | SV-052 |
 | `authorization.categories[]` | str | SV-052 |
 | `authorization.donor_dob` | str | SV-001 |
 | `authorization.donor_name` | str | SV-001 |
 | `authorization.method` | str | SV-015, SV-054, SV-071, SV-072 |
+| `authorization.organs_authorized` | list | SV-071 |
+| `authorization.organs_authorized[]` | str | SV-071 |
 | `authorization.recording_ref` | blank, str | SV-072 |
 | `authorization.required_fields` | list | SV-071 |
-| `authorization.required_fields[].name` | str | SV-071 |
-| `authorization.required_fields[].value` | blank, str, ts | SV-071 |
+| `authorization.required_fields[]` | str | SV-071 |
+| `authorization.signed_ts` | ts | SV-071 |
 | `authorization.tissues_authorized` | list | SV-054 |
 | `authorization.tissues_authorized[]` | str | SV-054 |
-| `authorization.witness_affiliation` | str | SV-015 |
+| `authorization.witness_affiliation` | blank, str | SV-015, SV-071 |
 | `authorization.witness_role` | str | SV-015 |
 
 ## body_diagram
@@ -94,12 +101,17 @@ checks: 59 | fixtures: 256 | leaf paths: 285
 | `capa.expectation.metric` | blank, str | SV-081, SV-082 |
 | `capa.expectation.narrative` | str | SV-081 |
 | `capa.expectation.target` | blank, number | SV-081, SV-082 |
-| `capa.expires` | str | SV-081 |
+| `capa.expires` | ts | SV-081 |
 | `capa.id` | str | SV-081, SV-082 |
 | `capa.inverse` | str | SV-081 |
 | `capa.owner_role` | blank, str | SV-081 |
 | `capa.status` | str | SV-081, SV-082 |
 | `capa.variance_class` | str | SV-081 |
+
+## case
+| path | observed types | carried by fixtures of |
+|---|---|---|
+| `case.closed_ts` | ts | SV-021 |
 
 ## case_id
 | path | observed types | carried by fixtures of |
@@ -126,7 +138,9 @@ checks: 59 | fixtures: 256 | leaf paths: 285
 | path | observed types | carried by fixtures of |
 |---|---|---|
 | `competencies.STF-052.driver.expires_ts` | ts | SV-043 |
+| `competencies.STF-052.driver.granted_ts` | ts | SV-043 |
 | `competencies.STF-052.tissue_recovery_technician.expires_ts` | ts | SV-043 |
+| `competencies.STF-052.tissue_recovery_technician.granted_ts` | ts | SV-043 |
 
 ## contracts
 | path | observed types | carried by fixtures of |
@@ -183,6 +197,11 @@ checks: 59 | fixtures: 256 | leaf paths: 285
 |---|---|---|
 | `death.pronounced_ts` | ts | SV-028 |
 
+## declaration
+| path | observed types | carried by fixtures of |
+|---|---|---|
+| `declaration.pronouncing_clinician` | str | SV-012 |
+
 ## disease_transmission
 | path | observed types | carried by fixtures of |
 |---|---|---|
@@ -223,6 +242,7 @@ checks: 59 | fixtures: 256 | leaf paths: 285
 | path | observed types | carried by fixtures of |
 |---|---|---|
 | `donor.age_months` | number | SV-058 |
+| `donor.breastfed_within_12_months` | str | SV-058 |
 
 ## donor_band
 | path | observed types | carried by fixtures of |
@@ -297,6 +317,7 @@ checks: 59 | fixtures: 256 | leaf paths: 285
 | `flow_sheet.segments[].vitals` | list | SV-057 |
 | `flow_sheet.segments[].vitals[].name` | str | SV-057 |
 | `flow_sheet.segments[].vitals[].value` | blank, number | SV-057 |
+| `flow_sheet.vitals_per_segment` | number | SV-057 |
 
 ## form
 | path | observed types | carried by fixtures of |
@@ -322,10 +343,14 @@ checks: 59 | fixtures: 256 | leaf paths: 285
 | `hemodilution.calc.crystalloids[].ts` | ts | SV-026 |
 | `hemodilution.calc.crystalloids[].volume_ml` | number | SV-026 |
 | `hemodilution.calc.crystalloids_ml` | number | SV-026 |
+| `hemodilution.logged.blood_product_refs` | list | SV-026 |
+| `hemodilution.logged.blood_product_refs[]` | str | SV-026 |
 | `hemodilution.logged.blood_products` | list | SV-026 |
 | `hemodilution.logged.blood_products[].ref` | str | SV-026 |
 | `hemodilution.logged.blood_products[].ts` | ts | SV-026 |
 | `hemodilution.logged.blood_products[].volume_ml` | number | SV-026 |
+| `hemodilution.logged.crystalloid_refs` | list | SV-026 |
+| `hemodilution.logged.crystalloid_refs[]` | str | SV-026 |
 | `hemodilution.logged.crystalloids` | list | SV-026 |
 | `hemodilution.logged.crystalloids[].ref` | str | SV-026 |
 | `hemodilution.logged.crystalloids[].ts` | ts | SV-026 |
@@ -350,7 +375,7 @@ checks: 59 | fixtures: 256 | leaf paths: 285
 |---|---|---|
 | `labs.inr.collected_ts` | ts | SV-025 |
 | `labs.inr.resulted_ts` | ts | SV-025 |
-| `labs.inr.value` | str | SV-025 |
+| `labs.inr.value` | number | SV-025 |
 
 ## match_run
 | path | observed types | carried by fixtures of |
@@ -395,6 +420,7 @@ checks: 59 | fixtures: 256 | leaf paths: 285
 ## or_timeline
 | path | observed types | carried by fixtures of |
 |---|---|---|
+| `or_timeline.draping_ts` | ts | SV-027 |
 | `or_timeline.incision_ts` | ts | SV-027 |
 | `or_timeline.prep_complete_ts` | ts | SV-027 |
 
@@ -423,6 +449,7 @@ checks: 59 | fixtures: 256 | leaf paths: 285
 | `physical_assessment.injection_sites` | list | SV-061 |
 | `physical_assessment.injection_sites[].classification` | str | SV-061 |
 | `physical_assessment.injection_sites[].site` | str | SV-061 |
+| `physical_assessment.injection_sites_assessed` | str | SV-061 |
 
 ## prep
 | path | observed types | carried by fixtures of |
@@ -483,6 +510,7 @@ checks: 59 | fixtures: 256 | leaf paths: 285
 | path | observed types | carried by fixtures of |
 |---|---|---|
 | `release.contamination_pct` | number | SV-080 |
+| `release.required_document_count` | number | SV-080 |
 | `release.required_documents` | list | SV-080 |
 | `release.required_documents[].name` | str | SV-080 |
 | `release.required_documents[].status` | str | SV-080 |
@@ -491,12 +519,12 @@ checks: 59 | fixtures: 256 | leaf paths: 285
 | path | observed types | carried by fixtures of |
 |---|---|---|
 | `report.id` | str | SV-085 |
-| `report.metric_families` | list | SV-085 |
-| `report.metric_families[].family` | str | SV-085 |
-| `report.metric_families[].metrics` | list | SV-085 |
-| `report.metric_families[].metrics[].denominator` | str | SV-085 |
-| `report.metric_families[].metrics[].value` | number | SV-085 |
-| `report.metric_families[].metrics[].variant` | str | SV-085 |
+| `report.metrics` | list | SV-085 |
+| `report.metrics[].denominator` | str | SV-085 |
+| `report.metrics[].family` | str | SV-085 |
+| `report.metrics[].section` | number | SV-085 |
+| `report.metrics[].value` | number | SV-085 |
+| `report.metrics[].variant` | str | SV-085 |
 
 ## research_tab
 | path | observed types | carried by fixtures of |
@@ -521,16 +549,13 @@ checks: 59 | fixtures: 256 | leaf paths: 285
 ## serology
 | path | observed types | carried by fixtures of |
 |---|---|---|
-| `serology.draw_ts` | ts | SV-029, SV-060 |
+| `serology.confirmatory_result_ts` | ts | SV-023 |
+| `serology.draw_ts` | ts | SV-002, SV-029 |
 | `serology.reactive_marker` | str | SV-023 |
 | `serology.reactive_result_ts` | ts | SV-023 |
+| `serology.result_ref` | str | SV-002 |
+| `serology.resulted_ts` | ts | SV-029 |
 | `serology.source` | str | SV-029 |
-
-## serology_entry
-| path | observed types | carried by fixtures of |
-|---|---|---|
-| `serology_entry.draw_ts` | ts | SV-002 |
-| `serology_entry.result_ref` | str | SV-002 |
 
 ## serology_report
 | path | observed types | carried by fixtures of |
@@ -554,7 +579,7 @@ checks: 59 | fixtures: 256 | leaf paths: 285
 ## signoff
 | path | observed types | carried by fixtures of |
 |---|---|---|
-| `signoff.by` | str | SV-056 |
+| `signoff.signed_by` | str | SV-056 |
 | `signoff.ts` | ts | SV-056 |
 
 ## standards
@@ -581,13 +606,13 @@ checks: 59 | fixtures: 256 | leaf paths: 285
 | check | trigger | predicate |
 |---|---|---|
 | SV-001 | on_close_attempt | `authorization.donor_name == chart.donor_name and authorization.donor_dob == chart.donor_dob and dre.donor_name == chart.donor_name and dre.donor_dob == chart.donor_dob and document_of_gift.donor_name == chart.donor_name and document_of_gift.donor_dob == chart.donor_dob` |
-| SV-002 | on_write | `serology_report.donor_id == chart.donor_id and serology_report.donor_dob == chart.donor_dob and serology_report.draw_ts == serology_entry.draw_ts` |
+| SV-002 | on_write | `serology_report.donor_id == chart.donor_id and serology_report.donor_dob == chart.donor_dob and minutes_between(serology_report.draw_ts, serology.draw_ts) == 0` |
 | SV-003 | on_close_attempt | `donor_band.number == recovery_paperwork.donor_band_number` |
-| SV-004 | on_close_attempt | `count(donor_verification.identifiers) >= 2 and contains(donor_verification.sources, 'bedside_nurse') and contains(donor_verification.sources, 'hospital_wristband') and contains(donor_verification.sources, 'donor_band')` |
+| SV-004 | on_close_attempt | `distinct(donor_verification.identifiers) >= 2 and contains(donor_verification.sources, 'bedside_nurse') and contains(donor_verification.sources, 'hospital_wristband') and contains(donor_verification.sources, 'donor_band')` |
 | SV-005 | on_close_attempt | `same_set(body_diagram.sites, narrative.sites)` |
 | SV-010 | on_close_attempt | `distinct(hla_abo.coordinator_signatures) >= 2 and exists(hla_abo.lab_signature)` |
 | SV-011 | on_close_attempt | `distinct(donor_verification.verified_by) >= 2 and subset(donor_verification.verified_by, team_worksheet.roster)` |
-| SV-012 | on_close_attempt | `(donor_type == 'brain_dead' implies contains(or_roster.roles, 'anesthesiologist')) and (donor_type == 'dcd' implies contains(or_roster.roles, 'circulator')) and subset(or_roster.recovering_physicians, or_roster.physician_signatures)` |
+| SV-012 | on_close_attempt | `(donor_type == 'brain_dead' implies contains(or_roster.roles, 'anesthesiologist')) and (donor_type == 'dcd' implies contains(or_roster.roles, 'circulator')) and not contains(or_roster.recovering_physicians, declaration.pronouncing_clinician) and subset(or_roster.recovering_physicians, or_roster.physician_signatures)` |
 | SV-013 | on_write | `edit.class != 'routine' implies exists(edit.case_note_ref)` |
 | SV-014 | on_write | `every(edits, exists(editor_id) and exists(ts) and editor_id == session_actor_id)` |
 | SV-015 | on_close_attempt | `authorization.witness_affiliation == 'hospital_care_team'` |
@@ -595,48 +620,48 @@ checks: 59 | fixtures: 256 | leaf paths: 285
 | SV-021 | continuous | `(tissue.category == 'fresh' implies within(recovery.end_ts, chart.sent_to_processor_ts, 10d)) and (tissue.category != 'fresh' implies within(recovery.end_ts, chart.sent_to_processor_ts, 30d))` |
 | SV-022 | continuous | `within(disease_transmission.info_received_ts, disease_transmission.notified_ts, 24h)` |
 | SV-023 | continuous | `within(serology.reactive_result_ts, county_epidemiology.notified_ts, 24h)` |
-| SV-024 | continuous | `within(covid.collected_ts, recovery.cross_clamp_ts, 72h) and (not exists(recovery.cross_clamp_ts) or minutes_between(covid.collected_ts, recovery.cross_clamp_ts) >= 0) and (contains(recovery.organs, 'lung') implies exists(covid.lower_respiratory_specimen_ref))` |
-| SV-025 | continuous | `contains(allocation.organs, 'liver') implies (within(labs.inr.collected_ts, allocation.start_ts, 12h) and (not exists(allocation.start_ts) or minutes_between(labs.inr.collected_ts, allocation.start_ts) >= 0))` |
-| SV-026 | on_write | `every(hemodilution.calc.blood_products, minutes_between(ts, hemodilution.sample_draw_ts) >= 0 and minutes_between(ts, hemodilution.sample_draw_ts) <= 48h) and every(hemodilution.logged.blood_products, minutes_between(ts, hemodilution.sample_draw_ts) < 0 or minutes_between(ts, hemodilution.sample_draw_ts) > 48h or contains(hemodilution.calc.blood_product_refs, ref)) and sum(hemodilution.calc.blood_products, volume_ml) == hemodilution.calc.blood_products_ml and every(hemodilution.calc.crystalloids, minutes_between(ts, hemodilution.sample_draw_ts) >= 0 and minutes_between(ts, hemodilution.sample_draw_ts) <= 1h) and every(hemodilution.logged.crystalloids, minutes_between(ts, hemodilution.sample_draw_ts) < 0 or minutes_between(ts, hemodilution.sample_draw_ts) > 1h or contains(hemodilution.calc.crystalloid_refs, ref)) and sum(hemodilution.calc.crystalloids, volume_ml) == hemodilution.calc.crystalloids_ml` |
+| SV-024 | continuous | `(exists(recovery.cross_clamp_ts) implies exists(covid.result)) and (exists(covid.result) implies (within(covid.collected_ts, recovery.cross_clamp_ts, 72h) and (not exists(recovery.cross_clamp_ts) or minutes_between(covid.collected_ts, recovery.cross_clamp_ts) >= 0))) and ((contains(recovery.organs, 'LU-L') or contains(recovery.organs, 'LU-R')) implies exists(covid.lower_respiratory_specimen_ref))` |
+| SV-025 | continuous | `contains(allocation.organs, 'LI') implies (within(labs.inr.collected_ts, allocation.start_ts, 12h) and (not exists(allocation.start_ts) or minutes_between(labs.inr.collected_ts, allocation.start_ts) >= 0))` |
+| SV-026 | on_write | `every(hemodilution.calc.blood_products, contains(hemodilution.logged.blood_product_refs, ref) and minutes_between(ts, hemodilution.sample_draw_ts) >= 0 and minutes_between(ts, hemodilution.sample_draw_ts) <= 48h) and every(hemodilution.logged.blood_products, minutes_between(ts, hemodilution.sample_draw_ts) < 0 or minutes_between(ts, hemodilution.sample_draw_ts) > 48h or contains(hemodilution.calc.blood_product_refs, ref)) and sum(hemodilution.calc.blood_products, volume_ml) == hemodilution.calc.blood_products_ml and every(hemodilution.calc.crystalloids, contains(hemodilution.logged.crystalloid_refs, ref) and minutes_between(ts, hemodilution.sample_draw_ts) >= 0 and minutes_between(ts, hemodilution.sample_draw_ts) <= 1h) and every(hemodilution.logged.crystalloids, minutes_between(ts, hemodilution.sample_draw_ts) < 0 or minutes_between(ts, hemodilution.sample_draw_ts) > 1h or contains(hemodilution.calc.crystalloid_refs, ref)) and sum(hemodilution.calc.crystalloids, volume_ml) == hemodilution.calc.crystalloids_ml` |
 | SV-027 | continuous | `within(or_timeline.prep_complete_ts, or_timeline.incision_ts, 75m)` |
-| SV-028 | continuous | `(minutes_between(death.pronounced_ts, cooling.initial_ts) <= 12h implies within(death.pronounced_ts, recovery.start_ts, 24h)) and (minutes_between(death.pronounced_ts, cooling.initial_ts) > 12h implies within(death.pronounced_ts, recovery.start_ts, 15h)) and sum(refrigeration.out_intervals, minutes_between(out_ts, in_ts)) <= 15h` |
+| SV-028 | continuous | `(not exists(cooling.initial_ts) implies within(death.pronounced_ts, recovery.start_ts, 15h)) and (exists(cooling.initial_ts) implies ((minutes_between(death.pronounced_ts, cooling.initial_ts) <= 12h implies within(death.pronounced_ts, recovery.start_ts, 24h)) and (minutes_between(death.pronounced_ts, cooling.initial_ts) > 12h implies within(death.pronounced_ts, recovery.start_ts, 15h)))) and sum(refrigeration.out_intervals, minutes_between(out_ts, in_ts)) <= 15h` |
 | SV-029 | continuous | `serology.source == 'reused_from_organ_case' implies (within(serology.draw_ts, recovery.start_ts, 7d) and (not exists(recovery.start_ts) or minutes_between(recovery.start_ts, serology.draw_ts) <= 7d))` |
 | SV-030 | continuous | `within(recovery.organ_recovery_ts, feedback.submitted_ts, 5bd)` |
 | SV-031 | continuous | `within(feedback.submitted_ts, ddr.submitted_ts, 30d)` |
-| SV-032 | continuous | `by(month_end_following(referral.received_ts), dnr.submitted_ts)` |
+| SV-032 | continuous | `within(month_end_of(referral.received_ts), dnr.submitted_ts, 30d)` |
 | SV-033 | continuous | `within(referral.received_ts, onsite.arrived_ts, 90m)` |
-| SV-034 | continuous | `exists(allocation.unstable_donor_exception_ref) or (every_pair(allocation.offers, minutes_between(prev.sent_ts, next.sent_ts) <= 30m) and within(allocation.latest_offer_ts, allocation.closed_ts, 30m))` |
+| SV-034 | continuous | `exists(allocation.unstable_donor_exception_ref) or (every_pair(allocation.offers, minutes_between(prev.sent_ts, next.sent_ts) >= 0 and minutes_between(prev.sent_ts, next.sent_ts) <= 30m) and within(allocation.latest_offer_ts, allocation.closed_ts, 30m))` |
 | SV-035 | continuous | `every(contracts, minutes_between(as_of, notice_deadline_ts) > 120d or exists(decision_ref))` |
 | SV-040 | on_write | `form.revision_used == document_control.current_revision_at_use[form.document_id]` |
 | SV-041 | on_write | `document.status == 'effective' implies subset(document.required_approval_roles, document.approved_roles)` |
 | SV-042 | continuous | `every(standards, not exists(next_edition) or adopted_edition == next_edition or minutes_between(as_of, next_edition_effective_ts) > 90d)` |
-| SV-043 | on_write | `minutes_between(action.ts, competencies[action.performed_by][action.role].expires_ts) >= 0` |
-| SV-050 | on_close_attempt | `every(dre.branches, parent_answer == 'yes' implies every(children, exists(answer)))` |
+| SV-043 | on_write | `minutes_between(competencies[action.performed_by][action.role].granted_ts, action.ts) >= 0 and minutes_between(action.ts, competencies[action.performed_by][action.role].expires_ts) >= 0` |
+| SV-050 | on_close_attempt | `count(dre.branches) > 0 and every(dre.branches, parent_answer == 'yes' implies every(children, exists(answer)))` |
 | SV-051 | on_close_attempt | `every(corrections, method == 'single_line_through' and exists(initialed_by) and exists(dated))` |
 | SV-052 | on_write | `subset(authorization.categories, controlled_vocabulary.authorized_categories)` |
-| SV-053 | on_write | `count(recovery.items) - distinct(recovery.items, seq) == count(recovery.paired_sequence_numbers)` |
+| SV-053 | on_write | `every(recovery.items, occurrences(recovery.items, seq, seq) == 1 or (contains(recovery.paired_sequence_numbers, seq) and occurrences(recovery.items, seq, seq) == 2))` |
 | SV-054 | on_close_attempt | `subset(recovery.tissues_recovered, authorization.tissues_authorized)` |
 | SV-055 | on_write | `minutes_between(inspection.pre_inspection_ts, prep.start_ts) > 0` |
 | SV-056 | on_write | `not exists(signoff.ts) or minutes_between(signoff.ts, entry.entered_ts) <= 0 or minutes_between(signoff.ts, entry.documented_ts) >= 0` |
-| SV-057 | on_close_attempt | `every_pair(flow_sheet.segments, minutes_between(prev.end_ts, next.start_ts) == 1) and every(flow_sheet.segments, every(vitals, exists(value)))` |
-| SV-058 | on_close_attempt | `donor.age_months > 18 or (contains(dre.subjects, 'donor') and contains(dre.subjects, 'birth_mother'))` |
+| SV-057 | on_close_attempt | `every_pair(flow_sheet.segments, minutes_between(prev.end_ts, next.start_ts) == 1) and every(flow_sheet.segments, count(vitals) >= flow_sheet.vitals_per_segment and every(vitals, exists(value)))` |
+| SV-058 | on_close_attempt | `(donor.age_months > 18 and donor.breastfed_within_12_months != 'yes') or (contains(dre.subjects, 'donor') and contains(dre.subjects, 'birth_mother'))` |
 | SV-059 | on_write | `(abo.type == 'A' or abo.type == 'AB') implies (exists(abo.subtype) or exists(abo.subtype_reason_code))` |
-| SV-060 | on_write | `abo.draw_ts != serology.draw_ts` |
-| SV-061 | on_write | `every(physical_assessment.injection_sites, classification == 'medical' or classification == 'non_medical')` |
+| SV-060 | on_write | `minutes_between(abo.determination_1.draw_ts, abo.determination_2.draw_ts) != 0` |
+| SV-061 | on_write | `(count(physical_assessment.injection_sites) > 0 or physical_assessment.injection_sites_assessed == 'yes') and every(physical_assessment.injection_sites, classification == 'medical' or classification == 'non_medical')` |
 | SV-062 | on_mount | `not contains(check.verification_fields, check.corrects_field)` |
 | SV-070 | on_write | `count(active_primary_offers[organ_id]) <= 1` |
-| SV-071 | on_close_attempt | `every(authorization.required_fields, exists(value))` |
+| SV-071 | on_close_attempt | `count(authorization.required_fields) > 0 and every(authorization.required_fields, exists(authorization[value]))` |
 | SV-072 | on_close_attempt | `authorization.method != 'phone' or exists(authorization.recording_ref)` |
 | SV-073 | on_close_attempt | `same_set(research_tab.specimens, or_summary.research_specimens)` |
 | SV-074 | on_write | `subset(perfusion_screening.centers, match_run.centers)` |
 | SV-075 | on_write | `every(allocation.declines, exists(reason_code) and (classification == 'disqualifying' or classification == 'non_disqualifying') and (classification != 'disqualifying' or list_status == 'removed'))` |
 | SV-076 | on_write | `every(allocation.offers, center_bypassed != 'yes' or primary_list_exhausted_at_send == 'yes')` |
-| SV-077 | on_close_attempt | `every(organs, organ_page_disposition == summary_page_disposition)` |
-| SV-078 | on_close_attempt | `every(shared_case.processors, subset(shared_case.results, results_received))` |
-| SV-080 | on_close_attempt | `release.contamination_pct == 0 and every(release.required_documents, status == 'complete')` |
+| SV-077 | on_close_attempt | `count(organs) > 0 and every(organs, organ_page_disposition == summary_page_disposition)` |
+| SV-078 | on_close_attempt | `count(shared_case.processors) >= 2 and every(shared_case.processors, subset(shared_case.results, results_received))` |
+| SV-080 | on_close_attempt | `release.contamination_pct == 0 and count(release.required_documents) >= release.required_document_count and every(release.required_documents, status == 'complete')` |
 | SV-081 | on_write | `exists(capa.owner_role) and exists(capa.expectation.metric) and exists(capa.expectation.baseline) and exists(capa.expectation.target) and exists(capa.expectation.horizon_ts) and exists(capa.expires) and exists(capa.inverse)` |
 | SV-082 | continuous | `minutes_between(capa.expectation.horizon_ts, as_of) < 0 or (exists(capa.effectiveness.result) and (capa.effectiveness.result == 'met' or (capa.status == 'returned_to_committee' and exists(capa.effectiveness.data_ref))))` |
 | SV-083 | on_write | `risk.priority < risk_register.owner_required_at_priority or (exists(risk.owner_role) and exists(risk.review_ts))` |
-| SV-084 | continuous | `within(qapi.last_board_presentation_ts, qapi.next_board_presentation_ts, 365d)` |
-| SV-085 | on_close_attempt | `every(report.metric_families, distinct(metrics, variant) <= 1 or every(metrics, exists(denominator)))` |
+| SV-084 | continuous | `within(qapi.last_board_presentation_ts, qapi.next_board_presentation_ts, 366d)` |
+| SV-085 | on_close_attempt | `every(report.metrics, exists(denominator) or occurrences(report.metrics, family, family) == occurrences(report.metrics, variant, variant))` |
 

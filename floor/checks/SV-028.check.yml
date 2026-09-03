@@ -1,5 +1,5 @@
 # SV-028 - the refrigeration clocks: recovery starts within 24h of death if the body
-# was cooled within 12h, else within 15h; and the body's cumulative time out of
+# was cooled within 12h, else within 15h (a body never cooled is the 15h case); and the body's cumulative time out of
 # refrigeration (every unrefrigerated interval, INCLUDING death-to-first-cooling,
 # as the adapter lists them) never exceeds 15h. Everything anchors to pronouncement.
 id: SV-028
@@ -10,7 +10,7 @@ authority: "AATB Standards for Tissue Banking - time limits for recovery relativ
 trigger: continuous
 anchor: death.pronounced_ts
 anchor_why: "every refrigeration clock anchors to pronouncement of death (asystole) - not to referral, not to arrival at the morgue, not to authorization"
-predicate: "(minutes_between(death.pronounced_ts, cooling.initial_ts) <= 12h implies within(death.pronounced_ts, recovery.start_ts, 24h)) and (minutes_between(death.pronounced_ts, cooling.initial_ts) > 12h implies within(death.pronounced_ts, recovery.start_ts, 15h)) and sum(refrigeration.out_intervals, minutes_between(out_ts, in_ts)) <= 15h"
+predicate: "(not exists(cooling.initial_ts) implies within(death.pronounced_ts, recovery.start_ts, 15h)) and (exists(cooling.initial_ts) implies ((minutes_between(death.pronounced_ts, cooling.initial_ts) <= 12h implies within(death.pronounced_ts, recovery.start_ts, 24h)) and (minutes_between(death.pronounced_ts, cooling.initial_ts) > 12h implies within(death.pronounced_ts, recovery.start_ts, 15h)))) and sum(refrigeration.out_intervals, minutes_between(out_ts, in_ts)) <= 15h"
 action: alarm
 message: "Refrigeration clock breached for death at {death.pronounced_ts}: recovery start window or the 15h cumulative unrefrigerated cap."
 evidence: [death.pronounced_ts, cooling.initial_ts, recovery.start_ts, refrigeration.out_intervals]

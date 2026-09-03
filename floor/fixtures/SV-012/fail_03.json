@@ -1,0 +1,6 @@
+{"expect": "HOLD",
+ "note": "the conflict of interest: the physician who declared death is also a recovering physician (OPTN 2.14.A)",
+ "record": {"case_id": "OD-2026-0445", "donor_type": "dcd", "declaration": {"pronouncing_clinician": "STF-301"},
+            "or_roster": {"roles": ["circulator", "recovery_surgeon", "coordinator"],
+                          "recovering_physicians": ["STF-301"], "physician_signatures": ["STF-301"]}},
+ "history": []}

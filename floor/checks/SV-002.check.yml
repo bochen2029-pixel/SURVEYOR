@@ -7,10 +7,10 @@ family: identity
 layer: L1
 authority: "Quality-science invariant: result-to-record identity match (site audit checklist [H]); FDA 21 CFR 1271 Subpart C donor-eligibility context - pin at rung 05"
 trigger: on_write
-predicate: "serology_report.donor_id == chart.donor_id and serology_report.donor_dob == chart.donor_dob and serology_report.draw_ts == serology_entry.draw_ts"
+predicate: "serology_report.donor_id == chart.donor_id and serology_report.donor_dob == chart.donor_dob and minutes_between(serology_report.draw_ts, serology.draw_ts) == 0"
 action: hold
 message: "Serology report identity does not match the record entry (report donor {serology_report.donor_id}, draw {serology_report.draw_ts})."
-evidence: [serology_report.donor_id, serology_report.donor_dob, serology_report.draw_ts, serology_entry.draw_ts]
+evidence: [serology_report.donor_id, serology_report.donor_dob, serology_report.draw_ts, serology.draw_ts]
 expires: P1Y
 inverse: retire
 tests: fixtures/SV-002/

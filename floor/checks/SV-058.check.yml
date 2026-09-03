@@ -1,15 +1,16 @@
-# SV-058 - an infant donor (18 months or younger) needs two risk-assessment
-# interviews: the donor's and the birth mother's.
+# SV-058 - an infant donor (18 months or younger), or any child breastfed within
+# the last 12 months, needs two risk-assessment interviews: the donor's and the
+# birth mother's.
 id: SV-058
-title: donor 18 months or younger implies two DREs (donor and birth mother)
+title: donor 18 months or younger, or breastfed within 12 months, implies two DREs (donor and birth mother)
 family: sequence
 layer: L0
-authority: "FDA donor-eligibility guidance under 21 CFR 1271.75 (donor 18 months or younger: birth mother risk screening) + AATB standards - pin at rung 05"
+authority: "FDA donor-eligibility guidance under 21 CFR 1271.75 (donor 18 months or younger, or breastfed within the preceding 12 months: birth mother risk screening) + AATB standards - pin at rung 05"
 trigger: on_close_attempt
-predicate: "donor.age_months > 18 or (contains(dre.subjects, 'donor') and contains(dre.subjects, 'birth_mother'))"
+predicate: "(donor.age_months > 18 and donor.breastfed_within_12_months != 'yes') or (contains(dre.subjects, 'donor') and contains(dre.subjects, 'birth_mother'))"
 action: hold
 message: "Donor aged {donor.age_months} months requires DREs for both the donor and the birth mother; recorded: {dre.subjects}."
-evidence: [donor.age_months, dre.subjects]
+evidence: [donor.age_months, donor.breastfed_within_12_months, dre.subjects]
 expires: P2Y
 inverse: retire
 tests: fixtures/SV-058/

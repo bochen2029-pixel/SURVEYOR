@@ -26,17 +26,23 @@ THE PREDICATE DSL v1 (grown from v0 at S2; v0 is a strict subset - tape decision
                | same_set(PATH, PATH)         both lists hold the same values
                | every(PATH, pred)            for each item: item fields resolve first, then the record
                | every_pair(PATH, pred)       for each adjacent pair: prev.<field> / next.<field>
-               | within(PATH, PATH, DUR)      clock: done - anchor <= bound; done missing -> as_of - anchor <= bound
+               | within(expr, PATH, DUR)      clock: done - anchor <= bound; done missing -> as_of - anchor <= bound
                | by(expr, PATH)               clock: done <= deadline; done missing -> as_of <= deadline
                | expr CMP expr
     expr      := term ( ('+'|'-') term )*
     term      := count(PATH) | distinct(PATH [, IDENT]) | sum(PATH, expr)
+               | occurrences(PATH, IDENT, expr)  how many items of the list carry that field == expr
                | minutes_between(expr, expr)  second minus first, in minutes
+               | month_end_of(expr)           the timestamp ending the given timestamp's month
                | month_end_following(expr)    the timestamp ending the month after the given one
                | PATH | NUMBER | DUR | 'string' | true | false
     PATH      := IDENT ( '[' PATH ']' | '.' IDENT )*   a[b] indexes a by the VALUE found at path b
     DUR       := NUMBER ('m'|'h'|'d'|'bd')             minutes; bd = business days, within() only
     CMP       := <= | >= | == | != | < | >
+Reserved words (and, or, not, implies, true, false, every function name, prev, next)
+are refused in EVERY path segment, not only the first: a record field may not be
+named `by` or `next`. v1.1 (S2b, after the independent review): occurrences(),
+month_end_of(), within() taking an expression as its anchor, the L1/L2 layer tag.
 Semantics (three-state honesty, law A4): missing data -> CANNOT-EVALUATE everywhere
 except inside exists(); blank ("" / null) counts as missing; a type mismatch in a
 comparison is CANNOT-EVALUATE, never a silent False. and/or/implies evaluate left to
@@ -75,7 +81,7 @@ FORBIDDEN_IMPORTS = re.compile(
 # The check schema (law A3: typed, sourced, expiring, carrying its inverse).
 REQUIRED_KEYS = ("id", "title", "family", "layer", "authority", "trigger", "predicate",
                  "action", "message", "evidence", "expires", "inverse", "tests")
-LAYERS = {"L0", "L1", "L2", "L0/L2"}
+LAYERS = {"L0", "L1", "L2", "L0/L2", "L1/L2"}
 TRIGGERS = {"on_write", "on_close_attempt", "continuous", "on_mount"}
 ACTIONS = {"hold", "flag", "alarm"}
 
@@ -146,7 +152,9 @@ _TOKEN = re.compile(
     r"\d+(?:bd|m|h|d)\b|-?\d+(?:\.\d+)?|-|'[^']*'|\"[^\"]*\"|[A-Za-z_][A-Za-z0-9_]*)")
 _KEYWORDS = {"and", "or", "not", "implies", "true", "false"}
 _BOOL_FNS = {"exists", "contains", "subset", "same_set", "every", "every_pair", "within", "by"}
-_EXPR_FNS = {"count", "distinct", "sum", "minutes_between", "month_end_following"}
+_EXPR_FNS = {"count", "distinct", "sum", "occurrences", "minutes_between", "month_end_of",
+             "month_end_following"}
+_RESERVED = _KEYWORDS | _BOOL_FNS | _EXPR_FNS | {"prev", "next"}
 _CMP = ("<=", ">=", "==", "!=", "<", ">")
 _DUR_UNIT = {"m": 1, "h": 60, "d": 1440}
 
@@ -248,7 +256,7 @@ class _Parser:
             self.take(",")
             node = {"op": fn, "a": p, "b": self.parse_pred()}
         elif fn == "within":
-            anchor = self.parse_path()
+            anchor = self.parse_expr()
             self.take(",")
             done = self.parse_path()
             self.take(",")
@@ -323,27 +331,40 @@ class _Parser:
             p = self.parse_path()
             self.take(",")
             node = {"op": "sum", "a": p, "b": self.parse_expr()}
+        elif fn == "occurrences":
+            p = self.parse_path()
+            self.take(",")
+            field = self.take()
+            if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", field) or field in _RESERVED:
+                raise ValueError(f"occurrences(): expected a field name, got {field!r}")
+            self.take(",")
+            node = {"op": "occurrences", "a": p, "field": field, "b": self.parse_expr()}
         elif fn == "minutes_between":
             a = self.parse_expr()
             self.take(",")
             node = {"op": "minutes_between", "a": a, "b": self.parse_expr()}
+        elif fn == "month_end_of":
+            node = {"op": "month_end_of", "a": self.parse_expr()}
         else:  # month_end_following
             node = {"op": "month_end_following", "a": self.parse_expr()}
         self.take(")")
         return node
 
-    def parse_path(self) -> dict:
+    def _segment(self, what: str, root: bool = False) -> str:
         name = self.take()
-        if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", name) or name in _KEYWORDS \
-           or name in _BOOL_FNS or name in _EXPR_FNS:
-            raise ValueError(f"expected a field path, got {name!r}")
-        steps: list[dict] = [{"k": "name", "v": name}]
+        reserved = _RESERVED - ({"prev", "next"} if root else set())   # pair scopes are lawful roots
+        if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", name) or name in reserved:
+            raise ValueError(f"expected a {what}, got {name!r} (reserved words cannot name fields)")
+        return name
+
+    def parse_path(self) -> dict:
+        steps: list[dict] = [{"k": "name", "v": self._segment("field path", root=True)}]
         while self.peek() in ("[", "."):
             if self.take() == "[":
                 steps.append({"k": "index_by", "v": self.parse_path()})
                 self.take("]")
             else:
-                steps.append({"k": "field", "v": self.take()})
+                steps.append({"k": "field", "v": self._segment("field name")})
         return {"op": "path", "steps": steps}
 
 
@@ -426,6 +447,11 @@ def _business_days(a: datetime, b: datetime) -> int:
         if d.weekday() < 5:
             n += 1
     return sign * n
+
+
+def _month_end_of(dt: datetime) -> str:
+    last = calendar.monthrange(dt.year, dt.month)[1]
+    return f"{dt.year:04d}-{dt.month:02d}-{last:02d}T23:59:59Z"
 
 
 def _month_end_following(dt: datetime) -> str:
@@ -516,10 +542,24 @@ def _eval(node: dict, scopes: list[dict]) -> Any:
                 raise CannotEvaluate("sum() over non-numbers")
             total += v
         return total
+    if op == "occurrences":
+        items = _list_at(node["a"], scopes, "occurrences()")
+        want = _eval(node["b"], scopes)
+        if want is None or want == "":
+            raise CannotEvaluate("occurrences(): blank value to count")
+        n = 0
+        for it in items:
+            if not isinstance(it, dict) or node["field"] not in it:
+                raise CannotEvaluate(f"occurrences(): item lacks {node['field']!r}")
+            if it[node["field"]] == want:
+                n += 1
+        return n
     if op == "minutes_between":
         a = _ts(_eval(node["a"], scopes), "minutes_between() first argument")
         b = _ts(_eval(node["b"], scopes), "minutes_between() second argument")
         return _minutes(a, b)
+    if op == "month_end_of":
+        return _month_end_of(_ts(_eval(node["a"], scopes), "month_end_of()"))
     if op == "month_end_following":
         return _month_end_following(_ts(_eval(node["a"], scopes), "month_end_following()"))
     # -- boolean nodes
@@ -558,7 +598,7 @@ def _eval(node: dict, scopes: list[dict]) -> Any:
             raise cannot
         return all(verdicts)
     if op == "within":
-        anchor = _ts(_resolve_path(node["a"], scopes), "anchor " + _path_text(node["a"]))
+        anchor = _ts(_eval(node["a"], scopes), "anchor")
         end = _done_or_as_of(node["b"], scopes)
         bound = node["bound"]
         if bound["unit"] == "bd":
@@ -779,10 +819,30 @@ def selftest() -> list[str]:
     case("m[f.id].rev == f.rev", {"m": {"F1": {"rev": "R5"}}, "f": {"id": "F1", "rev": "R5"}}, "PASS")
     case("m[f.id].rev == f.rev", {"m": {"F1": {"rev": "R5"}}, "f": {"id": "F1", "rev": "R4"}}, "HOLD")
     case("m[f.id] == 'x'", {"m": {"F1": "x"}, "f": {}}, "CANNOT-EVALUATE")
+    # index by a quantified scalar: every named field must be present on the object
+    case("every(req, exists(auth[value]))", {"req": ["a", "b"], "auth": {"a": 1, "b": "x"}}, "PASS")
+    case("every(req, exists(auth[value]))", {"req": ["a", "b"], "auth": {"a": 1, "b": ""}}, "HOLD")
+    case("every(req, exists(auth[value]))", {"req": ["a", "c"], "auth": {"a": 1}}, "HOLD")
+    # v1.1: occurrences / month_end_of / within on an expression anchor
+    O = "every(items, occurrences(items, seq, seq) == 1 or (contains(pairs, seq) and occurrences(items, seq, seq) == 2))"
+    case(O, {"items": [{"seq": 1}, {"seq": 4}, {"seq": 4}], "pairs": [4]}, "PASS")
+    case(O, {"items": [{"seq": 1}, {"seq": 1}, {"seq": 3}], "pairs": [4]}, "HOLD")
+    case(O, {"items": [{"seq": 1}, {"tissue": "x"}], "pairs": []}, "CANNOT-EVALUATE")
+    case("every(ms, exists(d) or occurrences(ms, f, f) == occurrences(ms, v, v))",
+         {"ms": [{"f": "A", "v": "a1"}, {"f": "A", "v": "a2"}]}, "HOLD")
+    case("every(ms, exists(d) or occurrences(ms, f, f) == occurrences(ms, v, v))",
+         {"ms": [{"f": "A", "v": "a1"}, {"f": "B", "v": "b1"}]}, "PASS")
+    E = "within(month_end_of(ref), done, 30d)"
+    case(E, {"ref": "2025-12-30T04:00Z", "done": "2026-01-30T18:00Z"}, "PASS")
+    case(E, {"ref": "2025-12-30T04:00Z", "done": "2026-01-31T18:00Z"}, "HOLD")
+    case(E, {"ref": "2026-02-10T04:00Z", "as_of": "2026-03-20T00:00Z"}, "PASS")
+    case(E, {"ref": "2026-02-10T04:00Z"}, "CANNOT-EVALUATE")
+    case("minutes_between(a, b) == 0", {"a": "2026-08-20T08:40:00Z", "b": "2026-08-20T08:40:00+00:00"}, "PASS")
     # known-bad predicates must be refused, never guessed at
     for p in ("count(x)", "a == 1 blah", "within(a, b, 5bd", "5bd <= 3", "a ==", "every(xs)",
               "exists(a) == true", "a = 1", "and a == 1", "count(x) <= 1 or", "within(a, b, x)",
-              "distinct(xs, a.b) == 1", "a == 1 implies b == 1 implies c == 1"):
+              "distinct(xs, a.b) == 1", "a == 1 implies b == 1 implies c == 1",
+              "signoff.by == 'x'", "exists(a.next)", "occurrences(xs, by, 1) == 1", "a.prev == 1"):
         bad(p)
     return fails
 

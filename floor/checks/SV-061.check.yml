@@ -6,10 +6,10 @@ family: sequence
 layer: L0
 authority: "FDA 21 CFR 1271.75 and 1271.80 physical assessment (evidence of non-medical percutaneous drug use as a risk factor) + AATB standards - pin at rung 05"
 trigger: on_write
-predicate: "every(physical_assessment.injection_sites, classification == 'medical' or classification == 'non_medical')"
+predicate: "(count(physical_assessment.injection_sites) > 0 or physical_assessment.injection_sites_assessed == 'yes') and every(physical_assessment.injection_sites, classification == 'medical' or classification == 'non_medical')"
 action: hold
 message: "An injection-site finding is not classified as medical or non-medical."
-evidence: [physical_assessment.injection_sites]
+evidence: [physical_assessment.injection_sites, physical_assessment.injection_sites_assessed]
 expires: P2Y
 inverse: retire
 tests: fixtures/SV-061/

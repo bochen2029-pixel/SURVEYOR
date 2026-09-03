@@ -1,5 +1,7 @@
 # SV-070 - the flagship: a reportable violation with no system check today,
 # recovered by phone calls. Here: data with a citation, an expiry, and an undo.
+# Scope: on_write, the organ being written (organ_id); a continuous sibling that
+# quantifies over every organ on the case is on the tape as a question (S2b).
 id: SV-070
 title: single-active-primary-offer guard
 family: reconciliation

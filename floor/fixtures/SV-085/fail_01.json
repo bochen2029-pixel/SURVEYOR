@@ -1,4 +1,4 @@
 {"expect": "FLAG", "note": "both variants on one page, neither denominator named - the reader cannot tell why 41 and 38 differ",
  "record": {"report": {"id": "RPT-2026-08-TOWNHALL",
-                       "metric_families": [{"family": "organ_donors", "metrics": [{"variant": "organ_donor", "value": 41}, {"variant": "cms_organ_donor", "value": 38}]}]}},
+                       "metrics": [{"family": "organ_donors", "variant": "organ_donor", "value": 41, "section": 1}, {"family": "organ_donors", "variant": "cms_organ_donor", "value": 38, "section": 1}]}},
  "history": []}

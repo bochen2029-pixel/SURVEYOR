@@ -1,0 +1,5 @@
+{"expect": "ALARM",
+ "note": "ANCHOR PLANT: prep currency runs from completion of skin PREP, not from draping. Prep 01:00, draped 01:30, incision 02:30: 90 minutes from prep (ALARM), 60 from draping (a false PASS).",
+ "anchor_plant": {"wrong_anchor": "or_timeline.draping_ts", "verdict_if_wrong": "PASS"},
+ "record": {"case_id": "TD-2026-0955", "or_timeline": {"prep_complete_ts": "2026-08-18T01:00:00Z", "draping_ts": "2026-08-18T01:30:00Z", "incision_ts": "2026-08-18T02:30:00Z"}, "as_of": "2026-08-20T00:00:00Z"},
+ "history": []}

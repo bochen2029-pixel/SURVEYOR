@@ -1,7 +1,7 @@
-{"expect": "HOLD", "note": "the right units, the wrong total - 600 entered for two 300 mL units that sum to 600? no: one unit is 350",
+{"expect": "HOLD", "note": "the right units, the wrong total: 300 mL and 350 mL logged and used, but 600 mL entered as the blood-product volume",
  "record": {"case_id": "OD-2026-0513",
             "hemodilution": {"sample_draw_ts": "2026-08-17T10:00:00Z",
-                             "logged": {"blood_products": [{"ref": "BP-1", "ts": "2026-08-16T04:00:00Z", "volume_ml": 300}, {"ref": "BP-2", "ts": "2026-08-16T20:00:00Z", "volume_ml": 350}], "crystalloids": []},
+                             "logged": {"blood_products": [{"ref": "BP-1", "ts": "2026-08-16T04:00:00Z", "volume_ml": 300}, {"ref": "BP-2", "ts": "2026-08-16T20:00:00Z", "volume_ml": 350}], "blood_product_refs": ["BP-1", "BP-2"], "crystalloids": [], "crystalloid_refs": []},
                              "calc": {"blood_products": [{"ref": "BP-1", "ts": "2026-08-16T04:00:00Z", "volume_ml": 300}, {"ref": "BP-2", "ts": "2026-08-16T20:00:00Z", "volume_ml": 350}], "blood_product_refs": ["BP-1", "BP-2"], "blood_products_ml": 600,
                                       "crystalloids": [], "crystalloid_refs": [], "crystalloids_ml": 0}}},
  "history": []}

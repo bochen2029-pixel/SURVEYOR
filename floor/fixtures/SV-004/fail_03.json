@@ -1,0 +1,5 @@
+{"expect": "HOLD",
+ "note": "the same identifier listed twice is one identifier - two-identifier verification means two different ones",
+ "record": {"case_id": "TD-2026-0899",
+            "donor_verification": {"identifiers": ["name", "name"], "sources": ["bedside_nurse", "hospital_wristband", "donor_band"], "verified_ts": "2026-08-22T03:15:00Z"}},
+ "history": []}

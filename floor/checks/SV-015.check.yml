@@ -5,7 +5,7 @@ id: SV-015
 title: authorization witness is hospital care-team, never recovering-organization staff
 family: signatures
 layer: L0
-authority: "State Revised Uniform Anatomical Gift Act witnessing provisions + site authorization SOP [H]; CMS 42 CFR 486.344 context - pin at rung 05"
+authority: "State Revised Uniform Anatomical Gift Act witnessing provisions + site authorization SOP [H]; CMS 42 CFR 486.342 (requesting consent) context - pin at rung 05"
 trigger: on_close_attempt
 predicate: "authorization.witness_affiliation == 'hospital_care_team'"
 action: hold

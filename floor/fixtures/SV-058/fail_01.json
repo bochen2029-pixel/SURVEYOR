@@ -1,3 +1,3 @@
 {"expect": "HOLD", "note": "fourteen-month-old donor with the donor interview only",
- "record": {"case_id": "TD-2026-1062", "donor": {"age_months": 14}, "dre": {"subjects": ["donor"]}},
+ "record": {"case_id": "TD-2026-1062", "donor": {"age_months": 14, "breastfed_within_12_months": "no"}, "dre": {"subjects": ["donor"]}},
  "history": []}

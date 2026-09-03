@@ -1,17 +1,21 @@
-# SV-060 - the ABO draw and the serology draw are independent draws: they may not
-# carry the same timestamp. Encoded as harvested [H]; the S2 tape carries a question
-# on whether the site's rule is really about the TWO ABO determinations (OPTN 2.6:
-# two separate samples). An R1 reviewer settles it.
+# SV-060 - the two ABO determinations come from two draws: separate occasions,
+# different collection times, separate samples (OPTN Policy 2.6.A). Harvested as
+# "ABO and serology draws must not share a timestamp" [H]; the S2b review pointed
+# out that one venipuncture routinely fills the ABO tube and the serology tube, so
+# that wording flags conforming charts, while the independence rule OPTN actually
+# writes is between the two ABO samples. Retargeted on the tape; the harvest
+# wording stays as an open question for the quality director. Instants compare as
+# instants, never as strings.
 id: SV-060
-title: ABO and serology draws must not share a timestamp (independence of draws)
+title: the two ABO determinations are drawn on separate occasions with different collection times
 family: sequence
-layer: L1
-authority: "Quality-science invariant: independence of samples (OPTN Policy 2.6 context: blood type from two separate samples); site audit checklist [H] - pin at rung 05"
+layer: L0
+authority: "OPTN Policy 2.6.A Deceased Donor Blood Type Determination: at least two donor blood samples, drawn on two separate occasions, with different collection times, submitted as separate samples - pin at rung 05"
 trigger: on_write
-predicate: "abo.draw_ts != serology.draw_ts"
-action: flag
-message: "ABO draw and serology draw carry the identical timestamp {abo.draw_ts} - one was copied, or the draws were not independent."
-evidence: [abo.draw_ts, serology.draw_ts]
-expires: P1Y
+predicate: "minutes_between(abo.determination_1.draw_ts, abo.determination_2.draw_ts) != 0"
+action: hold
+message: "Both ABO determinations carry the same collection time ({abo.determination_1.draw_ts}) - OPTN requires two separately drawn samples."
+evidence: [abo.determination_1.draw_ts, abo.determination_2.draw_ts]
+expires: P2Y
 inverse: retire
 tests: fixtures/SV-060/

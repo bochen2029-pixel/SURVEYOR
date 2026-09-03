@@ -8,7 +8,7 @@ authority: "OPTN Policy 2.11 Required Deceased Donor Information (liver: INR or 
 trigger: continuous
 anchor: labs.inr.collected_ts
 anchor_why: "lab age is measured from collection, not from the result time; allocation start must fall inside the 12h window the draw opens"
-predicate: "contains(allocation.organs, 'liver') implies (within(labs.inr.collected_ts, allocation.start_ts, 12h) and (not exists(allocation.start_ts) or minutes_between(labs.inr.collected_ts, allocation.start_ts) >= 0))"
+predicate: "contains(allocation.organs, 'LI') implies (within(labs.inr.collected_ts, allocation.start_ts, 12h) and (not exists(allocation.start_ts) or minutes_between(labs.inr.collected_ts, allocation.start_ts) >= 0))"
 action: alarm
 message: "Liver allocation started {allocation.start_ts} without an INR collected in the prior 12 hours (last draw {labs.inr.collected_ts})."
 evidence: [allocation.organs, allocation.start_ts, labs.inr.collected_ts, labs.inr.value]

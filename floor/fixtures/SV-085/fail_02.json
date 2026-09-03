@@ -1,0 +1,4 @@
+{"expect": "FLAG", "note": "the harvested failure shape: 41 on slide 3 and 38 on slide 9, no denominators - mixing is judged across the whole report, not within a section",
+ "record": {"report": {"id": "RPT-2026-08-BOARD",
+                       "metrics": [{"family": "organ_donors", "variant": "organ_donor", "value": 41, "section": 3}, {"family": "organ_donors", "variant": "cms_organ_donor", "value": 38, "section": 9}]}},
+ "history": []}

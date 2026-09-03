@@ -1,3 +1,3 @@
-{"expect": "PASS", "note": "draws twenty minutes apart",
- "record": {"case_id": "OD-2026-0580", "abo": {"draw_ts": "2026-08-18T05:00:00Z"}, "serology": {"draw_ts": "2026-08-18T05:20:00Z"}},
+{"expect": "PASS", "note": "two ABO draws thirty minutes apart",
+ "record": {"case_id": "OD-2026-0580", "abo": {"determination_1": {"draw_ts": "2026-08-18T05:00:00Z", "result": "A"}, "determination_2": {"draw_ts": "2026-08-18T05:30:00Z", "result": "A"}}},
  "history": []}

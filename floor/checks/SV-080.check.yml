@@ -1,15 +1,19 @@
-# SV-080 - the tissue release gate: no contamination and every screening and
-# recovery document complete before the release record closes.
+# SV-080 - the tissue release gate: the site's contamination bar (0% on released
+# tissue) and every screening and recovery document complete before the release
+# record closes. The FDA rules govern the eligibility determination and release
+# records; the 0% bar and the document set are the site's own gate (L2 riding L0),
+# and the required-document count comes from the site template, so an empty list
+# cannot pass as complete.
 id: SV-080
 title: tissue release gate - contamination 0% and screening/recovery documentation complete
 family: release
-layer: L0
-authority: "FDA 21 CFR 1271.50 and 1271.265 (donor eligibility determination and release criteria) + AATB release standards; site release SOP [H] - pin at rung 05"
+layer: L0/L2
+authority: "FDA 21 CFR 1271.50 and 1271.265 (donor eligibility determination and release records) - the mandated core; the 0% contamination bar and the document set are the site's release SOP [H] - pin at rung 05"
 trigger: on_close_attempt
-predicate: "release.contamination_pct == 0 and every(release.required_documents, status == 'complete')"
+predicate: "release.contamination_pct == 0 and count(release.required_documents) >= release.required_document_count and every(release.required_documents, status == 'complete')"
 action: hold
 message: "Release record cannot close: contamination {release.contamination_pct}% or incomplete documentation."
-evidence: [release.contamination_pct, release.required_documents]
+evidence: [release.contamination_pct, release.required_document_count, release.required_documents]
 expires: P2Y
 inverse: retire
 tests: fixtures/SV-080/

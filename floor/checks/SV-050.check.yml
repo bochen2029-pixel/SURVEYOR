@@ -7,7 +7,7 @@ family: sequence
 layer: L0
 authority: "FDA 21 CFR 1271.75 donor screening (risk-assessment interview) + AATB DRAI requirements; OPTN Policy 2.4 deceased donor medical and behavioral history - pin at rung 05"
 trigger: on_close_attempt
-predicate: "every(dre.branches, parent_answer == 'yes' implies every(children, exists(answer)))"
+predicate: "count(dre.branches) > 0 and every(dre.branches, parent_answer == 'yes' implies every(children, exists(answer)))"
 action: hold
 message: "A DRE parent question answered yes has an unanswered required child question."
 evidence: [dre.branches]

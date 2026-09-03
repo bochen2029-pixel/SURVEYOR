@@ -48,7 +48,7 @@ from closure import REFERENCE, STN, hhmm  # noqa: E402
 CHECKS_DIR = ROOT / "floor" / "checks"
 FIXTURES_DIR = ROOT / "floor" / "fixtures"
 
-_WITHIN = re.compile(r"within\(\s*([A-Za-z_][\w.\[\]]*)\s*,\s*([A-Za-z_][\w.\[\]]*)\s*,\s*(\d+)(bd|m|h|d)?\s*\)")
+_WITHIN = re.compile(r"within\(\s*(month_end_of\()?\s*([A-Za-z_][\w.\[\]]*)\s*\)?\s*,\s*([A-Za-z_][\w.\[\]]*)\s*,\s*(\d+)(bd|m|h|d)?\s*\)")
 _BY = re.compile(r"by\(\s*month_end_following\(\s*([A-Za-z_][\w.\[\]]*)\s*\)\s*,\s*([A-Za-z_][\w.\[\]]*)\s*\)")
 _UNIT = {"m": 1, "h": 60, "d": 1440, None: 1}
 
@@ -72,8 +72,8 @@ def load_registry() -> list[dict[str, Any]]:
             problems.append(f"declared anchor {anchor!r} is not a path the predicate reads")
         clauses = []
         for m in _WITHIN.finditer(pred):
-            a, d, n, unit = m.group(1), m.group(2), int(m.group(3)), m.group(4)
-            clauses.append({"kind": "within", "anchor": a, "done": d,
+            wrapped, a, d, n, unit = m.group(1), m.group(2), m.group(3), int(m.group(4)), m.group(5)
+            clauses.append({"kind": "within_month_end" if wrapped else "within", "anchor": a, "done": d,
                             "bound": n if unit == "bd" else n * _UNIT[unit], "unit": unit or "m"})
         for m in _BY.finditer(pred):
             clauses.append({"kind": "by_month_end_following", "anchor": m.group(1), "done": m.group(2)})
@@ -201,6 +201,14 @@ def build_stn(record: dict) -> tuple[STN, dict[str, Any]]:
         elif b["kind"] == "within":
             stn.at_most(b["done"], b["anchor"], b["bound"],
                         label=f"{b['check']} <= {hhmm(b['bound']).replace(' ', '')}", layer=b["layer"])
+        elif b["kind"] == "within_month_end":
+            if a_ts is not None:
+                deadline = engine._ts(engine._month_end_of(a_ts))
+                stn.at_most(b["done"], REFERENCE, m(deadline) + b["bound"],
+                            label=f"{b['check']} month end + {hhmm(b['bound']).replace(' ', '')}", layer=b["layer"])
+            else:  # anchor pending: at most a 31-day month remainder plus the bound
+                stn.at_most(b["done"], b["anchor"], 31 * 1440 + b["bound"],
+                            label=f"{b['check']} month end + bound (calendar-conservative, anchor pending)", layer=b["layer"])
         else:  # month-end following: needs the anchor's calendar month
             if a_ts is not None:
                 deadline = engine._ts(engine._month_end_following(a_ts))

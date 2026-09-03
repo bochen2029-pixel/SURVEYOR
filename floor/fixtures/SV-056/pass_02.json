@@ -1,3 +1,3 @@
 {"expect": "PASS", "note": "a late entry after the signoff that documents a time after the signoff - not backdated",
- "record": {"case_id": "OD-2026-0551", "entry": {"field": "notes.addendum", "documented_ts": "2026-08-18T13:00:00Z", "entered_ts": "2026-08-18T13:10:00Z"}, "signoff": {"ts": "2026-08-18T12:00:00Z", "by": "STF-014"}},
+ "record": {"case_id": "OD-2026-0551", "entry": {"field": "notes.addendum", "documented_ts": "2026-08-18T13:00:00Z", "entered_ts": "2026-08-18T13:10:00Z"}, "signoff": {"ts": "2026-08-18T12:00:00Z", "signed_by": "STF-014"}},
  "history": []}
