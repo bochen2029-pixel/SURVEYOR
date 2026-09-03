@@ -1,0 +1,15 @@
+# REFUSED - see REFUSED.md section 06
+id: SITE-906
+title: research specimen count matches the requisition
+family: reconciliation
+layer: L2
+authority: "Site research SOP RS-03"
+trigger: on_close_attempt
+predicate: "count(research_tab.specimens) == requisition.specimen_count"
+action: flag
+message: "Research specimen count does not match the requisition."
+evidence: [research_tab.specimens, requisition.specimen_count]
+expires: P1Y
+inverse: retire
+refusal: no-failing-fixture
+tests: fixtures/SITE-906/

@@ -1,0 +1,6 @@
+{"expect": "ALARM", "note": "a 25-minute gap with no pause code: past this site's 20 minutes, and it would have passed the reference site's 30",
+ "record": {"case_id": "OD-SITE-0003",
+            "allocation": {"offers": [{"offer_ref": "OF-1", "sent_ts": "2026-06-10T10:00:00Z"},
+                                      {"offer_ref": "OF-2", "sent_ts": "2026-06-10T10:25:00Z"}],
+                           "latest_offer_ts": "2026-06-10T10:25:00Z", "closed_ts": "2026-06-10T10:30:00Z"}},
+ "history": []}

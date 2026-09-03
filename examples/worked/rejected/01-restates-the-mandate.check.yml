@@ -1,0 +1,15 @@
+# REFUSED - see REFUSED.md section 01
+id: SITE-901
+title: two ABO determinations must come from separately drawn samples
+family: sequence
+layer: L2
+authority: "Site blood-type SOP"
+trigger: on_write
+predicate: "minutes_between(abo.determination_1.draw_ts, abo.determination_2.draw_ts) != 0"
+action: hold
+message: "Both ABO determinations carry the same collection time."
+evidence: [abo.determination_1.draw_ts, abo.determination_2.draw_ts]
+expires: P1Y
+inverse: retire
+refusal: duplicates-a-mandated-check
+tests: fixtures/SITE-901/

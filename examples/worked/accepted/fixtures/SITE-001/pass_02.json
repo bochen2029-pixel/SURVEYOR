@@ -1,0 +1,6 @@
+{"expect": "PASS", "note": "a 40-minute gap with a structured pause code - the lawful suspension, recorded rather than remembered",
+ "record": {"case_id": "OD-SITE-0002",
+            "allocation": {"offers": [{"offer_ref": "OF-1", "sent_ts": "2026-06-10T10:00:00Z"},
+                                      {"offer_ref": "OF-2", "sent_ts": "2026-06-10T10:40:00Z"}],
+                           "latest_offer_ts": "2026-06-10T10:40:00Z", "pause_code": "PAUSE-DONOR-UNSTABLE"}},
+ "history": []}

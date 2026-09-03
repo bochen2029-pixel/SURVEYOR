@@ -1,0 +1,15 @@
+# REFUSED - see REFUSED.md section 03
+id: SITE-903
+title: courier handoff signed by the receiving party
+family: signatures
+layer: L2
+authority: "Site transport SOP TR-05"
+trigger: on_close_attempt
+predicate: "exists(transport.handoff.by) and transport.handoff.by != courier.id"
+action: hold
+message: "Courier handoff not signed by a distinct receiving party."
+evidence: [transport.handoff.by]
+expires: P1Y
+inverse: retire
+refusal: predicate-does-not-parse
+tests: fixtures/SITE-903/

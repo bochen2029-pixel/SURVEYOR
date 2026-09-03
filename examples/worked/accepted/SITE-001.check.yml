@@ -1,0 +1,19 @@
+# A site-authored check that mounts. Written from elicit/questions.yml SV-034's answer at
+# a fictional programme whose allocation practice differs from the reference site's: they
+# run a 20-minute cadence and record the suspension as a structured pause code rather than
+# a free-text note. Everything that makes this mountable is visible below.
+id: SITE-001
+title: offer cadence at most 20 minutes, or a structured pause code on the case
+family: reconciliation
+layer: L2
+authority: "Site allocation SOP AL-04 rev 7. OPTN Policies set no interval between consecutive offers - searched and recorded at crosswalk/mappings/MAP-SV-034-silent-offer-cadence.map.yml - so this number is the site's own and a second site will differ."
+trigger: continuous
+anchor: allocation.latest_offer_ts
+anchor_why: "cadence runs from the most recent offer SENT, not from the match run's start and not from the last response received; offers are listed in send order"
+predicate: "exists(allocation.pause_code) or (every_pair(allocation.offers, minutes_between(prev.sent_ts, next.sent_ts) >= 0 and minutes_between(prev.sent_ts, next.sent_ts) <= 20m) and within(allocation.latest_offer_ts, allocation.closed_ts, 20m))"
+action: alarm
+message: "More than 20 minutes since the last offer ({allocation.latest_offer_ts}) with no new offer, no close, and no pause code recorded."
+evidence: [allocation.offers, allocation.latest_offer_ts, allocation.closed_ts, allocation.pause_code]
+expires: P1Y
+inverse: retire
+tests: fixtures/SITE-001/

@@ -1,0 +1,15 @@
+# REFUSED - see REFUSED.md section 04
+id: SITE-904
+title: donor eligibility determination is complete before release
+family: release
+layer: L0
+authority: "FDA 21 CFR 1271.50: a responsible person must determine and document eligibility"
+trigger: on_close_attempt
+predicate: "exists(eligibility.determined_by) and exists(eligibility.determined_ts)"
+action: hold
+message: "Donor-eligibility determination missing."
+evidence: [eligibility.determined_by, eligibility.determined_ts]
+expires: P2Y
+inverse: retire
+refusal: authors-a-mandated-layer
+tests: fixtures/SITE-904/

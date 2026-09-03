@@ -1,0 +1,3 @@
+{"expect": "CANNOT-EVALUATE", "note": "no offers sent yet - there is no cadence to judge, and the check says so instead of passing",
+ "record": {"case_id": "OD-SITE-0004", "allocation": {"offers": []}, "as_of": "2026-06-10T10:40:00Z"},
+ "history": []}

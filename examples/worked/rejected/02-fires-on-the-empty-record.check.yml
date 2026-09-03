@@ -1,0 +1,15 @@
+# REFUSED - see REFUSED.md section 02
+id: SITE-902
+title: transport cooler temperature log complete
+family: release
+layer: L2
+authority: "Site transport SOP TR-02"
+trigger: on_close_attempt
+predicate: "exists(transport.cooler_log_ref) and exists(transport.temp_min_c) and exists(transport.temp_max_c)"
+action: hold
+message: "Transport cooler log incomplete."
+evidence: [transport.cooler_log_ref, transport.temp_min_c, transport.temp_max_c]
+expires: P1Y
+inverse: retire
+refusal: fires-on-the-empty-record
+tests: fixtures/SITE-902/

@@ -1,0 +1,19 @@
+# REFUSED - see REFUSED.md section 05
+id: SITE-905
+title: corrected donor contact number confirmed by calling the corrected number
+family: identity
+layer: L2
+authority: "Site contact-verification SOP CT-01"
+trigger: on_write
+predicate: "contact.confirmed_via == contact.phone"
+action: hold
+message: "Corrected contact number not confirmed."
+evidence: [contact.phone, contact.confirmed_via]
+# Declaring these two is what lets law B5 be checked MECHANICALLY: SV-062 is an
+# on_mount check that runs over a check definition, and these are the fields it reads.
+corrects_field: contact.phone
+verification_fields: [contact.phone]
+expires: P1Y
+inverse: retire
+refusal: verification-channel-is-the-corrected-field
+tests: fixtures/SITE-905/

@@ -36,6 +36,9 @@ Gates:
   G-EVIDENCE-LINKS    rung 07's executioner: the Morning Board renders from the tape, a line
                       with no evidence CANNOT be built, refusals are counted on the page, and
                       the board published on site/surveyor.html is the one this tape produces
+  G-FOREIGN-HARNESS   rung 09's executioner: the completion kit holds - conformance/run.py is
+                      green, every refused draft is refused for the reason it declares, every
+                      site-variant check has an elicit question, and the boot contract exists
 Stdlib only.
 """
 import json
@@ -397,6 +400,46 @@ def gate_evidence_links():
                     f"generated board and its provenance")
 
 
+def gate_foreign_harness():
+    """Rung 09's executioner: can a harness that is not us complete a fit here?
+
+    The kit is graded by the command a foreign harness would actually run, which is the
+    only honest way to grade a kit - a conformance report we do not run is a claim, and
+    this whole repository is an argument against those. It also requires the REFUSED
+    examples to be refused FOR THE REASON THEY DECLARE, because a narrated refusal nobody
+    re-runs decays into fiction, and the refusals are the half that transfers."""
+    # Loaded BY PATH, never by name. `import run` finds experiments/f-fixture/run.py first,
+    # and this gate briefly graded that instead - passing green on the wrong module. A gate
+    # that can be satisfied by a name collision is not a gate.
+    try:
+        import contextlib
+        import importlib.util
+        import io
+        spec = importlib.util.spec_from_file_location(
+            "surveyor_conformance", ROOT / "conformance" / "run.py")
+        conformance = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(conformance)
+    except Exception as e:  # noqa: BLE001
+        return "CANNOT-EVALUATE", f"conformance harness unavailable: {type(e).__name__}: {e}"
+    buf = io.StringIO()
+    try:
+        with contextlib.redirect_stdout(buf):
+            rc = conformance.main()
+    except Exception as e:  # noqa: BLE001
+        return "FAIL", f"conformance crashed: {type(e).__name__}: {e}"
+    if rc != 0:
+        bad = [n for n in conformance._bad]
+        return "FAIL", f"conformance: {len(bad)} failed - {', '.join(bad[:4])}"
+    if not (ROOT / "AGENTS.md").exists():
+        return "FAIL", "AGENTS.md missing - a foreign harness has no boot contract"
+    refused = len(list((ROOT / "examples/worked/rejected").glob("*.check.yml")))
+    asked = len([l for l in (ROOT / "elicit/questions.yml").read_text(encoding="utf-8").splitlines()
+                 if l.startswith("check: ")])
+    return "PASS", (f"conformance green ({len(conformance._ok)} checks); {refused} refused drafts each "
+                    f"refused for the class it declares; {asked} variation points each carry a question; "
+                    f"AGENTS.md + elicit/method.md + adapters/CONTRACT.md present; adapters empty by design")
+
+
 def main():
     record = "--record" in sys.argv
     results = [
@@ -411,6 +454,7 @@ def main():
         ("G-CROSSWALK-PINS",) + gate_crosswalk_pins(),
         ("G-FOLD-DETERMINISM",) + gate_fold_determinism(),
         ("G-EVIDENCE-LINKS",) + gate_evidence_links(),
+        ("G-FOREIGN-HARNESS",) + gate_foreign_harness(),
     ]
     width = max(len(r[0]) for r in results)
     fail = False

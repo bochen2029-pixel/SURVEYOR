@@ -1,0 +1,159 @@
+# SURVEYOR - elicit - the question set
+# ---------------------------------------------------------------------------
+# ONE QUESTION PER VARIATION POINT. This file is not invented beside the catalog:
+# it is keyed to the checks tagged L2, L0/L2 or L1/L2, and `conformance/run.py`
+# FAILS if the catalog grows a site-variant check and nobody writes its question.
+# The seed enumerates what it does not determine; this file asks about exactly
+# that and nothing else.
+#
+# USABLE WITH NO SOFTWARE AT ALL. If you never run a line of this repository,
+# these are still the questions that decide how your programme differs from the
+# mandated spine - and `trap` is the part worth reading, because it names the
+# specific way each answer comes out wrong.
+#
+# WHAT A SITE-VARIANT CHECK IS. Three tags appear here and they are not the same
+# thing. L2: the rule is yours entirely. L0/L2: a duty is mandated and the NUMBER
+# is yours - the regulation says "timely" and you say how many minutes. L1/L2: a
+# quality-science invariant whose threshold is yours. Answering an L0/L2 question
+# does not let you relax the mandated duty underneath it; the crosswalk mapping
+# on each check names the clause that duty comes from.
+#
+# ORDERING is by decision impact: the clocks that gate cases come first, because
+# those are the answers that decide whether a chart closes clean.
+#
+# Read elicit/method.md before running this against anyone or anything.
+
+schema_version: 0.1
+keyed_to: floor/CATALOG.md (every check tagged L2, L0/L2 or L1/L2)
+
+# --- tier 1: the clocks that gate a case -----------------------------------
+
+check: SV-033
+tier: 1
+variation: onsite response interval after a referral
+ask: "From the moment a referral call is answered, how long may pass before someone from your organisation is physically at the bedside - and is that number written anywhere, or is it what people believe?"
+sources: "the OPO-hospital agreement (CMS requires it to DEFINE 'timely referral', and that definition is your number) | the referral log's own arrival timestamps, grouped by hospital | whoever runs the on-call rota"
+impact: "This is the number most likely to be quoted at you in a survey and least likely to exist in writing. It also gates everything downstream: a late arrival compresses every clock after it."
+trap: "Two different numbers are usually in play - the one in the agreement and the one the team actually works to - and the second is often tighter. Encode the one you will be held to, and put the other in the check's message so the gap is visible rather than argued about later."
+mandated_floor: "42 CFR 486.322(a) requires the agreement to specify what 'timely referral' means. It does not set an interval. The interval is yours."
+
+check: SV-024
+tier: 1
+variation: SARS-CoV-2 specimen currency window before cross-clamp
+ask: "How fresh must a SARS-CoV-2 specimen be at cross-clamp, measured from COLLECTION - and who decides when a stale one forces a re-draw rather than a phone call?"
+sources: "your infectious-disease testing SOP | the lab's turnaround times, which decide whether your window is achievable | recovery records where the clamp slipped"
+impact: "Sets when the floor alarms during an active case, which is the difference between a re-draw and a scramble."
+trap: "The window is measured from collection, not from the result. Anchoring it to the result makes an old sample look fresh whenever the lab is slow, which is exactly when it is not."
+mandated_floor: "OPTN Policy 2.9 mandates the lower-respiratory NAT for lung donors. It sets no currency window. The window is yours."
+
+check: SV-023
+tier: 1
+variation: reportable-serology notification interval to public health
+ask: "When a donor screening test comes back reactive for a reportable condition, how long do you have to notify public health - and does that interval differ by organism?"
+sources: "your state's communicable-disease reporting rule, by condition | the fax or portal confirmations in past cases | your county health department's own contact sheet"
+impact: "An externally-imposed clock your organisation does not control and can still miss."
+trap: "This is state law and it VARIES BY ORGANISM: immediate, one working day, 24 hours and seven days are all real answers in different states for different conditions. One number for all of them is wrong somewhere. If your programme crosses state lines, it is wrong in more than one place."
+mandated_floor: "State communicable-disease reporting rules. The duty is not yours; the interval and the channel are set by your state."
+
+check: SV-031
+tier: 1
+variation: internal buffer on the mandated registration deadline
+ask: "OPTN gives you 60 days from feedback-form submission for the deceased donor registration. What internal deadline do you work to, and what happens on the day it passes?"
+sources: "the data-submission calendar | past submission timestamps against the OPTN deadline | whoever chases these"
+impact: "A buffer is only real if something happens when it passes. If nothing does, you have a 60-day deadline and a comforting number."
+trap: "Buffers get set once and never revisited. If your median submission is already inside the buffer, the buffer is not doing work; if the buffer alarms on every case, people stop reading it. Either way the number is wrong and the tape will show which."
+mandated_floor: "OPTN Policy 18, Table 18-1: 60 days after the donor organ disposition (feedback) form is submitted. That is the ceiling. Your buffer sits under it."
+
+check: SV-027
+tier: 1
+variation: prep-to-incision interval before a re-prep is required
+ask: "How long may sit between completed skin prep and incision before the site must be re-prepped?"
+sources: "your aseptic recovery SOP | OR timeline records where the gap ran long | the recovery team, who will have a rule of thumb"
+impact: "Fires during the case, when a re-prep is still possible. After the fact it is only a finding."
+trap: "The clock runs from completion of PREP, not from draping and not from arrival in the room. Anchoring it to draping quietly buys you the draping time, on the one measurement where buying time is the whole risk."
+mandated_floor: "A quality-science invariant. The interval is yours; a second site will differ."
+
+# --- tier 2: the clocks that gate the department ---------------------------
+
+check: SV-020
+tier: 2
+variation: how soon after recovery the chart audit begins
+ask: "After a recovery ends, how many days before someone starts auditing that chart - and is that a target or a commitment?"
+sources: "your quality plan | the audit log's own start timestamps against recovery end | the auditor's queue depth"
+impact: "This is the department's SLA on itself. It is also the number that decides whether a finding can still be corrected."
+trap: "Measured from recovery END, not from case close and not from referral. And if the true answer is 'when we get to it', encode that honestly as a longer interval rather than aspirationally as seven days - a clock nobody meets teaches people to ignore clocks."
+mandated_floor: "Nothing federal sets this. 42 CFR 486.348(b) requires monthly death-record reviews, which is a different activity. This interval is entirely yours."
+
+check: SV-021
+tier: 2
+variation: chart-to-processor window, and the shorter one for fresh tissue
+ask: "How long after recovery must the chart reach the processor - and which tissue categories carry a shorter window?"
+sources: "each processor agreement, which usually states it | shipment records against recovery end | the difference between your standard and fresh/osteochondral paths"
+impact: "Different processors give different windows; the check needs the one that binds for the category recovered."
+trap: "The categories are the trap, not the number. If 'fresh' is not a field on your record, the check cannot tell which window applies and will abstain on every case - which reads as silence and is actually a modelling gap."
+mandated_floor: "Processor contract terms. Nothing federal sets it."
+
+check: SV-034
+tier: 2
+variation: offer cadence, and what suspends it
+ask: "During allocation, how long may pass between consecutive offers before someone should notice - and what circumstances lawfully suspend that expectation?"
+sources: "your allocation SOP | the offer timestamps on past match runs | the coordinators, who know which cases legitimately stall"
+impact: "The exception matters more than the interval: a cadence rule with no exception fires on every unstable donor and is switched off within a month."
+trap: "'Unstable donor' must be a LOGGED exception with a reference, not a remembered one. If the exception is not recorded, the check cannot tell a justified pause from a forgotten case, and it will alarm on both."
+mandated_floor: "OPTN Policies set no interval between consecutive offers - searched and recorded in the crosswalk. The cadence is entirely yours."
+
+check: SV-035
+tier: 2
+variation: contract and licence notice-deadline lookahead
+ask: "How far ahead of a contract or licence NOTICE deadline do you want to be told, and who is the decision recorded against?"
+sources: "the contract register | the last near-miss, which is usually why anyone is asking | procurement's own calendar"
+impact: "A generalisation from a harvested near-miss: the clock runs to the notice deadline, not to the contract end date."
+trap: "Auto-renewal makes the notice deadline the real deadline, and it is typically months before the date anyone has in mind. If your register records only end dates, this check has nothing to run on."
+mandated_floor: "Nothing external. This is organisational hygiene made mechanical."
+
+check: SV-042
+tier: 2
+variation: lead time on a regulator edition change
+ask: "When a standards body publishes a new edition, how long before its EFFECTIVE date do you want the affected policies flagged?"
+sources: "the last edition transition and how much warning you actually had | your document-control review cycle | the standards you are audited against"
+impact: "This is the audited-to-the-new-edition trap: the survey applies the edition in force on the day of the survey, whatever your policies cite."
+trap: "The clock runs to the EFFECTIVE date, not the publication date. Publication often precedes effect by a year, and the comfortable gap is exactly what makes the deadline invisible until it is a finding."
+mandated_floor: "A quality-science invariant. The lead time is yours."
+
+# --- tier 3: allocation practice and release ------------------------------
+
+check: SV-075
+tier: 3
+variation: decline reason codes, and which ones gate list status
+ask: "What is your list of decline reason codes, which of them are disqualifying, and what happens to a centre's list status when a disqualifying decline is recorded?"
+sources: "the decline dropdown in your allocation system | the aggressive-list criteria, if you keep one | the placement team"
+impact: "Structured declines are what make the rest of allocation analysis possible. Free text is where this data goes to die."
+trap: "Every site has codes; almost no site has them pre-classified as disqualifying or not. Without that classification the automatic gating cannot run, and this check degrades to 'is the box filled in'."
+mandated_floor: "OPTN Policies do not prescribe decline codes. The list, the classification and the gating are yours."
+
+check: SV-076
+tier: 3
+variation: when a bypassed centre may be offered again
+ask: "When a centre has been bypassed, at what point may it lawfully receive an offer - and how does the record show that the primary list was exhausted first?"
+sources: "your allocation SOP | match-run records where a bypassed centre was later offered | the placement coordinators"
+impact: "Encodes the order in which offers may leave the building."
+trap: "'Exhausted' needs a definition your record can carry. If the only evidence is the coordinator's judgement at the time, the check has nothing to test and will abstain."
+mandated_floor: "OPTN Policy 5.4.B fixes the ORDER of allocation down the match run. What counts as exhausting the primary list, and your bypass practice, are yours."
+
+check: SV-074
+tier: 3
+variation: which screening partners must appear on a match run
+ask: "Which centres are on your perfusion or research screening list, and must every one of them appear on a match run before the run is considered complete?"
+sources: "the screening agreements | recent match runs compared against that list | whoever maintains the list"
+impact: "A screening partner missing from a run is an offer that was never made, and nothing else in the system will notice."
+trap: "The list changes more often than anyone updates the check. Put its source of truth in the record, not in the predicate, or the check becomes wrong quietly."
+mandated_floor: "Site practice. Nothing external requires it."
+
+check: SV-080
+tier: 3
+variation: the tissue release criteria, including the contamination bar
+ask: "What must be true before a tissue release record can close - which documents, and what culture result - and does a positive culture bar release or route to a documented disposition?"
+sources: "your release SOP | the processor's release specification | past releases where a culture came back positive"
+impact: "The last gate before tissue leaves. Everything upstream is preparation for this."
+trap: "A flat 'contamination = 0%' is rarely how release actually works: recovery-site cultures are often positive and resolved by validated processing. If your real rule is 'positive culture routes to a documented disposition', encode THAT - a bar nobody can meet gets waived, and a waived gate is worse than an honest one."
+mandated_floor: "FDA 21 CFR 1271.50 and 1271.265 require a documented determination against pre-established release criteria. The criteria themselves are yours."
