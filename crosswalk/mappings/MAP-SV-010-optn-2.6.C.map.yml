@@ -1,0 +1,9 @@
+id: MAP-SV-010-optn-2.6.C
+check: SV-010
+source: optn-policies
+locator: "OPTN Policy 2.6.C: Reporting of Deceased Donor Blood Type and Subtype"
+type: implements
+quote: "This report must be verified by a different qualified health care professional according to the OPO's protocol."
+establishes: "Two-person verification by DIFFERENT professionals - the first-corroborator law already in policy. SV-010 grades the mechanical form of it on the HLA/ABO pages: two DISTINCT coordinator signatures plus the lab's, where counting signatures rather than distinct signers would have passed one person signing twice."
+expires: P1Y
+inverse: retire

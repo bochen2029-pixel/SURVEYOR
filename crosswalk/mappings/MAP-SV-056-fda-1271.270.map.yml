@@ -1,0 +1,9 @@
+id: MAP-SV-056-fda-1271.270
+check: SV-056
+source: ecfr-21-1271
+locator: "21 CFR 1271.270(a)"
+type: implements
+quote: "You must maintain records concurrently with the performance of each step required in this subpart and subpart C of this part."
+establishes: "CONCURRENTLY is the anti-backdating rule in one word: the record is made as the step is performed. SV-056 grades the mechanical residue of that - an entry made after a signoff may not claim a time before it."
+expires: P1Y
+inverse: retire

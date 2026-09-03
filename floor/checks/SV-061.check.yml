@@ -4,7 +4,7 @@ id: SV-061
 title: injection-site findings tagged medical vs non-medical (eligibility-relevant)
 family: sequence
 layer: L0
-authority: "FDA 21 CFR 1271.75 and 1271.80 physical assessment (evidence of non-medical percutaneous drug use as a risk factor) + AATB standards - pin at rung 05"
+authority: "21 CFR 1271.3(o): the physical assessment looks for signs suggestive of risk factors - pinned. The injection-site language and the medical/non-medical distinction are FDA guidance and AATB standards, not codified text (crosswalk/mappings/MAP-SV-061-silent-injection-sites.map.yml). L1 invariant implementing a guidance-level requirement."
 trigger: on_write
 predicate: "(count(physical_assessment.injection_sites) > 0 or physical_assessment.injection_sites_assessed == 'yes') and every(physical_assessment.injection_sites, classification == 'medical' or classification == 'non_medical')"
 action: hold

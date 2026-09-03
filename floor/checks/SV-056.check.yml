@@ -7,7 +7,7 @@ id: SV-056
 title: no backdating past a signoff (audit-trail sequence legality)
 family: sequence
 layer: L1
-authority: "Quality-science invariant: audit-trail sequence legality (site audit checklist [H]); FDA 21 CFR 1271.270 and CMS 42 CFR 486 Subpart G records context - pin at rung 05"
+authority: "Quality-science invariant: audit-trail sequence legality (site audit checklist [H]); FDA 21 CFR 1271.270 and CMS 42 CFR 486 Subpart G records context - PINNED: MAP-SV-056-fda-1271.270"
 trigger: on_write
 predicate: "not exists(signoff.ts) or minutes_between(signoff.ts, entry.entered_ts) <= 0 or minutes_between(signoff.ts, entry.documented_ts) >= 0"
 action: hold

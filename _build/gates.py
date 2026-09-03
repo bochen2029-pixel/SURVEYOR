@@ -293,10 +293,11 @@ def gate_crosswalk_pins():
         got = sorted(d["checks_to_review"])
         if got != want:
             return "FAIL", f"edition fixture: review queue {got}, fixture says {want}"
-        if len(d["intact"]) != int(exp.get("expect_intact", -1)):
-            return "FAIL", (f"edition fixture: {len(d['intact'])} mappings intact, fixture says "
-                            f"{exp.get('expect_intact')} - a diff that flags everything is as "
-                            f"useless as one that flags nothing")
+        floor_intact = int(exp.get("expect_intact_min", 0))
+        if len(d["intact"]) < floor_intact:
+            return "FAIL", (f"edition fixture: only {len(d['intact'])} mappings survive the edition "
+                            f"unchanged, fixture requires at least {floor_intact} - a diff that flags "
+                            f"everything is as useless as one that flags nothing")
     cov = pins.coverage()
     return "PASS", (f"{res['mappings']} mappings byte-match their pinned sources "
                     f"({res['warned']} currency warning(s)); edition-diff fixture green; "

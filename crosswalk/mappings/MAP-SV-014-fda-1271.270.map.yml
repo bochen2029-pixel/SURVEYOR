@@ -1,0 +1,12 @@
+# The clearest FDA mapping in the set: the regulation names the two fields the check
+# grades. SV-014 exists because a real record system froze attribution to the original
+# author [H]; this clause says the record must identify the person performing the work.
+id: MAP-SV-014-fda-1271.270
+check: SV-014
+source: ecfr-21-1271
+locator: "21 CFR 1271.270(a)"
+type: implements
+quote: "The records must identify the person performing the work and the dates of the various entries, and must be as detailed as necessary to provide a complete history of the work performed and to relate the records to the particular HCT/P involved."
+establishes: "Every entry must carry WHO did the work and WHEN. SV-014 grades both, and compares the recorded editor against the actor the system logged - a record that names the wrong person satisfies the letter and defeats the clause."
+expires: P1Y
+inverse: retire

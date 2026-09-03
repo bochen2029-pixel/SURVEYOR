@@ -7,7 +7,7 @@ id: SV-024
 title: SARS-CoV-2 specimen present and collected within 72h before cross-clamp; lower respiratory specimen for every lung donor
 family: clocks
 layer: L0/L2
-authority: "OPTN Policy 2.9 Required Deceased Donor Infectious Disease Testing (lower respiratory SARS-CoV-2 NAT for lung donors) - the mandated core; the 72-hour currency window is the site's rule [H] - pin at rung 05"
+authority: "OPTN Policy 2.9 Required Deceased Donor Infectious Disease Testing (lower respiratory SARS-CoV-2 NAT for lung donors) - the mandated core; the 72-hour currency window is the site's rule [H] - PINNED: MAP-SV-024-optn-2.9"
 trigger: continuous
 anchor: covid.collected_ts
 anchor_why: "specimen currency is measured from collection, not from the result; cross-clamp must fall inside the 72h window that collection opens"

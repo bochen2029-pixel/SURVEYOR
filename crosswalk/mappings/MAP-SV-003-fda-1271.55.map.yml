@@ -1,0 +1,9 @@
+id: MAP-SV-003-fda-1271.55
+check: SV-003
+source: ecfr-21-1271
+locator: "21 CFR 1271.55(a)(1)"
+type: implements
+quote: "A distinct identification code affixed to the HCT/P container, e.g., alphanumeric, that relates the HCT/P to the donor and to all records pertaining to the HCT/P"
+establishes: "The identification code must RELATE the tissue to the donor and to all its records. SV-003 tests exactly that relation at the one place it is written twice by hand - the band on the body against the number on the recovery paperwork. The same clause forbids the code containing a name, which is why the whole record schema addresses people by opaque id."
+expires: P1Y
+inverse: retire

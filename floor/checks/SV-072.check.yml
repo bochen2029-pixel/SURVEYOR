@@ -3,7 +3,7 @@ id: SV-072
 title: phone authorization requires the attached voice recording before completion
 family: reconciliation
 layer: L0
-authority: "State Revised Uniform Anatomical Gift Act (recorded telephonic authorization) + site recorded-line SOP [H] - pin at rung 05"
+authority: "State Revised Uniform Anatomical Gift Act (recorded telephonic authorization) + site recorded-line SOP [H] - PINNED: MAP-SV-072-tx-692A.010"
 trigger: on_close_attempt
 predicate: "authorization.method != 'phone' or exists(authorization.recording_ref)"
 action: hold

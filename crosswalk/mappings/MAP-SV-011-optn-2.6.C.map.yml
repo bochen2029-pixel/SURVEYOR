@@ -1,0 +1,9 @@
+id: MAP-SV-011-optn-2.6.C
+check: SV-011
+source: optn-policies
+locator: "OPTN Policy 2.6.C: Reporting of Deceased Donor Blood Type and Subtype"
+type: constrains
+quote: "Both qualified health care professionals must use all known available blood type and subtype determination source documents to verify they:"
+establishes: "The two verifiers must be qualified professionals working from source documents. SV-011 adds the site's roster test - both verifiers appear on this case's team worksheet - which is the site making 'qualified' checkable against a list it maintains."
+expires: P1Y
+inverse: retire

@@ -5,7 +5,7 @@ id: SV-011
 title: donor-ID verification carries two distinct staff, both on the team-worksheet roster
 family: signatures
 layer: L0
-authority: "Two-person donor identification (OPTN Policy 2; AATB standards) + site team-worksheet rule [H] - pin at rung 05"
+authority: "Two-person donor identification (OPTN Policy 2; AATB standards) + site team-worksheet rule [H] - PINNED: MAP-SV-011-optn-2.6.C"
 trigger: on_close_attempt
 predicate: "distinct(donor_verification.verified_by) >= 2 and subset(donor_verification.verified_by, team_worksheet.roster)"
 action: hold

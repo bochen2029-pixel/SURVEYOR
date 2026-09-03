@@ -4,7 +4,7 @@ id: SV-033
 title: onsite response within 1.5h of referral
 family: clocks
 layer: L0/L2
-authority: "CMS 42 CFR 486.344 (evaluation and management of potential donors - timely onsite response) + site SLA 1.5h, tightened from 2h [H] - pin at rung 05"
+authority: "CMS 42 CFR 486.344 (evaluation and management of potential donors - timely onsite response) + site SLA 1.5h, tightened from 2h [H] - PINNED: MAP-SV-033-cfr-486.322"
 trigger: continuous
 anchor: referral.received_ts
 anchor_why: "the clock starts when the referral call is received, not when the coordinator is dispatched and not when the hospital asks for someone onsite"

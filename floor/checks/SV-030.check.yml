@@ -6,7 +6,7 @@ id: SV-030
 title: donor feedback due 5 business days from organ-recovery time (not cross-clamp)
 family: clocks
 layer: L0
-authority: "OPTN Policy 18 Table 18-1: Donor Organ Disposition (Feedback) due 5 business days after the procurement date (host OPO) - pin at rung 05; site anchor field [H]"
+authority: "OPTN Policy 18 Table 18-1: Donor Organ Disposition (Feedback) due 5 business days after the procurement date (host OPO) - PINNED: MAP-SV-030-optn-18; site anchor field [H]"
 trigger: continuous
 anchor: recovery.organ_recovery_ts
 anchor_why: "organ-recovery time, NOT cross-clamp: a clock anchored to the clamp computes a different due date whenever the two fall on different business days - the site's historical error mode [H]"

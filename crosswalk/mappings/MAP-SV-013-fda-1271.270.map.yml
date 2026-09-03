@@ -1,0 +1,9 @@
+id: MAP-SV-013-fda-1271.270
+check: SV-013
+source: ecfr-21-1271
+locator: "21 CFR 1271.270(a)"
+type: implements
+quote: "Any requirement in this part that an action be documented involves the creation of a record, which is subject to the requirements of this section."
+establishes: "A late or second signature, or an edit after completion, is itself an action that must be documented. SV-013 holds any non-routine edit that carries no linked explanatory case note - the explanation IS the record the clause requires."
+expires: P1Y
+inverse: retire

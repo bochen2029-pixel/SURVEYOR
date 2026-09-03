@@ -1,0 +1,9 @@
+id: MAP-SV-077-optn-18
+check: SV-077
+source: optn-policies
+locator: "OPTN Policy 18, Table 18-1: Data Submission Requirements"
+type: reports-under
+quote: "Deceased Donor Registration (DDR) 60 days after the donor organ disposition (feedback) form is submitted and disposition is reported for all organs All deceased donors"
+establishes: "Disposition must be reported FOR ALL ORGANS before the registration is complete. SV-077 grades the internal consistency the registry depends on: each organ's disposition code must read the same on the organ-data page and the donor-summary page that feeds it."
+expires: P1Y
+inverse: retire

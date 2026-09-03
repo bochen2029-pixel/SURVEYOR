@@ -7,7 +7,7 @@ id: SV-032
 title: DNR due 30 days after the end of the referral month
 family: clocks
 layer: L0
-authority: "OPTN Policy 18 Table 18-1: Death Notification Registration due 30 days after the end of the month in which a donor hospital reports a death to the OPO - pin at rung 05; site month-end rule [H] is a looser paraphrase"
+authority: "OPTN Policy 18 Table 18-1: Death Notification Registration due 30 days after the end of the month in which a donor hospital reports a death to the OPO - PINNED: MAP-SV-032-optn-18; site month-end rule [H] is a looser paraphrase"
 trigger: continuous
 anchor: referral.received_ts
 anchor_why: "the month in which the hospital reported the death to the OPO - the referral, not the recovery and not case close"

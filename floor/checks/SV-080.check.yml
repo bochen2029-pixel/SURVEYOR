@@ -8,7 +8,7 @@ id: SV-080
 title: tissue release gate - contamination 0% and screening/recovery documentation complete
 family: release
 layer: L0/L2
-authority: "FDA 21 CFR 1271.50 and 1271.265 (donor eligibility determination and release records) - the mandated core; the 0% contamination bar and the document set are the site's release SOP [H] - pin at rung 05"
+authority: "FDA 21 CFR 1271.50 and 1271.265 (donor eligibility determination and release records) - the mandated core; the 0% contamination bar and the document set are the site's release SOP [H] - PINNED: MAP-SV-080-fda-1271.265"
 trigger: on_close_attempt
 predicate: "release.contamination_pct == 0 and count(release.required_documents) >= release.required_document_count and every(release.required_documents, status == 'complete')"
 action: hold

@@ -5,7 +5,7 @@ id: SV-013
 title: late/second signature or post-completion edit requires a linked explanatory case note
 family: signatures
 layer: L1
-authority: "Quality-science invariant: documentation of after-the-fact changes (site audit checklist [H]); CMS 42 CFR 486 Subpart G recordkeeping context - pin at rung 05"
+authority: "Quality-science invariant: documentation of after-the-fact changes (site audit checklist [H]); CMS 42 CFR 486 Subpart G recordkeeping context - PINNED: MAP-SV-013-fda-1271.270"
 trigger: on_write
 predicate: "edit.class != 'routine' implies exists(edit.case_note_ref)"
 action: hold

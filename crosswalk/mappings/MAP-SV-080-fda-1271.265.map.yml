@@ -1,0 +1,9 @@
+id: MAP-SV-080-fda-1271.265
+check: SV-080
+source: ecfr-21-1271
+locator: "21 CFR 1271.265(c)(1)"
+type: implements
+quote: "Before making an HCT/P available for distribution, you must review manufacturing and tracking records pertaining to the HCT/P, and, on the basis of that record review, you must verify and document that the release criteria have been met."
+establishes: "Release is gated on a documented record review against pre-established criteria. SV-080's documentation half implements this exactly; its 0 percent contamination bar is the site's own release criterion, which is why the check is tagged L0/L2."
+expires: P1Y
+inverse: retire

@@ -1,0 +1,9 @@
+id: MAP-SV-005-fda-1271.3
+check: SV-005
+source: ecfr-21-1271
+locator: "21 CFR 1271.3(o)"
+type: implements
+quote: "Physical assessment of a cadaveric donor means a limited autopsy or recent antemortem or postmortem physical examination of the donor to assess for signs of a relevant communicable disease and for signs suggestive of any risk factor for a relevant communicable disease."
+establishes: "The physical assessment is a search for SIGNS - the marks a body diagram records. SV-005 grades the deterministic residue: the structured sites on the diagram and in the narrative must agree. Whether the narrative MEANS what the diagram shows is the watch tier's question, and the check says so."
+expires: P1Y
+inverse: retire

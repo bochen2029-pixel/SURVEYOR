@@ -7,5 +7,5 @@ base: optn-policies
 edits: optn-next-draft.edits.yml
 expect_review: [SV-012, SV-030]
 expect_disturbed: 2
-expect_intact: 7
-why: "SV-030's deadline moved and SV-012's clause was reworded; the third edit touches text no mapping cites and must disturb nothing."
+expect_intact_min: 5
+why: "SV-030's deadline moved and SV-012's clause was reworded; the third edit touches text no mapping cites and must disturb nothing. The review queue is asserted EXACTLY - that is what proves the diff neither misses a change nor flags an unrelated one. The intact count is asserted as a FLOOR, not an exact number: an exact count breaks every time a mapping is added, which is a fixture testing the size of the crosswalk rather than the behaviour of the diff (it broke that way the first time a session grew the mapping set)."

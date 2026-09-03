@@ -8,7 +8,7 @@ id: SV-026
 title: hemodilution lookback windows (blood products 48h, crystalloids 1h) computed from logged volumes and timestamps
 family: clocks
 layer: L0
-authority: "OPTN Policy 2.5 Hemodilution Assessment (complete history of blood products and IV fluids; hemodilution calculation) + FDA 21 CFR 1271.80(d)(2) plasma dilution context; site windows [H] - pin at rung 05"
+authority: "OPTN Policy 2.5 Hemodilution Assessment (complete history of blood products and IV fluids; hemodilution calculation) + FDA 21 CFR 1271.80(d)(2) plasma dilution context; site windows [H] - PINNED: MAP-SV-026-optn-2.5"
 trigger: on_write
 anchor: hemodilution.sample_draw_ts
 anchor_why: "lookback windows count backward from the screening sample draw - not from admission and not from the result"

@@ -5,7 +5,7 @@ id: SV-050
 title: DRE branching completeness - parent answered yes implies required children non-blank
 family: sequence
 layer: L0
-authority: "FDA 21 CFR 1271.75 donor screening (risk-assessment interview) + AATB DRAI requirements; OPTN Policy 2.4 deceased donor medical and behavioral history - pin at rung 05"
+authority: "FDA 21 CFR 1271.75 donor screening (risk-assessment interview) + AATB DRAI requirements; OPTN Policy 2.4 deceased donor medical and behavioral history - PINNED: MAP-SV-050-fda-1271.3"
 trigger: on_close_attempt
 predicate: "count(dre.branches) > 0 and every(dre.branches, parent_answer == 'yes' implies every(children, exists(answer)))"
 action: hold

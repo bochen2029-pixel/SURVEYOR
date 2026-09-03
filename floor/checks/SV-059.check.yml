@@ -3,7 +3,7 @@ id: SV-059
 title: ABO type A or AB implies subtype present or a reason code
 family: sequence
 layer: L0
-authority: "OPTN Policy 2.6 Deceased Donor Blood Type Determination and Reporting, Table 2-1 subtyping requirements - pin at rung 05"
+authority: "OPTN Policy 2.6 Deceased Donor Blood Type Determination and Reporting, Table 2-1 subtyping requirements - PINNED: MAP-SV-059-optn-2.6.B"
 trigger: on_write
 predicate: "(abo.type == 'A' or abo.type == 'AB') implies (exists(abo.subtype) or exists(abo.subtype_reason_code))"
 action: hold

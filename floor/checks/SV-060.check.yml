@@ -10,7 +10,7 @@ id: SV-060
 title: the two ABO determinations are drawn on separate occasions with different collection times
 family: sequence
 layer: L0
-authority: "OPTN Policy 2.6.A Deceased Donor Blood Type Determination: at least two donor blood samples, drawn on two separate occasions, with different collection times, submitted as separate samples - pin at rung 05"
+authority: "OPTN Policy 2.6.A Deceased Donor Blood Type Determination: at least two donor blood samples, drawn on two separate occasions, with different collection times, submitted as separate samples - PINNED: MAP-SV-060-optn-2.6.A"
 trigger: on_write
 predicate: "minutes_between(abo.determination_1.draw_ts, abo.determination_2.draw_ts) != 0"
 action: hold

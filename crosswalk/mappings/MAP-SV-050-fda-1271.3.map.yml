@@ -1,0 +1,9 @@
+id: MAP-SV-050-fda-1271.3
+check: SV-050
+source: ecfr-21-1271
+locator: "21 CFR 1271.3(s)"
+type: implements
+quote: "Relevant medical records means a collection of documents that includes a current donor medical history interview; a current report of the physical assessment of a cadaveric donor or the physical examination of a living donor"
+establishes: "A CURRENT donor medical history interview is a required document. SV-050 grades its completeness where completeness is mechanical: a parent question answered yes obliges its required children, and an interview with no branches at all is not an interview."
+expires: P1Y
+inverse: retire

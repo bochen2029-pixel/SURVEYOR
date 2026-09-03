@@ -5,7 +5,7 @@ id: SV-051
 title: correction method - single line-through, initials, date; no overwrite or white-out
 family: sequence
 layer: L1
-authority: "Quality-science invariant: good documentation practice (AATB records standards; FDA 21 CFR 1271.270 records context); site SOP [H] - pin at rung 05"
+authority: "Quality-science invariant: good documentation practice (AATB records standards; FDA 21 CFR 1271.270 records context); site SOP [H] - PINNED: MAP-SV-051-fda-1271.270"
 trigger: on_close_attempt
 predicate: "every(corrections, method == 'single_line_through' and exists(initialed_by) and exists(dated))"
 action: flag

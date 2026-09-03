@@ -1,0 +1,10 @@
+id: MAP-SV-061-silent-injection-sites
+check: SV-061
+source: ecfr-21-1271
+locator: "21 CFR Part 1271 (whole)"
+type: silent
+quote: ""
+searched: "percutaneous | injection site | needle track | track marks | nonmedical drug use"
+establishes: "Part 1271 requires the physical assessment to look for signs suggestive of risk factors (1271.3(o)) but never names injection sites or the medical/non-medical distinction; that language is FDA guidance and AATB standards. SV-061's classification rule is therefore an L1 invariant implementing a guidance-level requirement, not a codified L0 one."
+expires: P6M
+inverse: retire

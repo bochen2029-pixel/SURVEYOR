@@ -7,7 +7,7 @@ id: SV-014
 title: true editor and timestamp recorded on every edit (attribution never freezes to the original author)
 family: signatures
 layer: L1
-authority: "Quality-science invariant: audit-trail integrity (site finding [H]); CMS 42 CFR 486 Subpart G and FDA 21 CFR 1271.270 record requirements context - pin at rung 05"
+authority: "Quality-science invariant: audit-trail integrity (site finding [H]); CMS 42 CFR 486 Subpart G and FDA 21 CFR 1271.270 record requirements context - PINNED: MAP-SV-014-fda-1271.270"
 trigger: on_write
 predicate: "every(edits, exists(editor_id) and exists(ts) and editor_id == session_actor_id)"
 action: flag

@@ -5,7 +5,7 @@ id: SV-058
 title: donor 18 months or younger, or breastfed within 12 months, implies two DREs (donor and birth mother)
 family: sequence
 layer: L0
-authority: "FDA donor-eligibility guidance under 21 CFR 1271.75 (donor 18 months or younger, or breastfed within the preceding 12 months: birth mother risk screening) + AATB standards - pin at rung 05"
+authority: "FDA guidance (Eligibility Determination for Donors of HCT/Ps): donor 18 months or younger, or breastfed within the preceding 12 months, requires screening the birth mother. GUIDANCE, not codified - 21 CFR Part 1271 is pinned and contains neither interval (crosswalk/mappings/MAP-SV-058-silent-birth-mother.map.yml). AATB standards not in the corpus. L0 provisional."
 trigger: on_close_attempt
 predicate: "(donor.age_months > 18 and donor.breastfed_within_12_months != 'yes') or (contains(dre.subjects, 'donor') and contains(dre.subjects, 'birth_mother'))"
 action: hold

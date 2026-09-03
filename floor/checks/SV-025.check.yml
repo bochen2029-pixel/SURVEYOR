@@ -4,7 +4,7 @@ id: SV-025
 title: PT/INR collected within 12h before liver allocation start
 family: clocks
 layer: L0
-authority: "OPTN Policy 2.11 Required Deceased Donor Information (liver: INR or PT within 12 hours of the offer) - pin at rung 05"
+authority: "OPTN Policy 2.11 Required Deceased Donor Information (liver: INR or PT within 12 hours of the offer) - PINNED: MAP-SV-025-optn-2.11"
 trigger: continuous
 anchor: labs.inr.collected_ts
 anchor_why: "lab age is measured from collection, not from the result time; allocation start must fall inside the 12h window the draw opens"

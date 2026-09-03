@@ -1,0 +1,9 @@
+id: MAP-SV-002-fda-1271.55
+check: SV-002
+source: ecfr-21-1271
+locator: "21 CFR 1271.55(b)(2)"
+type: reports-under
+quote: "A listing and interpretation of the results of all communicable disease tests performed"
+establishes: "The results travel with the tissue, which is why the result must be about the right donor and the right draw. SV-002 holds a serology report whose donor id, date of birth or draw time disagrees with the record entry."
+expires: P1Y
+inverse: retire

@@ -1,0 +1,9 @@
+id: MAP-SV-051-fda-1271.270
+check: SV-051
+source: ecfr-21-1271
+locator: "21 CFR 1271.270(a)"
+type: constrains
+quote: "All records must be accurate, indelible, and legible."
+establishes: "INDELIBLE is why a correction is a single line through with initials and a date, and why white-out is a finding: the original entry must remain readable. The specific correction METHOD is good documentation practice, not this clause - hence constrains, not implements."
+expires: P1Y
+inverse: retire

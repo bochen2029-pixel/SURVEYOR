@@ -7,7 +7,7 @@ id: SV-085
 title: reports mixing metric variants without naming the denominator are flagged
 family: release
 layer: L1
-authority: "Quality-science invariant: denominator discipline (LAWS.md A6; OPTN/SRTR metric definitions context) - pin at rung 05"
+authority: "Quality-science invariant: denominator discipline (LAWS.md A6; OPTN/SRTR metric definitions context) - PINNED: MAP-SV-085-cfr-486.318"
 trigger: on_close_attempt
 predicate: "every(report.metrics, exists(denominator) or occurrences(report.metrics, family, family) == occurrences(report.metrics, variant, variant))"
 action: flag

@@ -5,7 +5,7 @@ id: SV-010
 title: two distinct coordinator signatures plus lab signature before HLA/ABO pages complete
 family: signatures
 layer: L0
-authority: "OPTN Policy 2.6 Deceased Donor Blood Type Determination and Reporting (verification by a different qualified professional) + site rule of two coordinator signatures and a lab signature [H] - pin at rung 05"
+authority: "OPTN Policy 2.6 Deceased Donor Blood Type Determination and Reporting (verification by a different qualified professional) + site rule of two coordinator signatures and a lab signature [H] - PINNED: MAP-SV-010-optn-2.6.C"
 trigger: on_close_attempt
 predicate: "distinct(hla_abo.coordinator_signatures) >= 2 and exists(hla_abo.lab_signature)"
 action: hold

@@ -137,20 +137,40 @@ def load_sources() -> dict[str, dict]:
     return out
 
 
-def corpus_root() -> tuple[Path | None, str]:
-    """The local corpus, found without ever committing a machine path to this repo."""
-    env = os.environ.get("SURVEYOR_CORPUS")
-    if env and Path(env).is_dir():
-        return Path(env), "$SURVEYOR_CORPUS"
+def corpus_roots() -> tuple[list[Path], str]:
+    """The local corpora, found without ever committing a machine path to this repo.
+    Several roots, searched in order: $SURVEYOR_CORPUS (may be os.pathsep-separated),
+    each line of _local/corpus-path.txt, then crosswalk/corpus/. Plural because a site
+    keeps its own pinned sources beside, not inside, whatever it inherited."""
+    roots, how = [], []
+    for part in (os.environ.get("SURVEYOR_CORPUS") or "").split(os.pathsep):
+        if part and Path(part).is_dir():
+            roots.append(Path(part))
+            how.append("$SURVEYOR_CORPUS")
     pointer = ROOT / "_local" / "corpus-path.txt"
     if pointer.exists():
-        p = Path(pointer.read_text(encoding="utf-8").strip())
-        if p.is_dir():
-            return p, "_local/corpus-path.txt"
+        for line in pointer.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if line and not line.startswith("#") and Path(line).is_dir():
+                roots.append(Path(line))
+                how.append("_local/corpus-path.txt")
     local = HERE / "corpus"
     if local.is_dir():
-        return local, "crosswalk/corpus/"
-    return None, "not found"
+        roots.append(local)
+        how.append("crosswalk/corpus/")
+    return roots, (" + ".join(dict.fromkeys(how)) or "not found")
+
+
+def corpus_root() -> tuple[Path | None, str]:
+    roots, how = corpus_roots()
+    return (roots[0] if roots else None), how
+
+
+def find_source_file(name: str) -> Path | None:
+    for r in corpus_roots()[0]:
+        if (r / name).exists():
+            return r / name
+    return None
 
 
 _TEXT_CACHE: dict[str, tuple[str | None, str]] = {}
@@ -164,9 +184,8 @@ def source_text(sid: str, sources: dict[str, dict]) -> tuple[str | None, str]:
     if not src:
         res = (None, UNPINNED)
     else:
-        root, _ = corpus_root()
-        path = (root / src["file"]) if root else None
-        if path is None or not path.exists():
+        path = find_source_file(src["file"])
+        if path is None:
             res = (None, MISSING)
         elif sha256_file(path) != src.get("sha256"):
             res = (None, CHANGED)
@@ -375,9 +394,9 @@ def load_edition(name: str, base: str | None = None) -> tuple[str | None, str]:
     for p in (EDITIONS_DIR / name, EDITIONS_DIR / f"{name}.txt"):
         if p.exists():
             return normalise(p.read_text(encoding="utf-8", errors="replace")), str(p.relative_to(ROOT).as_posix())
-    root, _ = corpus_root()
-    if root and (root / name).exists():
-        return normalise((root / name).read_text(encoding="utf-8", errors="replace")), f"corpus/{name}"
+    f = find_source_file(name)
+    if f:
+        return normalise(f.read_text(encoding="utf-8", errors="replace")), f"corpus/{name}"
     return None, name
 
 

@@ -9,7 +9,7 @@ id: SV-012
 title: OR roster role requirements by donor type; every recovering physician signs; the clinician who declared death is not on the recovery team
 family: signatures
 layer: L0
-authority: "OPTN Policy 2.14.A Conflicts of Interest (recovery not performed by the team member who declared death) + 2.15 DCD requirements + state Revised Uniform Anatomical Gift Act (the physician determining death may not participate in removal); site OR roster rule [H] - pin at rung 05"
+authority: "OPTN Policy 2.14.A Conflicts of Interest (recovery not performed by the team member who declared death) + 2.15 DCD requirements + state Revised Uniform Anatomical Gift Act (the physician determining death may not participate in removal); site OR roster rule [H] - PINNED: MAP-SV-012-optn-2.14.A, MAP-SV-012-tx-692A.014"
 trigger: on_close_attempt
 predicate: "(donor_type == 'brain_dead' implies contains(or_roster.roles, 'anesthesiologist')) and (donor_type == 'dcd' implies contains(or_roster.roles, 'circulator')) and not contains(or_roster.recovering_physicians, declaration.pronouncing_clinician) and subset(or_roster.recovering_physicians, or_roster.physician_signatures)"
 action: hold

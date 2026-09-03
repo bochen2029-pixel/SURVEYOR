@@ -10,3 +10,7 @@ __pycache__/
 
 # Generated corpora (large; regenerate from the seed)
 experiments/f-fixture/out/
+
+# Pinned regulatory sources: fetched locally, never redistributed from this repo.
+# crosswalk/sources.yml carries the urls and hashes needed to rebuild it.
+crosswalk/corpus/

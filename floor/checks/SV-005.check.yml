@@ -5,7 +5,7 @@ id: SV-005
 title: body-diagram annotations consistent with narrative notes (deterministic subset)
 family: identity
 layer: L1
-authority: "Quality-science invariant: physical-assessment cross-check (site audit checklist [H]); FDA 21 CFR 1271.75 physical assessment context - pin at rung 05"
+authority: "Quality-science invariant: physical-assessment cross-check (site audit checklist [H]); FDA 21 CFR 1271.75 physical assessment context - PINNED: MAP-SV-005-fda-1271.3"
 trigger: on_close_attempt
 predicate: "same_set(body_diagram.sites, narrative.sites)"
 action: flag

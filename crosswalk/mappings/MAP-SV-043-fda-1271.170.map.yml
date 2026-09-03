@@ -1,0 +1,9 @@
+id: MAP-SV-043-fda-1271.170
+check: SV-043
+source: ecfr-21-1271
+locator: "21 CFR 1271.170(b)"
+type: implements
+quote: "You must have personnel with the necessary education, experience, and training to ensure competent performance of their assigned functions. Personnel must perform only those activities for which they are qualified and authorized."
+establishes: "Qualified AND authorized, for the activity actually performed. With 42 CFR 486.326(a)(1) this is the second independent source for SV-043; the check reads a competency that was granted before the action and had not expired at it."
+expires: P1Y
+inverse: retire

@@ -4,7 +4,7 @@ id: SV-077
 title: organ disposition code matches across the organ-data page and the donor-summary page
 family: reconciliation
 layer: L0
-authority: "OPTN Policy 18 data submission (donor organ disposition reporting) - pin at rung 05; site audit checklist [H]"
+authority: "OPTN Policy 18 data submission (donor organ disposition reporting) - PINNED: MAP-SV-077-optn-18; site audit checklist [H]"
 trigger: on_close_attempt
 predicate: "count(organs) > 0 and every(organs, organ_page_disposition == summary_page_disposition)"
 action: hold

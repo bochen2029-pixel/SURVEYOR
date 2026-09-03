@@ -5,7 +5,7 @@ id: SV-002
 title: serology report identity (DOB, donor ID, draw time) matches the record entry
 family: identity
 layer: L1
-authority: "Quality-science invariant: result-to-record identity match (site audit checklist [H]); FDA 21 CFR 1271 Subpart C donor-eligibility context - pin at rung 05"
+authority: "Quality-science invariant: result-to-record identity match (site audit checklist [H]); FDA 21 CFR 1271 Subpart C donor-eligibility context - PINNED: MAP-SV-002-fda-1271.55"
 trigger: on_write
 predicate: "serology_report.donor_id == chart.donor_id and serology_report.donor_dob == chart.donor_dob and minutes_between(serology_report.draw_ts, serology.draw_ts) == 0"
 action: hold

@@ -74,3 +74,16 @@ effective: 2024-01-01
 accessed: 2026-08-26
 cadence: P1Y
 names: "42 USC|National Organ Transplant Act|NOTA"
+
+id: ecfr-21-1271
+title: 21 CFR Part 1271 - Human Cells, Tissues, and Cellular and Tissue-Based Products
+publisher: Office of the Federal Register (eCFR)
+file: ecfr-21-1271.txt
+sha256: fb4d283884703acfc1694005e06dfaf23187589c084cfeeb1d7bf694b3230fb8
+bytes: 104115
+url: "https://www.ecfr.gov/api/versioner/v1/full/2026-09-01/title-21.xml?chapter=I&subchapter=L&part=1271"
+effective: 2026-09-01
+accessed: 2026-09-03
+cadence: P1M
+names: "21 CFR 1271|FDA 21 CFR 1271|1271."
+note: "The tissue rule. Fetched at S5 because fourteen encoded checks rested on it and none could be byte-checked; the eCFR endpoint requires an Accept-Encoding header that permits compression, and the date is the one the API reports title 21 current to, never a guessed one. Latest amendment in this edition: 2026-08-31."
