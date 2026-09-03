@@ -1,0 +1,13 @@
+# SV-059 is STRICTER than the policy for AB donors: OPTN Table 2-1 makes subtyping
+# Required for blood type A and Optional for AB, and the check demands a subtype or a
+# reason code for both. That is a site tightening, and typing this `constrains` rather
+# than `implements` is how the crosswalk says so out loud.
+id: MAP-SV-059-optn-2.6.B
+check: SV-059
+source: optn-policies
+locator: "OPTN Policy 2.6.B: Deceased Donor Blood Subtype Determination (Table 2-1)"
+type: constrains
+quote: "Deceased Donor Blood Subtype Determination Deceased donor blood subtyping must be completed according to the Table 2-1 and the requirements below."
+establishes: "Subtyping is governed by Table 2-1, which makes it Required for blood type A and Optional for AB. The check requires a subtype OR a reason code for both A and AB - stricter than the policy for AB, and the reason code is the site's own escape."
+expires: P1Y
+inverse: retire

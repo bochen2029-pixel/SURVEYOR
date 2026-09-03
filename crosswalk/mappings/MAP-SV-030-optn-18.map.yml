@@ -1,0 +1,9 @@
+id: MAP-SV-030-optn-18
+check: SV-030
+source: optn-policies
+locator: "OPTN Policy 18, Table 18-1: Data Submission Requirements"
+type: reports-under
+quote: "Host OPO Donor Organ Disposition (Feedback) 5 business days after the procurement date Individuals, except living donors, from whom at least one organ is recovered"
+establishes: "Five business days, anchored to the procurement date. SV-030's anchor field is organ-recovery time for exactly this reason, and its anchor plant proves that counting from cross-clamp instead produces a different due date across a business-day boundary."
+expires: P1Y
+inverse: retire

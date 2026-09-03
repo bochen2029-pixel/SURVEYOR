@@ -1,0 +1,9 @@
+id: MAP-SV-043-cfr-486.326
+check: SV-043
+source: ecfr-42-486-subpartG
+locator: "42 CFR 486.326(a)(1)"
+type: implements
+quote: "The OPO must ensure that all individuals who provide services and/or supervise services, including services furnished under contract or arrangement, are qualified to provide or supervise the services."
+establishes: "Qualification is required at the time services are provided. SV-043 grades exactly that: a competency granted before the action and not expired at the action - the second half added at S2b, after the reviewer found a competency issued weeks AFTER the work still satisfied the check."
+expires: P1Y
+inverse: retire

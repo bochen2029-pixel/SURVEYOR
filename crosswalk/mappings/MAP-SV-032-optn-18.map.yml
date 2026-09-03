@@ -1,0 +1,11 @@
+# The clause that S2b encoded SV-032 onto after the review found the site's
+# month-end-following paraphrase is a day LOOSER than this in 31-day months.
+id: MAP-SV-032-optn-18
+check: SV-032
+source: optn-policies
+locator: "OPTN Policy 18, Table 18-1: Data Submission Requirements"
+type: reports-under
+quote: "OPOs Death Notification Registration (DNR) 30 days after the end of the month in which a donor hospital reports a death to the OPO or the OPO identifies the death through a death record review All imminent neurological deaths and eligible deaths in its DSA"
+establishes: "Thirty days after the end of the referral month - the bound the check now grades, in place of the site's month-end paraphrase, which passed a missed deadline in seven months of the year."
+expires: P1Y
+inverse: retire

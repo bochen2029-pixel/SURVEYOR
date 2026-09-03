@@ -25,6 +25,10 @@ Gates:
   F-FIXTURE-WORLD     SPEC section 12's decider, mechanised: the floor against the
                       synthetic OPO world at a pinned seed - dies if any planted defect
                       PASSes, or if the clean-record false-hold rate exceeds 1%
+  G-CROSSWALK-PINS    rung 05's executioner: every crosswalk mapping's quote byte-matches
+                      its sha256-pinned source, and the edition-diff fixture puts exactly
+                      the mappings it should into the review queue (law B6). Fails closed:
+                      a source absent on this machine is never a pass
 Stdlib only.
 """
 import json
@@ -255,6 +259,52 @@ def gate_fixture_world():
                     f"seed {res['seed']} cases {res['n_cases']} k {res['k_plants']}")
 
 
+def gate_crosswalk_pins():
+    """Rung 05's executioner (law B6: a quote that does not byte-match does not exist).
+    Three things at once: every mapping verifies against its pinned source; the edition
+    diff moves exactly the mappings the fixture says it should; and a source that is
+    absent on this machine is reported as unverifiable rather than passed."""
+    try:
+        sys.path.insert(0, str(ROOT / "crosswalk"))
+        import pins
+    except Exception as e:  # noqa: BLE001
+        return "CANNOT-EVALUATE", f"crosswalk unavailable: {e}"
+    if not (ROOT / "crosswalk" / "mappings").exists():
+        return "CANNOT-EVALUATE", "no mappings yet"
+    res = pins.check_all()
+    if res["mappings"] == 0:
+        return "CANNOT-EVALUATE", "no mappings yet"
+    if res["bad"]:
+        bad = [r for r in res["rows"] if r["status"] not in (pins.OK, pins.WARN)][:3]
+        return "FAIL", "; ".join(f"{r['check']} {r['locator']}: {r['detail']}" for r in bad)
+    if res["unavailable"]:
+        return "CANNOT-EVALUATE", (f"{res['unavailable']} of {res['mappings']} mappings could not be "
+                                   f"checked - the pinned corpus is not on this machine "
+                                   f"(set $SURVEYOR_CORPUS); an unchecked quote is never a pass")
+    # the edition-diff fixture
+    import engine as _e  # noqa: F401  (floor's flat-yaml reader, already on the path)
+    exp_path = ROOT / "crosswalk" / "editions" / "optn-next-draft.expect.yml"
+    if exp_path.exists():
+        exp = _e.load_check_yml(exp_path)
+        d = pins.diff_edition(str(exp["base"]), str(exp["edits"]))
+        if "error" in d:
+            return "FAIL", f"edition fixture: {d['error']}"
+        want = sorted(exp.get("expect_review", []))
+        got = sorted(d["checks_to_review"])
+        if got != want:
+            return "FAIL", f"edition fixture: review queue {got}, fixture says {want}"
+        if len(d["intact"]) != int(exp.get("expect_intact", -1)):
+            return "FAIL", (f"edition fixture: {len(d['intact'])} mappings intact, fixture says "
+                            f"{exp.get('expect_intact')} - a diff that flags everything is as "
+                            f"useless as one that flags nothing")
+    cov = pins.coverage()
+    return "PASS", (f"{res['mappings']} mappings byte-match their pinned sources "
+                    f"({res['warned']} currency warning(s)); edition-diff fixture green; "
+                    f"{cov['mapped']}/{cov['checks']} checks mapped, "
+                    f"{cov['named_but_unmapped']} nameable but unmapped, "
+                    f"{cov['authority_outside_corpus']} rest on authority outside the corpus")
+
+
 def main():
     record = "--record" in sys.argv
     results = [
@@ -266,6 +316,7 @@ def main():
         ("G-FIELDS",) + gate_fields(),
         ("G-ANCHOR-PLANTS",) + gate_anchor_plants(),
         ("F-FIXTURE-WORLD",) + gate_fixture_world(),
+        ("G-CROSSWALK-PINS",) + gate_crosswalk_pins(),
     ]
     width = max(len(r[0]) for r in results)
     fail = False

@@ -1,0 +1,10 @@
+id: MAP-SV-034-silent-offer-cadence
+check: SV-034
+source: optn-policies
+locator: "OPTN Policies (whole document, edition effective 2025-08-01)"
+type: silent
+quote: ""
+searched: "offer cadence | minutes between offers | 30 minutes | offer interval | unstable donor exception"
+establishes: "No clause sets an interval between consecutive offers. SV-034's 30-minute cadence and its unstable-donor exception are the site's own allocation practice - correctly tagged L2, and a second site will differ. A silent mapping is what lets the catalog say 'we looked' rather than 'we did not find'."
+expires: P6M
+inverse: retire

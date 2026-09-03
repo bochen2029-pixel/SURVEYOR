@@ -1,0 +1,9 @@
+id: MAP-SV-072-tx-692A.010
+check: SV-072
+source: tx-hs-692A
+locator: "Texas Health & Safety Code 692A.010(a)"
+type: implements
+quote: "may make an anatomical gift by a document of gift signed by the person making the gift or by that person's oral communication that is electronically recorded or is contemporaneously reduced to a record and signed by the individual receiving the oral communication"
+establishes: "An oral (telephone) authorization is valid only if electronically recorded or contemporaneously reduced to a signed record. SV-072 holds a phone authorization that has no recording attached - the record IS the authorization's validity."
+expires: P1Y
+inverse: retire

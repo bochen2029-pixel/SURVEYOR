@@ -1,0 +1,9 @@
+id: MAP-SV-015-tx-692A.005
+check: SV-015
+source: tx-hs-692A
+locator: "Texas Health & Safety Code 692A.005(b)(1)"
+type: constrains
+quote: "be witnessed by at least two adults, at least one of whom is a disinterested witness, who have signed at the request of the donor or the other person, or be acknowledged before a notary public"
+establishes: "The statute requires a DISINTERESTED witness. SV-015's rule - the witness is hospital care-team and never recovering-organization staff - is the operational reading of disinterest at this site. One state's enactment: every site signs its own, which is the L2 boundary made visible."
+expires: P1Y
+inverse: retire

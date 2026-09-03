@@ -1,0 +1,11 @@
+# The quote crosses a page break, where extraction inserted a running header. The
+# elision is bounded, printed in the verdict, and both halves are verbatim.
+id: MAP-SV-012-optn-2.14.A
+check: SV-012
+source: optn-policies
+locator: "OPTN Policy 2.14.A: Conflicts of Interest"
+type: implements
+quote: "The organ recovery procedure and the transplantation of organs must not be performed by the donor hospital healthcare team member who declares the death of the potential deceased [...] donor. Death is declared in accordance with hospital policy and applicable state and local statutes or regulation."
+establishes: "The clinician who declares death may not be on the recovery team - for every deceased donor, not only DCD. This is the conjunct S2b added to SV-012 after the reviewer flagged that the check enforced a DCD-only circulator rule and missed the mandated conflict rule entirely."
+expires: P1Y
+inverse: retire

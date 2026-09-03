@@ -1,0 +1,76 @@
+# crosswalk/sources.yml - the sources registry (SPEC section 7).
+#
+# Each block opens with `id:` at column 0; the rest is flat key: value, the same dialect
+# the checks use. THE DOCUMENTS THEMSELVES ARE NOT IN THIS REPOSITORY: they belong to
+# their publishers, and this file carries only what makes a copy checkable - the url it
+# came from, the sha256 of the extracted text every quote was matched against, its byte
+# count, and its effective date. Fetch your own copies, point $SURVEYOR_CORPUS at them,
+# and `python crosswalk/pins.py --check` will tell you whether you are reading the same
+# bytes every mapping was verified against.
+#
+# `names` is the pipe-separated list of ways a check's `authority:` string refers to this
+# source; the coverage fold uses it to say which checks COULD be pinned and are not yet.
+# `cadence` is how often the source is re-fetched to detect an edition change.
+
+id: optn-policies
+title: OPTN Policies
+publisher: Organ Procurement and Transplantation Network (HRSA contractor)
+file: optn-policies.txt
+sha256: 88e73522ec02d8a79be1e6ec0d0965395fd49e66abf318d50286aa0f53c010ac
+bytes: 784630
+url: "https://optn.transplant.hrsa.gov/media/eavh5bf3/optn_policies.pdf"
+effective: 2025-08-01
+accessed: 2026-08-26
+cadence: P1M
+names: "OPTN Policy|OPTN Policies|OPTN allocation policy|OPTN 2.|OPTN 15.|OPTN 18|Table 18-1|Table 2-1"
+note: "Extracted text carries [[PAGE n]] markers; pins.py strips them before matching, so a quote may cross a page boundary."
+
+id: ecfr-42-486-subpartG
+title: 42 CFR Part 486 Subpart G - Requirements for Certification and Designation and Conditions for Coverage - Organ Procurement Organizations
+publisher: Office of the Federal Register (eCFR)
+file: ecfr-42-486-subpartG.txt
+sha256: cc14fbe7cc703cdd9e9075f4b746d2b1914b90381fbceaa1d8b2d465b7ddee9a
+bytes: 76253
+url: "https://www.ecfr.gov/api/versioner/v1/full/2026-08-24/title-42.xml?chapter=IV&subchapter=G&part=486&subpart=G"
+effective: 2026-08-24
+accessed: 2026-08-26
+cadence: P1M
+names: "42 CFR 486|CMS 42 CFR 486|486.3"
+note: "486.318(a)-(c) still carries an expired three-measure outcome regime in the codified text - the byte-match gate PASSES a quote to it and warns, because it cannot tell real-and-superseded from real-and-in-force."
+
+id: ecfr-42-121
+title: 42 CFR Part 121 - Organ Procurement and Transplantation Network
+publisher: Office of the Federal Register (eCFR)
+file: ecfr-42-121.txt
+sha256: 5bda10732755110e3d2c23b3945c5cba85509041e21637e5d519b41dc3e2a6b2
+bytes: 47236
+url: "https://www.ecfr.gov/api/versioner/v1/full/2026-08-24/title-42.xml?chapter=I&subchapter=K&part=121"
+effective: 2026-08-24
+accessed: 2026-08-26
+cadence: P1M
+names: "42 CFR 121|121."
+
+id: tx-hs-692A
+title: Texas Health and Safety Code Chapter 692A - Revised Uniform Anatomical Gift Act
+publisher: Texas Legislative Council (statutes.capitol.texas.gov)
+file: tx-hs-692A.txt
+sha256: acded5638283b71070a3604ebc7ae542d0890129fcf2a93e6c5f787f9b5f3d23
+bytes: 49043
+url: "https://statutes.capitol.texas.gov/Docs/HS/htm/HS.692A.htm"
+effective: 2026-08-26
+accessed: 2026-08-26
+cadence: P6M
+names: "Revised Uniform Anatomical Gift Act|RUAGA|anatomical gift"
+note: "One state's enactment of the RUAGA. Every site signs its own state's version - this is the L2 boundary made visible: the clause is mandated, the enactment is local."
+
+id: usc-42-partH
+title: 42 U.S.C. Chapter 6A Subchapter II Part H - Organ Transplants
+publisher: U.S. Government Publishing Office
+file: usc-42-partH.txt
+sha256: 49fd8443b7750501165b12c3f1035e87336956e539e19912798c1d9679923a6a
+bytes: 70796
+url: "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42-chap6A-subchapII-partH.htm"
+effective: 2024-01-01
+accessed: 2026-08-26
+cadence: P1Y
+names: "42 USC|National Organ Transplant Act|NOTA"

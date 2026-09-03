@@ -1,0 +1,9 @@
+id: MAP-SV-031-optn-18
+check: SV-031
+source: optn-policies
+locator: "OPTN Policy 18, Table 18-1: Data Submission Requirements"
+type: reports-under
+quote: "Host OPO Deceased Donor Registration (DDR) 60 days after the donor organ disposition (feedback) form is submitted and disposition is reported for all organs All deceased donors"
+establishes: "The DDR's 60-day OPTN deadline AND its anchor: submission of the feedback form, not recovery. The check grades the site's 30-day buffer on that same anchor and names the 60-day deadline in its message; the anchor plant proves that anchoring to recovery instead fires a false alarm."
+expires: P1Y
+inverse: retire

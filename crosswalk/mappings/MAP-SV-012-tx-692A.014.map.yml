@@ -1,0 +1,9 @@
+id: MAP-SV-012-tx-692A.014
+check: SV-012
+source: tx-hs-692A
+locator: "Texas Health & Safety Code 692A.014(i)"
+type: implements
+quote: "The physician who attends the decedent at death or the physician who determines the time of the decedent's death may not participate in the procedures for removing or transplanting a part from the decedent."
+establishes: "The same conflict-of-interest rule as OPTN 2.14.A, in state statute - two independent sources for one conjunct of SV-012. Corroboration across independent documents is worth more than either alone."
+expires: P1Y
+inverse: retire

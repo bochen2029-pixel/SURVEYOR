@@ -6,7 +6,7 @@ id: SV-070
 title: single-active-primary-offer guard
 family: reconciliation
 layer: L0
-authority: "OPTN allocation policy (crosswalk pin lands at rung 05)"
+authority: "NOT PINNED. The rung-05 crosswalk searched the pinned OPTN Policies (edition effective 2025-08-01) for primary offer, duplicate, one candidate at a time, simultaneous, provisional - no clause codifies the single-active-primary guard. See crosswalk/mappings/MAP-SV-070-silent-primary-offer.map.yml. The rule may live in OPTN Bylaws or the allocation system operational rules (neither in this corpus), or it may be professional practice only [H]. L0 is PROVISIONAL until an R1 reviewer names the document."
 trigger: on_write
 predicate: "count(active_primary_offers[organ_id]) <= 1"
 action: hold

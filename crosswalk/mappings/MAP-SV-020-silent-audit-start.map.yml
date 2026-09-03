@@ -1,0 +1,10 @@
+id: MAP-SV-020-silent-audit-start
+check: SV-020
+source: ecfr-42-486-subpartG
+locator: "42 CFR 486 Subpart G (whole)"
+type: silent
+quote: ""
+searched: "chart audit | record review timeliness | 7 days | audit within | post-recovery review"
+establishes: "486.348(b) mandates at least monthly death record reviews, but nothing sets a deadline for beginning the audit of a completed donor chart. SV-020's 7-day clock is the quality department's SLA on itself - L2, and the department is free to change it."
+expires: P6M
+inverse: retire

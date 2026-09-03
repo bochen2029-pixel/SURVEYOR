@@ -1,0 +1,35 @@
+# A NEXT EDITION, as an edit list. F-CROSSWALK's mechanical fixture.
+#
+# WHY THIS SHAPE. The natural fixture is a real edition transition (the AATB 15th to
+# 16th, harvested [H]), and we do not have both editions on this machine. So the diff
+# machinery is proven here on an AUTHORED next edition of a source we do have: three
+# edits against the pinned OPTN Policies, chosen to exercise the three outcomes a real
+# transition produces. The machinery is real and graded; the edition is synthetic and
+# labelled as such. F-CROSSWALK's real run waits for a real edition change, the way
+# F-RETRO waits for a real site.
+#
+# Each block: `from:` (verbatim text in the base edition) then `to:` (its replacement).
+# An edit whose `from` does not occur refuses loudly - the fixture cannot rot silently
+# while appearing to pass.
+#
+# WHAT EACH EDIT IS FOR
+#  1. A DEADLINE TIGHTENS. The feedback form moves 5 business days -> 3. SV-030's quote
+#     stops matching, the check enters the review queue, and the bound in the check is
+#     now wrong - the exact failure the crosswalk exists to catch before a survey does.
+#  2. A CLAUSE IS REWORDED, not removed. The conflict-of-interest sentence gains a
+#     qualifier. The opening survives, so the diff reports "reworded or renumbered" and
+#     a human reads the new text rather than the tool guessing.
+#  3. AN UNRELATED CLAUSE MOVES. Text no mapping cites changes. Nothing should enter the
+#     queue: a crosswalk that flags every edition change flags nothing.
+
+from: "Host OPO Donor Organ Disposition (Feedback) 5 business days after the procurement date"
+to: "Host OPO Donor Organ Disposition (Feedback) 3 business days after the procurement date"
+why: "deadline tightening - SV-030 must enter the review queue"
+
+from: "The organ recovery procedure and the transplantation of organs must not be performed by the donor hospital healthcare team member who declares the death of the potential deceased"
+to: "The organ recovery procedure and the transplantation of organs must not be performed by, or directed by, the donor hospital healthcare team member who declares the death of the potential deceased"
+why: "rewording that keeps the opening - SV-012 must be reported as reworded, not gone"
+
+from: "Chest x-ray 4. Complete blood count (CBC) 5. Electrolytes"
+to: "Chest x-ray 4. Complete blood count (CBC) with differential 5. Electrolytes"
+why: "an edit no mapping cites - nothing may enter the review queue for it"

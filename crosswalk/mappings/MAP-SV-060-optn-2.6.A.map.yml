@@ -1,0 +1,12 @@
+# The two ABO determinations must come from two draws. This is the clause S2b
+# retargeted SV-060 onto, after the review showed the harvested wording (ABO vs
+# serology sharing a timestamp) would flag conforming charts.
+id: MAP-SV-060-optn-2.6.A
+check: SV-060
+source: optn-policies
+locator: "OPTN Policy 2.6.A: Deceased Donor Blood Type Determination"
+type: implements
+quote: "The deceased donor blood samples must: 1. Be drawn on two separate occasions 2. Have different collection times 3. Be submitted as separate samples"
+establishes: "Two ABO determinations from samples with different collection times. The check tests exactly the second requirement, which is the one a record can carry: two draw timestamps that differ."
+expires: P1Y
+inverse: retire

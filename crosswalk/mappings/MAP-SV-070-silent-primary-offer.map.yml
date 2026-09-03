@@ -1,0 +1,16 @@
+# THE FLAGSHIP'S PIN DID NOT LAND, AND THAT IS THE FINDING.
+# SV-070's authority line promised an OPTN allocation-policy pin at rung 05. Searched:
+# the phrase 'primary offer' does not occur anywhere in the pinned OPTN Policies, nor
+# does 'duplicate', nor 'one candidate at a time'. The harvest said this exact thing -
+# one organ, one primary offer is "a norm enforced by professional culture only" [H] -
+# and the crosswalk now confirms it mechanically against the policy text.
+id: MAP-SV-070-silent-primary-offer
+check: SV-070
+source: optn-policies
+locator: "OPTN Policies (whole document, edition effective 2025-08-01)"
+type: silent
+quote: ""
+searched: "primary offer | duplicate | one candidate at a time | simultaneous | provisional | may only make one"
+establishes: "The pinned OPTN Policies do not codify the single-active-primary-offer rule in those terms. Either it lives outside this corpus (OPTN Bylaws, or the allocation system's operational rules) or it is professional practice rather than policy text. Until an R1 reviewer names the document, SV-070's authority must not claim an OPTN policy citation - it is a hazard the record system leaves unreachable, which is why the harvest found it recovered by phone calls."
+expires: P6M
+inverse: retire

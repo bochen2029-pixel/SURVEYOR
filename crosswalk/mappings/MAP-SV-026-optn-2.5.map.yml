@@ -1,0 +1,9 @@
+id: MAP-SV-026-optn-2.5
+check: SV-026
+source: optn-policies
+locator: "OPTN Policy 2.5: Hemodilution Assessment"
+type: implements
+quote: "Prior to screening, the host OPO must assess all potential deceased donor blood samples that were obtained for screening tests for hemodilution using a hemodilution calculation. The host OPO must document in the deceased donor medical record a complete history of all blood products and intravenous fluid transfusions the deceased donor received since admission to the donor hospital."
+establishes: "A hemodilution calculation is mandatory, and the complete transfusion history it draws on must be in the record. The check grades the calculation AGAINST that logged history in both directions - nothing omitted, nothing invented - which is the mechanical content of 'assess using a hemodilution calculation'. The 48h/1h lookback windows themselves are the site's [H]."
+expires: P1Y
+inverse: retire

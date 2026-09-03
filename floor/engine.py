@@ -642,9 +642,11 @@ def evaluate(check: dict, record: dict) -> str:
 # ---------------------------------------------------------------- battery
 def no_model_scan() -> list[str]:
     """Law B2's executioner (adopted from the estate): the floor imports no
-    learned/network machinery. Scans floor/ and ledger/ sources."""
+    learned/network machinery. Scans floor/, ledger/, clocks/ and crosswalk/ - every
+    deterministic organ. The crosswalk especially: a pin store that could reach the
+    network could 'verify' a quote against something other than the pinned bytes."""
     hits = []
-    for d in (ROOT / "floor", ROOT / "ledger"):
+    for d in (ROOT / "floor", ROOT / "ledger", ROOT / "clocks", ROOT / "crosswalk"):
         for p in d.glob("*.py"):
             m = FORBIDDEN_IMPORTS.search(p.read_text(encoding="utf-8"))
             if m:

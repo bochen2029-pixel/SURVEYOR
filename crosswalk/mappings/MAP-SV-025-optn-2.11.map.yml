@@ -1,0 +1,9 @@
+id: MAP-SV-025-optn-2.11
+check: SV-025
+source: optn-policies
+locator: "OPTN Policy 2.11: Required Deceased Donor Information (liver offers)"
+type: implements
+quote: "Other laboratory tests within 12 hours of the offer: a. Alanine aminotransferase/asparate aminotransferase (ALT/AST) b. Alkaline phosphatase c. Total and direct bilirubin d. International normalized ration (INR) or Prothrombin (PT) if INR is not available"
+establishes: "The 12-hour window on the liver INR, measured against the offer. The check anchors to collection rather than result because a lab's age runs from the draw - the anchor-defect plant in its fixtures proves the difference."
+expires: P1Y
+inverse: retire

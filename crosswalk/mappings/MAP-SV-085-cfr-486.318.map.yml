@@ -1,0 +1,13 @@
+# The currency case, on real text: 486.318(a)-(c) still carries a three-measure outcome
+# regime the 2020 rule replaced. A byte-match gate PASSES a quote to it - the passage
+# genuinely exists - so the tool warns instead of guessing, which is the whole reason
+# the warn tier exists.
+id: MAP-SV-085-cfr-486.318
+check: SV-085
+source: ecfr-42-486-subpartG
+locator: "42 CFR 486.318(a)"
+type: reports-under
+quote: "an OPO must meet two out of the three following outcome measures"
+establishes: "The outcome-measure regime whose denominators SV-085 refuses to let a report mix without naming. Read the currency warning: this paragraph is codified text describing a superseded regime, and the check's point is precisely that a number without its denominator cannot be read safely."
+expires: P1Y
+inverse: retire

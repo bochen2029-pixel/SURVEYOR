@@ -1,0 +1,9 @@
+id: MAP-SV-024-optn-2.9
+check: SV-024
+source: optn-policies
+locator: "OPTN Policy 2.9: Required Deceased Donor Infectious Disease Testing"
+type: implements
+quote: "Infectious disease testing for all potential deceased lung donors using an FDA licensed, approved, cleared, or emergency use authorized, lower respiratory specimen test for SARS-CoV-2 (COVID-19) by nucleic acid test (NAT) Lower respiratory specimen test results for SARS-CoV-2 by nucleic acid test (NAT) must be available pre-transplant of lungs."
+establishes: "The lower respiratory SARS-CoV-2 NAT for lung donors is mandated - the half of SV-024 tagged L0. The 72-hour currency window in the same check is the site's rule, which is why the check is tagged L0/L2."
+expires: P1Y
+inverse: retire

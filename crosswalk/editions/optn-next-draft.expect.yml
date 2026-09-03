@@ -1,0 +1,11 @@
+# What the edition-diff fixture must produce. Graded by gates.py G-CROSSWALK-PINS.
+# A diff engine that flags everything is as useless as one that flags nothing, so the
+# fixture asserts BOTH: the two mappings that must enter the review queue, and the count
+# that must stay out of it.
+id: optn-next-draft
+base: optn-policies
+edits: optn-next-draft.edits.yml
+expect_review: [SV-012, SV-030]
+expect_disturbed: 2
+expect_intact: 7
+why: "SV-030's deadline moved and SV-012's clause was reworded; the third edit touches text no mapping cites and must disturb nothing."

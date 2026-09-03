@@ -1,0 +1,9 @@
+id: MAP-SV-084-cfr-486.348
+check: SV-084
+source: ecfr-42-486-subpartG
+locator: "42 CFR 486.348"
+type: constrains
+quote: "The OPO must develop, implement, and maintain a comprehensive, data-driven QAPI program designed to monitor and evaluate performance of all donation services, including services provided under contract or arrangement."
+establishes: "The QAPI program is mandated. The check's subject - an ANNUAL presentation of the plan to the governing board - is not in this clause; see the companion silent mapping."
+expires: P1Y
+inverse: retire

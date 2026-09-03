@@ -1,0 +1,12 @@
+# The most instructive mapping in the set: the regulation mandates the duty and
+# DELEGATES the number. The 1.5 hours is the site's, which is why S2b retagged the
+# check L0/L2. A crosswalk that hid this would be hiding the L0/L2 boundary itself.
+id: MAP-SV-033-cfr-486.322
+check: SV-033
+source: ecfr-42-486-subpartG
+locator: "42 CFR 486.322(a)"
+type: constrains
+quote: 'The agreement must specify the meaning of the terms "timely referral" and "imminent death."'
+establishes: "CMS requires that 'timely referral' BE DEFINED in the OPO-hospital agreement; it does not set the interval. The 1.5-hour onsite response in SV-033 is therefore the site's number riding a mandated duty - L0/L2, and a second site will differ."
+expires: P1Y
+inverse: retire
