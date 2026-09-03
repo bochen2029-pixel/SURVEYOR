@@ -1,0 +1,9 @@
+id: MAP-SV-061-guidance-injected-drugs
+check: SV-061
+source: fda-hctp-eligibility
+locator: "FDA HCT/P Eligibility guidance, donor screening risk factors, item 2"
+type: implements
+quote: "Persons who have injected drugs for a non-medical reason in the preceding 5 years, including intravenous, intramuscular, or subcutaneous injections"
+establishes: "The medical / NON-MEDICAL distinction SV-061 requires on every injection-site finding, named in the guidance as the risk factor itself. The physical assessment looks for the signs (21 CFR 1271.3(o), pinned separately); this is what the signs mean."
+expires: P1Y
+inverse: retire

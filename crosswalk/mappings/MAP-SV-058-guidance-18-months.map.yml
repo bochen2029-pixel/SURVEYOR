@@ -1,0 +1,9 @@
+id: MAP-SV-058-guidance-18-months
+check: SV-058
+source: fda-hctp-eligibility
+locator: "FDA HCT/P Eligibility guidance, donor screening risk factors, item 7"
+type: constrains
+quote: "Children born to mothers with or at risk for HIV infection: [...] If 18 months of age or younger, or [...] If breast-fed within the preceding 12 months."
+establishes: "The 18-month and breastfed-within-12-months limbs SV-058 encodes, in guidance rather than regulation - and NARROWER than the check: the guidance scopes them to children of mothers with or at risk for HIV infection, while the check applies them to every infant donor. The check is stricter than its source. That is a defensible site position and it must be a stated one."
+expires: P1Y
+inverse: retire

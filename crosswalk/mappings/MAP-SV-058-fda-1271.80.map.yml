@@ -1,0 +1,9 @@
+id: MAP-SV-058-fda-1271.80
+check: SV-058
+source: ecfr-21-1271
+locator: "21 CFR 1271.80(a)"
+type: implements
+quote: "In the case of a donor 1 month of age or younger, you must test a specimen from the birth mother instead of a specimen from the donor."
+establishes: "For a donor one month or younger the birth mother's specimen REPLACES the donor's - codified. This is the tier the S2b reviewer flagged and the check does not yet distinguish: SV-058 requires BOTH interviews at every age up to 18 months, where the regulation substitutes the mother at one month. An R1 question, now with the clause attached."
+expires: P1Y
+inverse: retire

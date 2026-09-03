@@ -87,3 +87,16 @@ accessed: 2026-09-03
 cadence: P1M
 names: "21 CFR 1271|FDA 21 CFR 1271|1271."
 note: "The tissue rule. Fetched at S5 because fourteen encoded checks rested on it and none could be byte-checked; the eCFR endpoint requires an Accept-Encoding header that permits compression, and the date is the one the API reports title 21 current to, never a guessed one. Latest amendment in this edition: 2026-08-31."
+
+id: fda-hctp-eligibility
+title: FDA Guidance for Industry - Eligibility Determination for Donors of Human Cells, Tissues, and Cellular and Tissue-Based Products (HCT/Ps)
+publisher: U.S. Food and Drug Administration, Center for Biologics Evaluation and Research
+file: fda-hctp-eligibility.txt
+sha256: 555e7a4894ecb0d5a96dcbc7b99cc19a5ade1cdf8a469adf05349c7791f6db00
+bytes: 182969
+url: "https://www.fda.gov/media/73072/download"
+effective: 2007-08-01
+accessed: 2026-09-03
+cadence: P1Y
+names: "FDA guidance|Eligibility Determination for Donors|HCT/P guidance"
+note: "GUIDANCE, NOT REGULATION - it says so on every page (Contains Nonbinding Recommendations). Pinned because three checks rest on rules that live here rather than in 21 CFR 1271, and a citation to guidance is honest where a citation to the regulation would have been wrong. Text extracted from the 70-page PDF with page markers; the pin is over the extracted text every quote is matched against."

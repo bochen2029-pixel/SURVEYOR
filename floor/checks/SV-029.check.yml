@@ -5,7 +5,7 @@ id: SV-029
 title: reused serology sample only within 7 days of tissue recovery, else redraw required
 family: clocks
 layer: L0
-authority: "FDA guidance (Eligibility Determination for Donors of HCT/Ps) - the 7-day specimen window is GUIDANCE, not codified: 21 CFR Part 1271 is pinned and contains no such interval (crosswalk/mappings/MAP-SV-029-silent-seven-day-window.map.yml). Site reuse SOP [H]. L0 provisional until the site SOP adopting the guidance is named."
+authority: "21 CFR 1271.80(b): the donor specimen is collected at recovery, or up to 7 days before or after it - CODIFIED, and symmetric. PINNED: MAP-SV-029-fda-1271.80. (An S5 mapping wrongly declared this uncodified on a search that was recorded but never run; S6 corrected it when the tool began executing every search term.) Site reuse SOP [H]."
 trigger: continuous
 anchor: serology.draw_ts
 anchor_why: "sample validity runs from the draw, not from the result date and not from the organ case's recovery; the tissue recovery must fall within 7 days of the draw"

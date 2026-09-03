@@ -1,0 +1,14 @@
+# THE CORRECTION. At S5 this check carried a `silent` mapping asserting that 21 CFR 1271
+# contained no seven-day specimen window. It does, at 1271.80(b), in these words. The
+# silent mapping's `searched:` field listed five terms of which one had actually been run;
+# the tool now executes every term, and that is what caught it. A field a human types is
+# a claim; a field the tool executes is evidence.
+id: MAP-SV-029-fda-1271.80
+check: SV-029
+source: ecfr-21-1271
+locator: "21 CFR 1271.80(b)"
+type: implements
+quote: "You must collect the donor specimen for testing at the time of recovery of cells or tissue from the donor; or up to 7 days before or after recovery"
+establishes: "The seven-day window, codified, and symmetric: before OR after recovery. SV-029 grades exactly that symmetry for a sample reused from an organ case - the check tests both directions, which a one-sided reading would have missed."
+expires: P1Y
+inverse: retire

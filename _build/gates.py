@@ -29,6 +29,10 @@ Gates:
                       its sha256-pinned source, and the edition-diff fixture puts exactly
                       the mappings it should into the review queue (law B6). Fails closed:
                       a source absent on this machine is never a pass
+  G-FOLD-DETERMINISM  rung 06's executioner: the same tape renders byte-identical documents,
+                      a tape whose simultaneous events are reordered renders the SAME bytes,
+                      every table data row carries an evidence handle, and the CAPA/variance
+                      engines pass their own battery
 Stdlib only.
 """
 import json
@@ -306,6 +310,44 @@ def gate_crosswalk_pins():
                     f"{cov['authority_outside_corpus']} rest on authority outside the corpus")
 
 
+def gate_fold_determinism():
+    """Rung 06's executioner. Four properties at once, because a generated document is
+    only evidence if it can be re-derived: (1) the CAPA lifecycle and variance triage pass
+    their battery; (2) the same tape renders byte-identical documents; (3) a tape whose
+    SIMULTANEOUS events arrived in a different order renders the same bytes, so the
+    document is not counting arrival order; (4) every table data row carries an evidence
+    handle, so no number reaches a page without its source (law A6). Also writes the tape
+    through the real hash-chained ledger and verifies the chain."""
+    try:
+        sys.path.insert(0, str(ROOT / "ledger"))
+        import folds
+        import lifecycle
+        import make_tape
+    except Exception as e:  # noqa: BLE001
+        return "CANNOT-EVALUATE", f"ledger unavailable: {e}"
+    problems = [f"lifecycle: {x}" for x in lifecycle.selftest()]
+    events = make_tape.build(seed=20260903, cases=25)
+    problems += [f"folds: {x}" for x in folds.selftest(events)]
+    # the ported hash-chained ledger must actually carry the quality vocabulary
+    import tempfile
+    with tempfile.TemporaryDirectory() as d:
+        try:
+            summary = make_tape.write_chain(events, Path(d))
+        except Exception as e:  # noqa: BLE001
+            problems.append(f"product tape rejected the quality vocabulary: {type(e).__name__}: {e}")
+            summary = "chain not verified"
+        else:
+            if not summary.startswith("tape OK"):
+                problems.append(f"product tape: {summary}")
+    if problems:
+        return "FAIL", "; ".join(problems[:3])
+    auth = folds.load_authorities()
+    n_auth = sum(1 for c in auth if auth[c])
+    return "PASS", (f"3 documents render byte-identical twice and under reordered simultaneous "
+                    f"events; {len(events):,} events; every table row cited; {n_auth} checks carry a "
+                    f"pinned authority in the binder; {summary}")
+
+
 def main():
     record = "--record" in sys.argv
     results = [
@@ -318,6 +360,7 @@ def main():
         ("G-ANCHOR-PLANTS",) + gate_anchor_plants(),
         ("F-FIXTURE-WORLD",) + gate_fixture_world(),
         ("G-CROSSWALK-PINS",) + gate_crosswalk_pins(),
+        ("G-FOLD-DETERMINISM",) + gate_fold_determinism(),
     ]
     width = max(len(r[0]) for r in results)
     fail = False

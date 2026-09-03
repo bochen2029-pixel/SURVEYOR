@@ -257,11 +257,40 @@ def verify(m: dict, sources: dict[str, dict]) -> tuple[str, str]:
     if probs:
         return MISMATCH, "; ".join(probs)
     if m["type"] == "silent":
-        # A claim that the regulation is SILENT cannot be proven by a quote. It is a
-        # human reading, recorded as such, and it must name what it searched.
-        if not str(m.get("searched", "")).strip():
-            return MISMATCH, "a `silent` mapping must record what was searched (`searched:`)"
-        return OK, f"silent: no clause found in {m['source']} for {m.get('searched')!r} (human reading, not a byte-match)"
+        # A claim that the regulation is SILENT is checkable after all, and it MUST be
+        # checked. S6 found this the hard way: an S5 silent mapping asserted that 21 CFR
+        # 1271 contained no seven-day specimen window and listed five search terms in its
+        # `searched:` field - of which exactly one had actually been run. The regulation
+        # says "up to 7 days before or after recovery" at 1271.80(b), and the mapping had
+        # recorded a search that was never performed. A field a human types is a claim;
+        # a field the tool executes is evidence. So every term is now run, and one hit
+        # rejects the mapping.
+        terms = [t.strip() for t in str(m.get("searched", "")).split("|") if t.strip()]
+        if not terms:
+            return MISMATCH, "a `silent` mapping must record what was searched (`searched:`, terms separated by |)"
+        # A single generic word is not a search for a rule. "annual" occurs in any CFR
+        # part; "30 minutes" occurs in any clinical policy; finding them proves nothing
+        # and NOT finding them would have proved nothing either. A term must be a phrase
+        # specific enough that a hit would actually mean the rule exists.
+        vague = [t for t in terms if " " not in t.strip() or len(t.strip()) < 10]
+        if vague:
+            return MISMATCH, (f"search terms too generic to be evidence of absence: {vague} - "
+                              f"a silent mapping must search PHRASES (>= 2 words, >= 10 chars) that "
+                              f"would only appear if the rule were there")
+        text, status = source_text(m["source"], sources)
+        if text is None:
+            return status, f"source {m['source']!r} not available - silence cannot be asserted unchecked"
+        hits = []
+        for t in terms:
+            i = text.lower().find(normalise(t).lower())
+            if i >= 0:
+                hits.append((t, text[max(0, i - 60): i + 140]))
+        if hits:
+            t, ctx = hits[0]
+            return MISMATCH, (f"NOT SILENT: searching {m['source']} for {t!r} finds it "
+                              f"({len(hits)} of {len(terms)} terms hit) - ...{ctx.strip()}...")
+        return OK, (f"silent: {len(terms)} search term(s) run against {m['source']}, "
+                    f"none occurs (mechanically checked, not asserted)")
     text, status = source_text(m["source"], sources)
     if text is None:
         return status, f"source {m['source']!r} not available to check against"

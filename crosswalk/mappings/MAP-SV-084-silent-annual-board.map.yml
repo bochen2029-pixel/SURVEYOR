@@ -1,14 +1,12 @@
-# This mapping answers an open question the S2b reviewer raised and the tape carried:
-# is there an explicit CMS clause requiring an annual governing-board presentation of
-# the QAPI plan? Searched, and there is not. A `silent` mapping is a human reading, not
-# a byte-match, so it records what was searched and stays reviewable.
+# Rewritten at S6 with phrases. "annual" alone hits the designated-requestor training
+# clause and proves nothing about the QAPI plan.
 id: MAP-SV-084-silent-annual-board
 check: SV-084
 source: ecfr-42-486-subpartG
 locator: "42 CFR 486 Subpart G (whole)"
 type: silent
 quote: ""
-searched: "annual | annually | governing body + present | board presentation | QAPI plan approval | 486.324 | 486.348"
-establishes: "486.324 gives the governing body authority over the QAPI program and 486.348 mandates the program, but neither sets an ANNUAL board-presentation clock. SV-084's yearly clock is therefore the site's governance rule, not a federal one: the check should retag L2, or the R1 reviewer should name the accreditation standard it actually comes from."
-expires: P1Y
+searched: "annually to the governing body | present the QAPI plan | QAPI plan to the board | governing body must approve | annual review of the QAPI | board of directors annually"
+establishes: "486.324 gives the governing body authority over the QAPI program and 486.348 mandates the program, but neither sets an ANNUAL board-presentation clock. SV-084's yearly clock is site governance, not a federal requirement: retag L2, or name the accreditation standard it comes from."
+expires: P6M
 inverse: retire
