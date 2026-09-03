@@ -19,6 +19,9 @@ Gates:
   G-CATALOG-COMPLETE  rung 02's executioner: PASS only when every catalog check is encoded
   G-FIELDS            floor/FIELDS.md (the record vocabulary) matches a fresh fold of
                       the fixtures (law A1 applied to the vocabulary; added S2)
+  G-ANCHOR-PLANTS     rung 03's executioner: every clock check declares an anchor the
+                      predicate reads, every anchor-defect plant flips its verdict on
+                      the wrong anchor, and the ported closure battery is green (law B1)
 Stdlib only.
 """
 import json
@@ -193,6 +196,35 @@ def gate_fields():
     return "FAIL", "floor/FIELDS.md stale or hand-edited - run: python floor/engine.py --fields --write"
 
 
+def gate_anchor_plants():
+    """Rung 03's executioner (law B1 made mechanical): the anchor registry is complete,
+    every anchor-defect plant flips on the wrong anchor, the closure battery is green."""
+    import contextlib
+    import io
+    try:
+        sys.path.insert(0, str(ROOT / "clocks"))
+        import anchors
+        import test_closure
+    except Exception as e:  # noqa: BLE001
+        return "CANNOT-EVALUATE", f"clocks unavailable: {e}"
+    g = anchors.grade_plants()
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        rc = test_closure.run()
+    problems = list(g["broken"])
+    if rc:
+        problems.append(f"closure battery: {len(test_closure.FAIL)} failed")
+    if hasattr(anchors, "selftest"):
+        problems += [f"clocks selftest: {f}" for f in anchors.selftest()]
+    if problems:
+        return "FAIL", "; ".join(problems[:4])
+    if not g["plants"]:
+        return "CANNOT-EVALUATE", "registry present but no anchor-defect plants yet"
+    return "PASS", (f"{g['registry']} anchored checks; {len(g['plants'])} anchor plants across "
+                    f"{g['checks_with_plants']} checks all flip on the wrong anchor; closure battery "
+                    f"{len(test_closure.PASS)} green")
+
+
 def main():
     record = "--record" in sys.argv
     results = [
@@ -202,6 +234,7 @@ def main():
         ("F-FIXTURE",) + gate_fixture(),
         ("G-CATALOG-COMPLETE",) + gate_catalog_complete(),
         ("G-FIELDS",) + gate_fields(),
+        ("G-ANCHOR-PLANTS",) + gate_anchor_plants(),
     ]
     width = max(len(r[0]) for r in results)
     fail = False
@@ -213,7 +246,7 @@ def main():
             fail = True  # privacy fails closed
     if record:
         ts = datetime.now(timezone.utc).isoformat(timespec="seconds")
-        with TAPE.open("a", encoding="utf-8") as f:
+        with TAPE.open("a", encoding="utf-8", newline="\n") as f:
             for name, status, detail in results:
                 f.write(json.dumps({"ts": ts, "session": "gates", "type": "verdict",
                                     "gate": name, "status": status,

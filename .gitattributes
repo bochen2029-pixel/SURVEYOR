@@ -1,0 +1,8 @@
+# Line endings are part of the tape's identity (the fold hashes its bytes), so they
+# must not depend on who checked the repo out. Everything text is LF, everywhere.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.gif binary
+*.woff binary
+*.woff2 binary

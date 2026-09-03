@@ -878,7 +878,7 @@ if __name__ == "__main__":
     if "--fields" in sys.argv:
         md = fields_markdown()
         if "--write" in sys.argv:
-            FIELDS_MD.write_text(md, encoding="utf-8")
+            FIELDS_MD.write_text(md, encoding="utf-8", newline="\n")
             print(f"wrote {FIELDS_MD.relative_to(ROOT).as_posix()}")
         else:
             print(md, end="")

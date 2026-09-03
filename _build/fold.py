@@ -50,9 +50,13 @@ def read_tape():
 
 
 def tape_sha():
+    """Content identity of the tape: line endings are stripped before hashing, so the
+    sha is the same whether a checkout gave the file LF or CRLF (S2: a mixed-ending
+    tape made the fold hash checkout-dependent, a cold-start defect)."""
     if not TAPE.exists():
         return "EMPTY"
-    return hashlib.sha256(TAPE.read_bytes()).hexdigest()[:16]
+    lines = [ln.rstrip(b"\r") for ln in TAPE.read_bytes().split(b"\n")]
+    return hashlib.sha256(b"\n".join(lines)).hexdigest()[:16]
 
 
 def latest_verdicts(events):
@@ -149,8 +153,8 @@ def render(events):
 
 def write_folds():
     state_md, board_md = render(read_tape())
-    STATE.write_text(state_md, encoding="utf-8")
-    BOARD.write_text(board_md, encoding="utf-8")
+    STATE.write_text(state_md, encoding="utf-8", newline="\n")
+    BOARD.write_text(board_md, encoding="utf-8", newline="\n")
     print(f"folded: {STATE.name}, {BOARD.name} (tape {tape_sha()})")
 
 
