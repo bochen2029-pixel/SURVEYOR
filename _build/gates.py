@@ -34,8 +34,10 @@ Gates:
                       every table data row carries an evidence handle, and the CAPA/variance
                       engines pass their own battery
   G-EVIDENCE-LINKS    rung 07's executioner: the Morning Board renders from the tape, a line
-                      with no evidence CANNOT be built, refusals are counted on the page, and
-                      the board published on site/surveyor.html is the one this tape produces
+                      with no evidence CANNOT be built, refusals are counted on the page, the
+                      board published on site/surveyor.html is the one this tape produces, and
+                      in the local app EVERY RENDERED LINK RESOLVES - a dead citation is worse
+                      than a printed one, because it looks checkable
   G-FOREIGN-HARNESS   rung 09's executioner: the completion kit holds - conformance/run.py is
                       green, every refused draft is refused for the reason it declares, every
                       site-variant check has an elicit question, and the boot contract exists
@@ -393,11 +395,28 @@ def gate_evidence_links():
                 problems.append("the published board does not state its provenance and refusal count")
     if problems:
         return "FAIL", "; ".join(problems[:3])
+    # the local app: the citation is a LINK, so the link must go somewhere
+    ui = "not present"
+    if (ROOT / "ui" / "serve.py").exists():
+        try:
+            import importlib.util
+            spec = importlib.util.spec_from_file_location("surveyor_ui", ROOT / "ui" / "serve.py")
+            mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(mod)
+            ui_fails = mod.selftest()
+        except Exception as e:  # noqa: BLE001
+            problems.append(f"ui: {type(e).__name__}: {e}")
+            ui_fails = []
+        else:
+            problems += [f"ui: {x}" for x in ui_fails]
+            ui = "every rendered link resolves, read-only, no external reference"
+    if problems:
+        return "FAIL", "; ".join(problems[:3])
     lines, dropped = board.build(events, "2026-01-01T00:00:00Z", "2027-01-01T00:00:00Z")
     cited = sum(len(l.evidence) for l in lines)
     return "PASS", (f"{len(lines)} board lines, every one citing its evidence ({cited:,} handles), "
                     f"{len(dropped)} refused for lacking it; the published page carries the "
-                    f"generated board and its provenance")
+                    f"generated board and its provenance; local app: {ui}")
 
 
 def gate_foreign_harness():
