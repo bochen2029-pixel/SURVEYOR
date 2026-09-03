@@ -1,6 +1,40 @@
-{"expect": "ALARM",
+{
+ "expect": "ALARM",
  "note": "ANCHOR PLANT: refrigeration clocks anchor to PRONOUNCEMENT, not to the referral three hours later. Death 00:00, referral 03:00, cooled 04:00, recovery began 26h after death: ALARM under the 24h rule; measured from referral it is 23h and a false PASS.",
- "anchor_plant": {"wrong_anchor": "referral.received_ts", "verdict_if_wrong": "PASS"},
- "record": {"case_id": "TD-2026-0966", "death": {"pronounced_ts": "2026-08-01T00:00:00Z"}, "referral": {"received_ts": "2026-08-01T03:00:00Z"}, "cooling": {"initial_ts": "2026-08-01T04:00:00Z"}, "recovery": {"start_ts": "2026-08-02T02:00:00Z"},
-            "refrigeration": {"out_intervals": [{"out_ts": "2026-08-01T00:00:00Z", "in_ts": "2026-08-01T04:00:00Z"}, {"out_ts": "2026-08-02T01:00:00Z", "in_ts": "2026-08-02T02:00:00Z"}]}, "as_of": "2026-08-20T00:00:00Z"},
- "history": []}
+ "anchor_plant": {
+  "wrong_anchor": "referral.received_ts",
+  "verdict_if_wrong": "PASS"
+ },
+ "record": {
+  "case_id": "TD-2026-0966",
+  "death": {
+   "asystole_ts": "2026-08-01T00:00:00Z"
+  },
+  "referral": {
+   "received_ts": "2026-08-01T03:00:00Z"
+  },
+  "cooling": {
+   "initial_ts": "2026-08-01T04:00:00Z"
+  },
+  "recovery": {
+   "start_ts": "2026-08-02T02:00:00Z"
+  },
+  "refrigeration": {
+   "out_intervals": [
+    {
+     "out_ts": "2026-08-01T00:00:00Z",
+     "in_ts": "2026-08-01T04:00:00Z"
+    },
+    {
+     "out_ts": "2026-08-02T01:00:00Z",
+     "in_ts": "2026-08-02T02:00:00Z"
+    }
+   ]
+  },
+  "as_of": "2026-08-20T00:00:00Z",
+  "tissue": {
+   "category": "standard"
+  }
+ },
+ "history": []
+}

@@ -1,6 +1,6 @@
 # SURVEYOR — THE SPEC
 ### Quality, rebuilt into the record. The verification half of the estate, promoted to a product.
-**v0.1 · 2026-08-26 · REV 0 — NOTHING HAS RUN.** Claim grammar, binding on every statement in this repository: `[M]` measured, dated receipt · `[H]` harvested — line-referenced from the local passport corpus (`_local/harvest/`, never ships) · `[D]` derived, chain shown · `[SPEC]` designed, unbuilt · `[BET]` kill condition named · `[NULL]` the baseline it must beat. A number without grain, denominator, and source is not a number. Funerals print. Where this spec and a receipt disagree, the receipt wins and the spec is the defect.
+**v0.1 · 2026-08-26 · REV 1 — ONE DECIDER HAS PRINTED (F-FIXTURE, synthetic, 2026-09-03; F-RETRO has not).** Claim grammar, binding on every statement in this repository: `[M]` measured, dated receipt · `[H]` harvested — line-referenced from the local passport corpus (`_local/harvest/`, never ships) · `[D]` derived, chain shown · `[SPEC]` designed, unbuilt · `[BET]` kill condition named · `[NULL]` the baseline it must beat. A number without grain, denominator, and source is not a number. Funerals print. Where this spec and a receipt disagree, the receipt wins and the spec is the defect.
 
 ---
 

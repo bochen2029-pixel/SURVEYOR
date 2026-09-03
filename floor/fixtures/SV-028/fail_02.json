@@ -1,4 +1,33 @@
-{"expect": "ALARM", "note": "cooled at 13h so the 15h rule applies; recovery began at 16h - would have passed under the 24h rule, which is the trap",
- "record": {"case_id": "TD-2026-0963", "death": {"pronounced_ts": "2026-08-01T00:00:00Z"}, "cooling": {"initial_ts": "2026-08-01T13:00:00Z"}, "recovery": {"start_ts": "2026-08-01T16:00:00Z"},
-            "refrigeration": {"out_intervals": [{"out_ts": "2026-08-01T00:00:00Z", "in_ts": "2026-08-01T13:00:00Z"}, {"out_ts": "2026-08-01T15:30:00Z", "in_ts": "2026-08-01T16:00:00Z"}]}, "as_of": "2026-08-20T00:00:00Z"},
- "history": []}
+{
+ "expect": "ALARM",
+ "note": "cooled at 13h so the 15h rule applies; recovery began at 16h - would have passed under the 24h rule, which is the trap",
+ "record": {
+  "case_id": "TD-2026-0963",
+  "death": {
+   "asystole_ts": "2026-08-01T00:00:00Z"
+  },
+  "cooling": {
+   "initial_ts": "2026-08-01T13:00:00Z"
+  },
+  "recovery": {
+   "start_ts": "2026-08-01T16:00:00Z"
+  },
+  "refrigeration": {
+   "out_intervals": [
+    {
+     "out_ts": "2026-08-01T00:00:00Z",
+     "in_ts": "2026-08-01T13:00:00Z"
+    },
+    {
+     "out_ts": "2026-08-01T15:30:00Z",
+     "in_ts": "2026-08-01T16:00:00Z"
+    }
+   ]
+  },
+  "as_of": "2026-08-20T00:00:00Z",
+  "tissue": {
+   "category": "standard"
+  }
+ },
+ "history": []
+}

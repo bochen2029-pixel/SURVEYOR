@@ -1,7 +1,7 @@
 # SURVEYOR
 ### Quality, rebuilt into the record. Survey-ready every day.
 
-**REV 0 · NOTHING HAS RUN.** This repository is a spec, a receipted check catalog, a pre-registration, and a build target — in that order, on purpose. No claim here graduates until its executioner prints.
+**REV 1 · THE FIRST DECIDER HAS PRINTED.** `[M 2026-09-03]` The floor was run against a synthetic OPO world it never saw being built: **295 planted nonconformities, 295 caught, 0 missed, 0 false holds in 8,967 clean (record, check) pairs** — pre-registered in [`experiments/f-fixture/PREDICTIONS.md`](experiments/f-fixture/PREDICTIONS.md) before the first run, receipt in [`experiments/f-fixture/RESULTS.md`](experiments/f-fixture/RESULTS.md), re-runnable by `python experiments/f-fixture/run.py`. **The predictions were wrong where it counts:** the first run killed on a 4.01% false-hold rate and printed two real defects (one check held every chart in the building, another alarmed on every organ-only donor); both are fixed and fenced by a new law. **F-RETRO — the number that decides the product — still needs a real site's historical charts and has not run.** Everything else here is a spec, a receipted catalog, and a pre-registration, in that order, on purpose.
 
 Every OPO staffs a quality department that audits a **sample** of charts, **weeks** after the cases, and becomes survey-ready as an **event**. SURVEYOR moves the deterministic half of that work into the record itself — **census, at the keystroke, as a standing property** — keeps the regulation↔policy crosswalk maintained as a computation, makes corrective actions grade their own effectiveness, and reserves human judgment for the part that is judgment.
 

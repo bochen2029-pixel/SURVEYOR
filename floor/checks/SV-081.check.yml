@@ -1,4 +1,7 @@
-# SV-081 - a CAPA row is complete only with an owner, a falsifiable expectation
+# SV-081 - a CAPA row is complete only with an owner, a falsifiable expectation.
+# The leading `capa.id != ''` is the APPLICABILITY GATE: a record carrying no CAPA at
+# all cannot be judged for CAPA completeness, so the check abstains instead of holding
+# every donor chart in the building (found by the S3 generator's first run).
 # (metric, baseline, target, horizon), an expiry, and an inverse. SPEC section 8:
 # a CAPA is an expectation with a deadline; no CAPA closes by assertion.
 id: SV-081
@@ -7,7 +10,7 @@ family: release
 layer: L1
 authority: "Quality-science invariant: corrective action as a testable expectation (SPEC section 8; the department's own sustained-corrective-action language [H]); CMS 42 CFR 486.348 QAPI context - pin at rung 05"
 trigger: on_write
-predicate: "exists(capa.owner_role) and exists(capa.expectation.metric) and exists(capa.expectation.baseline) and exists(capa.expectation.target) and exists(capa.expectation.horizon_ts) and exists(capa.expires) and exists(capa.inverse)"
+predicate: "capa.id != '' and exists(capa.owner_role) and exists(capa.expectation.metric) and exists(capa.expectation.baseline) and exists(capa.expectation.target) and exists(capa.expectation.horizon_ts) and exists(capa.expires) and exists(capa.inverse)"
 action: hold
 message: "CAPA {capa.id} is incomplete: it needs an owner, a falsifiable expectation (metric, baseline, target, horizon), an expiry, and an inverse."
 evidence: [capa.id, capa.owner_role, capa.expectation, capa.expires, capa.inverse]

@@ -7,3 +7,6 @@ _local/
 *.bak
 __pycache__/
 .DS_Store
+
+# Generated corpora (large; regenerate from the seed)
+experiments/f-fixture/out/

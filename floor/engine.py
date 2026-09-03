@@ -652,10 +652,33 @@ def no_model_scan() -> list[str]:
     return hits
 
 
+def applicability_problem(check: dict[str, Any]) -> str | None:
+    """THE APPLICABILITY LAW (added S3, after the generator's first run): a check whose
+    subject is absent from the record must ABSTAIN, never fire. Graded on the empty
+    record: a check that returns its action on {} would hold every record in the
+    building that its family does not even cover. PASS is lawful (nothing to judge and
+    nothing to hold); the action verdicts are not.
+
+    Two live defects motivated this, both invisible to hand-written fixtures because a
+    fixture is always written FOR the check: SV-081 held every donor chart (all its
+    conjuncts were exists(), and exists() reads absence as False), and SV-028 alarmed on
+    every organ-only donor (no tissue recovery, so the clock's as_of fallback treated a
+    never-event as a pending one)."""
+    try:
+        got = evaluate(check, {})
+    except ValueError:
+        return None                      # a predicate that does not parse is reported elsewhere
+    if got in ("PASS", "CANNOT-EVALUATE"):
+        return None
+    return (f"fires ({got}) on an empty record - the check needs an applicability gate: "
+            f"a leading path read that raises when its subject is absent")
+
+
 def run_battery() -> dict[str, Any]:
     """Every encoded check against every one of its fixtures. Naming law:
     pass_* must PASS; fail_* must land the check's action; cannot_* must
-    CANNOT-EVALUATE; every fixture's own `expect` field must agree too."""
+    CANNOT-EVALUATE; every fixture's own `expect` field must agree too.
+    Plus the applicability law: no check may fire on the empty record."""
     results: dict[str, Any] = {"checks": {}, "encoded": 0, "broken": [],
                                "fixtures_run": 0, "no_model_violations": no_model_scan(),
                                "hatches": []}
@@ -674,6 +697,10 @@ def run_battery() -> dict[str, Any]:
                 compile_predicate(str(check["predicate"]))
             except ValueError as e:
                 problems.append(f"predicate does not parse: {e}")
+            else:
+                ap = applicability_problem(check)
+                if ap:
+                    problems.append(ap)
         fdir = FIXTURES_DIR / cid
         fixtures = sorted(fdir.glob("*.json")) if fdir.exists() else []
         for fx in fixtures:

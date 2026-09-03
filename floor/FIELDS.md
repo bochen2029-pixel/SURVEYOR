@@ -2,7 +2,7 @@
 Regenerate: `python floor/engine.py --fields --write` (gates.py G-FIELDS enforces).
 Folded from the fixtures, so it is exact for what the checks have been proven against and silent about anything else. Types are observed, not declared: ts = ISO-8601 timestamp, blank = null or empty string.
 
-checks: 59 | fixtures: 281 | leaf paths: 306
+checks: 59 | fixtures: 283 | leaf paths: 307
 
 ## abo
 | path | observed types | carried by fixtures of |
@@ -195,7 +195,8 @@ checks: 59 | fixtures: 281 | leaf paths: 306
 ## death
 | path | observed types | carried by fixtures of |
 |---|---|---|
-| `death.pronounced_ts` | ts | SV-028 |
+| `death.asystole_ts` | ts | SV-028 |
+| `death.declared_ts` | ts | SV-028 |
 
 ## declaration
 | path | observed types | carried by fixtures of |
@@ -252,7 +253,7 @@ checks: 59 | fixtures: 281 | leaf paths: 306
 ## donor_type
 | path | observed types | carried by fixtures of |
 |---|---|---|
-| `donor_type` | str | SV-012 |
+| `donor_type` | str | SV-012, SV-028 |
 
 ## donor_verification
 | path | observed types | carried by fixtures of |
@@ -467,12 +468,12 @@ checks: 59 | fixtures: 281 | leaf paths: 306
 ## recovery
 | path | observed types | carried by fixtures of |
 |---|---|---|
-| `recovery.cross_clamp_ts` | ts | SV-024, SV-030 |
-| `recovery.end_ts` | ts | SV-020, SV-021, SV-032 |
+| `recovery.cross_clamp_ts` | ts | SV-024, SV-028, SV-030 |
+| `recovery.end_ts` | ts | SV-020, SV-021, SV-028, SV-032 |
 | `recovery.items` | list | SV-053 |
 | `recovery.items[].seq` | number | SV-053 |
 | `recovery.items[].tissue` | str | SV-053 |
-| `recovery.organ_recovery_ts` | ts | SV-030, SV-031 |
+| `recovery.organ_recovery_ts` | ts | SV-028, SV-030, SV-031 |
 | `recovery.organs` | list | SV-024 |
 | `recovery.organs[]` | str | SV-024 |
 | `recovery.paired_sequence_numbers` | list | SV-053 |
@@ -600,7 +601,7 @@ checks: 59 | fixtures: 281 | leaf paths: 306
 ## tissue
 | path | observed types | carried by fixtures of |
 |---|---|---|
-| `tissue.category` | str | SV-021 |
+| `tissue.category` | str | SV-021, SV-028 |
 
 ## predicates
 | check | trigger | predicate |
@@ -624,7 +625,7 @@ checks: 59 | fixtures: 281 | leaf paths: 306
 | SV-025 | continuous | `contains(allocation.organs, 'LI') implies (within(labs.inr.collected_ts, allocation.start_ts, 12h) and (not exists(allocation.start_ts) or minutes_between(labs.inr.collected_ts, allocation.start_ts) >= 0))` |
 | SV-026 | on_write | `every(hemodilution.calc.blood_products, contains(hemodilution.logged.blood_product_refs, ref) and minutes_between(ts, hemodilution.sample_draw_ts) >= 0 and minutes_between(ts, hemodilution.sample_draw_ts) <= 48h) and every(hemodilution.logged.blood_products, minutes_between(ts, hemodilution.sample_draw_ts) < 0 or minutes_between(ts, hemodilution.sample_draw_ts) > 48h or contains(hemodilution.calc.blood_product_refs, ref)) and sum(hemodilution.calc.blood_products, volume_ml) == hemodilution.calc.blood_products_ml and every(hemodilution.calc.crystalloids, contains(hemodilution.logged.crystalloid_refs, ref) and minutes_between(ts, hemodilution.sample_draw_ts) >= 0 and minutes_between(ts, hemodilution.sample_draw_ts) <= 1h) and every(hemodilution.logged.crystalloids, minutes_between(ts, hemodilution.sample_draw_ts) < 0 or minutes_between(ts, hemodilution.sample_draw_ts) > 1h or contains(hemodilution.calc.crystalloid_refs, ref)) and sum(hemodilution.calc.crystalloids, volume_ml) == hemodilution.calc.crystalloids_ml` |
 | SV-027 | continuous | `within(or_timeline.prep_complete_ts, or_timeline.incision_ts, 75m)` |
-| SV-028 | continuous | `(not exists(cooling.initial_ts) implies within(death.pronounced_ts, recovery.start_ts, 15h)) and (exists(cooling.initial_ts) implies ((minutes_between(death.pronounced_ts, cooling.initial_ts) <= 12h implies within(death.pronounced_ts, recovery.start_ts, 24h)) and (minutes_between(death.pronounced_ts, cooling.initial_ts) > 12h implies within(death.pronounced_ts, recovery.start_ts, 15h)))) and sum(refrigeration.out_intervals, minutes_between(out_ts, in_ts)) <= 15h` |
+| SV-028 | continuous | `tissue.category != '' and (not exists(cooling.initial_ts) implies within(death.asystole_ts, recovery.start_ts, 15h)) and (exists(cooling.initial_ts) implies ((minutes_between(death.asystole_ts, cooling.initial_ts) <= 12h implies within(death.asystole_ts, recovery.start_ts, 24h)) and (minutes_between(death.asystole_ts, cooling.initial_ts) > 12h implies within(death.asystole_ts, recovery.start_ts, 15h)))) and sum(refrigeration.out_intervals, minutes_between(out_ts, in_ts)) <= 15h` |
 | SV-029 | continuous | `serology.source == 'reused_from_organ_case' implies (within(serology.draw_ts, recovery.start_ts, 7d) and (not exists(recovery.start_ts) or minutes_between(recovery.start_ts, serology.draw_ts) <= 7d))` |
 | SV-030 | continuous | `within(recovery.organ_recovery_ts, feedback.submitted_ts, 5bd)` |
 | SV-031 | continuous | `within(feedback.submitted_ts, ddr.submitted_ts, 30d)` |
@@ -659,7 +660,7 @@ checks: 59 | fixtures: 281 | leaf paths: 306
 | SV-077 | on_close_attempt | `count(organs) > 0 and every(organs, organ_page_disposition == summary_page_disposition)` |
 | SV-078 | on_close_attempt | `count(shared_case.processors) >= 2 and every(shared_case.processors, subset(shared_case.results, results_received))` |
 | SV-080 | on_close_attempt | `release.contamination_pct == 0 and count(release.required_documents) >= release.required_document_count and every(release.required_documents, status == 'complete')` |
-| SV-081 | on_write | `exists(capa.owner_role) and exists(capa.expectation.metric) and exists(capa.expectation.baseline) and exists(capa.expectation.target) and exists(capa.expectation.horizon_ts) and exists(capa.expires) and exists(capa.inverse)` |
+| SV-081 | on_write | `capa.id != '' and exists(capa.owner_role) and exists(capa.expectation.metric) and exists(capa.expectation.baseline) and exists(capa.expectation.target) and exists(capa.expectation.horizon_ts) and exists(capa.expires) and exists(capa.inverse)` |
 | SV-082 | continuous | `minutes_between(capa.expectation.horizon_ts, as_of) < 0 or (exists(capa.effectiveness.result) and (capa.effectiveness.result == 'met' or (capa.status == 'returned_to_committee' and exists(capa.effectiveness.data_ref))))` |
 | SV-083 | on_write | `risk.priority < risk_register.owner_required_at_priority or (exists(risk.owner_role) and exists(risk.review_ts))` |
 | SV-084 | continuous | `within(qapi.last_board_presentation_ts, qapi.next_board_presentation_ts, 366d)` |

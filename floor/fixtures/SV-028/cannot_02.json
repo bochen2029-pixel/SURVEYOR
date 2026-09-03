@@ -1,0 +1,6 @@
+{"expect": "CANNOT-EVALUATE",
+ "note": "an organ-only donor: no tissue was recovered, so the refrigeration clocks do not apply and the check abstains. Without the applicability gate the never-arriving recovery.start_ts fell through to the as_of fallback and alarmed on every organ-only case (S3 generator, first run).",
+ "record": {"case_id": "OD-2026-0969", "donor_type": "brain_dead", "death": {"declared_ts": "2026-08-01T00:00:00Z", "asystole_ts": "2026-08-02T06:00:00Z"},
+            "recovery": {"cross_clamp_ts": "2026-08-02T06:00:00Z", "organ_recovery_ts": "2026-08-02T07:00:00Z", "end_ts": "2026-08-02T08:30:00Z"},
+            "as_of": "2026-08-20T00:00:00Z"},
+ "history": []}

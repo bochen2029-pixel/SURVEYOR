@@ -22,6 +22,9 @@ Gates:
   G-ANCHOR-PLANTS     rung 03's executioner: every clock check declares an anchor the
                       predicate reads, every anchor-defect plant flips its verdict on
                       the wrong anchor, and the ported closure battery is green (law B1)
+  F-FIXTURE-WORLD     SPEC section 12's decider, mechanised: the floor against the
+                      synthetic OPO world at a pinned seed - dies if any planted defect
+                      PASSes, or if the clean-record false-hold rate exceeds 1%
 Stdlib only.
 """
 import json
@@ -225,6 +228,33 @@ def gate_anchor_plants():
                     f"{len(test_closure.PASS)} green")
 
 
+# The pinned run: the numbers that publish. Changing these changes the receipt, so a
+# change needs a tape decision saying why (the seed is arbitrary; the sizes are not).
+WORLD_SEED, WORLD_CASES, WORLD_PLANTS = 20260903, 200, 5
+
+
+def gate_fixture_world():
+    """SPEC section 12's F-FIXTURE, mechanised now that the synthetic world exists.
+    The hand-written battery (F-FIXTURE above) grades the checks against fixtures written
+    FOR them; this grades them against a world that was authored without looking at them.
+    That difference is the point: it found two live defects on its first run."""
+    try:
+        sys.path.insert(0, str(ROOT / "experiments" / "f-fixture"))
+        import run as world
+    except Exception as e:  # noqa: BLE001
+        return "CANNOT-EVALUATE", f"f-fixture harness unavailable: {e}"
+    try:
+        res = world.grade(WORLD_SEED, WORLD_CASES, WORLD_PLANTS)
+    except AssertionError as e:            # the generator's own plant invariant
+        return "FAIL", f"generator defect (instrument, not floor): {e}"
+    if res["kill"]:
+        return "FAIL", "; ".join(res["kill"])
+    return "PASS", (f"{res['caught']}/{res['plants']} plants caught, 0 missed, "
+                    f"{len(res['false_holds'])} false holds in {res['clean_pairs']} clean pairs "
+                    f"({res['false_hold_rate']:.2%}), {len(res['collateral'])} collateral, "
+                    f"seed {res['seed']} cases {res['n_cases']} k {res['k_plants']}")
+
+
 def main():
     record = "--record" in sys.argv
     results = [
@@ -235,6 +265,7 @@ def main():
         ("G-CATALOG-COMPLETE",) + gate_catalog_complete(),
         ("G-FIELDS",) + gate_fields(),
         ("G-ANCHOR-PLANTS",) + gate_anchor_plants(),
+        ("F-FIXTURE-WORLD",) + gate_fixture_world(),
     ]
     width = max(len(r[0]) for r in results)
     fail = False

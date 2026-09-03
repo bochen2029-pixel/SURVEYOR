@@ -1,4 +1,27 @@
-{"expect": "ALARM", "note": "never refrigerated at all - the 15h rule applies and recovery began at 20h; the highest-risk case must alarm, not abstain",
- "record": {"case_id": "TD-2026-0967", "death": {"pronounced_ts": "2026-08-01T00:00:00Z"}, "cooling": {}, "recovery": {"start_ts": "2026-08-01T20:00:00Z"},
-            "refrigeration": {"out_intervals": [{"out_ts": "2026-08-01T00:00:00Z", "in_ts": "2026-08-01T14:00:00Z"}]}, "as_of": "2026-08-20T00:00:00Z"},
- "history": []}
+{
+ "expect": "ALARM",
+ "note": "never refrigerated at all - the 15h rule applies and recovery began at 20h; the highest-risk case must alarm, not abstain",
+ "record": {
+  "case_id": "TD-2026-0967",
+  "death": {
+   "asystole_ts": "2026-08-01T00:00:00Z"
+  },
+  "cooling": {},
+  "recovery": {
+   "start_ts": "2026-08-01T20:00:00Z"
+  },
+  "refrigeration": {
+   "out_intervals": [
+    {
+     "out_ts": "2026-08-01T00:00:00Z",
+     "in_ts": "2026-08-01T14:00:00Z"
+    }
+   ]
+  },
+  "as_of": "2026-08-20T00:00:00Z",
+  "tissue": {
+   "category": "standard"
+  }
+ },
+ "history": []
+}

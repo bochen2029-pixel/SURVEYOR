@@ -1,19 +1,24 @@
 # SV-028 - the refrigeration clocks: recovery starts within 24h of death if the body
 # was cooled within 12h, else within 15h (a body never cooled is the 15h case); and the body's cumulative time out of
 # refrigeration (every unrefrigerated interval, INCLUDING death-to-first-cooling,
-# as the adapter lists them) never exceeds 15h. Everything anchors to pronouncement.
+# as the adapter lists them) never exceeds 15h. Everything anchors to asystole: the
+# pronouncement for DCD and tissue-only donors, cross-clamp for brain-dead donors.
+# The leading `tissue.category != ''` is the APPLICABILITY GATE: an organ-only donor has
+# no tissue recovery, so recovery.start_ts is not a pending event but a never-event, and
+# without the gate the clock's as_of fallback fabricates a breach on every such case
+# (found by the S3 generator's first run - 17% of organ-only records).
 id: SV-028
 title: refrigeration clocks - 24h/15h recovery-start rule by initial-cooling timing; cumulative out-of-refrigeration at most 15h
 family: clocks
 layer: L0
 authority: "AATB Standards for Tissue Banking - time limits for recovery relative to asystole and refrigeration (section pinned at rung 05); site SOP [H]"
 trigger: continuous
-anchor: death.pronounced_ts
-anchor_why: "every refrigeration clock anchors to pronouncement of death (asystole) - not to referral, not to arrival at the morgue, not to authorization"
-predicate: "(not exists(cooling.initial_ts) implies within(death.pronounced_ts, recovery.start_ts, 15h)) and (exists(cooling.initial_ts) implies ((minutes_between(death.pronounced_ts, cooling.initial_ts) <= 12h implies within(death.pronounced_ts, recovery.start_ts, 24h)) and (minutes_between(death.pronounced_ts, cooling.initial_ts) > 12h implies within(death.pronounced_ts, recovery.start_ts, 15h)))) and sum(refrigeration.out_intervals, minutes_between(out_ts, in_ts)) <= 15h"
+anchor: death.asystole_ts
+anchor_why: "every refrigeration clock anchors to ASYSTOLE - the moment circulation stops. For a DCD or tissue-only donor that is the pronouncement of death; for a brain-dead donor it is cross-clamp, a day or more AFTER death was declared. Anchoring to the declaration would fabricate breaches on every brain-dead organ-and-tissue donor (found by the S3 generator while modelling the timeline)"
+predicate: "tissue.category != '' and (not exists(cooling.initial_ts) implies within(death.asystole_ts, recovery.start_ts, 15h)) and (exists(cooling.initial_ts) implies ((minutes_between(death.asystole_ts, cooling.initial_ts) <= 12h implies within(death.asystole_ts, recovery.start_ts, 24h)) and (minutes_between(death.asystole_ts, cooling.initial_ts) > 12h implies within(death.asystole_ts, recovery.start_ts, 15h)))) and sum(refrigeration.out_intervals, minutes_between(out_ts, in_ts)) <= 15h"
 action: alarm
-message: "Refrigeration clock breached for death at {death.pronounced_ts}: recovery start window or the 15h cumulative unrefrigerated cap."
-evidence: [death.pronounced_ts, cooling.initial_ts, recovery.start_ts, refrigeration.out_intervals]
+message: "Refrigeration clock breached for death at {death.asystole_ts}: recovery start window or the 15h cumulative unrefrigerated cap."
+evidence: [tissue.category, death.asystole_ts, cooling.initial_ts, recovery.start_ts, refrigeration.out_intervals]
 expires: P2Y
 inverse: retire
 tests: fixtures/SV-028/
